@@ -5,7 +5,7 @@ export default function Regions() {
   // const query = useQuery({
   //   queryKey: ["regions"],
   //   queryFn: async () => {
-  //     const response = await fetch(`${process.env.DB_URL ?? ""}/regions`);
+  //     const response = await fetch(`${process.env.API_URL ?? ""}/regions`);
   //     if (!response.ok) {
   //       throw new Error("Network response was not ok");
   //     }
