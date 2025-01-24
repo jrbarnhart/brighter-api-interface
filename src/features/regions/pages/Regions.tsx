@@ -1,6 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { components } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 export default function Regions() {
   const headers = new Headers();
@@ -29,22 +30,19 @@ export default function Regions() {
   const { data: payload } = data;
 
   return (
-    <div className="flex flex-col">
-      <div className="flex gap-2">
-        <h1>Regions:</h1>
-        <p>{`Count: ${payload.length.toString() || "Not found"}`}</p>
-        <p>
-          Total Rooms:{" "}
-          {payload.reduce(
-            (roomCount, currentRegion) =>
-              roomCount + currentRegion.rooms.length,
-            0
-          )}
-        </p>
+    <>
+      <div className="flex flex-col h-8">
+        <div className="flex gap-2 items-start h-full">
+          <h1 className="text-2xl">Regions</h1>
+          <div className="w-1 h-full bg-secondary rounded-xl border-border" />
+          <Button variant={"link"} className="pl-1 text-accent" asChild>
+            <Link to={"/regions/create"}>Create</Link>
+          </Button>
+        </div>
       </div>
-      <div className="overflow-y-auto">
+      <div className="pt-5">
         <Outlet />
       </div>
-    </div>
+    </>
   );
 }
