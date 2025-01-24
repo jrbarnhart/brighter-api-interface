@@ -296,6 +296,58 @@ export interface paths {
         patch: operations["CraftingSkillRequirementsController_update"];
         trace?: never;
     };
+    "/skills/crafting/recipes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get all craftingRecipe
+         * @description This gets all craftingRecipe records
+         */
+        get: operations["CraftingRecipesController_findAll"];
+        put?: never;
+        /**
+         * Create craftingRecipe
+         * @description This creates a new craftingRecipe record
+         */
+        post: operations["CraftingRecipesController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/skills/crafting/recipes/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get craftingRecipe by id
+         * @description This gets one craftingRecipe by its id
+         */
+        get: operations["CraftingRecipesController_findOne"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete craftingRecipe
+         * @description This deletes an craftingRecipe record by id
+         */
+        delete: operations["CraftingRecipesController_remove"];
+        options?: never;
+        head?: never;
+        /**
+         * Update craftingRecipe
+         * @description This updates an craftingRecipe record by id
+         */
+        patch: operations["CraftingRecipesController_update"];
+        trace?: never;
+    };
     "/skills/crafting": {
         parameters: {
             query?: never;
@@ -804,7 +856,7 @@ export interface paths {
         patch: operations["WeaponsController_update"];
         trace?: never;
     };
-    "/items/armor/variants": {
+    "/items/armors/variants": {
         parameters: {
             query?: never;
             header?: never;
@@ -828,7 +880,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/items/armor/variants/{id}": {
+    "/items/armors/variants/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1064,7 +1116,7 @@ export interface paths {
         patch: operations["MonstersController_update"];
         trace?: never;
     };
-    "/monsters/tables": {
+    "/monsters/drop-tables": {
         parameters: {
             query?: never;
             header?: never;
@@ -1088,7 +1140,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/monsters/tables/{id}": {
+    "/monsters/drop-tables/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1335,6 +1387,42 @@ export interface components {
         CreateRegionDto: {
             name: string;
         };
+        RegionBaseEntity: {
+            id: number;
+            name: string;
+        };
+        RoomBaseEntity: {
+            /** @description The array of types of bank in this room */
+            banks: ("BONES" | "BUILDING" | "CAPES" | "EXPLOSIVES" | "BAIT" | "HIDES" | "INGREDIENTS" | "LEATHERS" | "LUMBER" | "MONUMENT" | "ORE" | "REAGENTS" | "POTIONS" | "QUARTERMASTER" | "STONE" | "TIMBER")[];
+            id: number;
+            name: string;
+            regionId: number;
+            portal: boolean;
+            obelisk: boolean;
+        };
+        CombatSkillBaseEntity: {
+            id: number;
+            name: string;
+            regionId: number;
+        };
+        GatheringSkillBaseEntity: {
+            id: number;
+            name: string;
+            regionId: number;
+        };
+        CraftingSkillBaseEntity: {
+            id: number;
+            name: string;
+            regionId: number;
+        };
+        RegionEntity: {
+            id: number;
+            name: string;
+            rooms: components["schemas"]["RoomBaseEntity"][];
+            combatSkills: components["schemas"]["CombatSkillBaseEntity"][];
+            gatheringSkills: components["schemas"]["GatheringSkillBaseEntity"][];
+            craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
+        };
         UpdateRegionDto: {
             name?: string;
         };
@@ -1350,6 +1438,60 @@ export interface components {
             npcIds?: number[];
             resourceIds?: number[];
             questStepIds?: number[];
+        };
+        MonsterBaseEntity: {
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            attackElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            immuneElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            vulnerableElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            skillId: number;
+            passive: boolean;
+        };
+        NpcBaseEntity: {
+            id: number;
+            name: string;
+        };
+        ResourceBaseEntity: {
+            id: number;
+            name: string;
+            skillId: number;
+            passive: boolean;
+        };
+        QuestStepBaseEntity: {
+            id: number;
+            index: number;
+            description: string;
+            questId: number;
+            roomId: number | null;
+            npcId: number | null;
+        };
+        RoomEntity: {
+            /** @description The array of types of bank in this room */
+            banks: ("BONES" | "BUILDING" | "CAPES" | "EXPLOSIVES" | "BAIT" | "HIDES" | "INGREDIENTS" | "LEATHERS" | "LUMBER" | "MONUMENT" | "ORE" | "REAGENTS" | "POTIONS" | "QUARTERMASTER" | "STONE" | "TIMBER")[];
+            id: number;
+            name: string;
+            region: components["schemas"]["RegionBaseEntity"];
+            regionId: number;
+            portal: boolean;
+            obelisk: boolean;
+            craftingSKills: components["schemas"]["CraftingSkillBaseEntity"][];
+            monsters: components["schemas"]["MonsterBaseEntity"][];
+            npcs: components["schemas"]["NpcBaseEntity"][];
+            resources: components["schemas"]["ResourceBaseEntity"][];
+            questSteps: components["schemas"]["QuestStepBaseEntity"][];
         };
         UpdateRoomDto: {
             /** @description The array of types of bank in this room */
@@ -1369,6 +1511,34 @@ export interface components {
             unlockLevel: number;
             description?: string;
             resourceVariantId?: number;
+        };
+        GatheringSkillRequirementBaseEntity: {
+            id: number;
+            description?: string;
+            skillId: number;
+            unlockLevel: number;
+        };
+        GatheringSkillEntity: {
+            id: number;
+            name: string;
+            region: components["schemas"]["RegionBaseEntity"];
+            regionId: number;
+            skillRequirements: components["schemas"]["GatheringSkillRequirementBaseEntity"][];
+            resources: components["schemas"]["ResourceBaseEntity"][];
+        };
+        ResourceVariantBaseEntity: {
+            id: number;
+            name: string;
+            resourceId: number;
+            requirementId: number | null;
+        };
+        GatheringSkillRequirementEntity: {
+            id: number;
+            description?: string;
+            skill: components["schemas"]["GatheringSkillEntity"];
+            skillId: number;
+            resourceVariant?: components["schemas"]["ResourceVariantBaseEntity"];
+            unlockLevel: number;
         };
         UpdateGatheringSkillRequirementDto: {
             skillId?: number;
@@ -1390,15 +1560,81 @@ export interface components {
             description?: string;
             recipeId?: number;
         };
+        CraftingSkillRequirementBaseEntity: {
+            id: number;
+            description?: string;
+            skillId: number;
+            unlockLevel: number;
+        };
+        CraftingRecipeBaseEntity: {
+            id: number;
+            name: string;
+            requirementId: number | null;
+        };
+        CraftingSkillRequirementEntity: {
+            id: number;
+            description?: string;
+            skill: components["schemas"]["CraftingSkillBaseEntity"];
+            skillId: number;
+            recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
+            unlockLevel: number;
+        };
         UpdateCraftingSkillRequirementDto: {
             skillId: number;
             unlockLevel: number;
             description?: string;
             recipeId?: number;
         };
+        CreateCraftingRecipeDto: {
+            name: string;
+        };
+        MiscItemBaseEntity: {
+            id: number;
+            name: string;
+        };
+        ConsumableVariantBaseEntity: {
+            id: number;
+            name: string;
+            consumableId: number;
+            recipeId: number | null;
+        };
+        WeaponVariantBaseEntity: {
+            id: number;
+            name: string;
+            weaponId: number;
+            recipeId: number | null;
+        };
+        ArmorVariantBaseEntity: {
+            id: number;
+            name: string;
+            armorId: number;
+            recipeId: number | null;
+        };
+        CraftingRecipeEntity: {
+            id: number;
+            name: string;
+            requirement?: components["schemas"]["CraftingSkillRequirementBaseEntity"];
+            requirementId: number | null;
+            inputResourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
+            inputItems: components["schemas"]["MiscItemBaseEntity"][];
+            outputConsumableVariant?: components["schemas"]["ConsumableVariantBaseEntity"];
+            outputWeaponVariant?: components["schemas"]["WeaponVariantBaseEntity"];
+            outputArmorVariant?: components["schemas"]["ArmorVariantBaseEntity"];
+        };
+        UpdateCraftingRecipeDto: {
+            name?: string;
+        };
         CreateCraftingSkillDto: {
             name: string;
             regionId: number;
+        };
+        CraftingSkillEntity: {
+            id: number;
+            name: string;
+            region: components["schemas"]["RegionBaseEntity"];
+            regionId: number;
+            requirements: components["schemas"]["CraftingSkillRequirementBaseEntity"][];
+            rooms: components["schemas"]["RoomBaseEntity"][];
         };
         UpdateCraftingSkillDto: {
             name?: string;
@@ -1410,6 +1646,26 @@ export interface components {
             description?: string;
             monsterVariantId?: number;
         };
+        CombatSkillRequirementBaseEntity: {
+            id: number;
+            description?: string;
+            skillId: number;
+            unlockLevel: number;
+        };
+        MonsterVariantBaseEntity: {
+            id: number;
+            name: string;
+            monsterId: number;
+            requirementId: number | null;
+        };
+        CombatSkillRequirementEntity: {
+            id: number;
+            description?: string;
+            skill: components["schemas"]["CombatSkillBaseEntity"];
+            skillId: number;
+            monsterVariant?: components["schemas"]["MonsterVariantBaseEntity"];
+            unlockLevel: number;
+        };
         UpdateCombatSkillRequirementDto: {
             skillId?: number;
             unlockLevel?: number;
@@ -1420,6 +1676,14 @@ export interface components {
             name: string;
             regionId: number;
         };
+        CombatSkillEntity: {
+            id: number;
+            name: string;
+            region: components["schemas"]["RegionBaseEntity"];
+            regionId: number;
+            skillRequirements: components["schemas"]["CombatSkillRequirementBaseEntity"][];
+            monsters: components["schemas"]["MonsterBaseEntity"][];
+        };
         UpdateCombatSkillDto: {
             name?: string;
             regionId?: number;
@@ -1427,6 +1691,26 @@ export interface components {
         CreateResourceVariantDto: {
             name: string;
             resourceId: number;
+        };
+        VendorBaseEntity: {
+            id: number;
+            npcId: number;
+        };
+        DropTableBaseEntity: {
+            id: number;
+            monsterVariantId: number;
+            currency: number | null;
+        };
+        ResourceVariantEntity: {
+            id: number;
+            name: string;
+            resource: components["schemas"]["ResourceBaseEntity"];
+            resourceId: number;
+            requirement?: components["schemas"]["GatheringSkillRequirementBaseEntity"];
+            requirementId: number | null;
+            inRecipes: components["schemas"]["CraftingRecipeBaseEntity"][];
+            vendors: components["schemas"]["VendorBaseEntity"][];
+            dropTables: components["schemas"]["DropTableBaseEntity"][];
         };
         UpdateResourceVariantDto: {
             name?: string;
@@ -1437,6 +1721,15 @@ export interface components {
             skillId: number;
             passive: boolean;
         };
+        ResourceEntity: {
+            id: number;
+            name: string;
+            skill: components["schemas"]["GatheringSkillBaseEntity"];
+            skillId: number;
+            rooms: components["schemas"]["RoomBaseEntity"][];
+            passive: boolean;
+            variants: components["schemas"]["ResourceVariantBaseEntity"][];
+        };
         UpdateResourceDto: {
             name?: string;
             skillId?: number;
@@ -1446,6 +1739,20 @@ export interface components {
             name: string;
             consumableId: number;
         };
+        ConsumableBaseEntity: {
+            id: number;
+            name: string;
+        };
+        ConsumableVariantEntity: {
+            id: number;
+            name: string;
+            consumable: components["schemas"]["ConsumableBaseEntity"];
+            consumableId: number;
+            recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
+            recipeId: number | null;
+            vendors: components["schemas"]["VendorBaseEntity"][];
+            dropTables: components["schemas"]["DropTableBaseEntity"][];
+        };
         UpdateConsumableVariantDto: {
             name?: string;
             consumableId?: number;
@@ -1453,12 +1760,43 @@ export interface components {
         CreateConsumableDto: {
             name: string;
         };
+        ConsumableEntity: {
+            id: number;
+            name: string;
+            variants: components["schemas"]["ConsumableVariantBaseEntity"][];
+        };
         UpdateConsumableDto: {
             name?: string;
         };
         CreateWeaponVariantDto: {
             name: string;
             weaponId: number;
+        };
+        WeaponBaseEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            element: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            isRanged: boolean;
+            isTwoHanded: boolean;
+        };
+        WeaponVariantEntity: {
+            id: number;
+            name: string;
+            weapon: components["schemas"]["WeaponBaseEntity"];
+            weaponId: number;
+            recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
+            recipeId: number | null;
+            vendors: components["schemas"]["VendorBaseEntity"][];
+            dropTables: components["schemas"]["DropTableBaseEntity"][];
         };
         UpdateWeaponVariantDto: {
             name?: string;
@@ -1479,6 +1817,23 @@ export interface components {
             isRanged: boolean;
             isTwoHanded: boolean;
         };
+        WeaponEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            element: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            isRanged: boolean;
+            isTwoHanded: boolean;
+            variants: components["schemas"]["WeaponVariantBaseEntity"][];
+        };
         UpdateWeaponDto: {
             /**
              * @description The faction/player class this belongs to
@@ -1498,6 +1853,30 @@ export interface components {
             name: string;
             armorId: number;
         };
+        ArmorBaseEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The gear slot that this armor occupies
+             * @enum {string}
+             */
+            slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
+            id: number;
+            name: string;
+        };
+        ArmorVariantEntity: {
+            id: number;
+            name: string;
+            armor: components["schemas"]["ArmorBaseEntity"];
+            armorId: number;
+            recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
+            recipeId: number | null;
+            vendors: components["schemas"]["VendorBaseEntity"][];
+            dropTables: components["schemas"]["DropTableBaseEntity"][];
+        };
         UpdateArmorVariantDto: {
             name?: string;
             armorId?: number;
@@ -1515,6 +1894,21 @@ export interface components {
             slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
             name: string;
         };
+        ArmorEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The gear slot that this armor occupies
+             * @enum {string}
+             */
+            slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
+            id: number;
+            name: string;
+            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+        };
         UpdateArmorDto: {
             /**
              * @description The faction/player class this belongs to
@@ -1531,12 +1925,28 @@ export interface components {
         CreateMiscItemDto: {
             name: string;
         };
+        MiscItemEntity: {
+            id: number;
+            name: string;
+            vendors: components["schemas"]["VendorBaseEntity"][];
+            inRecipes: components["schemas"]["CraftingRecipeBaseEntity"][];
+            dropTables: components["schemas"]["DropTableBaseEntity"][];
+        };
         UpdateMiscItemDto: {
             name?: string;
         };
         CreateMonsterVariantDto: {
             name: string;
             monsterId: number;
+        };
+        MonsterVariantEntity: {
+            id: number;
+            name: string;
+            monster: components["schemas"]["MonsterBaseEntity"];
+            monsterId: number;
+            requirement?: components["schemas"]["CombatSkillRequirementBaseEntity"];
+            requirementId: number | null;
+            dropTable: components["schemas"]["DropTableBaseEntity"];
         };
         UpdateMonsterVariantDto: {
             name?: string;
@@ -1561,6 +1971,30 @@ export interface components {
             name: string;
             skillId: number;
             passive: boolean;
+        };
+        MonsterEntity: {
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            attackElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            immuneElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            vulnerableElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            skill: components["schemas"]["CombatSkillBaseEntity"];
+            skillId: number;
+            rooms: components["schemas"]["RoomBaseEntity"][];
+            passive: boolean;
+            variants: components["schemas"]["MonsterVariantBaseEntity"][];
         };
         UpdateMonsterDto: {
             /**
@@ -1588,7 +2022,19 @@ export interface components {
             weaponVariantIds?: number[];
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
+            miscItemIds?: number[];
             currency?: number;
+        };
+        DropTableEntity: {
+            id: number;
+            monsterVariant: components["schemas"]["MonsterVariantBaseEntity"];
+            monsterVariantId: number;
+            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
+            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
+            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            consumbalbeVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
+            miscItems: components["schemas"]["MiscItemBaseEntity"][];
+            currency: number | null;
         };
         UpdateDropTableDto: {
             monsterVariantId?: number;
@@ -1596,6 +2042,7 @@ export interface components {
             weaponVariantIds?: number[];
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
+            miscItemIds?: number[];
             currency?: number;
         };
         CreateVendorDto: {
@@ -1605,6 +2052,16 @@ export interface components {
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
             miscItemsIds?: number[];
+        };
+        VendorEntity: {
+            id: number;
+            npc: components["schemas"]["NpcBaseEntity"];
+            npcId: number;
+            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
+            consumableVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
+            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
+            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            miscItems: components["schemas"]["MiscItemBaseEntity"][];
         };
         UpdateVendorDto: {
             npcId?: number;
@@ -1617,6 +2074,13 @@ export interface components {
         CreateNpcDto: {
             name: string;
         };
+        NpcEntity: {
+            id: number;
+            name: string;
+            vendor?: components["schemas"]["VendorBaseEntity"];
+            questSteps: components["schemas"]["QuestStepBaseEntity"][];
+            rooms: components["schemas"]["RoomBaseEntity"][];
+        };
         UpdateNpcDto: {
             name?: string;
         };
@@ -1627,6 +2091,21 @@ export interface components {
             roomId?: number;
             npcId?: number;
         };
+        QuestBaseEntity: {
+            id: number;
+            name: string;
+        };
+        QuestStepEntity: {
+            id: number;
+            index: number;
+            description: string;
+            quest: components["schemas"]["QuestBaseEntity"];
+            questId: number;
+            room?: components["schemas"]["RoomBaseEntity"];
+            roomId: number | null;
+            npc?: components["schemas"]["NpcBaseEntity"];
+            npcId: number | null;
+        };
         UpdateQuestStepDto: {
             index?: number;
             description?: string;
@@ -1636,6 +2115,11 @@ export interface components {
         };
         CreateQuestDto: {
             name: string;
+        };
+        QuestEntity: {
+            id: number;
+            name: string;
+            steps: components["schemas"]["QuestStepBaseEntity"][];
         };
         UpdateQuestDto: {
             name?: string;
@@ -1703,7 +2187,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RegionEntity"];
+                };
             };
         };
     };
@@ -1725,7 +2211,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RegionBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -1759,7 +2247,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RegionEntity"];
+                };
             };
             /** @description Region not found */
             404: {
@@ -1786,7 +2276,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RegionBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -1819,6 +2311,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated region record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegionBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -1856,7 +2357,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RoomEntity"];
+                };
             };
         };
     };
@@ -1878,7 +2381,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RoomBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -1912,7 +2417,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RoomEntity"];
+                };
             };
             /** @description Room not found */
             404: {
@@ -1939,7 +2446,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["RoomBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -1972,6 +2481,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated room record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoomBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2009,7 +2527,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillRequirementEntity"];
+                };
             };
         };
     };
@@ -2031,7 +2551,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillRequirementBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2065,7 +2587,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillRequirementEntity"];
+                };
             };
             /** @description GatheringSkillRequirement not found */
             404: {
@@ -2092,7 +2616,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillRequirementBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2125,6 +2651,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated gatheringSkillRequirement record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillRequirementBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2162,7 +2697,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillEntity"];
+                };
             };
         };
     };
@@ -2184,7 +2721,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2218,7 +2757,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillEntity"];
+                };
             };
             /** @description GatheringSkill not found */
             404: {
@@ -2245,7 +2786,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2278,6 +2821,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated gatheringSkill record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GatheringSkillBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2315,7 +2867,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillRequirementEntity"];
+                };
             };
         };
     };
@@ -2337,7 +2891,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillRequirementBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2371,7 +2927,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillRequirementEntity"];
+                };
             };
             /** @description CraftingSkillRequirement not found */
             404: {
@@ -2398,7 +2956,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillRequirementBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2431,6 +2991,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated craftingSkillRequirement record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillRequirementBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2454,6 +3023,176 @@ export interface operations {
             };
         };
     };
+    CraftingRecipesController_findAll: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Found all craftingRecipe records */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingRecipeEntity"];
+                };
+            };
+        };
+    };
+    CraftingRecipesController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateCraftingRecipeDto"];
+            };
+        };
+        responses: {
+            /** @description CraftingRecipe created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingRecipeBaseEntity"];
+                };
+            };
+            /** @description Bad request, invalid body data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CraftingRecipesController_findOne: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Found craftingRecipe record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingRecipeEntity"];
+                };
+            };
+            /** @description CraftingRecipe not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CraftingRecipesController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description CraftingRecipe was deleted */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingRecipeBaseEntity"];
+                };
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description CraftingRecipe not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CraftingRecipesController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateCraftingRecipeDto"];
+            };
+        };
+        responses: {
+            /** @description Updated craftingRecipe record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingRecipeBaseEntity"];
+                };
+            };
+            /** @description Bad request, invalid body data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description CraftingRecipe not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     CraftingSkillsController_findAll: {
         parameters: {
             query?: never;
@@ -2468,7 +3207,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillEntity"];
+                };
             };
         };
     };
@@ -2490,7 +3231,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2524,7 +3267,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillEntity"];
+                };
             };
             /** @description CraftingSkill not found */
             404: {
@@ -2551,7 +3296,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2584,6 +3331,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated craftingSkill record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CraftingSkillBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2621,7 +3377,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillRequirementEntity"];
+                };
             };
         };
     };
@@ -2643,7 +3401,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillRequirementBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2677,7 +3437,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillRequirementEntity"];
+                };
             };
             /** @description CombatSkillRequirement not found */
             404: {
@@ -2704,7 +3466,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillRequirementBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2737,6 +3501,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated combatSkillRequirement record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CombatSkillRequirementBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2774,7 +3547,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillEntity"];
+                };
             };
         };
     };
@@ -2796,7 +3571,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -2830,7 +3607,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillEntity"];
+                };
             };
             /** @description CombatSkill not found */
             404: {
@@ -2857,7 +3636,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["CombatSkillBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -2890,6 +3671,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated combatSkill record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CombatSkillBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -2963,7 +3753,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceVariantEntity"];
+                };
             };
         };
     };
@@ -2985,7 +3777,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceVariantBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3019,7 +3813,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceVariantEntity"];
+                };
             };
             /** @description ResourceVariant not found */
             404: {
@@ -3046,7 +3842,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceVariantBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3079,6 +3877,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated resourceVariant record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResourceVariantBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3116,7 +3923,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceEntity"];
+                };
             };
         };
     };
@@ -3138,7 +3947,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3172,7 +3983,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceEntity"];
+                };
             };
             /** @description Resource not found */
             404: {
@@ -3199,7 +4012,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ResourceBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3232,6 +4047,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated resource record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResourceBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3269,7 +4093,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableVariantEntity"];
+                };
             };
         };
     };
@@ -3291,7 +4117,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableVariantBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3325,7 +4153,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableVariantEntity"];
+                };
             };
             /** @description ConsumableVariant not found */
             404: {
@@ -3352,7 +4182,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableVariantBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3385,6 +4217,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated consumableVariant record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConsumableVariantBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3422,7 +4263,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableEntity"];
+                };
             };
         };
     };
@@ -3444,7 +4287,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3478,7 +4323,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableEntity"];
+                };
             };
             /** @description Consumable not found */
             404: {
@@ -3505,7 +4352,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ConsumableBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3538,6 +4387,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated consumable record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConsumableBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3575,7 +4433,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponVariantEntity"];
+                };
             };
         };
     };
@@ -3597,7 +4457,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponVariantBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3631,7 +4493,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponVariantEntity"];
+                };
             };
             /** @description WeaponVariant not found */
             404: {
@@ -3658,7 +4522,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponVariantBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3691,6 +4557,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated weaponVariant record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WeaponVariantBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3728,7 +4603,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponEntity"];
+                };
             };
         };
     };
@@ -3750,7 +4627,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3784,7 +4663,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponEntity"];
+                };
             };
             /** @description Weapon not found */
             404: {
@@ -3811,7 +4692,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["WeaponBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3844,6 +4727,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated weapon record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WeaponBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -3881,7 +4773,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorVariantEntity"];
+                };
             };
         };
     };
@@ -3903,7 +4797,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorVariantBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -3937,7 +4833,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorVariantEntity"];
+                };
             };
             /** @description ArmorVariant not found */
             404: {
@@ -3964,7 +4862,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorVariantBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -3997,6 +4897,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated armorVariant record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArmorVariantBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4034,7 +4943,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorEntity"];
+                };
             };
         };
     };
@@ -4056,7 +4967,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4090,7 +5003,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorEntity"];
+                };
             };
             /** @description Armor not found */
             404: {
@@ -4117,7 +5032,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ArmorBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4150,6 +5067,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated armor record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArmorBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4187,7 +5113,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MiscItemEntity"];
+                };
             };
         };
     };
@@ -4209,7 +5137,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MiscItemBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4243,7 +5173,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MiscItemEntity"];
+                };
             };
             /** @description MiscItem not found */
             404: {
@@ -4270,7 +5202,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MiscItemBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4303,6 +5237,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated miscItem record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MiscItemBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4340,7 +5283,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterVariantEntity"];
+                };
             };
         };
     };
@@ -4362,7 +5307,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterVariantBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4396,7 +5343,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterVariantEntity"];
+                };
             };
             /** @description MonsterVariant not found */
             404: {
@@ -4423,7 +5372,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterVariantBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4456,6 +5407,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated monsterVariant record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MonsterVariantBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4493,7 +5453,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterEntity"];
+                };
             };
         };
     };
@@ -4515,7 +5477,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4549,7 +5513,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterEntity"];
+                };
             };
             /** @description Monster not found */
             404: {
@@ -4576,7 +5542,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["MonsterBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4609,6 +5577,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated monster record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MonsterBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4646,7 +5623,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["DropTableEntity"];
+                };
             };
         };
     };
@@ -4668,7 +5647,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4702,7 +5683,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["DropTableEntity"];
+                };
             };
             /** @description DropTable not found */
             404: {
@@ -4729,7 +5712,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4762,6 +5747,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated dropTable record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4799,7 +5793,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["VendorEntity"];
+                };
             };
         };
     };
@@ -4821,7 +5817,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["VendorBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -4855,7 +5853,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["VendorEntity"];
+                };
             };
             /** @description Vendor not found */
             404: {
@@ -4882,7 +5882,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["VendorBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -4915,6 +5917,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated vendor record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VendorBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -4952,7 +5963,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["NpcEntity"];
+                };
             };
         };
     };
@@ -4974,7 +5987,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["NpcBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -5008,7 +6023,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["NpcEntity"];
+                };
             };
             /** @description Npc not found */
             404: {
@@ -5035,7 +6052,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["NpcBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -5068,6 +6087,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated npc record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NpcBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -5105,7 +6133,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestStepEntity"];
+                };
             };
         };
     };
@@ -5127,7 +6157,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestStepBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -5161,7 +6193,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestStepEntity"];
+                };
             };
             /** @description QuestStep not found */
             404: {
@@ -5188,7 +6222,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestStepBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -5221,6 +6257,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated questStep record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuestStepBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
@@ -5258,7 +6303,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestEntity"];
+                };
             };
         };
     };
@@ -5280,7 +6327,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestBaseEntity"];
+                };
             };
             /** @description Bad request, invalid body data */
             400: {
@@ -5314,7 +6363,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestEntity"];
+                };
             };
             /** @description Quest not found */
             404: {
@@ -5341,7 +6392,9 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["QuestBaseEntity"];
+                };
             };
             /** @description Unauthorized access */
             401: {
@@ -5374,6 +6427,15 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Updated quest record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QuestBaseEntity"];
+                };
+            };
             /** @description Bad request, invalid body data */
             400: {
                 headers: {
