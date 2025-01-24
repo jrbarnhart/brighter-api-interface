@@ -23,7 +23,7 @@ export default function RegionsForm() {
   });
 
   const onSubmit = (values: z.infer<typeof CreateRegionSchema>) => {
-    // React query goes here
+    // Fetch POST goes here
     console.log(values);
   };
 
