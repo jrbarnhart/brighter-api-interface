@@ -29,17 +29,22 @@ export default function Regions() {
   const { data: payload } = data;
 
   return (
-    <div>
-      <h1>Regions:</h1>
-      <p>{`Count: ${payload.length.toString() || "Not found"}`}</p>
-      <p>
-        Total Rooms:{" "}
-        {payload.reduce(
-          (roomCount, currentRegion) => roomCount + currentRegion.rooms.length,
-          0
-        )}
-      </p>
-      <Outlet />
+    <div className="flex flex-col">
+      <div className="flex gap-2">
+        <h1>Regions:</h1>
+        <p>{`Count: ${payload.length.toString() || "Not found"}`}</p>
+        <p>
+          Total Rooms:{" "}
+          {payload.reduce(
+            (roomCount, currentRegion) =>
+              roomCount + currentRegion.rooms.length,
+            0
+          )}
+        </p>
+      </div>
+      <div className="overflow-y-auto">
+        <Outlet />
+      </div>
     </div>
   );
 }
