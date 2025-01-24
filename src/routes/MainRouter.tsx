@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Regions from "@/features/regions/pages/Regions";
 import RegionsForm from "@/features/regions/components/RegionsForm";
 import Nav from "@/components/nav/Nav";
+import RegionsIndex from "@/features/regions/components/RegionsIndex";
 
 export default function MainRouter() {
   return (
@@ -15,6 +16,7 @@ export default function MainRouter() {
           <Route path="login" element={<Login />} />
           {/* Regions */}
           <Route path="regions" element={<Regions />}>
+            <Route index element={<RegionsIndex />} />
             <Route path="create" element={<RegionsForm />} />
           </Route>
           {/* Rooms */}
