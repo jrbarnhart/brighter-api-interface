@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useMutation } from "@tanstack/react-query";
+import { components } from "@/types/api";
 
 export default function CreateRegionForm() {
   const form = useForm<z.infer<typeof CreateRegionSchema>>({
@@ -22,16 +24,31 @@ export default function CreateRegionForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof CreateRegionSchema>) => {
-    // React query goes here
-    console.log(values);
-  };
+  const mutation = useMutation({
+    mutationFn: async (newRegion: components["schemas"]["CreateRegionDto"]) => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/regions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newRegion),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+      }
+    },
+  });
 
   return (
     <>
       <h2 className="text-xl">Create new Region</h2>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(() => {
+            mutation.mutate(form.getValues());
+          })}
+          className="space-y-8"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -46,7 +63,22 @@ export default function CreateRegionForm() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+
+          <div>
+            {mutation.isPending ? (
+              <p>Adding todo...</p>
+            ) : (
+              <>
+                {mutation.isError ? (
+                  <p>An error occurred: {mutation.error.message}</p>
+                ) : null}
+
+                {mutation.isSuccess ? <div>Todo added!</div> : null}
+
+                <Button type="submit">Create Region</Button>
+              </>
+            )}
+          </div>
         </form>
       </Form>
     </>
