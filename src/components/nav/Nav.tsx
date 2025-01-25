@@ -5,15 +5,15 @@ export default function Nav() {
   return (
     <div className="relative">
       <nav className="w-40 h-screen p-4 bg-secondary fixed top-0 left-0 flex flex-col items-start">
-        <Button variant={"link"}>
+        <Button variant={"link"} className="text-xl">
           <Link to={"/"}>Dashboard</Link>
         </Button>
 
-        <Button variant={"link"}>
+        <Button variant={"link"} className="text-xl">
           <Link to={"/regions"}>Regions</Link>
         </Button>
 
-        <Button variant={"link"}>
+        <Button variant={"link"} className="text-xl">
           <Link to={"/rooms"}>Rooms</Link>
         </Button>
       </nav>
