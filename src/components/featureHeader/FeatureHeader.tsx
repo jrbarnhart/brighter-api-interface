@@ -13,11 +13,15 @@ export default function FeatureHeader({
       <div className="flex gap-2 items-start h-full">
         <Button variant={"link"} className="pl-0 pr-2" asChild>
           <Link to={"/regions"}>
-            <h1 className="text-2xl">{label}</h1>
+            <h1 className="text-3xl">{label}</h1>
           </Link>
         </Button>
         <div className="w-1 h-full bg-secondary rounded-xl border-border" />
-        <Button variant={"link"} className="pl-1 text-accent" asChild>
+        <Button
+          variant={"link"}
+          className="pl-1 text-accent text-xl items-start"
+          asChild
+        >
           <Link to={`/${urlName}/create`}>Create</Link>
         </Button>
       </div>
