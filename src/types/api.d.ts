@@ -1384,6 +1384,9 @@ export interface components {
             username: string;
             password: string;
         };
+        JwtEntity: {
+            access_token: string;
+        };
         CreateRegionDto: {
             name: string;
         };
@@ -2165,7 +2168,17 @@ export interface operations {
             };
         };
         responses: {
+            /** @description Valid login credentials */
             200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JwtEntity"];
+                };
+            };
+            /** @description Invalid login credentials */
+            401: {
                 headers: {
                     [name: string]: unknown;
                 };
