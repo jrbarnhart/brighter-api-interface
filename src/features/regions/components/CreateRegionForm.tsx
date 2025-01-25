@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export default function RegionsForm() {
+export default function CreateRegionForm() {
   const form = useForm<z.infer<typeof CreateRegionSchema>>({
     resolver: zodResolver(CreateRegionSchema),
     defaultValues: {

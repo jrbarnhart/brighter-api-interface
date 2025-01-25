@@ -2,7 +2,7 @@ import Home from "@/pages/home/Home";
 import Login from "@/pages/login/Login";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Regions from "@/features/regions/pages/Regions";
-import RegionsForm from "@/features/regions/components/RegionsForm";
+import CreateRegionForm from "@/features/regions/components/CreateRegionForm";
 import Nav from "@/components/nav/Nav";
 import RegionsIndex from "@/features/regions/components/RegionsIndex";
 import Region from "@/features/regions/components/Region";
@@ -19,7 +19,7 @@ export default function MainRouter() {
           <Route path="regions" element={<Regions />}>
             <Route index element={<RegionsIndex />} />
             <Route path=":id" element={<Region />} />
-            <Route path="create" element={<RegionsForm />} />
+            <Route path="create" element={<CreateRegionForm />} />
           </Route>
           {/* Rooms */}
           {/* Skills */}
