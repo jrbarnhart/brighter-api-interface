@@ -2188,7 +2188,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["RegionEntity"];
+                    "application/json": components["schemas"]["RegionEntity"][];
                 };
             };
         };
