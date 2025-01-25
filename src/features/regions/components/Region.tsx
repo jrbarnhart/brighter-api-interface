@@ -1,7 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { paths } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 export default function Region() {
   const { id } = useParams();
@@ -34,16 +35,27 @@ export default function Region() {
   const { data: region } = data;
 
   return (
-    <>
-      <h2 className="text-2xl">{region.name}</h2>
-      <h3 className="text-xl">Rooms:</h3>
-      <ScrollArea className="w-96 h-44 bg-secondary border-2 rounded-xl pl-3">
-        {region.rooms.map((room) => (
-          <p className="pb-1" key={room.id}>
-            {room.name}
-          </p>
-        ))}
-      </ScrollArea>
-    </>
+    <ScrollArea className="h-full">
+      <div className="space-y-4">
+        <h2 className="text-2xl">{region.name}</h2>
+        <div className="flex gap-3 h-screen">
+          <p className="text-xl">Rooms:</p>
+          <ScrollArea className="w-96 h-44 bg-secondary border-2 rounded-xl pl-3">
+            <div className="flex flex-col items-start">
+              {region.rooms.map((room) => (
+                <Button
+                  key={room.id}
+                  variant={"link"}
+                  className="text-base p-0 underline"
+                  asChild
+                >
+                  <Link to={`/rooms/${room.id.toString()}`}>{room.name}</Link>
+                </Button>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      </div>
+    </ScrollArea>
   );
 }
