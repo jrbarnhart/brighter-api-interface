@@ -1,9 +1,8 @@
-import FeatureHeader from "@/components/featureHeader/FeatureHeader";
 import { paths } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
-export default function RegionDetails() {
+export default function Region() {
   const { id } = useParams();
 
   const headers = new Headers();
@@ -35,7 +34,6 @@ export default function RegionDetails() {
 
   return (
     <>
-      <FeatureHeader label="Regions" urlName="regions" />
       <p>{payload.name}</p>
     </>
   );
