@@ -3,23 +3,21 @@ import { Link, Outlet } from "react-router";
 
 export default function Nav() {
   return (
-    <div className="grid grid-flow-col grid-cols-[min-content_1fr]">
-      <nav className="w-fit h-screen p-5 bg-secondary">
+    <div className="relative">
+      <nav className="w-40 h-screen p-4 bg-secondary fixed top-0 left-0 flex flex-col items-start">
         <Button variant={"link"}>
           <Link to={"/"}>Dashboard</Link>
         </Button>
 
-        <div className="flex items-center">
-          <Button variant={"link"}>
-            <Link to={"/regions"}>Regions</Link>
-          </Button>
-        </div>
+        <Button variant={"link"}>
+          <Link to={"/regions"}>Regions</Link>
+        </Button>
 
         <Button variant={"link"}>
           <Link to={"/rooms"}>Rooms</Link>
         </Button>
       </nav>
-      <div className="w-full h-full p-5">
+      <div className="p-4 pl-44">
         <Outlet />
       </div>
     </div>

@@ -26,11 +26,25 @@ export default function RegionsIndex() {
   }
 
   const { data: payload } = data;
+
   return (
-    <div>
-      <p>Total: 1</p>
-      <p>Total Rooms: 100</p>
-      <p>Total Skills 100</p>
+    <div className="h-[800px] border border-border">
+      <div className="grid grid-cols-[1fr_1fr_3fr] p-2 bg-secondary ">
+        <p>Name</p>
+        <p>Id</p>
+        <p>Skills</p>
+      </div>
+      <div className="overflow-y-auto h-full">
+        {payload.map((region) => (
+          <div
+            className="grid grid-cols-[1fr_1fr_3fr] p-2 even:bg-secondary/60"
+            key={region.id}
+          >
+            <p>{region.name}</p>
+            <p>{region.id}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
