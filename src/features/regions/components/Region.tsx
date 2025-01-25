@@ -38,18 +38,76 @@ export default function Region() {
     <ScrollArea className="h-full">
       <div className="space-y-4">
         <h2 className="text-2xl">{region.name}</h2>
-        <div className="flex gap-3 h-screen">
+        <p className="text-xl">Id: {region.id}</p>
+        <div className="flex flex-col gap-2">
           <p className="text-xl">Rooms:</p>
-          <ScrollArea className="w-96 h-44 bg-secondary border-2 rounded-xl pl-3">
+          <ScrollArea className="w-fit max-w-96 min-w-44 h-44 bg-secondary shadow-inner shadow-accent rounded-xl px-3">
             <div className="flex flex-col items-start">
               {region.rooms.map((room) => (
                 <Button
                   key={room.id}
                   variant={"link"}
-                  className="text-base p-0 underline"
+                  className="text-base p-0 underline truncate"
                   asChild
                 >
                   <Link to={`/rooms/${room.id.toString()}`}>{room.name}</Link>
+                </Button>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-xl">Combat Skills:</p>
+          <ScrollArea className="w-fit max-w-96 min-w-44 h-44 bg-secondary shadow-inner shadow-accent rounded-xl px-3">
+            <div className="flex flex-col items-start">
+              {region.combatSkills.map((skill) => (
+                <Button
+                  key={skill.id}
+                  variant={"link"}
+                  className="text-base p-0 underline truncate"
+                  asChild
+                >
+                  <Link to={`/skills/combat/${skill.id.toString()}`}>
+                    {skill.name}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-xl">Gathering Skills:</p>
+          <ScrollArea className="w-fit max-w-96 min-w-44 h-44 bg-secondary shadow-inner shadow-accent rounded-xl px-3">
+            <div className="flex flex-col items-start">
+              {region.gatheringSkills.map((skill) => (
+                <Button
+                  key={skill.id}
+                  variant={"link"}
+                  className="text-base p-0 underline truncate"
+                  asChild
+                >
+                  <Link to={`/skills/gathering/${skill.id.toString()}`}>
+                    {skill.name}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="text-xl">Crafting Skills:</p>
+          <ScrollArea className="w-fit max-w-96 min-w-44 h-44 bg-secondary shadow-inner shadow-accent rounded-xl px-3">
+            <div className="flex flex-col items-start">
+              {region.craftingSkills.map((skill) => (
+                <Button
+                  key={skill.id}
+                  variant={"link"}
+                  className="text-base p-0 underline truncate"
+                  asChild
+                >
+                  <Link to={`/skills/crafting/${skill.id.toString()}`}>
+                    {skill.name}
+                  </Link>
                 </Button>
               ))}
             </div>
