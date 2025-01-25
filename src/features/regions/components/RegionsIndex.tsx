@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { components } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 
 export default function RegionsIndex() {
   const headers = new Headers();
@@ -30,25 +31,33 @@ export default function RegionsIndex() {
 
   return (
     <div className="h-[800px] border border-border">
-      <div className="grid grid-cols-[1fr_1fr_3fr] p-2 bg-secondary ">
+      <div className="grid grid-cols-[1fr_1fr_1fr_1fr] p-2 bg-secondary ">
         <p>Name</p>
         <p>Id</p>
         <p>Skills</p>
+        <p>Rooms</p>
       </div>
       <div className="overflow-y-auto h-full">
         {payload.map((region) => (
           <div
-            className="grid grid-cols-[1fr_1fr_3fr] p-2 even:bg-secondary/60"
+            className="grid grid-cols-[1fr_1fr_1fr_1fr] items-center p-2 even:bg-secondary/60"
             key={region.id}
           >
-            <p>{region.name}</p>
+            <div>
+              <Button variant={"link"} className="pl-0" asChild>
+                <Link
+                  to={`/regions/${region.id.toString()}`}
+                  className="truncate underline"
+                >
+                  {region.name.toString()}
+                </Link>
+              </Button>
+            </div>
             <p>{region.id}</p>
             <p>
-              {region.combatSkills.map((skill) => (
-                // Map  skills to button links
-                <Button key={skill.id}>{skill.name}</Button>
-              ))}
+              {`Cb: ${region.combatSkills.length.toString()} - G: ${region.gatheringSkills.length.toString()} - Cr: ${region.craftingSkills.length.toString()}`}
             </p>
+            <p>{region.rooms.length}</p>
           </div>
         ))}
       </div>
