@@ -8,7 +8,7 @@ export default function RegionsIndex() {
   headers.append("Content-Type", "application/json");
 
   const { isLoading, isSuccess, error, data } = useQuery({
-    queryKey: ["allRegions"],
+    queryKey: ["all-regions"],
     queryFn: (): Promise<{
       data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
     }> =>
@@ -29,9 +29,7 @@ export default function RegionsIndex() {
     );
   }
 
-  const { data: payload } = data;
-
-  const regionsArray = Array.from(payload);
+  const { data: regionsArray } = data;
 
   return (
     <div className="h-[800px] border border-border">
