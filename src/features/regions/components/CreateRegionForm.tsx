@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { components } from "@/types/api";
 
 export default function CreateRegionForm() {
@@ -23,6 +23,8 @@ export default function CreateRegionForm() {
       name: "",
     },
   });
+
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (newRegion: components["schemas"]["CreateRegionDto"]) => {
@@ -36,6 +38,8 @@ export default function CreateRegionForm() {
         const errorText = await response.text();
         throw new Error(errorText);
       }
+
+      await queryClient.resetQueries({ queryKey: "all-regions" });
     },
   });
 
