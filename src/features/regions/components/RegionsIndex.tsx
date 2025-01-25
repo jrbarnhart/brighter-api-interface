@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { components } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
 
@@ -42,6 +43,12 @@ export default function RegionsIndex() {
           >
             <p>{region.name}</p>
             <p>{region.id}</p>
+            <p>
+              {region.combatSkills.map((skill) => (
+                // Map  skills to button links
+                <Button key={skill.id}>{skill.name}</Button>
+              ))}
+            </p>
           </div>
         ))}
       </div>
