@@ -1,11 +1,11 @@
 import Home from "@/pages/home/Home";
-import Login from "@/pages/login/Login";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Regions from "@/features/regions/pages/Regions";
 import CreateRegionForm from "@/features/regions/components/CreateRegionForm";
 import Nav from "@/components/nav/Nav";
 import RegionsIndex from "@/features/regions/components/RegionsIndex";
 import Region from "@/features/regions/components/Region";
+import Login from "@/features/auth/pages/Login";
 
 export default function MainRouter() {
   return (
