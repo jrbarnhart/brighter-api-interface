@@ -5,6 +5,7 @@ import Regions from "@/features/regions/pages/Regions";
 import RegionsForm from "@/features/regions/components/RegionsForm";
 import Nav from "@/components/nav/Nav";
 import RegionsIndex from "@/features/regions/components/RegionsIndex";
+import RegionDetails from "@/features/regions/pages/RegionDetails";
 
 export default function MainRouter() {
   return (
@@ -15,6 +16,7 @@ export default function MainRouter() {
           {/* Auth */}
           <Route path="login" element={<Login />} />
           {/* Regions */}
+          <Route path="regions/:id" element={<RegionDetails />}></Route>
           <Route path="regions" element={<Regions />}>
             <Route index element={<RegionsIndex />} />
             <Route path="create" element={<RegionsForm />} />
