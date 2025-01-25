@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { components } from "@/types/api";
+import { paths } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 
@@ -9,7 +9,9 @@ export default function RegionsIndex() {
 
   const { isLoading, isSuccess, error, data } = useQuery({
     queryKey: ["allRegions"],
-    queryFn: (): Promise<{ data: components["schemas"]["RegionEntity"][] }> =>
+    queryFn: (): Promise<{
+      data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
+    }> =>
       fetch(`${import.meta.env.VITE_API_URL}/regions`, {
         headers: new Headers(),
       }).then((res) => res.json()),
@@ -29,6 +31,8 @@ export default function RegionsIndex() {
 
   const { data: payload } = data;
 
+  const regionsArray = Array.from(payload);
+
   return (
     <div className="h-[800px] border border-border">
       <div className="grid grid-cols-[1fr_1fr_1fr_1fr] p-2 bg-secondary ">
@@ -38,7 +42,7 @@ export default function RegionsIndex() {
         <p>Rooms</p>
       </div>
       <div className="overflow-y-auto h-full">
-        {payload.map((region) => (
+        {regionsArray.map((region) => (
           <div
             className="grid grid-cols-[1fr_1fr_1fr_1fr] items-center p-2 even:bg-secondary/60"
             key={region.id}
