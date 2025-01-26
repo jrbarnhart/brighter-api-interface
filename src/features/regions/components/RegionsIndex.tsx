@@ -32,7 +32,7 @@ export default function RegionsIndex() {
   const { data: regionsArray } = data;
 
   return (
-    <div className="h-[1800px] border border-border">
+    <div className="border border-border">
       <div className="grid grid-cols-[1fr_1fr_1fr_1fr] p-2 bg-secondary ">
         <p>Name</p>
         <p>Id</p>

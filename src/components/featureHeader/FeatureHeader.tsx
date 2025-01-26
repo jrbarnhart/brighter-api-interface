@@ -13,7 +13,7 @@ export default function FeatureHeader({
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <div className="py-4 bg-background w-full flex justify-between sticky top-0">
+    <div className="p-4 bg-background w-full flex justify-between sticky top-0">
       <div className="flex flex-col h-8">
         <div className="flex gap-2 items-start h-full">
           <Button variant={"link"} className="pl-0 pr-2" asChild>
@@ -31,7 +31,13 @@ export default function FeatureHeader({
           </Button>
         </div>
       </div>
-      <p>test</p>
+      {isLoggedIn() ? (
+        <p className="text-xl self-end">Logged in! 🚀</p>
+      ) : (
+        <Button variant={"link"} className="text-xl self-end" asChild>
+          <Link to={"/login"}>Log In. 🔐</Link>
+        </Button>
+      )}
     </div>
   );
 }
