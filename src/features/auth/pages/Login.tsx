@@ -69,14 +69,14 @@ export default function Login() {
   });
 
   return (
-    <>
-      <h2 className="text-xl">Login</h2>
+    <div className="p-4 space-y-5">
+      <h2 className="text-3xl">Login</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(() => {
             mutation.mutate(form.getValues());
           })}
-          className="space-y-8"
+          className="space-y-4"
         >
           <FormField
             control={form.control}
@@ -121,6 +121,6 @@ export default function Login() {
           </div>
         </form>
       </Form>
-    </>
+    </div>
   );
 }
