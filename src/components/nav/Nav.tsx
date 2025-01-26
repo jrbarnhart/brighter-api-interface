@@ -3,8 +3,8 @@ import { Link, Outlet } from "react-router";
 
 export default function Nav() {
   return (
-    <div className="relative">
-      <nav className="w-40 h-screen p-4 bg-secondary fixed top-0 left-0 flex flex-col items-start">
+    <div className="grid grid-flow-col grid-cols-[auto_1fr] h-full">
+      <nav className="row-span-full col-start-1 col-end-2 w-40 h-screen p-4 bg-secondary flex flex-col items-start">
         <Button variant={"link"} className="text-xl">
           <Link to={"/"}>Dashboard</Link>
         </Button>
@@ -17,7 +17,7 @@ export default function Nav() {
           <Link to={"/rooms"}>Rooms</Link>
         </Button>
       </nav>
-      <div className="p-4 pl-44">
+      <div className="h-full w-full col-start-2 col-end-3">
         <Outlet />
       </div>
     </div>

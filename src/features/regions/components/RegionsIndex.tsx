@@ -32,14 +32,14 @@ export default function RegionsIndex() {
   const { data: regionsArray } = data;
 
   return (
-    <div className="h-[800px] border border-border">
+    <div className="h-[1800px] border border-border">
       <div className="grid grid-cols-[1fr_1fr_1fr_1fr] p-2 bg-secondary ">
         <p>Name</p>
         <p>Id</p>
         <p>Skills</p>
         <p>Rooms</p>
       </div>
-      <div className="overflow-y-auto h-full">
+      <div className="">
         {regionsArray.map((region) => (
           <div
             className="grid grid-cols-[1fr_1fr_1fr_1fr] items-center p-2 even:bg-secondary/60"

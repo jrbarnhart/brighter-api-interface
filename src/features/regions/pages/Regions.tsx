@@ -4,8 +4,8 @@ import { Outlet } from "react-router";
 export default function Regions() {
   return (
     <>
-      <FeatureHeader label="Regions" urlName="regions" />
-      <div className="pt-16">
+      <div className="h-screen overflow-y-auto relative">
+        <FeatureHeader label="Regions" urlName="regions" />
         <Outlet />
       </div>
     </>

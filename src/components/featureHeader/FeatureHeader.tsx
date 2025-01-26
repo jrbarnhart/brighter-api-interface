@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { useContext } from "react";
+import { AuthContext } from "@/features/auth/components/AuthContext";
 
 export default function FeatureHeader({
   label,
@@ -8,8 +10,10 @@ export default function FeatureHeader({
   label: string;
   urlName: string;
 }) {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
-    <div className="py-4 -mt-4 bg-background fixed z-10 w-full">
+    <div className="py-4 bg-background w-full flex justify-between sticky top-0">
       <div className="flex flex-col h-8">
         <div className="flex gap-2 items-start h-full">
           <Button variant={"link"} className="pl-0 pr-2" asChild>
@@ -27,6 +31,7 @@ export default function FeatureHeader({
           </Button>
         </div>
       </div>
+      <p>test</p>
     </div>
   );
 }
