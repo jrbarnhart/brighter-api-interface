@@ -17,8 +17,11 @@ import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { AuthContext } from "../components/AuthContext";
 import { loginResponseSchema } from "../schemas/login.response.schema";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const { setToken } = useContext(AuthContext);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -32,9 +35,9 @@ export default function Login() {
   const mutation = useMutation({
     mutationFn: async (
       loginCredentials: components["schemas"]["SignInDto"]
-    ): Promise<
-      paths["/auth/login"]["post"]["responses"]["200"]["content"]["application/json"]
-    > => {
+    ): Promise<{
+      data: paths["/auth/login"]["post"]["responses"]["200"]["content"]["application/json"];
+    }> => {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/auth/login`,
         {
@@ -49,7 +52,9 @@ export default function Login() {
         throw new Error(errorText);
       }
 
-      const validatedResponse = loginResponseSchema.safeParse(response.json());
+      const responseJson: unknown = await response.json();
+
+      const validatedResponse = loginResponseSchema.safeParse(responseJson);
 
       if (!validatedResponse.success) {
         throw new Error("Error validating response");
@@ -57,8 +62,9 @@ export default function Login() {
 
       return validatedResponse.data;
     },
-    onSuccess: (data) => {
-      setToken(data.access_token);
+    onSuccess: async (data) => {
+      setToken(data.data.access_token);
+      await navigate("/");
     },
   });
 
