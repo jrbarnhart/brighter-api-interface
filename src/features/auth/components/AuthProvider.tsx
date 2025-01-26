@@ -20,10 +20,22 @@ export default function AuthProvider({
   };
 
   const isLoggedIn = () => {
-    const decodedToken = jwtDecode(accessToken);
-    const today = new Date();
-    const isTokenExpired = (decodedToken.exp || 0) < today.getTime();
-    return !isTokenExpired;
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const today = new Date();
+      const currentTimeInSeconds = Math.floor(today.getTime() / 1000); // Convert to seconds
+      const isTokenExpired = (decodedToken.exp ?? 0) < currentTimeInSeconds;
+      return !isTokenExpired;
+    } catch (error) {
+      // Handle invalid tokens (e.g., malformed token)
+      console.error("Error decoding token:", error);
+      return false;
+    }
   };
 
   return (
