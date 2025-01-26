@@ -1,14 +1,5 @@
-import { createContext, useState } from "react";
-
-const AuthContext = createContext({
-  accessToken: "",
-  setToken: (token: string) => {
-    localStorage.setItem("access_token", token);
-  },
-  logout: () => {
-    localStorage.removeItem("access_token");
-  },
-});
+import { useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 export default function AuthProvider({
   children,

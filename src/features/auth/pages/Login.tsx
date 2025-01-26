@@ -7,15 +7,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { components } from "@/types/api";
+import { components, paths } from "@/types/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { LoginSchema } from "../schemas/login.schema";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { AuthContext } from "../components/AuthContext";
+import { loginResponseSchema } from "../schemas/login.response.schema";
 
 export default function Login() {
+  const { setToken } = useContext(AuthContext);
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -27,7 +32,9 @@ export default function Login() {
   const mutation = useMutation({
     mutationFn: async (
       loginCredentials: components["schemas"]["SignInDto"]
-    ) => {
+    ): Promise<
+      paths["/auth/login"]["post"]["responses"]["200"]["content"]["application/json"]
+    > => {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/auth/login`,
         {
@@ -41,6 +48,17 @@ export default function Login() {
         const errorText = await response.text();
         throw new Error(errorText);
       }
+
+      const validatedResponse = loginResponseSchema.safeParse(response.json());
+
+      if (!validatedResponse.success) {
+        throw new Error("Error validating response");
+      }
+
+      return validatedResponse.data;
+    },
+    onSuccess: (data) => {
+      setToken(data.access_token);
     },
   });
 
