@@ -36,7 +36,9 @@ export default function UpdateRegionForm() {
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
   const updateRegionMutation = useMutation({
-    mutationFn: async (newRegion: components["schemas"]["UpdateRegionDto"]) => {
+    mutationFn: async (
+      updatedRegion: components["schemas"]["UpdateRegionDto"]
+    ) => {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/regions/${id ?? ""}`,
         {
@@ -45,7 +47,7 @@ export default function UpdateRegionForm() {
             "Content-Type": "application/json",
             Authorization: authHeaderValue,
           },
-          body: JSON.stringify(newRegion),
+          body: JSON.stringify(updatedRegion),
         }
       );
 
