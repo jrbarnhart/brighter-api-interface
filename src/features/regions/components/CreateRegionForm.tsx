@@ -26,11 +26,18 @@ export default function CreateRegionForm() {
 
   const queryClient = useQueryClient();
 
+  const token = localStorage.getItem("access_token");
+
+  const authHeaderValue = `Bearer ${token ?? ""}`;
+
   const mutation = useMutation({
     mutationFn: async (newRegion: components["schemas"]["CreateRegionDto"]) => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/regions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authHeaderValue,
+        },
         body: JSON.stringify(newRegion),
       });
 
@@ -77,7 +84,7 @@ export default function CreateRegionForm() {
                   <p>An error occurred: {mutation.error.message}</p>
                 ) : null}
 
-                {mutation.isSuccess ? <div>Todo added!</div> : null}
+                {mutation.isSuccess ? <p>Region added successfullyS</p> : null}
 
                 <Button type="submit">Create Region</Button>
               </>
