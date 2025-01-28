@@ -30,7 +30,7 @@ export default function CreateRegionForm() {
 
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
-  const mutation = useMutation({
+  const createRegionMutation = useMutation({
     mutationFn: async (newRegion: components["schemas"]["CreateRegionDto"]) => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/regions`, {
         method: "POST",
@@ -56,7 +56,7 @@ export default function CreateRegionForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(() => {
-            mutation.mutate(form.getValues());
+            createRegionMutation.mutate(form.getValues());
           })}
           className="space-y-8"
         >
@@ -76,15 +76,17 @@ export default function CreateRegionForm() {
           />
 
           <div>
-            {mutation.isPending ? (
+            {createRegionMutation.isPending ? (
               <p>Adding region...</p>
             ) : (
               <>
-                {mutation.isError ? (
-                  <p>An error occurred: {mutation.error.message}</p>
+                {createRegionMutation.isError ? (
+                  <p>An error occurred: {createRegionMutation.error.message}</p>
                 ) : null}
 
-                {mutation.isSuccess ? <p>Region added successfully</p> : null}
+                {createRegionMutation.isSuccess ? (
+                  <p>Region added successfully</p>
+                ) : null}
 
                 <Button type="submit">Create Region</Button>
               </>
