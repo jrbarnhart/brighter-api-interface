@@ -6,6 +6,7 @@ import Nav from "@/components/nav/Nav";
 import RegionsIndex from "@/features/regions/components/RegionsIndex";
 import Region from "@/features/regions/components/Region";
 import Login from "@/features/auth/pages/Login";
+import Rooms from "@/features/rooms/pages/Rooms";
 
 export default function MainRouter() {
   return (
@@ -22,6 +23,7 @@ export default function MainRouter() {
             <Route path="create" element={<CreateRegionForm />} />
           </Route>
           {/* Rooms */}
+          <Route path="rooms" element={<Rooms />}></Route>
           {/* Skills */}
           {/* Monsters */}
           {/* Resources */}
