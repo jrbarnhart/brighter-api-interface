@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CreateRegionSchema } from "../schemas/create-reagion.schema";
+import { CreateRegionSchema } from "../schemas/create-region.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
