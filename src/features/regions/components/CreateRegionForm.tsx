@@ -77,14 +77,14 @@ export default function CreateRegionForm() {
 
           <div>
             {mutation.isPending ? (
-              <p>Adding todo...</p>
+              <p>Adding region...</p>
             ) : (
               <>
                 {mutation.isError ? (
                   <p>An error occurred: {mutation.error.message}</p>
                 ) : null}
 
-                {mutation.isSuccess ? <p>Region added successfullyS</p> : null}
+                {mutation.isSuccess ? <p>Region added successfully</p> : null}
 
                 <Button type="submit">Create Region</Button>
               </>
