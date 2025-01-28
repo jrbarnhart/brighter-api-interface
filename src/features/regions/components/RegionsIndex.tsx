@@ -33,7 +33,7 @@ export default function RegionsIndex() {
 
   return (
     <div className="border border-border">
-      <div className="grid grid-cols-[1fr_1fr_1fr_1fr] p-2 bg-secondary ">
+      <div className="grid grid-cols-[2fr_1fr_2fr_1fr] p-2 bg-secondary ">
         <p>Name</p>
         <p>Id</p>
         <p>Skills</p>
@@ -42,7 +42,7 @@ export default function RegionsIndex() {
       <div className="">
         {regionsArray.map((region) => (
           <div
-            className="grid grid-cols-[1fr_1fr_1fr_1fr] items-center p-2 even:bg-secondary/60"
+            className="grid grid-cols-[2fr_1fr_2fr_1fr] items-center p-2 even:bg-secondary/60"
             key={region.id}
           >
             <div>
