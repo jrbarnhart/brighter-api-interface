@@ -4,11 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "@/features/auth/components/AuthContext";
 
 export default function FeatureHeader({
-  label,
-  urlName,
+  featureLabel,
+  featureName,
 }: {
-  label: string;
-  urlName: string;
+  featureLabel: string;
+  featureName: string;
 }) {
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -17,8 +17,8 @@ export default function FeatureHeader({
       <div className="flex flex-col h-8">
         <div className="flex gap-2 items-start h-full">
           <Button variant={"link"} className="pl-0 pr-2" asChild>
-            <Link to={"/regions"}>
-              <h1 className="text-3xl">{label}</h1>
+            <Link to={`/${featureName}`}>
+              <h1 className="text-3xl">{featureLabel}</h1>
             </Link>
           </Button>
           <div className="w-1 h-full bg-secondary rounded-xl border-border" />
@@ -27,7 +27,7 @@ export default function FeatureHeader({
             className="pl-1 text-accent text-xl items-start"
             asChild
           >
-            <Link to={`/${urlName}/create`}>Create</Link>
+            <Link to={`/${featureName}/create`}>Create</Link>
           </Button>
         </div>
       </div>

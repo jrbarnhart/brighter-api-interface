@@ -11,7 +11,7 @@ export default function FeaturePage({
   return (
     <>
       <div className="h-screen overflow-y-auto relative">
-        <FeatureHeader label={featureLabel} urlName={featureName} />
+        <FeatureHeader featureLabel={featureLabel} featureName={featureName} />
         <div className="p-4">
           <Outlet />
         </div>
