@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CreateRegionSchema } from "../schemas/create-region.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
@@ -15,10 +14,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { components } from "@/types/api";
+import { UpdateRegionSchema } from "../schemas/update-region.schema";
+import { useNavigate, useParams } from "react-router";
 
 export default function UpdateRegionForm() {
-  const form = useForm<z.infer<typeof CreateRegionSchema>>({
-    resolver: zodResolver(CreateRegionSchema),
+  const form = useForm<z.infer<typeof UpdateRegionSchema>>({
+    resolver: zodResolver(UpdateRegionSchema),
     defaultValues: {
       name: "",
     },
@@ -26,20 +27,27 @@ export default function UpdateRegionForm() {
 
   const queryClient = useQueryClient();
 
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+
   const token = localStorage.getItem("access_token");
 
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
   const mutation = useMutation({
-    mutationFn: async (newRegion: components["schemas"]["CreateRegionDto"]) => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/regions`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authHeaderValue,
-        },
-        body: JSON.stringify(newRegion),
-      });
+    mutationFn: async (newRegion: components["schemas"]["UpdateRegionDto"]) => {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/regions/${id ?? ""}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authHeaderValue,
+          },
+          body: JSON.stringify(newRegion),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -47,12 +55,14 @@ export default function UpdateRegionForm() {
       }
 
       await queryClient.resetQueries({ queryKey: "all-regions" });
+
+      await navigate(0);
     },
   });
 
   return (
     <>
-      <h2 className="text-xl">Create new Region</h2>
+      <h2 className="text-xl">Update Region</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(() => {
@@ -77,16 +87,18 @@ export default function UpdateRegionForm() {
 
           <div>
             {mutation.isPending ? (
-              <p>Adding todo...</p>
+              <p>Updating region...</p>
             ) : (
               <>
                 {mutation.isError ? (
                   <p>An error occurred: {mutation.error.message}</p>
                 ) : null}
 
-                {mutation.isSuccess ? <p>Region added successfullyS</p> : null}
+                {mutation.isSuccess ? (
+                  <p>Region updated successfully.</p>
+                ) : null}
 
-                <Button type="submit">Create Region</Button>
+                <Button type="submit">Submit Changes</Button>
               </>
             )}
           </div>
