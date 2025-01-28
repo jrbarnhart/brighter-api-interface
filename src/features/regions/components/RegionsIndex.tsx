@@ -4,14 +4,13 @@ import useGetRegions from "../queries/useGetRegions";
 import RenderRegions from "./RenderRegions";
 
 export default function RegionsIndex() {
-  const gridColsRule = "grid-cols-[2fr_1fr_2fr_1fr]";
   const regionsUseQueryResult = useGetRegions();
   return (
     <FeatureIndex<components["schemas"]["RegionEntity"]>
       featureLabel="Regions"
       featureName="regions"
       featureHeaders={["Name", "Id", "Skills", "Rooms"]}
-      gridColsRule={gridColsRule}
+      gridColsRule="grid-cols-[2fr_1fr_2fr_1fr]"
       featureUseQueryResult={regionsUseQueryResult}
       renderContentFn={RenderRegions}
     />
