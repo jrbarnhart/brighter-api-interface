@@ -9,10 +9,16 @@ export default function FeatureIndex<T>({
 }: {
   featureName: string;
   featureLabel: string;
-  featureUseQueryResult: UseQueryResult<{ data: T }>;
+  featureUseQueryResult: UseQueryResult<{ data: T[] }>;
   featureHeaders: string[];
   gridColsRule: string;
-  renderContentFn: (data: T) => React.ReactNode;
+  renderContentFn: ({
+    data,
+    gridColsRule,
+  }: {
+    data: T[];
+    gridColsRule: string;
+  }) => React.ReactNode;
 }) {
   const { isLoading, isSuccess, error, data } = featureUseQueryResult;
 
@@ -28,7 +34,7 @@ export default function FeatureIndex<T>({
     );
   }
 
-  const { data: dataToMap } = data;
+  const { data: unwrappedData } = data;
 
   return (
     <div className="border border-border">
@@ -37,7 +43,9 @@ export default function FeatureIndex<T>({
           <p key={index}>{header}</p>
         ))}
       </div>
-      <div className="">{renderContentFn(dataToMap)}</div>
+      <div className="">
+        {renderContentFn({ data: unwrappedData, gridColsRule })}
+      </div>
     </div>
   );
 }
