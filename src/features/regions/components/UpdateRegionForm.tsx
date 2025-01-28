@@ -35,7 +35,7 @@ export default function UpdateRegionForm() {
 
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
-  const mutation = useMutation({
+  const updateRegionMutation = useMutation({
     mutationFn: async (newRegion: components["schemas"]["UpdateRegionDto"]) => {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/regions/${id ?? ""}`,
@@ -66,7 +66,7 @@ export default function UpdateRegionForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(() => {
-            mutation.mutate(form.getValues());
+            updateRegionMutation.mutate(form.getValues());
           })}
           className="space-y-8"
         >
@@ -86,15 +86,15 @@ export default function UpdateRegionForm() {
           />
 
           <div>
-            {mutation.isPending ? (
+            {updateRegionMutation.isPending ? (
               <p>Updating region...</p>
             ) : (
               <>
-                {mutation.isError ? (
-                  <p>An error occurred: {mutation.error.message}</p>
+                {updateRegionMutation.isError ? (
+                  <p>An error occurred: {updateRegionMutation.error.message}</p>
                 ) : null}
 
-                {mutation.isSuccess ? (
+                {updateRegionMutation.isSuccess ? (
                   <p>Region updated successfully.</p>
                 ) : null}
 
