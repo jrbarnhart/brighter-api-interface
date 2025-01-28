@@ -3,13 +3,13 @@ import { components } from "@/types/api";
 import { Link } from "react-router";
 
 export default function RenderRegions({
-  regionsArray,
+  data,
   gridColsRule,
 }: {
-  regionsArray: components["schemas"]["RegionEntity"][];
+  data: components["schemas"]["RegionEntity"][];
   gridColsRule: string;
 }) {
-  return regionsArray.map((region) => (
+  return data.map((region) => (
     <div
       className={`grid ${gridColsRule} items-center p-2 even:bg-secondary/60`}
       key={region.id}
