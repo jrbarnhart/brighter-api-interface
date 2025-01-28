@@ -93,7 +93,9 @@ export default function UpdateRegionForm() {
             ) : (
               <>
                 {updateRegionMutation.isError ? (
-                  <p>An error occurred: {updateRegionMutation.error.message}</p>
+                  <p className="text-destructive">
+                    An error occurred: {updateRegionMutation.error.message}
+                  </p>
                 ) : null}
 
                 {updateRegionMutation.isSuccess ? (

@@ -81,7 +81,9 @@ export default function CreateRegionForm() {
             ) : (
               <>
                 {createRegionMutation.isError ? (
-                  <p>An error occurred: {createRegionMutation.error.message}</p>
+                  <p className="text-destructive">
+                    An error occurred: {createRegionMutation.error.message}
+                  </p>
                 ) : null}
 
                 {createRegionMutation.isSuccess ? (
