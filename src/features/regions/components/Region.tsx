@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { paths } from "@/types/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import UpdateRegionForm from "./UpdateRegionForm";
 
 export default function Region() {
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const { id } = useParams();
+  // Qeury to get the region data
+  let { id } = useParams();
+  if (!id) id = "";
 
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -19,11 +22,44 @@ export default function Region() {
     queryFn: (): Promise<{
       data: paths["/regions/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
     }> =>
-      fetch(`${import.meta.env.VITE_API_URL}/regions/${id ?? "0"}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/regions/${id}`, {
         headers: new Headers(),
       }).then((res) => res.json()),
   });
 
+  // Mutation for deleting this region
+  const queryClient = useQueryClient();
+
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("access_token");
+
+  const authHeaderValue = `Bearer ${token ?? ""}`;
+
+  const deleteRegionMutation = useMutation({
+    mutationFn: async (regionToDeleteId: string) => {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/regions/${regionToDeleteId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: authHeaderValue,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+      }
+
+      await queryClient.resetQueries({ queryKey: "all-regions" });
+
+      await navigate("/regions");
+    },
+  });
+
+  // Return skeletons and error elements
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
@@ -38,6 +74,8 @@ export default function Region() {
 
   const { data: region } = data;
 
+  // Mutation for deleting this region
+
   return (
     <ScrollArea className="h-full">
       <div className="space-y-4">
@@ -47,18 +85,47 @@ export default function Region() {
           <Button
             variant={"link"}
             onClick={() => {
+              setIsDeleting(false);
               setIsUpdating((prev) => !prev);
             }}
             className="text-yellow-500 text-lg p-0"
           >
             {isUpdating ? "Cancel" : "Update"}
           </Button>
-          <Button variant={"link"} className="text-destructive text-lg p-0">
-            Delete
+          <Button
+            variant={"link"}
+            onClick={() => {
+              setIsUpdating(false);
+              setIsDeleting((prev) => !prev);
+            }}
+            className="text-destructive text-lg p-0"
+          >
+            {isDeleting ? "Cancel" : "Delete"}
           </Button>
         </div>
         {isUpdating ? (
           <UpdateRegionForm />
+        ) : isDeleting ? (
+          <div className="space-y-4">
+            <h3>Delete this region?</h3>
+            <p className="text-muted-foreground">
+              Note: Regions with rooms or skills cannot be deleted. Delete all
+              of their respective rooms or skills first.
+            </p>
+            <Button
+              variant={"destructive"}
+              onClick={() => {
+                deleteRegionMutation.mutate(id);
+              }}
+            >
+              Delete Region
+            </Button>
+            {deleteRegionMutation.error && (
+              <p className="text-destructive">
+                An error occurred: {deleteRegionMutation.error.message}
+              </p>
+            )}
+          </div>
         ) : (
           <>
             {" "}
