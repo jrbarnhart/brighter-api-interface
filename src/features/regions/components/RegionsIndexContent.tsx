@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { components } from "@/types/api";
 import { Link } from "react-router";
 
-export default function RenderRegions({
+export default function RegionsIndexContent({
   data,
   gridColsRule,
 }: {

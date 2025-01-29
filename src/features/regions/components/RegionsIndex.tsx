@@ -1,7 +1,7 @@
 import { components, paths } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import useGetRecords from "../../../queries/useGetAllRecords";
-import RenderRegions from "./RenderRegions";
+import RegionsIndexContent from "./RegionsIndexContent";
 
 export default function RegionsIndex() {
   const regionsUseQueryResult = useGetRecords<{
@@ -14,7 +14,7 @@ export default function RegionsIndex() {
       featureHeaders={["Name", "Id", "Skills", "Rooms"]}
       gridColsRule="grid-cols-[2fr_1fr_2fr_1fr]"
       featureUseQueryResult={regionsUseQueryResult}
-      renderContentFn={RenderRegions}
+      renderContentFn={RegionsIndexContent}
     />
   );
 }
