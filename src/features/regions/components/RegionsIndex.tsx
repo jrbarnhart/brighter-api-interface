@@ -1,10 +1,12 @@
-import { components } from "@/types/api";
+import { components, paths } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-import useGetRegions from "../queries/useGetRegions";
+import useGetRegions from "../queries/useGetAllRecords";
 import RenderRegions from "./RenderRegions";
 
 export default function RegionsIndex() {
-  const regionsUseQueryResult = useGetRegions();
+  const regionsUseQueryResult = useGetRegions<{
+    data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
+  }>();
   return (
     <FeatureIndex<components["schemas"]["RegionEntity"]>
       featureLabel="Regions"
