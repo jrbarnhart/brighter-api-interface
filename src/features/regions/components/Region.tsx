@@ -16,9 +16,9 @@ export default function Region() {
   // Qeury to get the region data
   let { id } = useParams();
   if (!id) id = "";
-  const { isLoading, isSuccess, error, data } = useGetRecordById<
-    paths["/regions/{id}"]["get"]["responses"]["200"]["content"]["application/json"]
-  >({ id, basePath: "/regions" });
+  const { isLoading, isSuccess, error, data } = useGetRecordById<{
+    data: paths["/regions/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
+  }>({ id, basePath: "/regions" });
 
   // Mutation for deleting this region
   const deleteRegionMutation = useDeleteRecord("/regions");
