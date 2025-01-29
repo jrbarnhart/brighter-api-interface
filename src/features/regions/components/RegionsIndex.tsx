@@ -1,10 +1,10 @@
 import { components, paths } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-import useGetRegions from "../../../queries/useGetAllRecords";
+import useGetRecords from "../../../queries/useGetAllRecords";
 import RenderRegions from "./RenderRegions";
 
 export default function RegionsIndex() {
-  const regionsUseQueryResult = useGetRegions<{
+  const regionsUseQueryResult = useGetRecords<{
     data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
   }>();
   return (
