@@ -2371,7 +2371,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["RoomEntity"];
+                    "application/json": components["schemas"]["RoomEntity"][];
                 };
             };
         };
@@ -2541,7 +2541,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["GatheringSkillRequirementEntity"];
+                    "application/json": components["schemas"]["GatheringSkillRequirementEntity"][];
                 };
             };
         };
@@ -2711,7 +2711,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["GatheringSkillEntity"];
+                    "application/json": components["schemas"]["GatheringSkillEntity"][];
                 };
             };
         };
@@ -2881,7 +2881,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CraftingSkillRequirementEntity"];
+                    "application/json": components["schemas"]["CraftingSkillRequirementEntity"][];
                 };
             };
         };
@@ -3051,7 +3051,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CraftingRecipeEntity"];
+                    "application/json": components["schemas"]["CraftingRecipeEntity"][];
                 };
             };
         };
@@ -3221,7 +3221,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CraftingSkillEntity"];
+                    "application/json": components["schemas"]["CraftingSkillEntity"][];
                 };
             };
         };
@@ -3391,7 +3391,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CombatSkillRequirementEntity"];
+                    "application/json": components["schemas"]["CombatSkillRequirementEntity"][];
                 };
             };
         };
@@ -3561,7 +3561,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CombatSkillEntity"];
+                    "application/json": components["schemas"]["CombatSkillEntity"][];
                 };
             };
         };
@@ -3767,7 +3767,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ResourceVariantEntity"];
+                    "application/json": components["schemas"]["ResourceVariantEntity"][];
                 };
             };
         };
@@ -3937,7 +3937,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ResourceEntity"];
+                    "application/json": components["schemas"]["ResourceEntity"][];
                 };
             };
         };
@@ -4107,7 +4107,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ConsumableVariantEntity"];
+                    "application/json": components["schemas"]["ConsumableVariantEntity"][];
                 };
             };
         };
@@ -4277,7 +4277,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ConsumableEntity"];
+                    "application/json": components["schemas"]["ConsumableEntity"][];
                 };
             };
         };
@@ -4447,7 +4447,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["WeaponVariantEntity"];
+                    "application/json": components["schemas"]["WeaponVariantEntity"][];
                 };
             };
         };
@@ -4617,7 +4617,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["WeaponEntity"];
+                    "application/json": components["schemas"]["WeaponEntity"][];
                 };
             };
         };
@@ -4787,7 +4787,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ArmorVariantEntity"];
+                    "application/json": components["schemas"]["ArmorVariantEntity"][];
                 };
             };
         };
@@ -4957,7 +4957,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ArmorEntity"];
+                    "application/json": components["schemas"]["ArmorEntity"][];
                 };
             };
         };
@@ -5127,7 +5127,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MiscItemEntity"];
+                    "application/json": components["schemas"]["MiscItemEntity"][];
                 };
             };
         };
@@ -5297,7 +5297,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MonsterVariantEntity"];
+                    "application/json": components["schemas"]["MonsterVariantEntity"][];
                 };
             };
         };
@@ -5467,7 +5467,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MonsterEntity"];
+                    "application/json": components["schemas"]["MonsterEntity"][];
                 };
             };
         };
@@ -5637,7 +5637,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["DropTableEntity"];
+                    "application/json": components["schemas"]["DropTableEntity"][];
                 };
             };
         };
@@ -5807,7 +5807,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["VendorEntity"];
+                    "application/json": components["schemas"]["VendorEntity"][];
                 };
             };
         };
@@ -5977,7 +5977,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["NpcEntity"];
+                    "application/json": components["schemas"]["NpcEntity"][];
                 };
             };
         };
@@ -6147,7 +6147,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["QuestStepEntity"];
+                    "application/json": components["schemas"]["QuestStepEntity"][];
                 };
             };
         };
@@ -6317,7 +6317,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["QuestEntity"];
+                    "application/json": components["schemas"]["QuestEntity"][];
                 };
             };
         };
