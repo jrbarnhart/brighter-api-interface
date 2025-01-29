@@ -2,13 +2,13 @@ import { Link } from "react-router";
 import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 
-type Identifiable = {
+type RequiredItemProperties = {
   id: string | number;
   name?: string;
   description?: string;
 };
 
-export default function ScrollList<T extends Identifiable>({
+export default function ScrollList<T extends RequiredItemProperties>({
   title,
   items,
   basePath,
