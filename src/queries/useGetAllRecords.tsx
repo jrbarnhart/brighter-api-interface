@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-export default function useGetRegions<T>() {
+export default function useGetRecords<T>() {
   return useQuery({
     queryKey: ["all-regions"],
     queryFn: (): Promise<T> =>
