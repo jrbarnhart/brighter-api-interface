@@ -5,8 +5,8 @@ import { useParams } from "react-router";
 import UpdateRegionForm from "./UpdateRegionForm";
 import ScrollList from "@/components/scrollList/ScrollList";
 import DeleteConfirmation from "@/components/deleteConfirmation/DeleteConfirmation";
-import useGetRecordById from "../queries/useGetRecordById";
-import useDeleteRecord from "../queries/useDeleteRecord";
+import useGetRecordById from "../../../queries/useGetRecordById";
+import useDeleteRecord from "../../../queries/useDeleteRecord";
 import { paths } from "@/types/api";
 
 export default function Region() {

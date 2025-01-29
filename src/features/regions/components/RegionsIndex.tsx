@@ -1,6 +1,6 @@
 import { components, paths } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-import useGetRegions from "../queries/useGetAllRecords";
+import useGetRegions from "../../../queries/useGetAllRecords";
 import RenderRegions from "./RenderRegions";
 
 export default function RegionsIndex() {
