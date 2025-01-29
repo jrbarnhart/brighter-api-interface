@@ -14,12 +14,12 @@ type RequiredRecordProperties = {
 // This will be used in the content function
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export default function FeatureDetails<T extends RequiredRecordProperties>({
-  recordDetailsContent,
+  renderContentFn,
   updateForm,
   basePath,
   deleteNotes,
 }: {
-  recordDetailsContent: () => React.ReactNode;
+  renderContentFn: (record: T) => React.ReactNode;
   updateForm: React.ReactNode;
   basePath: string;
   deleteNotes?: string;
@@ -91,7 +91,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
             notes={deleteNotes ?? ""}
           />
         ) : (
-          recordDetailsContent()
+          renderContentFn(foundRecord)
         )}
       </div>
     </ScrollArea>
