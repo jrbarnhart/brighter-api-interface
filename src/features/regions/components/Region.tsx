@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { paths } from "@/types/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import UpdateRegionForm from "./UpdateRegionForm";
 import ScrollList from "@/components/scrollList/ScrollList";
 import DeleteConfirmation from "@/components/deleteConfirmation/DeleteConfirmation";
+import useGetRegionById from "../queries/useGetRegionById";
+import useDeleteRegion from "../queries/useDeleteRegion";
 
 export default function Region() {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -15,53 +15,10 @@ export default function Region() {
   // Qeury to get the region data
   let { id } = useParams();
   if (!id) id = "";
-
-  const headers = new Headers();
-  headers.append("Content-Type", "application/json");
-
-  const { isLoading, isSuccess, error, data } = useQuery({
-    queryKey: ["region-by-id"],
-    queryFn: (): Promise<{
-      data: paths["/regions/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
-    }> =>
-      fetch(`${import.meta.env.VITE_API_URL}/regions/${id}`, {
-        headers: new Headers(),
-      }).then((res) => res.json()),
-  });
+  const { isLoading, isSuccess, error, data } = useGetRegionById({ id });
 
   // Mutation for deleting this region
-  const queryClient = useQueryClient();
-
-  const navigate = useNavigate();
-
-  const token = localStorage.getItem("access_token");
-
-  const authHeaderValue = `Bearer ${token ?? ""}`;
-
-  const deleteRegionMutation = useMutation({
-    mutationFn: async (regionToDeleteId: string | number) => {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_API_URL
-        }/regions/${regionToDeleteId.toString()}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: authHeaderValue,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText);
-      }
-
-      await queryClient.resetQueries({ queryKey: "all-regions" });
-
-      await navigate("/regions");
-    },
-  });
+  const deleteRegionMutation = useDeleteRegion();
 
   // Return skeletons and error elements
   if (isLoading) return "Loading...";
@@ -77,8 +34,6 @@ export default function Region() {
   }
 
   const { data: region } = data;
-
-  // Mutation for deleting this region
 
   return (
     <ScrollArea className="h-full">
