@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import UpdateRegionForm from "./UpdateRegionForm";
 import ScrollList from "@/components/scrollList/ScrollList";
+import DeleteConfirmation from "@/components/deleteConfirmation/DeleteConfirmation";
 
 export default function Region() {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -38,9 +39,11 @@ export default function Region() {
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
   const deleteRegionMutation = useMutation({
-    mutationFn: async (regionToDeleteId: string) => {
+    mutationFn: async (regionToDeleteId: string | number) => {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/regions/${regionToDeleteId}`,
+        `${
+          import.meta.env.VITE_API_URL
+        }/regions/${regionToDeleteId.toString()}`,
         {
           method: "DELETE",
           headers: {
@@ -107,29 +110,13 @@ export default function Region() {
         {isUpdating ? (
           <UpdateRegionForm />
         ) : isDeleting ? (
-          <div className="space-y-4">
-            <h3>Delete this region?</h3>
-            <p className="text-muted-foreground">
-              Note: Regions with rooms or skills cannot be deleted. Delete all
-              of their respective rooms or skills first.
-            </p>
-            <Button
-              variant={"destructive"}
-              onClick={() => {
-                deleteRegionMutation.mutate(id);
-              }}
-            >
-              Delete Region
-            </Button>
-            {deleteRegionMutation.error && (
-              <p className="text-destructive">
-                An error occurred: {deleteRegionMutation.error.message}
-              </p>
-            )}
-          </div>
+          <DeleteConfirmation
+            deleteMutation={deleteRegionMutation}
+            id={id}
+            resourceName="Region"
+          />
         ) : (
           <>
-            {" "}
             <p className="text-xl">Id: {region.id}</p>
             <ScrollList basePath="rooms" title="Rooms" items={region.rooms} />
             <ScrollList
