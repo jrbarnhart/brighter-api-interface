@@ -17,11 +17,13 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   renderContentFn,
   updateForm,
   basePath,
+  recordName,
   deleteNotes,
 }: {
   renderContentFn: (record: T) => React.ReactNode;
   updateForm: React.ReactNode;
   basePath: string;
+  recordName: string;
   deleteNotes?: string;
 }) {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -87,7 +89,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
           <DeleteConfirmation
             deleteMutation={deleteMutation}
             id={id}
-            resourceName={foundRecord.name ?? foundRecord.id.toString()}
+            recordName={recordName}
             notes={deleteNotes ?? ""}
           />
         ) : (
