@@ -7,6 +7,9 @@ import RegionsIndex from "@/features/regions/components/RegionsIndex";
 import Region from "@/features/regions/components/Region";
 import Login from "@/features/auth/pages/Login";
 import Rooms from "@/features/rooms/pages/Rooms";
+import RoomsIndex from "@/features/rooms/components/RoomsIndex";
+import Room from "@/features/rooms/components/Room";
+import CreateRoomForm from "@/features/rooms/components/CreateRoomForm";
 
 export default function MainRouter() {
   return (
@@ -23,7 +26,11 @@ export default function MainRouter() {
             <Route path="create" element={<CreateRegionForm />} />
           </Route>
           {/* Rooms */}
-          <Route path="rooms" element={<Rooms />}></Route>
+          <Route path="rooms" element={<Rooms />}>
+            <Route index element={<RoomsIndex />} />
+            <Route path=":id" element={<Room />} />
+            <Route path="create" element={<CreateRoomForm />} />
+          </Route>
           {/* Skills */}
           {/* Monsters */}
           {/* Resources */}
