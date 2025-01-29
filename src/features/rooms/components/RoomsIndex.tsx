@@ -1,7 +1,7 @@
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import useGetRecords from "@/queries/useGetAllRecords";
 import { paths, components } from "@/types/api";
-import RoomDetailsContents from "./RoomDetailsContents";
+import RoomsIndexContent from "./RoomsIndexContent";
 
 export default function RoomsIndex() {
   const roomsUseQueryResult = useGetRecords<{
@@ -14,7 +14,7 @@ export default function RoomsIndex() {
       featureHeaders={["Name", "Id"]}
       gridColsRule="grid-cols-[1fr_1fr]"
       featureUseQueryResult={roomsUseQueryResult}
-      renderContentFn={RoomDetailsContents}
+      renderContentFn={RoomsIndexContent}
     />
   );
 }
