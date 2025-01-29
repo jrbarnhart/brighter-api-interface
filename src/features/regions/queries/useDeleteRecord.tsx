@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
-export default function useDeleteRegion() {
+export default function useDeleteRecord(basePath: string) {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function useDeleteRegion() {
       const response = await fetch(
         `${
           import.meta.env.VITE_API_URL
-        }/regions/${regionToDeleteId.toString()}`,
+        }${basePath}/${regionToDeleteId.toString()}`,
         {
           method: "DELETE",
           headers: {

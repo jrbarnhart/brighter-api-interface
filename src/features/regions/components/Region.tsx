@@ -6,7 +6,7 @@ import UpdateRegionForm from "./UpdateRegionForm";
 import ScrollList from "@/components/scrollList/ScrollList";
 import DeleteConfirmation from "@/components/deleteConfirmation/DeleteConfirmation";
 import useGetRegionById from "../queries/useGetRegionById";
-import useDeleteRegion from "../queries/useDeleteRegion";
+import useDeleteRecord from "../queries/useDeleteRecord";
 
 export default function Region() {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -18,7 +18,7 @@ export default function Region() {
   const { isLoading, isSuccess, error, data } = useGetRegionById({ id });
 
   // Mutation for deleting this region
-  const deleteRegionMutation = useDeleteRegion();
+  const deleteRegionMutation = useDeleteRecord("/regions");
 
   // Return skeletons and error elements
   if (isLoading) return "Loading...";
