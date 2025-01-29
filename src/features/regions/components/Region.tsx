@@ -5,8 +5,9 @@ import { useParams } from "react-router";
 import UpdateRegionForm from "./UpdateRegionForm";
 import ScrollList from "@/components/scrollList/ScrollList";
 import DeleteConfirmation from "@/components/deleteConfirmation/DeleteConfirmation";
-import useGetRegionById from "../queries/useGetRegionById";
+import useGetRecordById from "../queries/useGetRecordById";
 import useDeleteRecord from "../queries/useDeleteRecord";
+import { paths } from "@/types/api";
 
 export default function Region() {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -15,7 +16,9 @@ export default function Region() {
   // Qeury to get the region data
   let { id } = useParams();
   if (!id) id = "";
-  const { isLoading, isSuccess, error, data } = useGetRegionById({ id });
+  const { isLoading, isSuccess, error, data } = useGetRecordById<
+    paths["/regions/{id}"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({ id, basePath: "/regions" });
 
   // Mutation for deleting this region
   const deleteRegionMutation = useDeleteRecord("/regions");
