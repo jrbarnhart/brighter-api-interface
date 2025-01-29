@@ -114,6 +114,8 @@ export default function Region() {
             deleteMutation={deleteRegionMutation}
             id={id}
             resourceName="Region"
+            notes="Note: Regions with rooms or skills cannot be deleted. Delete all
+        of their respective rooms or skills first."
           />
         ) : (
           <>
