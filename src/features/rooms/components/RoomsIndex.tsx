@@ -6,13 +6,24 @@ import RoomsIndexContent from "./RoomsIndexContent";
 export default function RoomsIndex() {
   const roomsUseQueryResult = useGetRecords<{
     data: paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>();
+  }>({ recordName: "rooms" });
   return (
     <FeatureIndex<components["schemas"]["RoomEntity"]>
       featureLabel="Rooms"
       featureName="rooms"
-      featureHeaders={["Name", "Id"]}
-      gridColsRule="grid-cols-[1fr_1fr]"
+      featureHeaders={[
+        "Name",
+        "Id",
+        "Portal",
+        "Obelisk",
+        "Banks",
+        "Crafting",
+        "Monsters",
+        "NPCs",
+        "Resources",
+        "Quests",
+      ]}
+      gridColsRule="grid-cols-[3fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
       featureUseQueryResult={roomsUseQueryResult}
       renderContentFn={RoomsIndexContent}
     />
