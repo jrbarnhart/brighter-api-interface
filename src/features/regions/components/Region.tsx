@@ -111,7 +111,8 @@ export default function Region() {
       basePath="/regions"
       renderContentFn={RegionDetailsContents}
       updateForm={<UpdateRegionForm />}
-      recordName="Region"
+      recordName="regions"
+      recordLabel="Region"
       deleteNotes="Note: Regions with rooms or skills cannot be deleted. Delete all of their respective rooms or skills first."
     />
   );

@@ -3,10 +3,10 @@ import { useNavigate } from "react-router";
 
 export default function useDeleteRecord({
   basePath,
-  recordName,
+  recordLabel,
 }: {
   basePath: string;
-  recordName: string;
+  recordLabel: string;
 }) {
   const queryClient = useQueryClient();
 
@@ -35,7 +35,7 @@ export default function useDeleteRecord({
         throw new Error(errorText);
       }
 
-      await queryClient.resetQueries({ queryKey: `all-${recordName}` });
+      await queryClient.resetQueries({ queryKey: `all-${recordLabel}` });
 
       await navigate(basePath);
     },
