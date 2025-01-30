@@ -8,14 +8,14 @@ export default function RoomDetailsContents(
   return (
     <>
       <p className="text-xl">Id: {room.id}</p>
-      <p className="text-xl">
-        Region:{" "}
+      <div className="flex gap-3 items-center">
+        <p className="text-xl">Region: </p>
         <RecordLink
           recordBasePath="/regions"
           recordId={room.region.id}
           recordName={room.region.name}
         />
-      </p>
+      </div>
       {room.portal ? <p>Is Portal Room ✅</p> : <p>Is not portal room ❌</p>}
       {room.obelisk ? <p>Is Obelisk Room ✅</p> : <p>Is not obelisk room ❌</p>}
       <div>
