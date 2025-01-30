@@ -18,12 +18,12 @@ export default function RoomsIndexContent({
         recordId={room.id}
         recordName={room.name}
       />
+      <p>{room.id}</p>
       <RecordLink
         recordBasePath="/regions"
         recordId={room.region.id}
         recordName={room.region.name}
       />
-      <p>{room.id}</p>
       <p>{room.portal && "✅"}</p>
       <p>{room.obelisk && "✅"}</p>
       <p>{room.banks.length}</p>
