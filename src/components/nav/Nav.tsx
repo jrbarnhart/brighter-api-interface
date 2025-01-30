@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link, Outlet } from "react-router";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "../ui/collapsible";
+import { ChevronsUpDown } from "lucide-react";
 
 export default function Nav() {
   return (
@@ -19,6 +25,58 @@ export default function Nav() {
         <Button variant={"link"} className="text-xl pl-0">
           <Link to={"/rooms"}>Rooms</Link>
         </Button>
+
+        <Collapsible className="w-full">
+          <div className="flex justify-between items-center w-full">
+            <Button variant={"link"} className="text-xl pl-0">
+              <Link to={"/skills"}>Skills</Link>
+            </Button>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <ChevronsUpDown className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent>
+            <ul className="list-disc list-inside">
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/combat"}>Combat</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/combat/requirements"}>Combat Reqs</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/gathering"}>Gathering</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/gathering/requirements"}>
+                    Gathering Reqs
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/crafting"}>Crafting</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"link"} className="text-base pl-0">
+                  <Link to={"/skills/crafting/requirements"}>
+                    Crafting Reqs
+                  </Link>
+                </Button>
+              </li>
+            </ul>
+          </CollapsibleContent>
+        </Collapsible>
       </nav>
       <div className="h-full w-full col-start-2 col-end-3">
         <Outlet />
