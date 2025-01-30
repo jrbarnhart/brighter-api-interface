@@ -4,17 +4,17 @@ import { Button } from "../ui/button";
 export default function DeleteConfirmation({
   deleteMutation,
   id,
-  recordName,
+  recordLabel,
   notes,
 }: {
   deleteMutation: UseMutationResult<void, Error, string | number>;
   id: string | number;
-  recordName: string;
+  recordLabel: string;
   notes: string;
 }) {
   return (
     <div className="space-y-4">
-      <h3>Delete this {recordName}?</h3>
+      <h3>Delete this {recordLabel}?</h3>
       <p className="text-muted-foreground">{notes}</p>
       <Button
         variant={"destructive"}
@@ -22,7 +22,7 @@ export default function DeleteConfirmation({
           deleteMutation.mutate(id);
         }}
       >
-        Delete {recordName}
+        Delete {recordLabel}
       </Button>
       {deleteMutation.error && (
         <p className="text-destructive">
