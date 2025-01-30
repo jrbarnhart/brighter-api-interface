@@ -13,6 +13,7 @@ export default function RoomsIndex() {
       featureName="rooms"
       featureHeaders={[
         "Name",
+        "Region",
         "Id",
         "Portal",
         "Obelisk",
@@ -23,7 +24,7 @@ export default function RoomsIndex() {
         "Resources",
         "Quests",
       ]}
-      gridColsRule="grid-cols-[3fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
+      gridColsRule="grid-cols-[3fr_3fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr]"
       featureUseQueryResult={roomsUseQueryResult}
       renderContentFn={RoomsIndexContent}
     />

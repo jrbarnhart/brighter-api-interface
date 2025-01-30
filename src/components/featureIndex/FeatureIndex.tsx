@@ -40,7 +40,9 @@ export default function FeatureIndex<T>({
     <div className="border border-border">
       <div className={`grid ${gridColsRule} gap-2 p-2 bg-secondary`}>
         {featureHeaders.map((header, index) => (
-          <p key={index}>{header}</p>
+          <p key={index} className="truncate text-sm">
+            {header}
+          </p>
         ))}
       </div>
       <div className="">

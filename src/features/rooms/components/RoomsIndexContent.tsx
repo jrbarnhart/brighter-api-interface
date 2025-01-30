@@ -24,6 +24,7 @@ export default function RoomsIndexContent({
           </Link>
         </Button>
       </div>
+      <p>{room.region.name}</p>
       <p>{room.id}</p>
       <p>{room.portal && "✅"}</p>
       <p>{room.obelisk && "✅"}</p>
