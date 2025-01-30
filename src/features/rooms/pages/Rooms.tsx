@@ -1,5 +1,5 @@
-import FeaturePage from "@/components/featurePage/FeaturePage";
+import FeatureLayout from "@/components/featureLayout/FeatureLayout";
 
 export default function Rooms() {
-  return <FeaturePage featureLabel="Rooms" featureName="rooms" />;
+  return <FeatureLayout featureLabel="Rooms" featureName="rooms" />;
 }

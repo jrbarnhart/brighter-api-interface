@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import FeatureHeader from "../featureHeader/FeatureHeader";
 
-export default function FeaturePage({
+export default function FeatureLayout({
   featureName,
   featureLabel,
 }: {

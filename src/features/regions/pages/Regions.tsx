@@ -1,5 +1,5 @@
-import FeaturePage from "@/components/featurePage/FeaturePage";
+import FeatureLayout from "@/components/featureLayout/FeatureLayout";
 
 export default function Regions() {
-  return <FeaturePage featureLabel="Regions" featureName="regions" />;
+  return <FeatureLayout featureLabel="Regions" featureName="regions" />;
 }
