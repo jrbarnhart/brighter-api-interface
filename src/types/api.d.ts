@@ -1490,7 +1490,7 @@ export interface components {
             regionId: number;
             portal: boolean;
             obelisk: boolean;
-            craftingSKills: components["schemas"]["CraftingSkillBaseEntity"][];
+            craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
             monsters: components["schemas"]["MonsterBaseEntity"][];
             npcs: components["schemas"]["NpcBaseEntity"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
