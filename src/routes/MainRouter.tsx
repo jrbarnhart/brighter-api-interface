@@ -3,13 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import RegionsLayout from "@/features/regions/layouts/RegionsLayout";
 import CreateRegionForm from "@/features/regions/components/CreateRegionForm";
 import Nav from "@/components/nav/Nav";
-import RegionsIndex from "@/features/regions/components/RegionsIndex";
-import Region from "@/features/regions/components/Region";
 import Login from "@/features/auth/pages/Login";
 import RoomsLayout from "@/features/rooms/layouts/RoomsLayout";
 import RoomsIndex from "@/features/rooms/components/RoomsIndex";
 import Room from "@/features/rooms/components/Room";
 import CreateRoomForm from "@/features/rooms/components/CreateRoomForm";
+import RegionsIndex from "@/features/regions/pages/RegionsIndex";
+import RegionDetails from "@/features/regions/pages/RegionDetails";
 
 export default function MainRouter() {
   return (
@@ -22,7 +22,7 @@ export default function MainRouter() {
           {/* Regions */}
           <Route path="regions" element={<RegionsLayout />}>
             <Route index element={<RegionsIndex />} />
-            <Route path=":id" element={<Region />} />
+            <Route path=":id" element={<RegionDetails />} />
             <Route path="create" element={<CreateRegionForm />} />
           </Route>
           {/* Rooms */}

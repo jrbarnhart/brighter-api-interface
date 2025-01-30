@@ -1,7 +1,7 @@
 import { components, paths } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import useGetRecords from "../../../queries/useGetAllRecords";
-import RegionsIndexContent from "./RegionsIndexContent";
+import RegionsIndexContent from "../components/RegionsIndexContent";
 
 export default function RegionsIndex() {
   const regionsUseQueryResult = useGetRecords<{
