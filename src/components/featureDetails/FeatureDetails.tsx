@@ -39,7 +39,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   }>({ id, basePath });
 
   // Mutation for deleting this record
-  const deleteMutation = useDeleteRecord(basePath);
+  const deleteMutation = useDeleteRecord({ basePath, recordName });
 
   // Return skeletons and error elements
   if (isLoading) return "Loading...";

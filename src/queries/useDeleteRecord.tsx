@@ -1,7 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
-export default function useDeleteRecord(basePath: string) {
+export default function useDeleteRecord({
+  basePath,
+  recordName,
+}: {
+  basePath: string;
+  recordName: string;
+}) {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -11,11 +17,11 @@ export default function useDeleteRecord(basePath: string) {
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
   return useMutation({
-    mutationFn: async (regionToDeleteId: string | number) => {
+    mutationFn: async (recordToDeleteId: string | number) => {
       const response = await fetch(
         `${
           import.meta.env.VITE_API_URL
-        }${basePath}/${regionToDeleteId.toString()}`,
+        }${basePath}/${recordToDeleteId.toString()}`,
         {
           method: "DELETE",
           headers: {
@@ -29,9 +35,9 @@ export default function useDeleteRecord(basePath: string) {
         throw new Error(errorText);
       }
 
-      await queryClient.resetQueries({ queryKey: "all-regions" });
+      await queryClient.resetQueries({ queryKey: `all-${recordName}` });
 
-      await navigate("/regions");
+      await navigate(basePath);
     },
   });
 }
