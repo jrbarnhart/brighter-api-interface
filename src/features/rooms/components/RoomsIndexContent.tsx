@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button";
+import RecordLink from "@/components/recordLink/RecordLink";
 import { components } from "@/types/api";
-import { Link } from "react-router";
 
 export default function RoomsIndexContent({
   data,
@@ -14,17 +13,16 @@ export default function RoomsIndexContent({
       className={`grid ${gridColsRule} gap-2 items-center p-2 even:bg-secondary/60`}
       key={room.id}
     >
-      <div>
-        <Button variant={"link"} className="pl-0" asChild>
-          <Link
-            to={`/rooms/${room.id.toString()}`}
-            className="truncate underline"
-          >
-            {room.name.toString()}
-          </Link>
-        </Button>
-      </div>
-      <p className="truncate">{room.region.name}</p>
+      <RecordLink
+        recordBasePath="/rooms"
+        recordId={room.id}
+        recordName={room.name}
+      />
+      <RecordLink
+        recordBasePath="/regions"
+        recordId={room.region.id}
+        recordName={room.region.name}
+      />
       <p>{room.id}</p>
       <p>{room.portal && "✅"}</p>
       <p>{room.obelisk && "✅"}</p>
