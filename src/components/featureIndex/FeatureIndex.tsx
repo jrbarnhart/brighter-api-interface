@@ -38,7 +38,7 @@ export default function FeatureIndex<T>({
 
   return (
     <div className="border border-border">
-      <div className={`grid ${gridColsRule} p-2 bg-secondary`}>
+      <div className={`grid ${gridColsRule} gap-2 p-2 bg-secondary`}>
         {featureHeaders.map((header, index) => (
           <p key={index}>{header}</p>
         ))}
