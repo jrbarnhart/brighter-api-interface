@@ -16,8 +16,8 @@ export default function RoomDetailsContents(
           recordName={room.region.name}
         />
       </div>
-      {room.portal ? <p>Is Portal Room ✅</p> : <p>Is not portal room ❌</p>}
-      {room.obelisk ? <p>Is Obelisk Room ✅</p> : <p>Is not obelisk room ❌</p>}
+      {room.portal ? <p>Is Portal Room ✅</p> : <p>Is not Portal room ❌</p>}
+      {room.obelisk ? <p>Is Obelisk Room ✅</p> : <p>Is not Obelisk room ❌</p>}
       <div>
         <p>Banks:</p>
         <ul className="list-disc list-inside">
