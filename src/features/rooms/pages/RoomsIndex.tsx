@@ -1,7 +1,7 @@
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import useGetRecords from "@/queries/useGetAllRecords";
 import { paths, components } from "@/types/api";
-import RoomsIndexContent from "./RoomsIndexContent";
+import RoomsIndexContent from "../components/RoomsIndexContent";
 
 export default function RoomsIndex() {
   const roomsUseQueryResult = useGetRecords<{
