@@ -20,6 +20,14 @@ import CombatSkillRequirementsIndex from "@/features/skills/combat/requirements/
 import CreateCombatSkillRequirementForm from "@/features/skills/combat/requirements/components/CreateCombatSkillRequirementForm";
 import CombatSkillDetails from "@/features/skills/combat/pages/CombatSkillDetails";
 import CombatSkillRequirementDetails from "@/features/skills/combat/requirements/pages/CombatSkillRequirementDetails";
+import CraftingSkillRequirementsLayout from "@/features/skills/crafting/requirements/layouts/CombatSkillRequirementsLayout";
+import CraftingSkillRequirementsIndex from "@/features/skills/crafting/requirements/pages/CraftingSkillRequirementsIndex";
+import CraftingSkillRequirementDetails from "@/features/skills/crafting/requirements/pages/CraftingSkillRequirementDetails";
+import CreateCraftingSkillRequirementForm from "@/features/skills/crafting/requirements/components/CreateCraftingSkillRequirementForm";
+import CraftingSkillLayout from "@/features/skills/crafting/layouts/CraftingSkillLayout";
+import CraftingSkillsIndex from "@/features/skills/crafting/pages/CraftingSkillsIndex";
+import CraftingSkillDetails from "@/features/skills/crafting/pages/CraftingSkillDetails";
+import CreateCraftingSkillForm from "@/features/skills/crafting/components/CreateCraftingSkillForm";
 
 export default function MainRouter() {
   return (
@@ -57,6 +65,22 @@ export default function MainRouter() {
             <Route index element={<CombatSkillsIndex />} />
             <Route path=":id" element={<CombatSkillDetails />} />
             <Route path="create" element={<CreateCombatSkillForm />} />
+          </Route>
+          <Route
+            path="skills/crafting/requirements"
+            element={<CraftingSkillRequirementsLayout />}
+          >
+            <Route index element={<CraftingSkillRequirementsIndex />} />
+            <Route path=":id" element={<CraftingSkillRequirementDetails />} />
+            <Route
+              path="create"
+              element={<CreateCraftingSkillRequirementForm />}
+            />
+          </Route>
+          <Route path="skills/crafting" element={<CraftingSkillLayout />}>
+            <Route index element={<CraftingSkillsIndex />} />
+            <Route path=":id" element={<CraftingSkillDetails />} />
+            <Route path="create" element={<CreateCraftingSkillForm />} />
           </Route>
           <Route path="skills" element={<SkillsLayout />}>
             <Route index element={<SkillsIndex />}></Route>
