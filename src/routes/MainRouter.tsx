@@ -16,6 +16,10 @@ import CreateCombatSkillForm from "@/features/skills/combat/components/CreateCom
 import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex";
 import CombatSkillDetailsContent from "@/features/skills/combat/components/CombatSkillDetailsContent";
 import SkillsIndex from "@/features/skills/pages/SkillsIndex";
+import CombatSkillRequirementsLayout from "@/features/skills/combat/requirements/layouts/CombatSkillRequirementsLayout";
+import CombatSkillRequirementsIndex from "@/features/skills/combat/requirements/pages/CombatSkillRequirementsIndex";
+import CombatSkillRequirementDetailsContent from "@/features/skills/combat/requirements/components/CombatSkillRequirementDetailsContent";
+import CreateCombatSkillRequirementForm from "@/features/skills/combat/requirements/components/CreateCombatSkillRequirementForm";
 
 export default function MainRouter() {
   return (
@@ -38,6 +42,20 @@ export default function MainRouter() {
             <Route path="create" element={<CreateRoomForm />} />
           </Route>
           {/* Skills */}
+          <Route
+            path="skills/combat/requirements"
+            element={<CombatSkillRequirementsLayout />}
+          >
+            <Route index element={<CombatSkillRequirementsIndex />} />
+            <Route
+              path=":id"
+              element={<CombatSkillRequirementDetailsContent />}
+            />
+            <Route
+              path="create"
+              element={<CreateCombatSkillRequirementForm />}
+            />
+          </Route>
           <Route path="skills/combat" element={<CombatSkillLayout />}>
             <Route index element={<CombatSkillsIndex />} />
             <Route path=":id" element={<CombatSkillDetailsContent />} />
