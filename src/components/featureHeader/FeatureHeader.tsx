@@ -6,9 +6,11 @@ import { AuthContext } from "@/features/auth/components/AuthContext";
 export default function FeatureHeader({
   featureLabel,
   featureName,
+  noCreate,
 }: {
   featureLabel: string;
   featureName: string;
+  noCreate?: boolean;
 }) {
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -21,14 +23,18 @@ export default function FeatureHeader({
               <h1 className="text-3xl">{featureLabel}</h1>
             </Link>
           </Button>
-          <div className="w-1 h-full bg-secondary rounded-xl border-border" />
-          <Button
-            variant={"link"}
-            className="pl-1 text-accent text-xl items-start"
-            asChild
-          >
-            <Link to={`/${featureName}/create`}>Create</Link>
-          </Button>
+          {!noCreate && (
+            <>
+              <div className="w-1 h-full bg-secondary rounded-xl border-border" />
+              <Button
+                variant={"link"}
+                className="pl-1 text-accent text-xl items-start"
+                asChild
+              >
+                <Link to={`/${featureName}/create`}>Create</Link>
+              </Button>{" "}
+            </>
+          )}
         </div>
       </div>
       {isLoggedIn() ? (
