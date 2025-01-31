@@ -82,6 +82,10 @@ import MonstersLayout from "@/features/monsters/layouts/MonstersLayout";
 import MonstersIndex from "@/features/monsters/pages/MonstersIndex";
 import MonsterDetails from "@/features/monsters/pages/MonsterDetails";
 import CreateMonsterForm from "@/features/monsters/components/CreateMonsterForm";
+import DropTablesLayout from "@/features/monsters/dropTables/layouts/DropTablesLayout";
+import DropTablesIndex from "@/features/monsters/dropTables/pages/DropTablesIndex";
+import DropTableDetails from "@/features/monsters/dropTables/pages/DropTableDetails";
+import CreateDropTableForm from "@/features/monsters/dropTables/components/CreateDropTableForm";
 
 export default function MainRouter() {
   return (
@@ -218,6 +222,11 @@ export default function MainRouter() {
             <Route path="create" element={<CreateArmorForm />} />
           </Route>
           {/* Monsters */}
+          <Route path="monsters/drop-tables" element={<DropTablesLayout />}>
+            <Route index element={<DropTablesIndex />} />
+            <Route path=":id" element={<DropTableDetails />} />
+            <Route path="create" element={<CreateDropTableForm />} />
+          </Route>
           <Route path="monsters/variants" element={<MonsterVariantsLayout />}>
             <Route index element={<MonsterVariantsIndex />} />
             <Route path=":id" element={<MonsterVariantDetails />} />
