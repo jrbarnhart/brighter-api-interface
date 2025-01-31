@@ -98,6 +98,14 @@ import NpcsLayout from "@/features/npcs/layouts/NpcsLayout";
 import NpcsIndex from "@/features/npcs/pages/NpcsIndex";
 import NpcDetails from "@/features/npcs/pages/NpcDetails";
 import CreateNpcForm from "@/features/npcs/components/CreateNpcForm";
+import QuestsLayout from "@/features/quests/layouts/QuestsLayout";
+import QuestsIndex from "@/features/quests/pages/QuestsIndex";
+import QuestDetails from "@/features/quests/pages/QuestDetails";
+import CreateQuestForm from "@/features/quests/components/CreateQuestForm";
+import QuestStepsLayout from "@/features/quests/questSteps/layouts/QuestStepsLayout";
+import QuestStepsIndex from "@/features/quests/questSteps/pages/QuestStepsIndex";
+import QuestStepDetails from "@/features/quests/questSteps/pages/QuestStepDetails";
+import CreateQuestStepForm from "@/features/quests/questSteps/components/CreateQuestStepForm";
 
 export default function MainRouter() {
   return (
@@ -267,6 +275,16 @@ export default function MainRouter() {
             <Route path="create" element={<CreateNpcForm />} />
           </Route>
           {/* Quests */}
+          <Route path="quests" element={<QuestsLayout />}>
+            <Route index element={<QuestsIndex />} />
+            <Route path=":id" element={<QuestDetails />} />
+            <Route path="create" element={<CreateQuestForm />} />
+          </Route>
+          <Route path="quests/steps" element={<QuestStepsLayout />}>
+            <Route index element={<QuestStepsIndex />} />
+            <Route path=":id" element={<QuestStepDetails />} />
+            <Route path="create" element={<CreateQuestStepForm />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
