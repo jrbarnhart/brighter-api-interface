@@ -48,6 +48,8 @@ import ResourcesLayout from "@/features/resources/layouts/ResourcesLayout";
 import ResourcesIndex from "@/features/resources/pages/ResourcesIndex";
 import ResourceDetails from "@/features/resources/pages/ResourceDetails";
 import CreateResourceForm from "@/features/resources/components/CreateResourceForm";
+import ItemsLayout from "@/features/items/layouts/ItemsLayout";
+import ItemsIndex from "@/features/items/pages/ItemsIndex";
 
 export default function MainRouter() {
   return (
@@ -127,6 +129,9 @@ export default function MainRouter() {
             <Route index element={<SkillsIndex />}></Route>
           </Route>
           {/* Items */}
+          <Route path="items" element={<ItemsLayout />}>
+            <Route index element={<ItemsIndex />} />
+          </Route>
           {/* Resources */}
           <Route
             path="items/resources/variants"
