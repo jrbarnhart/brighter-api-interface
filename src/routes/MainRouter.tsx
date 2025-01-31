@@ -10,6 +10,12 @@ import CreateRoomForm from "@/features/rooms/components/CreateRoomForm";
 import RegionsIndex from "@/features/regions/pages/RegionsIndex";
 import RegionDetails from "@/features/regions/pages/RegionDetails";
 import RoomDetails from "@/features/rooms/pages/RoomDetails";
+import SkillsLayout from "@/features/skills/layouts/SkillsLayout";
+import SkillsIndexContent from "@/features/skills/components/SkillsIndexContent";
+import CombatSkillLayout from "@/features/skills/layouts/CombatSkillLayout";
+import CombatSkillsIndexContent from "@/features/skills/components/combat/CombatSkillsIndexContent";
+import CombatSkillDetails from "@/features/skills/pages/combat/CombatSkillDetails";
+import CreateCombatSkillForm from "@/features/skills/components/combat/CreateCombatSkillForm";
 
 export default function MainRouter() {
   return (
@@ -32,6 +38,14 @@ export default function MainRouter() {
             <Route path="create" element={<CreateRoomForm />} />
           </Route>
           {/* Skills */}
+          <Route path="skills/combat" element={<CombatSkillLayout />}>
+            <Route index element={<CombatSkillsIndexContent />} />
+            <Route path=":id" element={<CombatSkillDetails />} />
+            <Route path="create" element={<CreateCombatSkillForm />} />
+          </Route>
+          <Route path="skills" element={<SkillsLayout />}>
+            <Route index element={<SkillsIndexContent />}></Route>
+          </Route>
           {/* Monsters */}
           {/* Resources */}
           {/* Items */}
