@@ -12,10 +12,10 @@ import RegionDetails from "@/features/regions/pages/RegionDetails";
 import RoomDetails from "@/features/rooms/pages/RoomDetails";
 import SkillsLayout from "@/features/skills/layouts/SkillsLayout";
 import SkillsIndexContent from "@/features/skills/components/SkillsIndexContent";
-import CombatSkillLayout from "@/features/skills/layouts/CombatSkillLayout";
-import CombatSkillDetails from "@/features/skills/pages/combat/CombatSkillDetails";
-import CreateCombatSkillForm from "@/features/skills/components/combat/CreateCombatSkillForm";
-import CombatSkillsIndex from "@/features/skills/pages/combat/CombatSkillsIndex";
+import CombatSkillLayout from "@/features/skills/combat/layouts/CombatSkillLayout";
+import CombatSkillDetails from "@/features/skills/combat/pages/CombatSkillDetails";
+import CreateCombatSkillForm from "@/features/skills/combat/components/CreateCombatSkillForm";
+import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex";
 
 export default function MainRouter() {
   return (
