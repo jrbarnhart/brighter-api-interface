@@ -74,6 +74,14 @@ import ArmorsLayout from "@/features/armors/layouts/ArmorsLayout";
 import ArmorsIndex from "@/features/armors/pages/ArmorsIndex";
 import ArmorDetails from "@/features/armors/pages/ArmorDetails";
 import CreateArmorForm from "@/features/armors/components/CreateArmorForm";
+import MonsterVariantsLayout from "@/features/monsters/variants/layouts/MonsterVariantsLayout";
+import MonsterVariantsIndex from "@/features/monsters/variants/pages/MonsterVariantsIndex";
+import MonsterVariantDetails from "@/features/monsters/variants/pages/MonsterVariantDetails";
+import CreateMonsterVariantForm from "@/features/monsters/variants/components/CreateMonsterVariantForm";
+import MonstersLayout from "@/features/monsters/layouts/MonstersLayout";
+import MonstersIndex from "@/features/monsters/pages/MonstersIndex";
+import MonsterDetails from "@/features/monsters/pages/MonsterDetails";
+import CreateMonsterForm from "@/features/monsters/components/CreateMonsterForm";
 
 export default function MainRouter() {
   return (
@@ -210,6 +218,16 @@ export default function MainRouter() {
             <Route path="create" element={<CreateArmorForm />} />
           </Route>
           {/* Monsters */}
+          <Route path="monsters/variants" element={<MonsterVariantsLayout />}>
+            <Route index element={<MonsterVariantsIndex />} />
+            <Route path=":id" element={<MonsterVariantDetails />} />
+            <Route path="create" element={<CreateMonsterVariantForm />} />
+          </Route>
+          <Route path="monsters" element={<MonstersLayout />}>
+            <Route index element={<MonstersIndex />} />
+            <Route path=":id" element={<MonsterDetails />} />
+            <Route path="create" element={<CreateMonsterForm />} />
+          </Route>
           {/* Npcs */}
           {/* Quests */}
         </Route>
