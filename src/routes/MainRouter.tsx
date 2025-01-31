@@ -32,6 +32,14 @@ import RecipesLayout from "@/features/skills/crafting/recipes/layouts/RecipesLay
 import RecipesIndex from "@/features/skills/crafting/recipes/pages/RecipesIndex";
 import RecipeDetails from "@/features/skills/crafting/recipes/pages/RecipeDetails";
 import CreateRecipeForm from "@/features/skills/crafting/recipes/components/CreateRecipeForm";
+import GatheringSkillRequirementsLayout from "@/features/skills/gathering/requirements/layouts/GatheringSkillRequirementsLayout";
+import GatheringSkillRequirementsIndex from "@/features/skills/gathering/requirements/pages/GatheringSkillRequirementsIndex";
+import GatheringSkillRequirementDetails from "@/features/skills/gathering/requirements/pages/GatheringSkillRequirementDetails";
+import CreateGatheringSkillRequirementForm from "@/features/skills/gathering/requirements/components/CreateGatheringSkillRequirementForm";
+import GatheringSkillLayout from "@/features/skills/gathering/layouts/GatheringSkillLayout";
+import GatheringSkillsIndex from "@/features/skills/gathering/pages/GatheringSkillsIndex";
+import GatheringSkillDetails from "@/features/skills/gathering/pages/GatheringSkillDetails";
+import CreateGatheringSkillForm from "@/features/skills/gathering/components/CreateGatheringSkillForm";
 
 export default function MainRouter() {
   return (
@@ -69,6 +77,22 @@ export default function MainRouter() {
             <Route index element={<CombatSkillsIndex />} />
             <Route path=":id" element={<CombatSkillDetails />} />
             <Route path="create" element={<CreateCombatSkillForm />} />
+          </Route>
+          <Route
+            path="skills/gathering/requirements"
+            element={<GatheringSkillRequirementsLayout />}
+          >
+            <Route index element={<GatheringSkillRequirementsIndex />} />
+            <Route path=":id" element={<GatheringSkillRequirementDetails />} />
+            <Route
+              path="create"
+              element={<CreateGatheringSkillRequirementForm />}
+            />
+          </Route>
+          <Route path="skills/gathering" element={<GatheringSkillLayout />}>
+            <Route index element={<GatheringSkillsIndex />} />
+            <Route path=":id" element={<GatheringSkillDetails />} />
+            <Route path="create" element={<CreateGatheringSkillForm />} />
           </Route>
           <Route
             path="skills/crafting/requirements"
