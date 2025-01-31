@@ -40,6 +40,14 @@ import GatheringSkillLayout from "@/features/skills/gathering/layouts/GatheringS
 import GatheringSkillsIndex from "@/features/skills/gathering/pages/GatheringSkillsIndex";
 import GatheringSkillDetails from "@/features/skills/gathering/pages/GatheringSkillDetails";
 import CreateGatheringSkillForm from "@/features/skills/gathering/components/CreateGatheringSkillForm";
+import ResourceVariantsLayout from "@/features/resources/variants/layouts/ResourceVariantsLayout";
+import ResourceVariantsIndex from "@/features/resources/variants/pages/ResourceVariantsIndex";
+import ResourceVariantDetails from "@/features/resources/variants/pages/ResourceVariantDetails";
+import CreateResourceVariantForm from "@/features/resources/variants/components/CreateResourceVariantForm";
+import ResourcesLayout from "@/features/resources/layouts/ResourcesLayout";
+import ResourcesIndex from "@/features/resources/pages/ResourcesIndex";
+import ResourceDetails from "@/features/resources/pages/ResourceDetails";
+import CreateResourceForm from "@/features/resources/components/CreateResourceForm";
 
 export default function MainRouter() {
   return (
@@ -118,9 +126,22 @@ export default function MainRouter() {
           <Route path="skills" element={<SkillsLayout />}>
             <Route index element={<SkillsIndex />}></Route>
           </Route>
-          {/* Monsters */}
-          {/* Resources */}
           {/* Items */}
+          {/* Resources */}
+          <Route
+            path="items/resources/variants"
+            element={<ResourceVariantsLayout />}
+          >
+            <Route index element={<ResourceVariantsIndex />} />
+            <Route path=":id" element={<ResourceVariantDetails />} />
+            <Route path="create" element={<CreateResourceVariantForm />} />
+          </Route>
+          <Route path="items/resources" element={<ResourcesLayout />}>
+            <Route index element={<ResourcesIndex />} />
+            <Route path=":id" element={<ResourceDetails />} />
+            <Route path="create" element={<CreateResourceForm />} />
+          </Route>
+          {/* Monsters */}
           {/* Npcs */}
           {/* Quests */}
         </Route>
