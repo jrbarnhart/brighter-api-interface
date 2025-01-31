@@ -28,6 +28,10 @@ import CraftingSkillLayout from "@/features/skills/crafting/layouts/CraftingSkil
 import CraftingSkillsIndex from "@/features/skills/crafting/pages/CraftingSkillsIndex";
 import CraftingSkillDetails from "@/features/skills/crafting/pages/CraftingSkillDetails";
 import CreateCraftingSkillForm from "@/features/skills/crafting/components/CreateCraftingSkillForm";
+import RecipesLayout from "@/features/skills/crafting/recipes/layouts/RecipesLayout";
+import RecipesIndex from "@/features/skills/crafting/recipes/pages/RecipesIndex";
+import RecipeDetails from "@/features/skills/crafting/recipes/pages/RecipeDetails";
+import CreateRecipeForm from "@/features/skills/crafting/recipes/components/CreateRecipeForm";
 
 export default function MainRouter() {
   return (
@@ -76,6 +80,11 @@ export default function MainRouter() {
               path="create"
               element={<CreateCraftingSkillRequirementForm />}
             />
+          </Route>
+          <Route path="skills/crafting/recipes" element={<RecipesLayout />}>
+            <Route index element={<RecipesIndex />} />
+            <Route path=":id" element={<RecipeDetails />} />
+            <Route path="create" element={<CreateRecipeForm />} />
           </Route>
           <Route path="skills/crafting" element={<CraftingSkillLayout />}>
             <Route index element={<CraftingSkillsIndex />} />
