@@ -13,9 +13,9 @@ import RoomDetails from "@/features/rooms/pages/RoomDetails";
 import SkillsLayout from "@/features/skills/layouts/SkillsLayout";
 import SkillsIndexContent from "@/features/skills/components/SkillsIndexContent";
 import CombatSkillLayout from "@/features/skills/combat/layouts/CombatSkillLayout";
-import CombatSkillDetails from "@/features/skills/combat/pages/CombatSkillDetails";
 import CreateCombatSkillForm from "@/features/skills/combat/components/CreateCombatSkillForm";
 import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex";
+import CombatSkillDetailsContent from "@/features/skills/combat/components/CombatSkillDetailsContent";
 
 export default function MainRouter() {
   return (
@@ -40,7 +40,7 @@ export default function MainRouter() {
           {/* Skills */}
           <Route path="skills/combat" element={<CombatSkillLayout />}>
             <Route index element={<CombatSkillsIndex />} />
-            <Route path=":id" element={<CombatSkillDetails />} />
+            <Route path=":id" element={<CombatSkillDetailsContent />} />
             <Route path="create" element={<CreateCombatSkillForm />} />
           </Route>
           <Route path="skills" element={<SkillsLayout />}>
