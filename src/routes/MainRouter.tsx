@@ -50,6 +50,14 @@ import ResourceDetails from "@/features/resources/pages/ResourceDetails";
 import CreateResourceForm from "@/features/resources/components/CreateResourceForm";
 import ItemsLayout from "@/features/items/layouts/ItemsLayout";
 import ItemsIndex from "@/features/items/pages/ItemsIndex";
+import ConsumableVariantsLayout from "@/features/consumables/variants/layouts/ConsumableVariantsLayout";
+import ConsumableVariantsIndex from "@/features/consumables/variants/pages/ConsumableVariantsIndex";
+import ConsumableVariantDetails from "@/features/consumables/variants/pages/ConsumableVariantDetails";
+import CreateConsumableVariantForm from "@/features/consumables/variants/components/CreateConsumableVariantForm";
+import ConsumablesLayout from "@/features/consumables/layouts/ConsumablesLayout";
+import ConsumablesIndex from "@/features/consumables/pages/ConsumablesIndex";
+import ConsumableDetails from "@/features/consumables/pages/ConsumableDetails";
+import CreateConsumableForm from "@/features/consumables/components/CreateConsumableForm";
 
 export default function MainRouter() {
   return (
@@ -145,6 +153,20 @@ export default function MainRouter() {
             <Route index element={<ResourcesIndex />} />
             <Route path=":id" element={<ResourceDetails />} />
             <Route path="create" element={<CreateResourceForm />} />
+          </Route>
+          {/* Consumables */}
+          <Route
+            path="items/consumables/variants"
+            element={<ConsumableVariantsLayout />}
+          >
+            <Route index element={<ConsumableVariantsIndex />} />
+            <Route path=":id" element={<ConsumableVariantDetails />} />
+            <Route path="create" element={<CreateConsumableVariantForm />} />
+          </Route>
+          <Route path="items/consumables" element={<ConsumablesLayout />}>
+            <Route index element={<ConsumablesIndex />} />
+            <Route path=":id" element={<ConsumableDetails />} />
+            <Route path="create" element={<CreateConsumableForm />} />
           </Route>
           {/* Monsters */}
           {/* Npcs */}
