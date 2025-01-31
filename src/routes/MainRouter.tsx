@@ -86,6 +86,10 @@ import DropTablesLayout from "@/features/monsters/dropTables/layouts/DropTablesL
 import DropTablesIndex from "@/features/monsters/dropTables/pages/DropTablesIndex";
 import DropTableDetails from "@/features/monsters/dropTables/pages/DropTableDetails";
 import CreateDropTableForm from "@/features/monsters/dropTables/components/CreateDropTableForm";
+import MiscItemsLayout from "@/features/miscItems/layouts/MiscItemsLayout";
+import MiscItemsIndex from "@/features/miscItems/pages/MiscItemsIndex";
+import MiscItemDetails from "@/features/miscItems/pages/MiscItemDetails";
+import CreateMiscItemForm from "@/features/miscItems/components/CreateMiscItemForm";
 
 export default function MainRouter() {
   return (
@@ -220,6 +224,12 @@ export default function MainRouter() {
             <Route index element={<ArmorsIndex />} />
             <Route path=":id" element={<ArmorDetails />} />
             <Route path="create" element={<CreateArmorForm />} />
+          </Route>
+          {/* Misc Items */}
+          <Route path="items/misc" element={<MiscItemsLayout />}>
+            <Route index element={<MiscItemsIndex />} />
+            <Route path=":id" element={<MiscItemDetails />} />
+            <Route path="create" element={<CreateMiscItemForm />} />
           </Route>
           {/* Monsters */}
           <Route path="monsters/drop-tables" element={<DropTablesLayout />}>
