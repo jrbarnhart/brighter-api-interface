@@ -1,12 +1,12 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
-import RoomDetailsContents from "../components/RoomDetailsContents";
+import RoomDetailsContent from "../components/RoomDetailsContent";
 import UpdateRoomForm from "../components/UpdateRoomForm";
 
 export default function RoomDetails() {
   return (
     <FeatureDetails
       basePath="/rooms"
-      renderContentFn={RoomDetailsContents}
+      renderContentFn={RoomDetailsContent}
       updateForm={<UpdateRoomForm />}
       recordName="rooms"
       recordLabel="Room"

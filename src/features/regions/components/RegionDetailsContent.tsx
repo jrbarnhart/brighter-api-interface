@@ -1,7 +1,7 @@
 import ScrollList from "@/components/scrollList/ScrollList";
 import { components } from "@/types/api";
 
-export default function RegionDetailsContents(
+export default function RegionDetailsContent(
   region: components["schemas"]["RegionEntity"]
 ) {
   return (

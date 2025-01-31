@@ -2,7 +2,7 @@ import RecordLink from "@/components/recordLink/RecordLink";
 import ScrollList from "@/components/scrollList/ScrollList";
 import { components } from "@/types/api";
 
-export default function RoomDetailsContents(
+export default function RoomDetailsContent(
   room: components["schemas"]["RoomEntity"]
 ) {
   return (
