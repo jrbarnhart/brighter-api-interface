@@ -66,6 +66,14 @@ import WeaponsLayout from "@/features/weapons/layouts/WeaponsLayout";
 import WeaponsIndex from "@/features/weapons/pages/WeaponsIndex";
 import WeaponDetails from "@/features/weapons/pages/WeaponDetails";
 import CreateWeaponForm from "@/features/weapons/components/CreateWeaponForm";
+import ArmorVariantsLayout from "@/features/armors/variants/layouts/ArmorVariantsLayout";
+import ArmorVariantsIndex from "@/features/armors/variants/pages/ArmorVariantsIndex";
+import ArmorVariantDetails from "@/features/armors/variants/pages/ArmorVariantDetails";
+import CreateArmorVariantForm from "@/features/armors/variants/components/CreateArmorVariantForm";
+import ArmorsLayout from "@/features/armors/layouts/ArmorsLayout";
+import ArmorsIndex from "@/features/armors/pages/ArmorsIndex";
+import ArmorDetails from "@/features/armors/pages/ArmorDetails";
+import CreateArmorForm from "@/features/armors/components/CreateArmorForm";
 
 export default function MainRouter() {
   return (
@@ -189,6 +197,17 @@ export default function MainRouter() {
             <Route index element={<WeaponsIndex />} />
             <Route path=":id" element={<WeaponDetails />} />
             <Route path="create" element={<CreateWeaponForm />} />
+          </Route>
+          {/* Armors */}
+          <Route path="items/armors/variants" element={<ArmorVariantsLayout />}>
+            <Route index element={<ArmorVariantsIndex />} />
+            <Route path=":id" element={<ArmorVariantDetails />} />
+            <Route path="create" element={<CreateArmorVariantForm />} />
+          </Route>
+          <Route path="items/armors" element={<ArmorsLayout />}>
+            <Route index element={<ArmorsIndex />} />
+            <Route path=":id" element={<ArmorDetails />} />
+            <Route path="create" element={<CreateArmorForm />} />
           </Route>
           {/* Monsters */}
           {/* Npcs */}
