@@ -11,11 +11,11 @@ import RegionsIndex from "@/features/regions/pages/RegionsIndex";
 import RegionDetails from "@/features/regions/pages/RegionDetails";
 import RoomDetails from "@/features/rooms/pages/RoomDetails";
 import SkillsLayout from "@/features/skills/layouts/SkillsLayout";
-import SkillsIndexContent from "@/features/skills/components/SkillsIndexContent";
 import CombatSkillLayout from "@/features/skills/combat/layouts/CombatSkillLayout";
 import CreateCombatSkillForm from "@/features/skills/combat/components/CreateCombatSkillForm";
 import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex";
 import CombatSkillDetailsContent from "@/features/skills/combat/components/CombatSkillDetailsContent";
+import SkillsIndex from "@/features/skills/pages/SkillsIndex";
 
 export default function MainRouter() {
   return (
@@ -44,7 +44,7 @@ export default function MainRouter() {
             <Route path="create" element={<CreateCombatSkillForm />} />
           </Route>
           <Route path="skills" element={<SkillsLayout />}>
-            <Route index element={<SkillsIndexContent />}></Route>
+            <Route index element={<SkillsIndex />}></Route>
           </Route>
           {/* Monsters */}
           {/* Resources */}
