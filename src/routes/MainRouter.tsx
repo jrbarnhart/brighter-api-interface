@@ -90,6 +90,14 @@ import MiscItemsLayout from "@/features/miscItems/layouts/MiscItemsLayout";
 import MiscItemsIndex from "@/features/miscItems/pages/MiscItemsIndex";
 import MiscItemDetails from "@/features/miscItems/pages/MiscItemDetails";
 import CreateMiscItemForm from "@/features/miscItems/components/CreateMiscItemForm";
+import VendorsIndex from "@/features/npcs/vendors/pages/VendorsIndex";
+import VendorDetails from "@/features/npcs/vendors/pages/VendorDetails";
+import CreateVendorForm from "@/features/npcs/vendors/components/CreateVendorForm";
+import VendorsLayout from "@/features/npcs/vendors/layouts/VendorsLayout";
+import NpcsLayout from "@/features/npcs/layouts/NpcsLayout";
+import NpcsIndex from "@/features/npcs/pages/NpcsIndex";
+import NpcDetails from "@/features/npcs/pages/NpcDetails";
+import CreateNpcForm from "@/features/npcs/components/CreateNpcForm";
 
 export default function MainRouter() {
   return (
@@ -248,6 +256,16 @@ export default function MainRouter() {
             <Route path="create" element={<CreateMonsterForm />} />
           </Route>
           {/* Npcs */}
+          <Route path="npcs/vendors" element={<VendorsLayout />}>
+            <Route index element={<VendorsIndex />} />
+            <Route path=":id" element={<VendorDetails />} />
+            <Route path="create" element={<CreateVendorForm />} />
+          </Route>
+          <Route path="npcs" element={<NpcsLayout />}>
+            <Route index element={<NpcsIndex />} />
+            <Route path=":id" element={<NpcDetails />} />
+            <Route path="create" element={<CreateNpcForm />} />
+          </Route>
           {/* Quests */}
         </Route>
       </Routes>
