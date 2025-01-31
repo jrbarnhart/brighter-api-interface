@@ -58,6 +58,14 @@ import ConsumablesLayout from "@/features/consumables/layouts/ConsumablesLayout"
 import ConsumablesIndex from "@/features/consumables/pages/ConsumablesIndex";
 import ConsumableDetails from "@/features/consumables/pages/ConsumableDetails";
 import CreateConsumableForm from "@/features/consumables/components/CreateConsumableForm";
+import WeaponVariantsLayout from "@/features/weapons/variants/layouts/WeaponVariantsLayout";
+import WeaponVariantsIndex from "@/features/weapons/variants/pages/WeaponVariantsIndex";
+import WeaponVariantDetails from "@/features/weapons/variants/pages/WeaponVariantDetails";
+import CreateWeaponVariantForm from "@/features/weapons/variants/components/CreateWeaponVariantForm";
+import WeaponsLayout from "@/features/weapons/layouts/WeaponsLayout";
+import WeaponsIndex from "@/features/weapons/pages/WeaponsIndex";
+import WeaponDetails from "@/features/weapons/pages/WeaponDetails";
+import CreateWeaponForm from "@/features/weapons/components/CreateWeaponForm";
 
 export default function MainRouter() {
   return (
@@ -167,6 +175,20 @@ export default function MainRouter() {
             <Route index element={<ConsumablesIndex />} />
             <Route path=":id" element={<ConsumableDetails />} />
             <Route path="create" element={<CreateConsumableForm />} />
+          </Route>
+          {/* Weapons */}
+          <Route
+            path="items/weapons/variants"
+            element={<WeaponVariantsLayout />}
+          >
+            <Route index element={<WeaponVariantsIndex />} />
+            <Route path=":id" element={<WeaponVariantDetails />} />
+            <Route path="create" element={<CreateWeaponVariantForm />} />
+          </Route>
+          <Route path="items/weapons" element={<WeaponsLayout />}>
+            <Route index element={<WeaponsIndex />} />
+            <Route path=":id" element={<WeaponDetails />} />
+            <Route path="create" element={<CreateWeaponForm />} />
           </Route>
           {/* Monsters */}
           {/* Npcs */}
