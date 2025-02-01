@@ -1,5 +1,24 @@
+import useGetRecords from "@/queries/useGetAllRecords";
 import CombatSkillsIndexContent from "../components/CombatSkillsIndexContent";
+import { paths, components } from "@/types/api";
+import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 
 export default function CombatSkillsIndex() {
-  return <CombatSkillsIndexContent />;
+  const combatSkillsUseQueryResult = useGetRecords<{
+    data: paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"];
+  }>({
+    queryKeyName: "combat-skills",
+    url: `${import.meta.env.VITE_API_URL}/skills/combat`,
+  });
+
+  return (
+    <FeatureIndex<components["schemas"]["CombatSkillEntity"]>
+      featureLabel="Combat Skills"
+      featureName="combat-skills"
+      featureHeaders={["Name", "Region", "Id", "Monsters", "Reqirements"]}
+      gridColsRule="grid-cols-[1fr_1fr_1fr_1fr_1fr]"
+      featureUseQueryResult={combatSkillsUseQueryResult}
+      renderContentFn={CombatSkillsIndexContent}
+    />
+  );
 }

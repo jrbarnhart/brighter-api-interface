@@ -10,7 +10,6 @@ export default function RoomsIndex() {
   return (
     <FeatureIndex<components["schemas"]["RoomEntity"]>
       featureLabel="Rooms"
-      featureName="rooms"
       featureHeaders={[
         "Name",
         "Id",

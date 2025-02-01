@@ -7,7 +7,6 @@ export default function FeatureIndex<T>({
   gridColsRule,
   renderContentFn,
 }: {
-  featureName: string;
   featureLabel: string;
   featureUseQueryResult: UseQueryResult<{ data: T[] }>;
   featureHeaders: string[];
