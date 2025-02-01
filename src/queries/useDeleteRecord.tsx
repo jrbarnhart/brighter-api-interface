@@ -2,10 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
 export default function useDeleteRecord({
-  basePath,
+  redirectPath,
+  url,
   recordLabel,
 }: {
-  basePath: string;
+  redirectPath: string;
+  url: string;
   recordLabel: string;
 }) {
   const queryClient = useQueryClient();
@@ -18,17 +20,12 @@ export default function useDeleteRecord({
 
   return useMutation({
     mutationFn: async (recordToDeleteId: string | number) => {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_API_URL
-        }${basePath}/${recordToDeleteId.toString()}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: authHeaderValue,
-          },
-        }
-      );
+      const response = await fetch(`${url}/${recordToDeleteId.toString()}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: authHeaderValue,
+        },
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -37,7 +34,7 @@ export default function useDeleteRecord({
 
       await queryClient.resetQueries({ queryKey: `all-${recordLabel}` });
 
-      await navigate(basePath);
+      await navigate(redirectPath);
     },
   });
 }
