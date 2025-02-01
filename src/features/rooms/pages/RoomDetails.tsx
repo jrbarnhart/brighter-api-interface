@@ -5,7 +5,8 @@ import UpdateRoomForm from "../components/UpdateRoomForm";
 export default function RoomDetails() {
   return (
     <FeatureDetails
-      basePath="/rooms"
+      redirectPath="/rooms"
+      url={`${import.meta.env.VITE_API_URL}/rooms`}
       renderContentFn={RoomDetailsContent}
       updateForm={<UpdateRoomForm />}
       recordName="rooms"

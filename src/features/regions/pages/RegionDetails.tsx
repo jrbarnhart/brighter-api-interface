@@ -5,7 +5,8 @@ import UpdateRegionForm from "../components/UpdateRegionForm";
 export default function RegionDetails() {
   return (
     <FeatureDetails
-      basePath="/regions"
+      redirectPath="/regions"
+      url={`${import.meta.env.VITE_API_URL}/regions`}
       renderContentFn={RegionDetailsContent}
       updateForm={<UpdateRegionForm />}
       recordName="regions"
