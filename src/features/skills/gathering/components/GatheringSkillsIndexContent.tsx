@@ -25,7 +25,7 @@ export default function GatheringSkillsIndexContent({
       />
       <p>{skill.id}</p>
       <p>{skill.resources.length}</p>
-      <p>{skill.skillRequirements.length}</p>
+      <p>{skill.requirements.length}</p>
     </div>
   ));
 }

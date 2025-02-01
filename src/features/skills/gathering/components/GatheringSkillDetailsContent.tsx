@@ -26,7 +26,7 @@ export default function GatheringSkillDetailsContent({
       <ScrollList
         basePath="/skills/gathering/requirements"
         title="Requirements"
-        items={record.skillRequirements}
+        items={record.requirements}
       />
     </>
   );
