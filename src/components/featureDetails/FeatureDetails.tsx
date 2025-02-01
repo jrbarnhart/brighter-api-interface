@@ -46,7 +46,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   const deleteMutation = useDeleteRecord({
     redirectPath,
     url,
-    recordLabel,
+    queryKeyName,
   });
 
   // Return skeletons and error elements
