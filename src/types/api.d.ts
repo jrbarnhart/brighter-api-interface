@@ -1526,7 +1526,7 @@ export interface components {
             name: string;
             region: components["schemas"]["RegionBaseEntity"];
             regionId: number;
-            skillRequirements: components["schemas"]["GatheringSkillRequirementBaseEntity"][];
+            requirements: components["schemas"]["GatheringSkillRequirementBaseEntity"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
         };
         ResourceVariantBaseEntity: {
@@ -1684,7 +1684,7 @@ export interface components {
             name: string;
             region: components["schemas"]["RegionBaseEntity"];
             regionId: number;
-            skillRequirements: components["schemas"]["CombatSkillRequirementBaseEntity"][];
+            requirements: components["schemas"]["CombatSkillRequirementBaseEntity"][];
             monsters: components["schemas"]["MonsterBaseEntity"][];
         };
         UpdateCombatSkillDto: {
