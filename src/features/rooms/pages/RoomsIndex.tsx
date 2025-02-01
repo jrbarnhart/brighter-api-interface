@@ -6,7 +6,7 @@ import RoomsIndexContent from "../components/RoomsIndexContent";
 export default function RoomsIndex() {
   const roomsUseQueryResult = useGetRecords<{
     data: paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({ recordName: "rooms" });
+  }>({ queryKeyName: "rooms", url: `${import.meta.env.VITE_API_URL}/rooms` });
   return (
     <FeatureIndex<components["schemas"]["RoomEntity"]>
       featureLabel="Rooms"

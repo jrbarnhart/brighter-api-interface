@@ -6,7 +6,10 @@ import RegionsIndexContent from "../components/RegionsIndexContent";
 export default function RegionsIndex() {
   const regionsUseQueryResult = useGetRecords<{
     data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({ recordName: "regions" });
+  }>({
+    queryKeyName: "regions",
+    url: `${import.meta.env.VITE_API_URL}/regions`,
+  });
   return (
     <FeatureIndex<components["schemas"]["RegionEntity"]>
       featureLabel="Regions"
