@@ -25,7 +25,7 @@ export default function CombatSkillsIndexContent({
       />
       <p>{skill.id}</p>
       <p>{skill.monsters.length}</p>
-      <p>{skill.skillRequirements.length}</p>
+      <p>{skill.requirements.length}</p>
     </div>
   ));
 }

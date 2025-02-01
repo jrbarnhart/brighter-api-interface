@@ -26,7 +26,7 @@ export default function CombatSkillDetailsContent({
       <ScrollList
         basePath="/skills/combat/requirements"
         title="Requirements"
-        items={record.skillRequirements}
+        items={record.requirements}
       />
     </>
   );
