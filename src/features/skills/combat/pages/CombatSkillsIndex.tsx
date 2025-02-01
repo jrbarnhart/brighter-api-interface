@@ -14,7 +14,6 @@ export default function CombatSkillsIndex() {
   return (
     <FeatureIndex<components["schemas"]["CombatSkillEntity"]>
       featureLabel="Combat Skills"
-      featureName="combat-skills"
       featureHeaders={["Name", "Region", "Id", "Monsters", "Reqirements"]}
       gridColsRule="grid-cols-[1fr_1fr_1fr_1fr_1fr]"
       featureUseQueryResult={combatSkillsUseQueryResult}
