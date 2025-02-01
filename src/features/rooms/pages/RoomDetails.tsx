@@ -9,7 +9,7 @@ export default function RoomDetails() {
       url={`${import.meta.env.VITE_API_URL}/rooms`}
       renderContentFn={RoomDetailsContent}
       updateForm={<UpdateRoomForm />}
-      recordName="rooms"
+      queryKeyName="rooms"
       recordLabel="Room"
       deleteNotes="Rooms with contents cannot be deleted. Delete the content records first."
     />

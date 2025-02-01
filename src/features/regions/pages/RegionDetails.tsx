@@ -9,7 +9,7 @@ export default function RegionDetails() {
       url={`${import.meta.env.VITE_API_URL}/regions`}
       renderContentFn={RegionDetailsContent}
       updateForm={<UpdateRegionForm />}
-      recordName="regions"
+      queryKeyName="regions"
       recordLabel="Region"
       deleteNotes="Note: Regions with rooms or skills cannot be deleted. Delete all of their respective rooms or skills first."
     />
