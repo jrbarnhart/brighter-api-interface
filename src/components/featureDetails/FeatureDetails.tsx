@@ -22,7 +22,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   recordLabel,
   deleteNotes,
 }: {
-  renderContentFn: (record: T) => React.ReactNode;
+  renderContentFn: ({ record }: { record: T }) => React.ReactNode;
   updateForm: React.ReactNode;
   redirectPath: string;
   url: string;
@@ -101,7 +101,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
             notes={deleteNotes ?? ""}
           />
         ) : (
-          renderContentFn(foundRecord)
+          renderContentFn({ record: foundRecord })
         )}
       </div>
     </ScrollArea>

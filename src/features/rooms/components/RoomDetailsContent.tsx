@@ -2,29 +2,35 @@ import RecordLink from "@/components/recordLink/RecordLink";
 import ScrollList from "@/components/scrollList/ScrollList";
 import { components } from "@/types/api";
 
-export default function RoomDetailsContent(
-  room: components["schemas"]["RoomEntity"]
-) {
+export default function RoomDetailsContent({
+  record,
+}: {
+  record: components["schemas"]["RoomEntity"];
+}) {
   return (
     <>
-      <p className="text-xl">Id: {room.id}</p>
+      <p className="text-xl">Id: {record.id}</p>
       <div className="flex gap-3 items-center">
         <p className="text-xl">Region: </p>
         <RecordLink
           recordBasePath="/regions"
-          recordId={room.region.id}
-          recordName={room.region.name}
+          recordId={record.region.id}
+          recordName={record.region.name}
         />
       </div>
-      {room.portal ? <p>Is Portal Room ✅</p> : <p>Is not Portal room ❌</p>}
-      {room.obelisk ? <p>Is Obelisk Room ✅</p> : <p>Is not Obelisk room ❌</p>}
+      {record.portal ? <p>Is Portal Room ✅</p> : <p>Is not Portal room ❌</p>}
+      {record.obelisk ? (
+        <p>Is Obelisk Room ✅</p>
+      ) : (
+        <p>Is not Obelisk room ❌</p>
+      )}
       <div>
         <p>Banks:</p>
         <ul className="list-disc list-inside">
-          {room.banks.length <= 0 ? (
+          {record.banks.length <= 0 ? (
             <li>None</li>
           ) : (
-            room.banks.map((bank, index) => (
+            record.banks.map((bank, index) => (
               <li key={index}>{`${bank.slice(0, 1)}${bank
                 .slice(1)
                 .toLowerCase()}`}</li>
@@ -35,19 +41,23 @@ export default function RoomDetailsContent(
       <ScrollList
         basePath="skills/crafting"
         title="Crafting Skill Spots"
-        items={room.craftingSkills}
+        items={record.craftingSkills}
       />
-      <ScrollList basePath="monsters" title="Monsters" items={room.monsters} />
-      <ScrollList basePath="npcs" title="NPC's" items={room.npcs} />
+      <ScrollList
+        basePath="monsters"
+        title="Monsters"
+        items={record.monsters}
+      />
+      <ScrollList basePath="npcs" title="NPC's" items={record.npcs} />
       <ScrollList
         basePath="resources"
         title="Resource Nodes"
-        items={room.resources}
+        items={record.resources}
       />
       <ScrollList
         basePath="quests/steps"
         title="QuestSteps"
-        items={room.questSteps}
+        items={record.questSteps}
       />
     </>
   );
