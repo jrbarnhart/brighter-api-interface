@@ -16,8 +16,8 @@ export default function CombatSkillRequirementsIndex() {
   return (
     <FeatureIndex<ComponentState["schemas"]["CombatSkillRequirementEntity"]>
       featureLabel="Combat Skill Requirements"
-      featureHeaders={["Unlock", "Id", "Description", "Monster Variant"]}
-      gridColsRule="grid-cols-[1fr_1fr_4fr_1fr]"
+      featureHeaders={["Id", "Unlock Lvl", "Description", "Monster Variant"]}
+      gridColsRule="grid-cols-[1fr_1fr_4fr_2fr]"
       featureUseQueryResult={combatSkillsUseQueryResult}
       renderContentFn={CombatSkillRequirementsIndexContent}
     />

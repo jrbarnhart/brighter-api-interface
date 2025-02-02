@@ -16,9 +16,9 @@ export default function CombatSkillRequirementsIndexContent({
       <RecordLink
         recordBasePath="/skills/combat/requirements"
         recordId={req.id}
-        recordName={`Lvl: ${req.unlockLevel.toString()}`}
+        recordName={req.id.toString()}
       />
-      <p>{req.id}</p>
+      <p>{req.unlockLevel}</p>
       <p className="truncate">{req.description}</p>
       {req.monsterVariant && (
         <RecordLink
