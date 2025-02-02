@@ -1655,10 +1655,11 @@ export interface components {
             skillId: number;
             unlockLevel: number;
         };
-        MonsterVariantBaseEntity: {
+        MonsterVariantBaseWithMonsterEntity: {
             id: number;
             name: string;
             monsterId: number;
+            monster: components["schemas"]["MonsterBaseEntity"];
             requirementId: number | null;
         };
         CombatSkillRequirementEntity: {
@@ -1666,7 +1667,7 @@ export interface components {
             description?: string;
             skill: components["schemas"]["CombatSkillBaseEntity"];
             skillId: number;
-            monsterVariant?: components["schemas"]["MonsterVariantBaseEntity"];
+            monsterVariant?: components["schemas"]["MonsterVariantBaseWithMonsterEntity"];
             unlockLevel: number;
         };
         UpdateCombatSkillRequirementDto: {
@@ -1941,6 +1942,12 @@ export interface components {
         CreateMonsterVariantDto: {
             name: string;
             monsterId: number;
+        };
+        MonsterVariantBaseEntity: {
+            id: number;
+            name: string;
+            monsterId: number;
+            requirementId: number | null;
         };
         MonsterVariantEntity: {
             id: number;
