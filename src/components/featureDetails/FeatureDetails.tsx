@@ -70,7 +70,9 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
       <div className="space-y-4">
         <div className="flex h-8 items-start gap-3">
           <h2 className="text-2xl truncate">
-            {foundRecord.name || foundRecord.unlockLevel}
+            {foundRecord.unlockLevel
+              ? `Lvl: ${foundRecord.unlockLevel.toString()}`
+              : foundRecord.name}
           </h2>
           <div className="w-1 h-full bg-secondary rounded-xl border-border" />
           <Button
