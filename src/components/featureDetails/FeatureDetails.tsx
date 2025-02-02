@@ -9,6 +9,7 @@ import DeleteConfirmation from "../deleteConfirmation/DeleteConfirmation";
 type RequiredRecordProperties = {
   id: number;
   name?: string;
+  unlockLevel?: number | string;
 };
 
 // This will be used in the content function
@@ -68,7 +69,9 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
     <ScrollArea className="h-full">
       <div className="space-y-4">
         <div className="flex h-8 items-start gap-3">
-          <h2 className="text-2xl truncate">{foundRecord.name}</h2>
+          <h2 className="text-2xl truncate">
+            {foundRecord.name || foundRecord.unlockLevel}
+          </h2>
           <div className="w-1 h-full bg-secondary rounded-xl border-border" />
           <Button
             variant={"link"}
