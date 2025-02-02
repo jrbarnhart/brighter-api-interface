@@ -22,7 +22,7 @@ export default function CraftingSkillRequirementDetailsContent({
         <div className="flex gap-3 items-center">
           <p className="text-xl">Recipe: </p>
           <RecordLink
-            recordBasePath="/monsterse/variants"
+            recordBasePath="/skills/crafting/recipes"
             recordId={record.recipe.id}
             recordName={record.recipe.name}
           />

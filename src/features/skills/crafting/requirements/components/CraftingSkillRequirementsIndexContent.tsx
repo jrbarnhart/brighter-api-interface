@@ -22,7 +22,7 @@ export default function CraftingSkillRequirementsIndexContent({
       <p className="truncate">{req.description}</p>
       {req.recipe && (
         <RecordLink
-          recordBasePath="/monsters/variants"
+          recordBasePath="/skills/crafting/recipes"
           recordId={req.recipe.id}
           recordName={req.recipe.name}
         />
