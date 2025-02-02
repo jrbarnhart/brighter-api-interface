@@ -1,5 +1,25 @@
+import FeatureIndex from "@/components/featureIndex/FeatureIndex";
+import useGetRecords from "@/queries/useGetAllRecords";
+
+import { paths } from "@/types/api";
+import { ComponentState } from "react";
 import CraftingSkillRequirementsIndexContent from "../components/CraftingSkillRequirementsIndexContent";
 
 export default function CraftingSkillRequirementsIndex() {
-  return <CraftingSkillRequirementsIndexContent />;
+  const craftingSkillsUseQueryResult = useGetRecords<{
+    data: paths["/skills/crafting/requirements"]["get"]["responses"]["200"]["content"]["application/json"];
+  }>({
+    queryKeyName: "crafting-skill-requirements",
+    url: `${import.meta.env.VITE_API_URL}/skills/crafting/requirements`,
+  });
+
+  return (
+    <FeatureIndex<ComponentState["schemas"]["CraftingSkillRequirementEntity"]>
+      featureLabel="Crafting Skill Requirements"
+      featureHeaders={["Id", "Unlock Lvl", "Description", "Recipe"]}
+      gridColsRule="grid-cols-[1fr_1fr_4fr_2fr]"
+      featureUseQueryResult={craftingSkillsUseQueryResult}
+      renderContentFn={CraftingSkillRequirementsIndexContent}
+    />
+  );
 }
