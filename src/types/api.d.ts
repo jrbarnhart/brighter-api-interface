@@ -1597,32 +1597,63 @@ export interface components {
             outputWeaponVariantId?: number;
             outputArmorVariantId?: number;
         };
-        ResourceVariantBaseEntity: {
-            id: number;
-            name: string;
-            resourceId: number;
-            requirementId: number | null;
-        };
         MiscItemBaseEntity: {
             id: number;
             name: string;
         };
-        ConsumableVariantBaseEntity: {
+        ConsumableBaseEntity: {
+            id: number;
+            name: string;
+        };
+        ConsumableVariantBaseWithConsumableEntity: {
             id: number;
             name: string;
             consumableId: number;
+            consumable: components["schemas"]["ConsumableBaseEntity"];
             recipeId: number | null;
         };
-        WeaponVariantBaseEntity: {
+        WeaponBaseEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            element: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            isRanged: boolean;
+            isTwoHanded: boolean;
+        };
+        WeaponVariantBaseWithWeaponEntity: {
             id: number;
             name: string;
             weaponId: number;
+            weapon: components["schemas"]["WeaponBaseEntity"];
             recipeId: number | null;
         };
-        ArmorVariantBaseEntity: {
+        ArmorBaseEntity: {
+            /**
+             * @description The faction/player class this belongs to
+             * @enum {string}
+             */
+            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+            /**
+             * @description The gear slot that this armor occupies
+             * @enum {string}
+             */
+            slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
+            id: number;
+            name: string;
+        };
+        ArmorVariantBaseWithArmorEntity: {
             id: number;
             name: string;
             armorId: number;
+            armor: components["schemas"]["ArmorBaseEntity"];
             recipeId: number | null;
         };
         CraftingRecipeEntity: {
@@ -1630,11 +1661,11 @@ export interface components {
             name: string;
             requirement?: components["schemas"]["CraftingSkillRequirementBaseEntity"];
             requirementId: number | null;
-            inputResourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
+            inputResourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
             inputItems: components["schemas"]["MiscItemBaseEntity"][];
-            outputConsumableVariant?: components["schemas"]["ConsumableVariantBaseEntity"];
-            outputWeaponVariant?: components["schemas"]["WeaponVariantBaseEntity"];
-            outputArmorVariant?: components["schemas"]["ArmorVariantBaseEntity"];
+            outputConsumableVariant?: components["schemas"]["ConsumableVariantBaseWithConsumableEntity"];
+            outputWeaponVariant?: components["schemas"]["WeaponVariantBaseWithWeaponEntity"];
+            outputArmorVariant?: components["schemas"]["ArmorVariantBaseWithArmorEntity"];
         };
         UpdateCraftingRecipeDto: {
             name?: string;
@@ -1713,6 +1744,12 @@ export interface components {
             name: string;
             resourceId: number;
         };
+        ResourceVariantBaseEntity: {
+            id: number;
+            name: string;
+            resourceId: number;
+            requirementId: number | null;
+        };
         VendorBaseEntity: {
             id: number;
             npcId: number;
@@ -1760,9 +1797,11 @@ export interface components {
             name: string;
             consumableId: number;
         };
-        ConsumableBaseEntity: {
+        ConsumableVariantBaseEntity: {
             id: number;
             name: string;
+            consumableId: number;
+            recipeId: number | null;
         };
         ConsumableVariantEntity: {
             id: number;
@@ -1793,21 +1832,11 @@ export interface components {
             name: string;
             weaponId: number;
         };
-        WeaponBaseEntity: {
-            /**
-             * @description The faction/player class this belongs to
-             * @enum {string}
-             */
-            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
-            /**
-             * @description The damage element this weapon has
-             * @enum {string}
-             */
-            element: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+        WeaponVariantBaseEntity: {
             id: number;
             name: string;
-            isRanged: boolean;
-            isTwoHanded: boolean;
+            weaponId: number;
+            recipeId: number | null;
         };
         WeaponVariantEntity: {
             id: number;
@@ -1874,19 +1903,11 @@ export interface components {
             name: string;
             armorId: number;
         };
-        ArmorBaseEntity: {
-            /**
-             * @description The faction/player class this belongs to
-             * @enum {string}
-             */
-            faction: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
-            /**
-             * @description The gear slot that this armor occupies
-             * @enum {string}
-             */
-            slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
+        ArmorVariantBaseEntity: {
             id: number;
             name: string;
+            armorId: number;
+            recipeId: number | null;
         };
         ArmorVariantEntity: {
             id: number;
