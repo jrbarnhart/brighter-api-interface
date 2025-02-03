@@ -1,5 +1,17 @@
+import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RecipeDetailsContent from "../components/RecipeDetailsContent";
+import UpdateRecipeForm from "../components/UpdateRecipeForm";
 
 export default function RecipeDetails() {
-  return <RecipeDetailsContent />;
+  return (
+    <FeatureDetails
+      redirectPath="/skills/crafting/recipes"
+      url={`${import.meta.env.VITE_API_URL}/skills/crafting/recipes`}
+      renderContentFn={RecipeDetailsContent}
+      updateForm={<UpdateRecipeForm />}
+      queryKeyName="recipes"
+      recordLabel="Recipe"
+      deleteNotes=""
+    />
+  );
 }
