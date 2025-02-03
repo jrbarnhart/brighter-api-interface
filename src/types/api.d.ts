@@ -1597,6 +1597,13 @@ export interface components {
             outputWeaponVariantId?: number;
             outputArmorVariantId?: number;
         };
+        CraftingSkillRequirementBaseWithSkillEntity: {
+            id: number;
+            description?: string;
+            skillId: number;
+            skill: components["schemas"]["CraftingSkillBaseEntity"];
+            unlockLevel: number;
+        };
         MiscItemBaseEntity: {
             id: number;
             name: string;
@@ -1659,7 +1666,7 @@ export interface components {
         CraftingRecipeEntity: {
             id: number;
             name: string;
-            requirement?: components["schemas"]["CraftingSkillRequirementBaseEntity"];
+            requirement?: components["schemas"]["CraftingSkillRequirementBaseWithSkillEntity"];
             requirementId: number | null;
             inputResourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
             inputItems: components["schemas"]["MiscItemBaseEntity"][];
