@@ -24,7 +24,7 @@ export default function RecipesIndexContent({
           <Collapsible key={index} defaultOpen={true}>
             <CollapsibleTrigger asChild>
               <p className="select-none p-2 text-lg bg-border">
-                {group[0]?.requirement?.skillId ?? "Group Name"}
+                {group[0]?.requirement?.skill.name ?? "Group Name"}
               </p>
             </CollapsibleTrigger>
             <CollapsibleContent>
