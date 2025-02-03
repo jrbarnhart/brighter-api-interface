@@ -1,5 +1,17 @@
+import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ResourceDetailsContent from "../components/ResourceDetailsContent";
+import UpdateResourceForm from "../components/UpdateResourceForm";
 
 export default function ResourceDetails() {
-  return <ResourceDetailsContent />;
+  return (
+    <FeatureDetails
+      redirectPath="/items/resources"
+      url={`${import.meta.env.VITE_API_URL}/items/resources`}
+      renderContentFn={ResourceDetailsContent}
+      updateForm={<UpdateResourceForm />}
+      queryKeyName="resources"
+      recordLabel="Resource"
+      deleteNotes=""
+    />
+  );
 }
