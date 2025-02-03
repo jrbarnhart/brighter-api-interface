@@ -19,12 +19,12 @@ export default function CraftingSkillDetailsContent({
         />
       </div>
       <ScrollList
-        basePath="/rooms"
+        basePath="rooms"
         title="Crafting Rooms"
         items={record.rooms}
       />
       <ScrollList
-        basePath="/skills/crafting/requirements"
+        basePath="skills/crafting/requirements"
         title="Requirements"
         items={record.requirements}
       />

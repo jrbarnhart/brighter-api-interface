@@ -19,12 +19,12 @@ export default function GatheringSkillDetailsContent({
         />
       </div>
       <ScrollList
-        basePath="/items/resources"
+        basePath="items/resources"
         title="Resources"
         items={record.resources}
       />
       <ScrollList
-        basePath="/skills/gathering/requirements"
+        basePath="skills/gathering/requirements"
         title="Requirements"
         items={record.requirements}
       />

@@ -19,12 +19,12 @@ export default function CombatSkillDetailsContent({
         />
       </div>
       <ScrollList
-        basePath="/monsters"
+        basePath="monsters"
         title="Monsters"
         items={record.monsters}
       />
       <ScrollList
-        basePath="/skills/combat/requirements"
+        basePath="skills/combat/requirements"
         title="Requirements"
         items={record.requirements}
       />
