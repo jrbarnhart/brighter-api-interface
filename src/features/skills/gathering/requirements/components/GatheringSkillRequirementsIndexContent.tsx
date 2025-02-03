@@ -41,7 +41,7 @@ export default function GatheringSkillRequirementsIndexContent({
                 <RecordLink
                   recordBasePath="/items/resources/variants"
                   recordId={req.resourceVariant.id}
-                  recordName={req.resourceVariant.name}
+                  recordName={`${req.resourceVariant.name} ${req.resourceVariant.resource.name}`}
                 />
               )}
             </div>

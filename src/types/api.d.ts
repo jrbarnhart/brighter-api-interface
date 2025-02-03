@@ -1529,10 +1529,11 @@ export interface components {
             requirements: components["schemas"]["GatheringSkillRequirementBaseEntity"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
         };
-        ResourceVariantBaseEntity: {
+        ResourceVariantBaseWithResourceEntity: {
             id: number;
             name: string;
             resourceId: number;
+            resource: components["schemas"]["ResourceBaseEntity"];
             requirementId: number | null;
         };
         GatheringSkillRequirementEntity: {
@@ -1540,7 +1541,7 @@ export interface components {
             description?: string;
             skill: components["schemas"]["GatheringSkillEntity"];
             skillId: number;
-            resourceVariant?: components["schemas"]["ResourceVariantBaseEntity"];
+            resourceVariant?: components["schemas"]["ResourceVariantBaseWithResourceEntity"];
             unlockLevel: number;
         };
         UpdateGatheringSkillRequirementDto: {
@@ -1583,13 +1584,24 @@ export interface components {
             unlockLevel: number;
         };
         UpdateCraftingSkillRequirementDto: {
-            skillId: number;
-            unlockLevel: number;
+            skillId?: number;
+            unlockLevel?: number;
             description?: string;
             recipeId?: number;
         };
         CreateCraftingRecipeDto: {
             name: string;
+            inputResourceVariantIds?: number[];
+            inputItemIds?: number[];
+            outputConsumableVariantId?: number;
+            outputWeaponVariantId?: number;
+            outputArmorVariantId?: number;
+        };
+        ResourceVariantBaseEntity: {
+            id: number;
+            name: string;
+            resourceId: number;
+            requirementId: number | null;
         };
         MiscItemBaseEntity: {
             id: number;
@@ -1626,6 +1638,11 @@ export interface components {
         };
         UpdateCraftingRecipeDto: {
             name?: string;
+            inputResourceVariantIds?: number[];
+            inputItemIds?: number[];
+            outputConsumableVariantId?: number;
+            outputWeaponVariantId?: number;
+            outputArmorVariantId?: number;
         };
         CreateCraftingSkillDto: {
             name: string;

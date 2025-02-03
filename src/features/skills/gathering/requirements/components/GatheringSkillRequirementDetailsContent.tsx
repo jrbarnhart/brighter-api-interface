@@ -20,11 +20,11 @@ export default function GatheringSkillRequirementDetailsContent({
       {record.description && <p>Description: {record.description}</p>}
       {record.resourceVariant && (
         <div className="flex gap-3 items-center">
-          <p className="text-xl">Monster Variant: </p>
+          <p className="text-xl">Resource Variant: </p>
           <RecordLink
             recordBasePath="/items/resources/variants"
             recordId={record.resourceVariant.id}
-            recordName={record.resourceVariant.name}
+            recordName={`${record.resourceVariant.name} ${record.resourceVariant.resource.name}`}
           />
         </div>
       )}
