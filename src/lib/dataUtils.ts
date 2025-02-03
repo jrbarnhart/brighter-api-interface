@@ -16,13 +16,39 @@ export function groupRecipesBySkillId<
   const grouped: { [key: number]: T[] } = {};
   const noRequirement: T[] = [];
 
-  for (const item of data) {
-    if (item.requirement?.skillId !== undefined) {
-      (grouped[item.requirement.skillId] ??= []).push(item);
+  for (const recipe of data) {
+    if (recipe.requirement?.skillId !== undefined) {
+      (grouped[recipe.requirement.skillId] ??= []).push(recipe);
     } else {
-      noRequirement.push(item);
+      noRequirement.push(recipe);
     }
   }
 
   return { grouped: Object.values(grouped), noRequirement };
+}
+
+export function groupResourceVariantsBySkillAndBase<
+  T extends { resource: { name: string; skill: { name: string } } }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const skillName = variant.resource.skill.name;
+      const resourceName = variant.resource.name;
+      // Ensure the skill group exists
+      if (!acc[skillName]) {
+        acc[skillName] = {};
+      }
+
+      // Then ensure the resource group exists in that skill group
+      if (!acc[skillName][resourceName]) {
+        acc[skillName][resourceName] = [];
+      }
+
+      // Then push the current variant to that nested array
+      acc[skillName][resourceName].push(variant);
+
+      return acc;
+    },
+    {}
+  );
 }
