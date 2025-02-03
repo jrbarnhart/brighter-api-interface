@@ -1757,6 +1757,13 @@ export interface components {
             resourceId: number;
             requirementId: number | null;
         };
+        ResourceBaseWithSkillEntity: {
+            id: number;
+            name: string;
+            skillId: number;
+            skill: components["schemas"]["GatheringSkillBaseEntity"];
+            passive: boolean;
+        };
         VendorBaseEntity: {
             id: number;
             npcId: number;
@@ -1769,7 +1776,7 @@ export interface components {
         ResourceVariantEntity: {
             id: number;
             name: string;
-            resource: components["schemas"]["ResourceBaseEntity"];
+            resource: components["schemas"]["ResourceBaseWithSkillEntity"];
             resourceId: number;
             requirement?: components["schemas"]["GatheringSkillRequirementBaseEntity"];
             requirementId: number | null;
