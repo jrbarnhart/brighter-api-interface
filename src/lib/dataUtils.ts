@@ -89,3 +89,15 @@ export function groupDataByElement<
     }, {})
   );
 }
+
+export function groupDataByWeaponName<T extends { weapon: { name: string } }>(
+  data: T[]
+): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const array = acc[item.weapon.name] ?? (acc[item.weapon.name] = []);
+      array.push(item);
+      return acc;
+    }, {})
+  );
+}
