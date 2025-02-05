@@ -4,7 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { groupRecipesBySkillId } from "@/lib/dataUtils";
+import { groupDataByRequirementSkillId } from "@/lib/dataUtils";
 import { components } from "@/types/api";
 
 export default function RecipesIndexContent({
@@ -14,7 +14,7 @@ export default function RecipesIndexContent({
   data: components["schemas"]["CraftingRecipeEntity"][];
   gridColsRule: string;
 }) {
-  const { grouped, noRequirement } = groupRecipesBySkillId(data);
+  const { grouped, noRequirement } = groupDataByRequirementSkillId(data);
   const allRecipes = [...grouped, noRequirement];
   return (
     <>

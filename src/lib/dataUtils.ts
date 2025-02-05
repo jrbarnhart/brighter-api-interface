@@ -10,7 +10,7 @@ export function groupDataBySkillId<T extends { skillId: number }>(
   );
 }
 
-export function groupRecipesBySkillId<
+export function groupDataByRequirementSkillId<
   T extends { requirement?: { skillId: number } }
 >(data: T[]): { grouped: T[][]; noRequirement: T[] } {
   const grouped: { [key: number]: T[] } = {};
