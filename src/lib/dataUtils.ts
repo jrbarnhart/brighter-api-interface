@@ -137,3 +137,35 @@ export function groupWeaponVariantsByFactionAndBase<
     {}
   );
 }
+
+export function groupArmorVariantsByFactionSlotAndBase<
+  T extends { armor: { name: string; faction: string; slot: string } }
+>(data: T[]) {
+  return data.reduce(
+    (
+      acc: { [key: string]: { [key: string]: { [key: string]: T[] } } },
+      variant
+    ) => {
+      const factionName = variant.armor.faction;
+      const slotName = variant.armor.slot;
+      const baseName = variant.armor.name;
+
+      if (!acc[factionName]) {
+        acc[factionName] = {};
+      }
+
+      if (!acc[factionName][slotName]) {
+        acc[factionName][slotName] = {};
+      }
+
+      if (!acc[factionName][slotName][baseName]) {
+        acc[factionName][slotName][baseName] = [];
+      }
+
+      acc[factionName][slotName][baseName].push(variant);
+
+      return acc;
+    },
+    {}
+  );
+}
