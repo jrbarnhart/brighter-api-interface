@@ -35,18 +35,40 @@ export function groupResourceVariantsBySkillAndBase<
     (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
       const skillName = variant.resource.skill.name;
       const resourceName = variant.resource.name;
-      // Ensure the skill group exists
+
       if (!acc[skillName]) {
         acc[skillName] = {};
       }
 
-      // Then ensure the resource group exists in that skill group
       if (!acc[skillName][resourceName]) {
         acc[skillName][resourceName] = [];
       }
 
-      // Then push the current variant to that nested array
       acc[skillName][resourceName].push(variant);
+
+      return acc;
+    },
+    {}
+  );
+}
+
+export function groupConsumableVariantsBySkillAndBase<
+  T extends { consumable: { name: string; skill?: { name: string } } }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const skillName = variant.consumable.skill?.name ?? "No Skill";
+      const consumableName = variant.consumable.name;
+
+      if (!acc[skillName]) {
+        acc[skillName] = {};
+      }
+
+      if (!acc[skillName][consumableName]) {
+        acc[skillName][consumableName] = [];
+      }
+
+      acc[skillName][consumableName].push(variant);
 
       return acc;
     },
