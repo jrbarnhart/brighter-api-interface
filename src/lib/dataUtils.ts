@@ -1,9 +1,10 @@
-export function groupDataBySkillId<T extends { skillId: number }>(
+export function groupDataBySkillId<T extends { skillId?: number }>(
   data: T[]
 ): T[][] {
   return Object.values(
     data.reduce((acc: { [key: number]: T[] }, item) => {
-      const array = acc[item.skillId] ?? (acc[item.skillId] = []);
+      const skillId = item.skillId ?? -1;
+      const array = acc[skillId] ?? (acc[skillId] = []);
       array.push(item);
       return acc;
     }, {})
