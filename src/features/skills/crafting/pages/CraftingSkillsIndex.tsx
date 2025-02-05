@@ -14,8 +14,15 @@ export default function CraftingSkillsIndex() {
   return (
     <FeatureIndex<components["schemas"]["CraftingSkillEntity"]>
       featureLabel="Crafting Skills"
-      featureHeaders={["Name", "Region", "Id", "Crafting Rooms", "Reqirements"]}
-      gridColsRule="grid-cols-[1fr_1fr_1fr_1fr_1fr]"
+      featureHeaders={[
+        "Name",
+        "Region",
+        "Id",
+        "Crafting Rooms",
+        "Reqirements",
+        "Consumables",
+      ]}
+      gridColsRule="grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr]"
       featureUseQueryResult={craftingSkillsUseQueryResult}
       renderContentFn={CraftingSkillsIndexContent}
     />

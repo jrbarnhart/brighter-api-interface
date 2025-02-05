@@ -28,6 +28,11 @@ export default function CraftingSkillDetailsContent({
         title="Requirements"
         items={record.requirements}
       />
+      <ScrollList
+        basePath="items/consumables"
+        items={record.consumables}
+        title="Consumables"
+      />
     </>
   );
 }

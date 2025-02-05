@@ -26,6 +26,7 @@ export default function CraftingSkillsIndexContent({
       <p>{skill.id}</p>
       <p>{skill.rooms.length}</p>
       <p>{skill.requirements.length}</p>
+      <p>{skill.consumables.length}</p>
     </div>
   ));
 }
