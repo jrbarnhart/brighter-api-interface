@@ -42,6 +42,30 @@ export function groupDataByRequirementSkillId<
   return { grouped: Object.values(grouped), noRequirement };
 }
 
+export function groupDataByFactionAndSlot<
+  T extends { faction: string; slot: string }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const faction = variant.faction;
+      const slot = variant.slot;
+
+      if (!acc[faction]) {
+        acc[faction] = {};
+      }
+
+      if (!acc[faction][slot]) {
+        acc[faction][slot] = [];
+      }
+
+      acc[faction][slot].push(variant);
+
+      return acc;
+    },
+    {}
+  );
+}
+
 export function groupResourceVariantsBySkillAndBase<
   T extends { resource: { name: string; skill: { name: string } } }
 >(data: T[]) {
