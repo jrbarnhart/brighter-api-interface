@@ -4,7 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { groupReqsBySkillId } from "@/lib/dataUtils";
+import { groupDataBySkillId } from "@/lib/dataUtils";
 import { components } from "@/types/api";
 
 export default function CombatSkillRequirementsIndexContent({
@@ -14,7 +14,7 @@ export default function CombatSkillRequirementsIndexContent({
   data: components["schemas"]["CombatSkillRequirementEntity"][];
   gridColsRule: string;
 }) {
-  const groupedData = groupReqsBySkillId(data);
+  const groupedData = groupDataBySkillId(data);
 
   return groupedData.map((group, index) => {
     return (

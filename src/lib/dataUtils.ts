@@ -1,4 +1,4 @@
-export function groupReqsBySkillId<T extends { skillId: number }>(
+export function groupDataBySkillId<T extends { skillId: number }>(
   data: T[]
 ): T[][] {
   return Object.values(
