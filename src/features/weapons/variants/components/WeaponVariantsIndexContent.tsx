@@ -22,7 +22,7 @@ export default function WeaponVariantsIndexContent({
       <Collapsible key={index} defaultOpen={true}>
         <CollapsibleTrigger asChild>
           <p className="select-none p-2 text-lg bg-border">
-            {group[index]?.weapon.name ?? "No Weapon"}
+            {group[0]?.weapon.name ?? "No Weapon"}
           </p>
         </CollapsibleTrigger>
         <CollapsibleContent>
