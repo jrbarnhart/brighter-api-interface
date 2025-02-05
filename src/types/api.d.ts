@@ -1975,7 +1975,7 @@ export interface components {
             slot: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
             id: number;
             name: string;
-            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            variants: components["schemas"]["ArmorVariantBaseEntity"][];
         };
         UpdateArmorDto: {
             /**
