@@ -13,6 +13,18 @@ export function groupDataBySkillId<T extends { skillId?: number }>(
   );
 }
 
+export function groupDataByElement<
+  T extends { element: components["schemas"]["AttackElementsEnum"]["value"] }
+>(data: T[]): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const array = acc[item.element] ?? (acc[item.element] = []);
+      array.push(item);
+      return acc;
+    }, {})
+  );
+}
+
 export function groupDataByRequirementSkillId<
   T extends { requirement?: { skillId: number } }
 >(data: T[]): { grouped: T[][]; noRequirement: T[] } {
@@ -78,26 +90,26 @@ export function groupConsumableVariantsBySkillAndBase<
   );
 }
 
-export function groupDataByElement<
-  T extends { element: components["schemas"]["AttackElementsEnum"]["value"] }
->(data: T[]): T[][] {
-  return Object.values(
-    data.reduce((acc: { [key: string]: T[] }, item) => {
-      const array = acc[item.element] ?? (acc[item.element] = []);
-      array.push(item);
-      return acc;
-    }, {})
-  );
-}
+export function groupWeaponVariantsByFactionAndBase<
+  T extends { weapon: { name: string; faction: string } }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const factionName = variant.weapon.faction;
+      const baseName = variant.weapon.name;
 
-export function groupDataByWeaponName<T extends { weapon: { name: string } }>(
-  data: T[]
-): T[][] {
-  return Object.values(
-    data.reduce((acc: { [key: string]: T[] }, item) => {
-      const array = acc[item.weapon.name] ?? (acc[item.weapon.name] = []);
-      array.push(item);
+      if (!acc[factionName]) {
+        acc[factionName] = {};
+      }
+
+      if (!acc[factionName][baseName]) {
+        acc[factionName][baseName] = [];
+      }
+
+      acc[factionName][baseName].push(variant);
+
       return acc;
-    }, {})
+    },
+    {}
   );
 }
