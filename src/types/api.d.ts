@@ -2198,6 +2198,22 @@ export interface components {
         UpdateQuestDto: {
             name?: string;
         };
+        AttackElementsEnum: {
+            /** @enum {string} */
+            value: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+        };
+        FactionsEnum: {
+            /** @enum {string} */
+            value: "CRYOKNIGHT" | "GUARDIAN" | "HAMMERMAGE" | "NONE";
+        };
+        GearSlotsEnum: {
+            /** @enum {string} */
+            value: "HEAD" | "NECK" | "TORSO" | "BACK" | "HANDS" | "SHIELD" | "LEGS" | "FEET";
+        };
+        BankTypesEnum: {
+            /** @enum {string} */
+            value: "BONES" | "BUILDING" | "CAPES" | "EXPLOSIVES" | "BAIT" | "HIDES" | "INGREDIENTS" | "LEATHERS" | "LUMBER" | "MONUMENT" | "ORE" | "REAGENTS" | "POTIONS" | "QUARTERMASTER" | "STONE" | "TIMBER";
+        };
     };
     responses: never;
     parameters: never;
