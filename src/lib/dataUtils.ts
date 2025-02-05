@@ -1,3 +1,5 @@
+import { components } from "@/types/api";
+
 export function groupDataBySkillId<T extends { skillId?: number }>(
   data: T[]
 ): T[][] {
@@ -73,5 +75,17 @@ export function groupConsumableVariantsBySkillAndBase<
       return acc;
     },
     {}
+  );
+}
+
+export function groupDataByElement<
+  T extends { element: components["schemas"]["AttackElementsEnum"]["value"] }
+>(data: T[]): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const array = acc[item.element] ?? (acc[item.element] = []);
+      array.push(item);
+      return acc;
+    }, {})
   );
 }
