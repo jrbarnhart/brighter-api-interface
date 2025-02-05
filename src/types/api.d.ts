@@ -1819,10 +1819,16 @@ export interface components {
             consumableId: number;
             recipeId: number | null;
         };
+        ConsumableBaseWithSkillEntity: {
+            id: number;
+            name: string;
+            skillId?: number;
+            skill?: components["schemas"]["CraftingSkillBaseEntity"];
+        };
         ConsumableVariantEntity: {
             id: number;
             name: string;
-            consumable: components["schemas"]["ConsumableBaseEntity"];
+            consumable: components["schemas"]["ConsumableBaseWithSkillEntity"];
             consumableId: number;
             recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
             recipeId: number | null;
