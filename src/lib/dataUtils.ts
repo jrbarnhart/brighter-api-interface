@@ -90,6 +90,30 @@ export function groupResourceVariantsBySkillAndBase<
   );
 }
 
+export function groupMonsterVariantsBySkillAndBase<
+  T extends { monster: { name: string; skill: { name: string } } }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const skillName = variant.monster.skill.name;
+      const monsterName = variant.monster.name;
+
+      if (!acc[skillName]) {
+        acc[skillName] = {};
+      }
+
+      if (!acc[skillName][monsterName]) {
+        acc[skillName][monsterName] = [];
+      }
+
+      acc[skillName][monsterName].push(variant);
+
+      return acc;
+    },
+    {}
+  );
+}
+
 export function groupConsumableVariantsBySkillAndBase<
   T extends { consumable: { name: string; skill?: { name: string } } }
 >(data: T[]) {
