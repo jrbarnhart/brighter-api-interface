@@ -2013,10 +2013,32 @@ export interface components {
             monsterId: number;
             requirementId: number | null;
         };
+        MonsterBaseWithSkillEntity: {
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            attackElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            immuneElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            /**
+             * @description The damage element this weapon has
+             * @enum {string}
+             */
+            vulnerableElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
+            id: number;
+            name: string;
+            skillId: number;
+            skill: components["schemas"]["CombatSkillBaseEntity"];
+            passive: boolean;
+        };
         MonsterVariantEntity: {
             id: number;
             name: string;
-            monster: components["schemas"]["MonsterBaseEntity"];
+            monster: components["schemas"]["MonsterBaseWithSkillEntity"];
             monsterId: number;
             requirement?: components["schemas"]["CombatSkillRequirementBaseEntity"];
             requirementId: number | null;
