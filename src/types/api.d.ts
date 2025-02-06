@@ -2042,7 +2042,7 @@ export interface components {
             monsterId: number;
             requirement?: components["schemas"]["CombatSkillRequirementBaseEntity"];
             requirementId: number | null;
-            dropTable: components["schemas"]["DropTableBaseEntity"];
+            dropTable?: components["schemas"]["DropTableBaseEntity"];
         };
         UpdateMonsterVariantDto: {
             name?: string;
