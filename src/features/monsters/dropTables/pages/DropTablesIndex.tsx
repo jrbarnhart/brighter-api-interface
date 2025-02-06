@@ -1,5 +1,32 @@
+import useGetRecords from "@/queries/useGetAllRecords";
 import DropTablesIndexContent from "../components/DropTablesIndexContent";
+import { paths, components } from "@/types/api";
+import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 
 export default function DropTablesIndex() {
-  return <DropTablesIndexContent />;
+  const dropTableUseQueryResult = useGetRecords<{
+    data: paths["/monsters/drop-tables"]["get"]["responses"]["200"]["content"]["application/json"];
+  }>({
+    queryKeyName: "drop-tables",
+    url: `${import.meta.env.VITE_API_URL}/monsters/drop-tables`,
+  });
+
+  return (
+    <FeatureIndex<components["schemas"]["DropTableEntity"]>
+      featureLabel="Drop Tables"
+      featureHeaders={[
+        "Id",
+        "Monster Variant",
+        "Resources",
+        "Consumables",
+        "Misc Items",
+        "Weapons",
+        "Armors",
+        "Currency",
+      ]}
+      gridColsRule="grid-cols-[1fr_3fr_1fr_1fr_1fr_1fr_1fr_2fr]"
+      featureUseQueryResult={dropTableUseQueryResult}
+      renderContentFn={DropTablesIndexContent}
+    />
+  );
 }

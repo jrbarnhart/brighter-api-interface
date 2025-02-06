@@ -25,6 +25,20 @@ export function groupDataByElement<
   );
 }
 
+export function groupDataByMonsterVariantMonster<
+  T extends { monsterVariant: { monster: { name: string } } }
+>(data: T[]): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const array =
+        acc[item.monsterVariant.monster.name] ??
+        (acc[item.monsterVariant.monster.name] = []);
+      array.push(item);
+      return acc;
+    }, {})
+  );
+}
+
 export function groupDataByRequirementSkillId<
   T extends { requirement?: { skillId: number } }
 >(data: T[]): { grouped: T[][]; noRequirement: T[] } {
