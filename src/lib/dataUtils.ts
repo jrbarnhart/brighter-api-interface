@@ -13,6 +13,19 @@ export function groupDataBySkillId<T extends { skillId?: number }>(
   );
 }
 
+export function groupDataByQuestName<T extends { quest: { name: string } }>(
+  data: T[]
+): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const questName = item.quest.name;
+      const array = acc[questName] ?? (acc[questName] = []);
+      array.push(item);
+      return acc;
+    }, {})
+  );
+}
+
 export function groupDataByElement<
   T extends { element: components["schemas"]["AttackElementsEnum"]["value"] }
 >(data: T[]): T[][] {
