@@ -2123,7 +2123,7 @@ export interface components {
         };
         DropTableEntity: {
             id: number;
-            monsterVariant: components["schemas"]["MonsterVariantBaseEntity"];
+            monsterVariant: components["schemas"]["MonsterVariantBaseWithMonsterEntity"];
             monsterVariantId: number;
             resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
             weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
