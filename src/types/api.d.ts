@@ -1012,6 +1012,58 @@ export interface paths {
         patch: operations["MiscItemsController_update"];
         trace?: never;
     };
+    "/monsters/drop-tables": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get all dropTable
+         * @description This gets all dropTable records
+         */
+        get: operations["DropTablesController_findAll"];
+        put?: never;
+        /**
+         * Create dropTable
+         * @description This creates a new dropTable record
+         */
+        post: operations["DropTablesController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/monsters/drop-tables/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get dropTable by id
+         * @description This gets one dropTable by its id
+         */
+        get: operations["DropTablesController_findOne"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete dropTable
+         * @description This deletes an dropTable record by id
+         */
+        delete: operations["DropTablesController_remove"];
+        options?: never;
+        head?: never;
+        /**
+         * Update dropTable
+         * @description This updates an dropTable record by id
+         */
+        patch: operations["DropTablesController_update"];
+        trace?: never;
+    };
     "/monsters/variants": {
         parameters: {
             query?: never;
@@ -1114,58 +1166,6 @@ export interface paths {
          * @description This updates an monster record by id
          */
         patch: operations["MonstersController_update"];
-        trace?: never;
-    };
-    "/monsters/drop-tables": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get all dropTable
-         * @description This gets all dropTable records
-         */
-        get: operations["DropTablesController_findAll"];
-        put?: never;
-        /**
-         * Create dropTable
-         * @description This creates a new dropTable record
-         */
-        post: operations["DropTablesController_create"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/monsters/drop-tables/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get dropTable by id
-         * @description This gets one dropTable by its id
-         */
-        get: operations["DropTablesController_findOne"];
-        put?: never;
-        post?: never;
-        /**
-         * Delete dropTable
-         * @description This deletes an dropTable record by id
-         */
-        delete: operations["DropTablesController_remove"];
-        options?: never;
-        head?: never;
-        /**
-         * Update dropTable
-         * @description This updates an dropTable record by id
-         */
-        patch: operations["DropTablesController_update"];
         trace?: never;
     };
     "/npcs/vendors": {
@@ -2003,6 +2003,35 @@ export interface components {
         UpdateMiscItemDto: {
             name?: string;
         };
+        CreateDropTableDto: {
+            monsterVariantId: number;
+            resourceVariantIds?: number[];
+            weaponVariantIds?: number[];
+            armorVariantIds?: number[];
+            consumableVariantIds?: number[];
+            miscItemIds?: number[];
+            currency?: number;
+        };
+        DropTableEntity: {
+            id: number;
+            monsterVariant: components["schemas"]["MonsterVariantBaseWithMonsterEntity"];
+            monsterVariantId: number;
+            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
+            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
+            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            consumablbeVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
+            miscItems: components["schemas"]["MiscItemBaseEntity"][];
+            currency: number | null;
+        };
+        UpdateDropTableDto: {
+            monsterVariantId?: number;
+            resourceVariantIds?: number[];
+            weaponVariantIds?: number[];
+            armorVariantIds?: number[];
+            consumableVariantIds?: number[];
+            miscItemIds?: number[];
+            currency?: number;
+        };
         CreateMonsterVariantDto: {
             name: string;
             monsterId: number;
@@ -2111,35 +2140,6 @@ export interface components {
             name?: string;
             skillId?: number;
             passive?: boolean;
-        };
-        CreateDropTableDto: {
-            monsterVariantId: number;
-            resourceVariantIds?: number[];
-            weaponVariantIds?: number[];
-            armorVariantIds?: number[];
-            consumableVariantIds?: number[];
-            miscItemIds?: number[];
-            currency?: number;
-        };
-        DropTableEntity: {
-            id: number;
-            monsterVariant: components["schemas"]["MonsterVariantBaseWithMonsterEntity"];
-            monsterVariantId: number;
-            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
-            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
-            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
-            consumbalbeVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
-            miscItems: components["schemas"]["MiscItemBaseEntity"][];
-            currency: number | null;
-        };
-        UpdateDropTableDto: {
-            monsterVariantId?: number;
-            resourceVariantIds?: number[];
-            weaponVariantIds?: number[];
-            armorVariantIds?: number[];
-            consumableVariantIds?: number[];
-            miscItemIds?: number[];
-            currency?: number;
         };
         CreateVendorDto: {
             npcId: number;
@@ -5391,6 +5391,176 @@ export interface operations {
             };
         };
     };
+    DropTablesController_findAll: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Found all dropTable records */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableEntity"][];
+                };
+            };
+        };
+    };
+    DropTablesController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateDropTableDto"];
+            };
+        };
+        responses: {
+            /** @description DropTable created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
+            };
+            /** @description Bad request, invalid body data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DropTablesController_findOne: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Found dropTable record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableEntity"];
+                };
+            };
+            /** @description DropTable not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DropTablesController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description DropTable was deleted */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description DropTable not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DropTablesController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDropTableDto"];
+            };
+        };
+        responses: {
+            /** @description Updated dropTable record */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DropTableBaseEntity"];
+                };
+            };
+            /** @description Bad request, invalid body data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized access */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description DropTable not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     MonsterVariantsController_findAll: {
         parameters: {
             query?: never;
@@ -5723,176 +5893,6 @@ export interface operations {
                 content?: never;
             };
             /** @description Monster not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    DropTablesController_findAll: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Found all dropTable records */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DropTableEntity"][];
-                };
-            };
-        };
-    };
-    DropTablesController_create: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateDropTableDto"];
-            };
-        };
-        responses: {
-            /** @description DropTable created */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DropTableBaseEntity"];
-                };
-            };
-            /** @description Bad request, invalid body data */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized access */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    DropTablesController_findOne: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Found dropTable record */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DropTableEntity"];
-                };
-            };
-            /** @description DropTable not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    DropTablesController_remove: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description DropTable was deleted */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DropTableBaseEntity"];
-                };
-            };
-            /** @description Unauthorized access */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description DropTable not found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    DropTablesController_update: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["UpdateDropTableDto"];
-            };
-        };
-        responses: {
-            /** @description Updated dropTable record */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DropTableBaseEntity"];
-                };
-            };
-            /** @description Bad request, invalid body data */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized access */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description DropTable not found */
             404: {
                 headers: {
                     [name: string]: unknown;
