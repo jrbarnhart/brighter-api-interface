@@ -2019,7 +2019,7 @@ export interface components {
             resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
             weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
             armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
-            consumablbeVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
+            consumableVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
             miscItems: components["schemas"]["MiscItemBaseEntity"][];
             currency: number | null;
         };
