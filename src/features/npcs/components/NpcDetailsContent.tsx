@@ -12,7 +12,7 @@ export default function NpcDetailsContent({
       <p className="text-xl">Id: {record.id}</p>
       {record.vendor ? (
         <div className="flex gap-3 items-center">
-          <p className="text-xl">Skill: </p>
+          <p className="text-xl">Vendor: </p>
           <RecordLink
             recordBasePath="/npcs/vendors"
             recordId={record.vendor.id}

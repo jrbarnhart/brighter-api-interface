@@ -21,7 +21,7 @@ export default function NpcsIndexContent({
       <p>{npc.id}</p>
       {npc.vendor && (
         <RecordLink
-          recordBasePath="npcs/vendors"
+          recordBasePath="/npcs/vendors"
           recordId={npc.vendor.id}
           recordName={`Id: ${npc.vendor.id.toString()}`}
         />
