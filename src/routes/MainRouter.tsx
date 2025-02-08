@@ -6,7 +6,7 @@ import Nav from "@/components/nav/Nav";
 import Login from "@/features/auth/pages/Login";
 import RoomsLayout from "@/features/rooms/layouts/RoomsLayout";
 import RoomsIndex from "@/features/rooms/pages/RoomsIndex";
-import CreateRoomForm from "@/features/rooms/components/CreateRoomForm";
+import { CreateRoomForm } from "@/features/rooms/components/RoomForms";
 import RegionsIndex from "@/features/regions/pages/RegionsIndex";
 import RegionDetails from "@/features/regions/pages/RegionDetails";
 import RoomDetails from "@/features/rooms/pages/RoomDetails";
