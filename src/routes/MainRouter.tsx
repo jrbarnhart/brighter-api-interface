@@ -1,6 +1,7 @@
 import Home from "@/pages/home/Home";
 import { BrowserRouter, Route, Routes } from "react-router";
 import RegionsLayout from "@/features/regions/layouts/RegionsLayout";
+import { CreateRegionForm } from "@/features/regions/components/RegionForms";
 import Nav from "@/components/nav/Nav";
 import Login from "@/features/auth/pages/Login";
 import RoomsLayout from "@/features/rooms/layouts/RoomsLayout";
@@ -118,6 +119,7 @@ export default function MainRouter() {
           <Route path="regions" element={<RegionsLayout />}>
             <Route index element={<RegionsIndex />} />
             <Route path=":id" element={<RegionDetails />} />
+            <Route path="create" element={<CreateRegionForm />} />
           </Route>
           {/* Rooms */}
           <Route path="rooms" element={<RoomsLayout />}>

@@ -1,6 +1,6 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RegionDetailsContent from "../components/RegionDetailsContent";
-import UpdateRegionForm from "../components/UpdateRegionForm";
+import { UpdateRegionForm } from "../components/RegionForms";
 
 export default function RegionDetails() {
   return (
