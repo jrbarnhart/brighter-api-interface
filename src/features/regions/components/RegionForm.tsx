@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { components } from "@/types/api";
 
-export default function CreateRegionForm() {
+export default function RegionForm() {
   const form = useForm<z.infer<typeof CreateRegionSchema>>({
     resolver: zodResolver(CreateRegionSchema),
     defaultValues: {
