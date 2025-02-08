@@ -1,5 +1,4 @@
 import { UseFormReturn } from "react-hook-form";
-import { CreateRegionSchema } from "../schemas/create-region.schema";
 import {
   FormControl,
   FormDescription,
@@ -10,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import FeatureForm from "@/components/featureForm/FeatureForm";
-import { UpdateRegionSchema } from "../schemas/update-region.schema";
+import { schemas } from "../../../schemas/openapi-zod-schemas";
 
 const RegionFormContent = ({ form }: { form: UseFormReturn }) => {
   return (
@@ -33,9 +32,9 @@ const RegionFormContent = ({ form }: { form: UseFormReturn }) => {
 
 export function CreateRegionForm() {
   return (
-    <FeatureForm<typeof CreateRegionSchema>
+    <FeatureForm<typeof schemas.CreateRegionDtoSchema>
       method="POST"
-      schema={CreateRegionSchema}
+      schema={schemas.CreateRegionDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/regions`}
       defaultValues={{ name: "" }}
       queryKey="all-regions"
@@ -47,9 +46,9 @@ export function CreateRegionForm() {
 
 export function UpdateRegionForm() {
   return (
-    <FeatureForm<typeof UpdateRegionSchema>
+    <FeatureForm<typeof schemas.UpdateRegionDtoSchema>
       method="PATCH"
-      schema={UpdateRegionSchema}
+      schema={schemas.UpdateRegionDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/regions`}
       defaultValues={{ name: "" }}
       queryKey="all-regions"
