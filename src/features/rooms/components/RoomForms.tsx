@@ -10,8 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import { schemas } from "@/schemas/openapi-zod-schemas";
-import { components } from "@/types/api";
-import useGetRecords from "@/queries/useGetAllRecords";
 import {
   Select,
   SelectContent,
@@ -20,16 +18,52 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Combobox from "@/components/combobox/Combobox";
+import { useQuery } from "@tanstack/react-query";
+import { paths } from "@/types/api";
+import { axiosClient } from "@/queries/axiosClient";
+import axios from "axios";
+
+type FormData = {
+  regions: Data<
+    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+  craftingSkills: Data<
+    paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+};
 
 const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
-  const {
-    isLoading,
-    isSuccess,
-    error,
-    data: regionData,
-  } = useGetRecords<{ data: components["schemas"]["RegionEntity"][] }>({
-    queryKeyName: "all-regions",
-    url: `${import.meta.env.VITE_API_URL}/regions`,
+  const { isLoading, isSuccess, error, data } = useQuery<FormData>({
+    queryKey: ["all-regions", "all-crafting-skills"],
+    queryFn: async (): Promise<FormData> => {
+      try {
+        const regionsResponse = await axiosClient.get<
+          Data<
+            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/regions");
+        const foundRegions = regionsResponse.data;
+
+        const craftingSkillsResponse = await axiosClient.get<
+          Data<
+            paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/skills/crafting");
+        const foundCraftingSkills = craftingSkillsResponse.data;
+
+        return { regions: foundRegions, craftingSkills: foundCraftingSkills };
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(error.message);
+        } else {
+          console.error(error);
+          throw new Error(
+            "An unexpected error occurred while fetching data for form."
+          );
+        }
+      }
+    },
   });
 
   if (isLoading) return "Loading...";
@@ -44,7 +78,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
     );
   }
 
-  const { data: regions } = regionData;
+  const { regions, craftingSkills } = data;
 
   return (
     <>
@@ -70,7 +104,11 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
             <FormLabel>Region Id</FormLabel>
             <FormControl>
               <Select
-                onValueChange={field.onChange}
+                onValueChange={(value) => {
+                  form.setValue("regionId", Number(value), {
+                    shouldValidate: true,
+                  });
+                }}
                 defaultValue={
                   typeof field.value === "string" ? field.value : ""
                 }
@@ -80,7 +118,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {regions.map((region) => (
+                    {regions.data.map((region) => (
                       <SelectItem value={region.id.toString()} key={region.id}>
                         {region.name}
                       </SelectItem>
@@ -95,6 +133,13 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
             <FormMessage />
           </FormItem>
         )}
+      />
+      <Combobox
+        form={form}
+        data={craftingSkills.data}
+        description="Select crafting skill ids for skills with crafting spots in this room."
+        fieldName="craftingSkillIds"
+        label="Crafting Skill"
       />
     </>
   );
