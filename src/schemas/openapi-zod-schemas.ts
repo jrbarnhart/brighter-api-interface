@@ -4,9 +4,11 @@ const SignInDto = z
   .object({ username: z.string(), password: z.string() })
   .passthrough();
 const JwtEntity = z.object({ access_token: z.string() }).passthrough();
-const CreateRegionDto = z.object({ name: z.string().max(256) }).passthrough();
+const CreateRegionDto = z
+  .object({ name: z.string().min(1).max(256) })
+  .passthrough();
 const RegionBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().max(256) })
+  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
   .passthrough();
 const RoomBaseEntity = z
   .object({
@@ -31,7 +33,7 @@ const RoomBaseEntity = z
       ])
     ),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
@@ -40,28 +42,28 @@ const RoomBaseEntity = z
 const CombatSkillBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
   })
   .passthrough();
 const GatheringSkillBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
   })
   .passthrough();
 const CraftingSkillBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
   })
   .passthrough();
 const RegionEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     rooms: z.array(RoomBaseEntity),
     combatSkills: z.array(CombatSkillBaseEntity),
     gatheringSkills: z.array(GatheringSkillBaseEntity),
@@ -69,7 +71,7 @@ const RegionEntity = z
   })
   .passthrough();
 const UpdateRegionDto = z
-  .object({ name: z.string().max(256) })
+  .object({ name: z.string().min(1).max(256) })
   .partial()
   .passthrough();
 const CreateRoomDto = z
@@ -96,7 +98,7 @@ const CreateRoomDto = z
         ])
       )
       .optional(),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
@@ -137,18 +139,18 @@ const MonsterBaseEntity = z
       "NONE",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
   .passthrough();
 const NpcBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().max(256) })
+  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
   .passthrough();
 const ResourceBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
@@ -186,7 +188,7 @@ const RoomEntity = z
       ])
     ),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     region: RegionBaseEntity,
     regionId: z.number().gte(1),
     portal: z.boolean(),
@@ -220,7 +222,7 @@ const UpdateRoomDto = z
         "TIMBER",
       ])
     ),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
@@ -251,7 +253,7 @@ const GatheringSkillRequirementBaseEntity = z
 const GatheringSkillEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     region: RegionBaseEntity,
     regionId: z.number().gte(1),
     requirements: z.array(GatheringSkillRequirementBaseEntity),
@@ -261,7 +263,7 @@ const GatheringSkillEntity = z
 const ResourceVariantBaseWithResourceEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     resourceId: z.number().gte(1),
     resource: ResourceBaseEntity,
     requirementId: z.number().gte(1).nullable(),
@@ -287,10 +289,10 @@ const UpdateGatheringSkillRequirementDto = z
   .partial()
   .passthrough();
 const CreateGatheringSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .passthrough();
 const UpdateGatheringSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateCraftingSkillRequirementDto = z
@@ -312,7 +314,7 @@ const CraftingSkillRequirementBaseEntity = z
 const CraftingRecipeBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     requirementId: z.number().gte(1).nullable(),
   })
   .passthrough();
@@ -337,7 +339,7 @@ const UpdateCraftingSkillRequirementDto = z
   .passthrough();
 const CreateCraftingRecipeDto = z
   .object({
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     inputResourceVariantIds: z.array(z.number().gte(1)).optional(),
     inputItemIds: z.array(z.number().gte(1)).optional(),
     outputConsumableVariantId: z.number().gte(1).optional(),
@@ -355,19 +357,19 @@ const CraftingSkillRequirementBaseWithSkillEntity = z
   })
   .passthrough();
 const MiscItemBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().max(256) })
+  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
   .passthrough();
 const ConsumableBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1).optional(),
   })
   .passthrough();
 const ConsumableVariantBaseWithConsumableEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     consumableId: z.number().gte(1),
     consumable: ConsumableBaseEntity,
     recipeId: z.number().gte(1).nullable(),
@@ -386,7 +388,7 @@ const WeaponBaseEntity = z
       "NONE",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     isRanged: z.boolean(),
     isTwoHanded: z.boolean(),
   })
@@ -394,7 +396,7 @@ const WeaponBaseEntity = z
 const WeaponVariantBaseWithWeaponEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     weaponId: z.number().gte(1),
     weapon: WeaponBaseEntity,
     recipeId: z.number().gte(1).nullable(),
@@ -414,13 +416,13 @@ const ArmorBaseEntity = z
       "FEET",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
   })
   .passthrough();
 const ArmorVariantBaseWithArmorEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     armorId: z.number().gte(1),
     armor: ArmorBaseEntity,
     recipeId: z.number().gte(1).nullable(),
@@ -429,7 +431,7 @@ const ArmorVariantBaseWithArmorEntity = z
 const CraftingRecipeEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     requirement: CraftingSkillRequirementBaseWithSkillEntity.optional(),
     requirementId: z.number().gte(1).nullable(),
     inputResourceVariants: z.array(ResourceVariantBaseWithResourceEntity),
@@ -442,7 +444,7 @@ const CraftingRecipeEntity = z
   .passthrough();
 const UpdateCraftingRecipeDto = z
   .object({
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     inputResourceVariantIds: z.array(z.number().gte(1)),
     inputItemIds: z.array(z.number().gte(1)),
     outputConsumableVariantId: z.number().gte(1),
@@ -452,12 +454,12 @@ const UpdateCraftingRecipeDto = z
   .partial()
   .passthrough();
 const CreateCraftingSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .passthrough();
 const CraftingSkillEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     region: RegionBaseEntity,
     regionId: z.number().gte(1),
     requirements: z.array(CraftingSkillRequirementBaseEntity),
@@ -466,7 +468,7 @@ const CraftingSkillEntity = z
   })
   .passthrough();
 const UpdateCraftingSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateCombatSkillRequirementDto = z
@@ -488,7 +490,7 @@ const CombatSkillRequirementBaseEntity = z
 const MonsterVariantBaseWithMonsterEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     monsterId: z.number().gte(1),
     monster: MonsterBaseEntity,
     requirementId: z.number().gte(1).nullable(),
@@ -514,12 +516,12 @@ const UpdateCombatSkillRequirementDto = z
   .partial()
   .passthrough();
 const CreateCombatSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .passthrough();
 const CombatSkillEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     region: RegionBaseEntity,
     regionId: z.number().gte(1),
     requirements: z.array(CombatSkillRequirementBaseEntity),
@@ -527,16 +529,16 @@ const CombatSkillEntity = z
   })
   .passthrough();
 const UpdateCombatSkillDto = z
-  .object({ name: z.string().max(256), regionId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateResourceVariantDto = z
-  .object({ name: z.string().max(256), resourceId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), resourceId: z.number().gte(1) })
   .passthrough();
 const ResourceVariantBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     resourceId: z.number().gte(1),
     requirementId: z.number().gte(1).nullable(),
   })
@@ -544,7 +546,7 @@ const ResourceVariantBaseEntity = z
 const ResourceBaseWithSkillEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     skill: GatheringSkillBaseEntity,
     passive: z.boolean(),
@@ -563,7 +565,7 @@ const DropTableBaseEntity = z
 const ResourceVariantEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     resource: ResourceBaseWithSkillEntity,
     resourceId: z.number().gte(1),
     requirement: GatheringSkillRequirementBaseEntity.optional(),
@@ -574,12 +576,12 @@ const ResourceVariantEntity = z
   })
   .passthrough();
 const UpdateResourceVariantDto = z
-  .object({ name: z.string().max(256), resourceId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), resourceId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateResourceDto = z
   .object({
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
@@ -587,7 +589,7 @@ const CreateResourceDto = z
 const ResourceEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skill: GatheringSkillBaseEntity,
     skillId: z.number().gte(1),
     rooms: z.array(RoomBaseEntity),
@@ -597,19 +599,19 @@ const ResourceEntity = z
   .passthrough();
 const UpdateResourceDto = z
   .object({
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
   .partial()
   .passthrough();
 const CreateConsumableVariantDto = z
-  .object({ name: z.string().max(256), consumableId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), consumableId: z.number().gte(1) })
   .passthrough();
 const ConsumableVariantBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     consumableId: z.number().gte(1),
     recipeId: z.number().gte(1).nullable(),
   })
@@ -617,7 +619,7 @@ const ConsumableVariantBaseEntity = z
 const ConsumableBaseWithSkillEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1).optional(),
     skill: CraftingSkillBaseEntity.optional(),
   })
@@ -625,7 +627,7 @@ const ConsumableBaseWithSkillEntity = z
 const ConsumableVariantEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     consumable: ConsumableBaseWithSkillEntity,
     consumableId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
@@ -635,32 +637,35 @@ const ConsumableVariantEntity = z
   })
   .passthrough();
 const UpdateConsumableVariantDto = z
-  .object({ name: z.string().max(256), consumableId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), consumableId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateConsumableDto = z
-  .object({ name: z.string().max(256), skillId: z.number().gte(1).optional() })
+  .object({
+    name: z.string().min(1).max(256),
+    skillId: z.number().gte(1).optional(),
+  })
   .passthrough();
 const ConsumableEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skill: CraftingSkillBaseEntity.optional(),
     skillId: z.number().gte(1).optional(),
     variants: z.array(ConsumableVariantBaseEntity),
   })
   .passthrough();
 const UpdateConsumableDto = z
-  .object({ name: z.string().max(256), skillId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), skillId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateWeaponVariantDto = z
-  .object({ name: z.string().max(256), weaponId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), weaponId: z.number().gte(1) })
   .passthrough();
 const WeaponVariantBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     weaponId: z.number().gte(1),
     recipeId: z.number().gte(1).nullable(),
   })
@@ -668,7 +673,7 @@ const WeaponVariantBaseEntity = z
 const WeaponVariantEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     weapon: WeaponBaseEntity,
     weaponId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
@@ -678,7 +683,7 @@ const WeaponVariantEntity = z
   })
   .passthrough();
 const UpdateWeaponVariantDto = z
-  .object({ name: z.string().max(256), weaponId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), weaponId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateWeaponDto = z
@@ -693,7 +698,7 @@ const CreateWeaponDto = z
       "IMPACT",
       "NONE",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     isRanged: z.boolean(),
     isTwoHanded: z.boolean(),
   })
@@ -711,7 +716,7 @@ const WeaponEntity = z
       "NONE",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     isRanged: z.boolean(),
     isTwoHanded: z.boolean(),
     variants: z.array(WeaponVariantBaseEntity),
@@ -729,19 +734,19 @@ const UpdateWeaponDto = z
       "IMPACT",
       "NONE",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     isRanged: z.boolean(),
     isTwoHanded: z.boolean(),
   })
   .partial()
   .passthrough();
 const CreateArmorVariantDto = z
-  .object({ name: z.string().max(256), armorId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), armorId: z.number().gte(1) })
   .passthrough();
 const ArmorVariantBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     armorId: z.number().gte(1),
     recipeId: z.number().gte(1).nullable(),
   })
@@ -749,7 +754,7 @@ const ArmorVariantBaseEntity = z
 const ArmorVariantEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     armor: ArmorBaseEntity,
     armorId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
@@ -759,7 +764,7 @@ const ArmorVariantEntity = z
   })
   .passthrough();
 const UpdateArmorVariantDto = z
-  .object({ name: z.string().max(256), armorId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), armorId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateArmorDto = z
@@ -775,7 +780,7 @@ const CreateArmorDto = z
       "LEGS",
       "FEET",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
   })
   .passthrough();
 const ArmorEntity = z
@@ -792,7 +797,7 @@ const ArmorEntity = z
       "FEET",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     variants: z.array(ArmorVariantBaseEntity),
   })
   .passthrough();
@@ -809,22 +814,24 @@ const UpdateArmorDto = z
       "LEGS",
       "FEET",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
   })
   .partial()
   .passthrough();
-const CreateMiscItemDto = z.object({ name: z.string().max(256) }).passthrough();
+const CreateMiscItemDto = z
+  .object({ name: z.string().min(1).max(256) })
+  .passthrough();
 const MiscItemEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     vendors: z.array(VendorBaseEntity),
     inRecipes: z.array(CraftingRecipeBaseEntity),
     dropTables: z.array(DropTableBaseEntity),
   })
   .passthrough();
 const UpdateMiscItemDto = z
-  .object({ name: z.string().max(256) })
+  .object({ name: z.string().min(1).max(256) })
   .partial()
   .passthrough();
 const CreateDropTableDto = z
@@ -864,12 +871,12 @@ const UpdateDropTableDto = z
   .partial()
   .passthrough();
 const CreateMonsterVariantDto = z
-  .object({ name: z.string().max(256), monsterId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), monsterId: z.number().gte(1) })
   .passthrough();
 const MonsterVariantBaseEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     monsterId: z.number().gte(1),
     requirementId: z.number().gte(1).nullable(),
   })
@@ -904,7 +911,7 @@ const MonsterBaseWithSkillEntity = z
       "NONE",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     skill: CombatSkillBaseEntity,
     passive: z.boolean(),
@@ -913,7 +920,7 @@ const MonsterBaseWithSkillEntity = z
 const MonsterVariantEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     monster: MonsterBaseWithSkillEntity,
     monsterId: z.number().gte(1),
     requirement: CombatSkillRequirementBaseEntity.optional(),
@@ -922,7 +929,7 @@ const MonsterVariantEntity = z
   })
   .passthrough();
 const UpdateMonsterVariantDto = z
-  .object({ name: z.string().max(256), monsterId: z.number().gte(1) })
+  .object({ name: z.string().min(1).max(256), monsterId: z.number().gte(1) })
   .partial()
   .passthrough();
 const CreateMonsterDto = z
@@ -954,7 +961,7 @@ const CreateMonsterDto = z
       "IMPACT",
       "NONE",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
@@ -989,7 +996,7 @@ const MonsterEntity = z
       "NONE",
     ]),
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skill: CombatSkillBaseEntity,
     skillId: z.number().gte(1),
     rooms: z.array(RoomBaseEntity),
@@ -1026,7 +1033,7 @@ const UpdateMonsterDto = z
       "IMPACT",
       "NONE",
     ]),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     passive: z.boolean(),
   })
@@ -1065,18 +1072,20 @@ const UpdateVendorDto = z
   })
   .partial()
   .passthrough();
-const CreateNpcDto = z.object({ name: z.string().max(256) }).passthrough();
+const CreateNpcDto = z
+  .object({ name: z.string().min(1).max(256) })
+  .passthrough();
 const NpcEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     vendor: VendorBaseEntity.optional(),
     questSteps: z.array(QuestStepBaseEntity),
     rooms: z.array(RoomBaseEntity),
   })
   .passthrough();
 const UpdateNpcDto = z
-  .object({ name: z.string().max(256) })
+  .object({ name: z.string().min(1).max(256) })
   .partial()
   .passthrough();
 const CreateQuestStepDto = z
@@ -1089,7 +1098,7 @@ const CreateQuestStepDto = z
   })
   .passthrough();
 const QuestBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().max(256) })
+  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
   .passthrough();
 const QuestStepEntity = z
   .object({
@@ -1114,16 +1123,18 @@ const UpdateQuestStepDto = z
   })
   .partial()
   .passthrough();
-const CreateQuestDto = z.object({ name: z.string().max(256) }).passthrough();
+const CreateQuestDto = z
+  .object({ name: z.string().min(1).max(256) })
+  .passthrough();
 const QuestEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().max(256),
+    name: z.string().min(1).max(256),
     steps: z.array(QuestStepBaseEntity),
   })
   .passthrough();
 const UpdateQuestDto = z
-  .object({ name: z.string().max(256) })
+  .object({ name: z.string().min(1).max(256) })
   .partial()
   .passthrough();
 
