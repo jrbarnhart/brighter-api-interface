@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,
@@ -23,7 +23,7 @@ import { useCallback, useEffect, useState } from "react";
 
 type ComboboxData = { name: string; id: number }[];
 
-export default function Combobox({
+export default function Combobox<T extends FieldValues>({
   data,
   fieldName,
   label,
@@ -31,10 +31,10 @@ export default function Combobox({
   form,
 }: {
   data: ComboboxData;
-  fieldName: string;
+  fieldName: Path<T>;
   label: string;
   description: string;
-  form: UseFormReturn;
+  form: UseFormReturn<T>;
 }) {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
@@ -66,18 +66,9 @@ export default function Combobox({
       ? formValue.filter((val) => typeof val === "number")
       : [];
     if (!arraysAreEqual(selectedIds, filteredVals)) {
-      form.setValue(fieldName, selectedIds);
+      form.setValue(fieldName, selectedIds as PathValue<T, Path<T>>);
     }
   }, [fieldName, form, selectedIds]);
-
-  //   const selectedNames = useMemo(() => {
-  //     return selectedIds
-  //       .map((id) => {
-  //         const item = data.find((entry) => entry.id === id);
-  //         return item ? item.name : null;
-  //       })
-  //       .filter((name) => name !== null);
-  //   }, [data, selectedIds]);
 
   return (
     <FormField
