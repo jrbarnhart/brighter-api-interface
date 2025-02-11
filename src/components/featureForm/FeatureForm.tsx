@@ -1,28 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
-import { z, ZodSchema } from "zod";
 import { Form } from "../ui/form";
 import { Button } from "../ui/button";
 
-export default function FeatureForm<TSchema extends ZodSchema>({
+export default function FeatureForm<T extends FieldValues>({
+  children,
   form,
   method,
   url,
   queryKey,
   recordLabel,
-  renderContentsFn,
 }: {
-  form: UseFormReturn<z.infer<TSchema>>;
+  children: React.ReactNode;
+  form: UseFormReturn<T>;
   method: "POST" | "PATCH";
   url: string;
   queryKey: string;
   recordLabel: string;
-  renderContentsFn: ({
-    form,
-  }: {
-    form: UseFormReturn<z.infer<TSchema>>;
-  }) => React.ReactNode;
 }) {
   const navigate = useNavigate();
 
@@ -35,7 +30,7 @@ export default function FeatureForm<TSchema extends ZodSchema>({
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
   const mutation = useMutation({
-    mutationFn: async (bodyData: TSchema) => {
+    mutationFn: async (bodyData: T) => {
       const response = await fetch(`${url}${id ? `/${id}` : ""}`, {
         method,
         headers: {
@@ -70,7 +65,7 @@ export default function FeatureForm<TSchema extends ZodSchema>({
           })}
           className="space-y-8"
         >
-          {renderContentsFn({ form })}
+          {children}
           <div>
             {mutation.isPending ? (
               <p>
