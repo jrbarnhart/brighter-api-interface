@@ -102,11 +102,11 @@ export default function ComboboxIds<T extends FieldValues>({
                   className="h-9"
                 />
                 <CommandList>
-                  <CommandEmpty>No framework found.</CommandEmpty>
+                  <CommandEmpty>Not found.</CommandEmpty>
                   <CommandGroup>
                     {data.map((entry) => (
                       <CommandItem
-                        value={entry.id.toString()}
+                        value={`${entry.name} - ${entry.id.toString()}`}
                         key={entry.id}
                         onSelect={() => {
                           handleSelect(entry.id);
