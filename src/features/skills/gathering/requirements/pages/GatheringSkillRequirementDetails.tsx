@@ -7,8 +7,8 @@ export default function GatheringSkillRequirementDetails() {
     <FeatureDetails
       redirectPath="/skills/gathering/requirements"
       url={`${import.meta.env.VITE_API_URL}/skills/gathering/requirements`}
-      renderContentFn={GatheringSkillRequirementDetailsContent}
-      updateForm={<UpdateGatheringSkillRequirementForm />}
+      RenderContent={GatheringSkillRequirementDetailsContent}
+      UpdateForm={<UpdateGatheringSkillRequirementForm />}
       queryKeyName="gathering-skill-requirements"
       recordLabel="Gathering Skill Requirement"
       deleteNotes=""

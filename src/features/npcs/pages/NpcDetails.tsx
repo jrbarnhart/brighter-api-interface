@@ -7,8 +7,8 @@ export default function NpcDetails() {
     <FeatureDetails
       redirectPath="/npcs"
       url={`${import.meta.env.VITE_API_URL}/npcs`}
-      renderContentFn={NpcDetailsContent}
-      updateForm={<UpdateNpcForm />}
+      RenderContent={NpcDetailsContent}
+      UpdateForm={<UpdateNpcForm />}
       queryKeyName="npcs"
       recordLabel="Npc"
       deleteNotes=""

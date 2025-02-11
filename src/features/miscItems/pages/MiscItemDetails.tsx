@@ -7,8 +7,8 @@ export default function MiscItemDetails() {
     <FeatureDetails
       redirectPath="/items/misc"
       url={`${import.meta.env.VITE_API_URL}/items/misc`}
-      renderContentFn={MiscItemDetailsContent}
-      updateForm={<UpdateMiscItemForm />}
+      RenderContent={MiscItemDetailsContent}
+      UpdateForm={<UpdateMiscItemForm />}
       queryKeyName="misc-items"
       recordLabel="Misc Item"
       deleteNotes=""

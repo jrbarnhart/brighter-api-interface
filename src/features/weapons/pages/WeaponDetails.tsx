@@ -7,8 +7,8 @@ export default function WeaponDetails() {
     <FeatureDetails
       redirectPath="/items/weapons"
       url={`${import.meta.env.VITE_API_URL}/items/weapons`}
-      renderContentFn={WeaponDetailsContent}
-      updateForm={<UpdateWeaponForm />}
+      RenderContent={WeaponDetailsContent}
+      UpdateForm={<UpdateWeaponForm />}
       queryKeyName="weapons"
       recordLabel="Weapon"
       deleteNotes=""

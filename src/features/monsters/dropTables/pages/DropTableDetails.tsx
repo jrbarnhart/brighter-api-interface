@@ -7,8 +7,8 @@ export default function DropTableDetails() {
     <FeatureDetails
       redirectPath="/monsters/drop-tables"
       url={`${import.meta.env.VITE_API_URL}/monsters/drop-tables`}
-      renderContentFn={DropTableDetailsContent}
-      updateForm={<UpdateDropTableForm />}
+      RenderContent={DropTableDetailsContent}
+      UpdateForm={<UpdateDropTableForm />}
       queryKeyName="drop-tables"
       recordLabel="Drop Table"
       deleteNotes=""

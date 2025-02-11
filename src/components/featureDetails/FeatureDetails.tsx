@@ -12,19 +12,17 @@ type RequiredRecordProperties = {
   unlockLevel?: number | string;
 };
 
-// This will be used in the content function
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export default function FeatureDetails<T extends RequiredRecordProperties>({
-  renderContentFn,
-  updateForm,
+  RenderContent,
+  UpdateForm,
   redirectPath,
   url,
   queryKeyName,
   recordLabel,
   deleteNotes,
 }: {
-  renderContentFn: ({ record }: { record: T }) => React.ReactNode;
-  updateForm: React.ReactNode;
+  RenderContent: React.ComponentType<{ record: T }>;
+  UpdateForm: React.ComponentType<{ record: T }>;
   redirectPath: string;
   url: string;
   queryKeyName: string;
@@ -97,7 +95,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
           </Button>
         </div>
         {isUpdating ? (
-          updateForm
+          <UpdateForm record={foundRecord} />
         ) : isDeleting ? (
           <DeleteConfirmation
             deleteMutation={deleteMutation}
@@ -106,7 +104,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
             notes={deleteNotes ?? ""}
           />
         ) : (
-          renderContentFn({ record: foundRecord })
+          <RenderContent record={foundRecord} />
         )}
       </div>
     </ScrollArea>

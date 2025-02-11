@@ -7,8 +7,8 @@ export default function RecipeDetails() {
     <FeatureDetails
       redirectPath="/skills/crafting/recipes"
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/recipes`}
-      renderContentFn={RecipeDetailsContent}
-      updateForm={<UpdateRecipeForm />}
+      RenderContent={RecipeDetailsContent}
+      UpdateForm={<UpdateRecipeForm />}
       queryKeyName="recipes"
       recordLabel="Recipe"
       deleteNotes=""

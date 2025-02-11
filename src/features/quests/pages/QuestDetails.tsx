@@ -7,8 +7,8 @@ export default function QuestDetails() {
     <FeatureDetails
       redirectPath="/quests"
       url={`${import.meta.env.VITE_API_URL}/quests`}
-      renderContentFn={QuestDetailsContent}
-      updateForm={<UpdateQuestForm />}
+      RenderContent={QuestDetailsContent}
+      UpdateForm={<UpdateQuestForm />}
       queryKeyName="quests"
       recordLabel="Quest"
       deleteNotes=""

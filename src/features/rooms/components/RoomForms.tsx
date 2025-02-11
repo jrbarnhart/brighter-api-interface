@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import ComboboxIds from "@/components/combobox/ComboboxIds";
 import { useQuery } from "@tanstack/react-query";
-import { paths } from "@/types/api";
+import { components, paths } from "@/types/api";
 import { axiosClient } from "@/queries/axiosClient";
 import axios from "axios";
 import { Switch } from "@/components/ui/switch";
@@ -325,19 +325,23 @@ export function CreateRoomForm() {
   );
 }
 
-export function UpdateRoomForm() {
+export function UpdateRoomForm({
+  record,
+}: {
+  record: components["schemas"]["RoomEntity"];
+}) {
   const form = useForm<RoomFormFields>({
     resolver: zodResolver(schemas.UpdateRoomDtoSchema),
     defaultValues: {
-      name: "",
-      regionId: 0,
-      portal: false,
-      obelisk: false,
-      craftingSkillIds: [],
-      monsterIds: [],
-      npcIds: [],
-      resourceIds: [],
-      questStepIds: [],
+      name: record.name,
+      regionId: record.regionId,
+      portal: record.portal,
+      obelisk: record.obelisk,
+      craftingSkillIds: record.craftingSkills.map((skill) => skill.id),
+      monsterIds: record.monsters.map((monster) => monster.id),
+      npcIds: record.npcs.map((npc) => npc.id),
+      resourceIds: record.resources.map((resource) => resource.id),
+      questStepIds: record.questSteps.map((questStep) => questStep.id),
     },
   });
 

@@ -7,8 +7,8 @@ export default function ResourceVariantDetails() {
     <FeatureDetails
       redirectPath="/items/resources/variants"
       url={`${import.meta.env.VITE_API_URL}/items/resources/variants`}
-      renderContentFn={ResourceVariantDetailsContent}
-      updateForm={<UpdateResourceVariantForm />}
+      RenderContent={ResourceVariantDetailsContent}
+      UpdateForm={<UpdateResourceVariantForm />}
       queryKeyName="resource-variants"
       recordLabel="Resource Variant"
       deleteNotes=""

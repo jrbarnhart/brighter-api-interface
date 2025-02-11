@@ -7,8 +7,8 @@ export default function MonsterDetails() {
     <FeatureDetails
       redirectPath="/monsters"
       url={`${import.meta.env.VITE_API_URL}/monsters`}
-      renderContentFn={MonsterDetailsContent}
-      updateForm={<UpdateMonsterForm />}
+      RenderContent={MonsterDetailsContent}
+      UpdateForm={<UpdateMonsterForm />}
       queryKeyName="monsters"
       recordLabel="Monster"
       deleteNotes=""

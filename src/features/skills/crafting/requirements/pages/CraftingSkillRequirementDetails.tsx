@@ -7,8 +7,8 @@ export default function CraftingSkillRequirementDetails() {
     <FeatureDetails
       redirectPath="/skills/crafting/requirements"
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/requirements`}
-      renderContentFn={CraftingSkillRequirementDetailsContent}
-      updateForm={<UpdateCraftingSkillRequirementForm />}
+      RenderContent={CraftingSkillRequirementDetailsContent}
+      UpdateForm={<UpdateCraftingSkillRequirementForm />}
       queryKeyName="crafting-skill-requirements"
       recordLabel="Crafting Skill Requirement"
       deleteNotes=""

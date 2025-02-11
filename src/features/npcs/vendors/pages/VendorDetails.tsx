@@ -7,8 +7,8 @@ export default function VendorDetails() {
     <FeatureDetails
       redirectPath="/npcs/vendors"
       url={`${import.meta.env.VITE_API_URL}/npcs/vendors`}
-      renderContentFn={VendorDetailsContent}
-      updateForm={<UpdateVendorForm />}
+      RenderContent={VendorDetailsContent}
+      UpdateForm={<UpdateVendorForm />}
       queryKeyName="vendors"
       recordLabel="Vendor"
       deleteNotes=""

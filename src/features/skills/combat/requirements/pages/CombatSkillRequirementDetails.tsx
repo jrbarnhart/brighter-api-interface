@@ -7,8 +7,8 @@ export default function CombatSkillRequirementDetails() {
     <FeatureDetails
       redirectPath="/skills/combat/requirements"
       url={`${import.meta.env.VITE_API_URL}/skills/combat/requirements`}
-      renderContentFn={CombatSkillRequirementDetailsContent}
-      updateForm={<UpdateCombatSkillRequirementForm />}
+      RenderContent={CombatSkillRequirementDetailsContent}
+      UpdateForm={<UpdateCombatSkillRequirementForm />}
       queryKeyName="combat-skill-requirements"
       recordLabel="Combat Skill Requirement"
       deleteNotes=""

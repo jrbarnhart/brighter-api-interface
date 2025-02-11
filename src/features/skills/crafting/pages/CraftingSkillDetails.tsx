@@ -7,8 +7,8 @@ export default function CraftingSkillDetails() {
     <FeatureDetails
       redirectPath="/skills/crafting"
       url={`${import.meta.env.VITE_API_URL}/skills/crafting`}
-      renderContentFn={CraftingSkillDetailsContent}
-      updateForm={<UpdateCraftingSkillForm />}
+      RenderContent={CraftingSkillDetailsContent}
+      UpdateForm={<UpdateCraftingSkillForm />}
       queryKeyName="crafting-skills"
       recordLabel="Crafting Skill"
       deleteNotes="Crafting skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."

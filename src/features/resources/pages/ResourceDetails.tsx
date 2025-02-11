@@ -7,8 +7,8 @@ export default function ResourceDetails() {
     <FeatureDetails
       redirectPath="/items/resources"
       url={`${import.meta.env.VITE_API_URL}/items/resources`}
-      renderContentFn={ResourceDetailsContent}
-      updateForm={<UpdateResourceForm />}
+      RenderContent={ResourceDetailsContent}
+      UpdateForm={<UpdateResourceForm />}
       queryKeyName="resources"
       recordLabel="Resource"
       deleteNotes=""

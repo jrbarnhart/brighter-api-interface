@@ -7,8 +7,8 @@ export default function ConsumableDetails() {
     <FeatureDetails
       redirectPath="/items/consumables"
       url={`${import.meta.env.VITE_API_URL}/items/consumables`}
-      renderContentFn={ConsumableDetailsContent}
-      updateForm={<UpdateConsumableForm />}
+      RenderContent={ConsumableDetailsContent}
+      UpdateForm={<UpdateConsumableForm />}
       queryKeyName="consumables"
       recordLabel="Consumable"
       deleteNotes=""
