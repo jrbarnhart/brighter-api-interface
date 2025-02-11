@@ -153,7 +153,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           <FormItem>
             <FormLabel>Name</FormLabel>
             <FormControl>
-              <Input placeholder="Region Id" {...field} />
+              <Input placeholder="Room Name" {...field} />
             </FormControl>
             <FormDescription>The name of the room.</FormDescription>
             <FormMessage />
