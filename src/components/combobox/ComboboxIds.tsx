@@ -115,7 +115,9 @@ export default function ComboboxIds<T extends FieldValues>({
                           entry.name
                             ? entry.name
                             : entry.index
-                            ? entry.index.toString()
+                            ? `${
+                                entry.quest?.name || "No Name"
+                              } # ${entry.index.toString()}`
                             : "Id: "
                         } - ${entry.id.toString()}`}
                         key={entry.id}
