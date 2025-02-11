@@ -23,7 +23,7 @@ import { useCallback, useEffect, useState } from "react";
 
 type ComboboxData = { name: string; id: number }[];
 
-export default function Combobox<T extends FieldValues>({
+export default function ComboboxIds<T extends FieldValues>({
   data,
   fieldName,
   label,

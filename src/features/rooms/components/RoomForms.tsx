@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Combobox from "@/components/combobox/Combobox";
+import ComboboxIds from "@/components/combobox/ComboboxIds";
 import { useQuery } from "@tanstack/react-query";
 import { paths } from "@/types/api";
 import { axiosClient } from "@/queries/axiosClient";
@@ -162,7 +162,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           </FormItem>
         )}
       />
-      <Combobox
+      <ComboboxIds
         form={form}
         data={craftingSkills.data}
         description="Select crafting skill ids for skills with crafting spots in this room."
