@@ -1,38 +1,32 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { z, ZodSchema } from "zod";
 import { Form } from "../ui/form";
 import { Button } from "../ui/button";
 
 export default function FeatureForm<TSchema extends ZodSchema>({
-  schema,
+  form,
   method,
   url,
   queryKey,
-  defaultValues,
   recordLabel,
   renderContentsFn,
 }: {
-  schema: ZodSchema;
+  form: UseFormReturn<z.infer<TSchema>>;
   method: "POST" | "PATCH";
   url: string;
   queryKey: string;
-  defaultValues: z.infer<TSchema>;
   recordLabel: string;
-  renderContentsFn: ({ form }: { form: UseFormReturn }) => React.ReactNode;
+  renderContentsFn: ({
+    form,
+  }: {
+    form: UseFormReturn<z.infer<TSchema>>;
+  }) => React.ReactNode;
 }) {
-  type FormData = z.infer<TSchema>;
-
   const navigate = useNavigate();
 
   const { id } = useParams();
-
-  const form = useForm<FormData>({
-    resolver: zodResolver(schema),
-    defaultValues,
-  });
 
   const queryClient = useQueryClient();
 
