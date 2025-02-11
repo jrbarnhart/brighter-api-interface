@@ -35,7 +35,7 @@ type RoomsFormData = {
   >;
 };
 
-type RoomsFormFields = {
+type RoomFormFields = {
   name: string;
   regionId: number;
   portal: boolean;
@@ -47,11 +47,7 @@ type RoomsFormFields = {
   questStepIds: number[];
 };
 
-const RoomFormContent = ({
-  form,
-}: {
-  form: UseFormReturn<RoomsFormFields>;
-}) => {
+const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
   const { isLoading, isSuccess, error, data } = useQuery<RoomsFormData>({
     queryKey: ["all-regions", "all-crafting-skills"],
     queryFn: async (): Promise<RoomsFormData> => {
@@ -178,7 +174,7 @@ const RoomFormContent = ({
 };
 
 export function CreateRoomForm() {
-  const form = useForm<RoomsFormFields>({
+  const form = useForm<RoomFormFields>({
     resolver: zodResolver(schemas.CreateRoomDtoSchema),
     defaultValues: {
       name: "",
@@ -194,7 +190,7 @@ export function CreateRoomForm() {
   });
 
   return (
-    <FeatureForm<RoomsFormFields>
+    <FeatureForm<RoomFormFields>
       form={form}
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/rooms`}
@@ -207,7 +203,7 @@ export function CreateRoomForm() {
 }
 
 export function UpdateRoomForm() {
-  const form = useForm<RoomsFormFields>({
+  const form = useForm<RoomFormFields>({
     resolver: zodResolver(schemas.UpdateRoomDtoSchema),
     defaultValues: {
       name: "",
@@ -223,7 +219,7 @@ export function UpdateRoomForm() {
   });
 
   return (
-    <FeatureForm<RoomsFormFields>
+    <FeatureForm<RoomFormFields>
       form={form}
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/rooms`}
