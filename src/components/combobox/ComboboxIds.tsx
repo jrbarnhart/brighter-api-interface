@@ -21,7 +21,12 @@ import {
 } from "../ui/command";
 import { useCallback, useEffect, useState } from "react";
 
-type ComboboxData = { name: string; id: number }[];
+type ComboboxData = {
+  name?: string;
+  index?: number;
+  quest?: { name: string };
+  id: number;
+}[];
 
 export default function ComboboxIds<T extends FieldValues>({
   data,
@@ -106,13 +111,27 @@ export default function ComboboxIds<T extends FieldValues>({
                   <CommandGroup>
                     {data.map((entry) => (
                       <CommandItem
-                        value={`${entry.name} - ${entry.id.toString()}`}
+                        value={`${
+                          entry.name
+                            ? entry.name
+                            : entry.index
+                            ? entry.index.toString()
+                            : "Id: "
+                        } - ${entry.id.toString()}`}
                         key={entry.id}
                         onSelect={() => {
                           handleSelect(entry.id);
                         }}
                       >
-                        {`${entry.name} - ${entry.id.toString()}`}
+                        {`${
+                          entry.name
+                            ? entry.name
+                            : entry.index
+                            ? `${
+                                entry.quest?.name || "No Name"
+                              } # ${entry.index.toString()}`
+                            : "Id: "
+                        } - ${entry.id.toString()}`}
                         <Check
                           className={cn(
                             "ml-auto",
