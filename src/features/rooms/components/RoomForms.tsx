@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import {
   FormControl,
   FormDescription,
@@ -23,8 +23,10 @@ import { useQuery } from "@tanstack/react-query";
 import { paths } from "@/types/api";
 import { axiosClient } from "@/queries/axiosClient";
 import axios from "axios";
+import { Switch } from "@/components/ui/switch";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type FormData = {
+type RoomsFormData = {
   regions: Data<
     paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
   >;
@@ -33,10 +35,26 @@ type FormData = {
   >;
 };
 
-const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
-  const { isLoading, isSuccess, error, data } = useQuery<FormData>({
+type RoomsFormFields = {
+  name: string;
+  regionId: number;
+  portal: boolean;
+  obelisk: boolean;
+  craftingSkillIds: number[];
+  monsterIds: number[];
+  npcIds: number[];
+  resourceIds: number[];
+  questStepIds: number[];
+};
+
+const RoomFormContent = ({
+  form,
+}: {
+  form: UseFormReturn<RoomsFormFields>;
+}) => {
+  const { isLoading, isSuccess, error, data } = useQuery<RoomsFormData>({
     queryKey: ["all-regions", "all-crafting-skills"],
-    queryFn: async (): Promise<FormData> => {
+    queryFn: async (): Promise<RoomsFormData> => {
       try {
         const regionsResponse = await axiosClient.get<
           Data<
@@ -134,6 +152,20 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
           </FormItem>
         )}
       />
+      <FormField
+        control={form.control}
+        name="portal"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Is Portal Room:</FormLabel>
+            <FormControl>
+              <Switch checked={field.value} onCheckedChange={field.onChange} />
+            </FormControl>
+            <FormDescription>The name of the room.</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       <Combobox
         form={form}
         data={craftingSkills.data}
@@ -146,49 +178,59 @@ const RoomFormContent = ({ form }: { form: UseFormReturn }) => {
 };
 
 export function CreateRoomForm() {
+  const form = useForm<RoomsFormFields>({
+    resolver: zodResolver(schemas.CreateRoomDtoSchema),
+    defaultValues: {
+      name: "",
+      regionId: 0,
+      portal: false,
+      obelisk: false,
+      craftingSkillIds: [],
+      monsterIds: [],
+      npcIds: [],
+      resourceIds: [],
+      questStepIds: [],
+    },
+  });
+
   return (
-    <FeatureForm<typeof schemas.CreateRoomDtoSchema>
+    <FeatureForm<RoomsFormFields>
+      form={form}
       method="POST"
-      schema={schemas.CreateRoomDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/rooms`}
-      defaultValues={{
-        name: "",
-        regionId: 0,
-        portal: false,
-        obelisk: false,
-        craftingSkillIds: [],
-        monsterIds: [],
-        npcIds: [],
-        resourceIds: [],
-        questStepIds: [],
-      }}
       queryKey="all-rooms"
       recordLabel="Room"
-      renderContentsFn={RoomFormContent}
-    />
+    >
+      <RoomFormContent form={form} />
+    </FeatureForm>
   );
 }
 
 export function UpdateRoomForm() {
+  const form = useForm<RoomsFormFields>({
+    resolver: zodResolver(schemas.UpdateRoomDtoSchema),
+    defaultValues: {
+      name: "",
+      regionId: 0,
+      portal: false,
+      obelisk: false,
+      craftingSkillIds: [],
+      monsterIds: [],
+      npcIds: [],
+      resourceIds: [],
+      questStepIds: [],
+    },
+  });
+
   return (
-    <FeatureForm<typeof schemas.UpdateRoomDtoSchema>
+    <FeatureForm<RoomsFormFields>
+      form={form}
       method="PATCH"
-      schema={schemas.UpdateRoomDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/rooms`}
-      defaultValues={{
-        name: "",
-        regionId: 0,
-        portal: false,
-        obelisk: false,
-        craftingSkillIds: [],
-        monsterIds: [],
-        npcIds: [],
-        resourceIds: [],
-        questStepIds: [],
-      }}
       queryKey="all-rooms"
       recordLabel="Room"
-      renderContentsFn={RoomFormContent}
-    />
+    >
+      <RoomFormContent form={form} />
+    </FeatureForm>
   );
 }
