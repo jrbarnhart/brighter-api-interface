@@ -26,6 +26,7 @@ import axios from "axios";
 import { Switch } from "@/components/ui/switch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ComboboxEnum from "@/components/combobox/ComboboxEnum";
+import { useEffect } from "react";
 
 type RoomsFormData = {
   regions: Data<
@@ -136,6 +137,14 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
     },
   });
 
+  // Reset the form after data is fetched so defaults show up
+  useEffect(() => {
+    if (isSuccess) {
+      form.reset();
+    }
+  }, [form, isSuccess]);
+
+  // Render skeleton/error here
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
@@ -148,6 +157,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
     );
   }
 
+  // Render the form
   const { regions, craftingSkills, monsters, npcs, resources, questSteps } =
     data;
 

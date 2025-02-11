@@ -59,8 +59,23 @@ export default function ComboboxIds<T extends FieldValues>({
     const formValue: unknown = form.getValues(fieldName);
 
     if (Array.isArray(formValue)) {
-      const filteredVals = formValue.filter((val) => typeof val === "number");
-      setSelectedIds(filteredVals);
+      const filteredVals = formValue.filter((val): val is number | string => {
+        if (typeof val === "number") {
+          return true;
+        } else if (typeof val === "string") {
+          const parsed = parseInt(val);
+          return !isNaN(parsed);
+        }
+        return false;
+      });
+
+      const parsedVals = filteredVals.map((val) =>
+        typeof val === "string" ? parseInt(val) : val
+      );
+      console.log(fieldName, form);
+      console.log("Set", parsedVals);
+      console.log("FormVal", formValue);
+      setSelectedIds(parsedVals);
     }
   }, [fieldName, form]);
 
