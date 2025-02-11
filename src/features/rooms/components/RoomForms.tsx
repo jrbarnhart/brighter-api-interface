@@ -63,7 +63,14 @@ type RoomFormFields = {
 
 const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
   const { isLoading, isSuccess, error, data } = useQuery<RoomsFormData>({
-    queryKey: ["all-regions", "all-crafting-skills"],
+    queryKey: [
+      "all-regions",
+      "all-crafting-skills",
+      "all-monsters",
+      "all-npcs",
+      "all-resources",
+      "all-quest-steps",
+    ],
     queryFn: async (): Promise<RoomsFormData> => {
       try {
         const regionsResponse = await axiosClient.get<
