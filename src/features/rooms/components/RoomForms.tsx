@@ -98,7 +98,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           Data<
             paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
           >
-        >("/resources");
+        >("/items/resources");
         const resources = resourcesResponse.data;
 
         const questStepsResponse = await axiosClient.get<
@@ -141,7 +141,8 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
     );
   }
 
-  const { regions, craftingSkills } = data;
+  const { regions, craftingSkills, monsters, npcs, resources, questSteps } =
+    data;
 
   return (
     <>
@@ -252,9 +253,37 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       <ComboboxIds
         form={form}
         data={craftingSkills.data}
-        description="Select crafting skill ids for skills with crafting spots in this room."
+        description="Select ids for crafting skills with crafting spots in this room."
         fieldName="craftingSkillIds"
         label="Crafting Skill"
+      />
+      <ComboboxIds
+        form={form}
+        data={monsters.data}
+        description="Select ids for monsters in this room."
+        fieldName="monsterIds"
+        label="Monsters"
+      />
+      <ComboboxIds
+        form={form}
+        data={npcs.data}
+        description="Select ids for NPC's in this room."
+        fieldName="npcIds"
+        label="NPC's"
+      />
+      <ComboboxIds
+        form={form}
+        data={resources.data}
+        description="Select ids for resources in this room."
+        fieldName="resourceIds"
+        label="Resources"
+      />
+      <ComboboxIds
+        form={form}
+        data={questSteps.data}
+        description="Select ids for quest steps in this room."
+        fieldName="questStepIds"
+        label="Quest Steps"
       />
     </>
   );
