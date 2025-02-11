@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import {
   FormControl,
   FormDescription,
@@ -10,8 +10,17 @@ import {
 import { Input } from "@/components/ui/input";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import { schemas } from "../../../schemas/openapi-zod-schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-const RegionFormContent = ({ form }: { form: UseFormReturn }) => {
+type RegionFormFields = {
+  name: string;
+};
+
+const RegionFormContent = ({
+  form,
+}: {
+  form: UseFormReturn<RegionFormFields>;
+}) => {
   return (
     <FormField
       control={form.control}
@@ -31,29 +40,43 @@ const RegionFormContent = ({ form }: { form: UseFormReturn }) => {
 };
 
 export function CreateRegionForm() {
+  const form = useForm<RegionFormFields>({
+    resolver: zodResolver(schemas.CreateRegionDtoSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
+
   return (
-    <FeatureForm<typeof schemas.CreateRegionDtoSchema>
+    <FeatureForm<RegionFormFields>
+      form={form}
       method="POST"
-      schema={schemas.CreateRegionDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      defaultValues={{ name: "" }}
       queryKey="all-regions"
       recordLabel="Region"
-      renderContentsFn={RegionFormContent}
-    />
+    >
+      <RegionFormContent form={form} />
+    </FeatureForm>
   );
 }
 
 export function UpdateRegionForm() {
+  const form = useForm<RegionFormFields>({
+    resolver: zodResolver(schemas.UpdateRegionDtoSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
+
   return (
-    <FeatureForm<typeof schemas.UpdateRegionDtoSchema>
+    <FeatureForm<RegionFormFields>
+      form={form}
       method="PATCH"
-      schema={schemas.UpdateRegionDtoSchema}
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      defaultValues={{ name: "" }}
       queryKey="all-regions"
       recordLabel="Region"
-      renderContentsFn={RegionFormContent}
-    />
+    >
+      <RegionFormContent form={form} />
+    </FeatureForm>
   );
 }
