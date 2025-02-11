@@ -153,6 +153,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
 
   return (
     <>
+      {/* Room Name */}
       <FormField
         control={form.control}
         name="name"
@@ -167,6 +168,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           </FormItem>
         )}
       />
+      {/* Region Id */}
       <FormField
         control={form.control}
         name="regionId"
@@ -180,9 +182,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
                     shouldValidate: true,
                   });
                 }}
-                defaultValue={
-                  typeof field.value === "string" ? field.value : ""
-                }
+                defaultValue={field.value.toString()}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a region" />
@@ -205,6 +205,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           </FormItem>
         )}
       />
+      {/* Is Portal */}
       <FormField
         control={form.control}
         name="portal"
@@ -216,6 +217,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
                 <Switch
                   checked={field.value}
                   onCheckedChange={field.onChange}
+                  defaultChecked={field.value}
                 />
               </div>
             </FormControl>
@@ -226,6 +228,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           </FormItem>
         )}
       />
+      {/* Is Obelisk */}
       <FormField
         control={form.control}
         name="obelisk"
@@ -237,6 +240,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
                 <Switch
                   checked={field.value}
                   onCheckedChange={field.onChange}
+                  defaultChecked={field.value}
                 />
               </div>
             </FormControl>
@@ -247,6 +251,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
           </FormItem>
         )}
       />
+      {/* Banks */}
       <ComboboxEnum
         form={form}
         data={
@@ -257,6 +262,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         fieldName="banks"
         label="Banks"
       />
+      {/* Crafting Skills (Spots) */}
       <ComboboxIds
         form={form}
         data={craftingSkills.data}
@@ -264,6 +270,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         fieldName="craftingSkillIds"
         label="Crafting Skill"
       />
+      {/* Monsters */}
       <ComboboxIds
         form={form}
         data={monsters.data}
@@ -271,6 +278,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         fieldName="monsterIds"
         label="Monsters"
       />
+      {/* NPC's */}
       <ComboboxIds
         form={form}
         data={npcs.data}
@@ -278,6 +286,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         fieldName="npcIds"
         label="NPC's"
       />
+      {/* Resources */}
       <ComboboxIds
         form={form}
         data={resources.data}
@@ -285,6 +294,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         fieldName="resourceIds"
         label="Resources"
       />
+      {/* Quest Steps */}
       <ComboboxIds
         form={form}
         data={questSteps.data}
