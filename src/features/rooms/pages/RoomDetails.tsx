@@ -1,6 +1,6 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RoomDetailsContent from "../components/RoomDetailsContent";
-import UpdateRoomForm from "../components/UpdateRoomForm";
+import { UpdateRoomForm } from "../components/RoomForms";
 
 export default function RoomDetails() {
   return (
