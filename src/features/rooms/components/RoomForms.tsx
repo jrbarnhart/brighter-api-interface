@@ -25,6 +25,7 @@ import { axiosClient } from "@/queries/axiosClient";
 import axios from "axios";
 import { Switch } from "@/components/ui/switch";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ComboboxEnum from "@/components/combobox/ComboboxEnum";
 
 type RoomsFormData = {
   regions: Data<
@@ -33,6 +34,18 @@ type RoomsFormData = {
   craftingSkills: Data<
     paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
   >;
+  monsters: Data<
+    paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+  npcs: Data<
+    paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+  resources: Data<
+    paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+  questSteps: Data<
+    paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
 };
 
 type RoomFormFields = {
@@ -40,6 +53,7 @@ type RoomFormFields = {
   regionId: number;
   portal: boolean;
   obelisk: boolean;
+  banks: string[];
   craftingSkillIds: number[];
   monsterIds: number[];
   npcIds: number[];
@@ -57,16 +71,51 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
             paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
           >
         >("/regions");
-        const foundRegions = regionsResponse.data;
+        const regions = regionsResponse.data;
 
         const craftingSkillsResponse = await axiosClient.get<
           Data<
             paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
           >
         >("/skills/crafting");
-        const foundCraftingSkills = craftingSkillsResponse.data;
+        const craftingSkills = craftingSkillsResponse.data;
 
-        return { regions: foundRegions, craftingSkills: foundCraftingSkills };
+        const monstersResponse = await axiosClient.get<
+          Data<
+            paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/monsters");
+        const monsters = monstersResponse.data;
+
+        const npcsResponse = await axiosClient.get<
+          Data<
+            paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/npcs");
+        const npcs = npcsResponse.data;
+
+        const resourcesResponse = await axiosClient.get<
+          Data<
+            paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/resources");
+        const resources = resourcesResponse.data;
+
+        const questStepsResponse = await axiosClient.get<
+          Data<
+            paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/quests/steps");
+        const questSteps = questStepsResponse.data;
+
+        return {
+          regions,
+          craftingSkills,
+          monsters,
+          npcs,
+          resources,
+          questSteps,
+        };
       } catch (error) {
         if (axios.isAxiosError(error)) {
           throw new Error(error.message);
@@ -153,14 +202,52 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         name="portal"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Is Portal Room:</FormLabel>
+            <FormLabel>Portal Room:</FormLabel>
             <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
+              <div className="w-full">
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </div>
             </FormControl>
-            <FormDescription>The name of the room.</FormDescription>
+            <FormDescription>
+              Does this room have a portal in it?
+            </FormDescription>
             <FormMessage />
           </FormItem>
         )}
+      />
+      <FormField
+        control={form.control}
+        name="obelisk"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Obelisk Room:</FormLabel>
+            <FormControl>
+              <div className="w-full">
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </div>
+            </FormControl>
+            <FormDescription>
+              Does this room have an obelisk in it?
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <ComboboxEnum
+        form={form}
+        data={
+          schemas.CreateRoomDtoSchema.shape.banks._def.innerType._def.type
+            .options
+        }
+        description="Select bank types in this room."
+        fieldName="banks"
+        label="Banks"
       />
       <ComboboxIds
         form={form}
