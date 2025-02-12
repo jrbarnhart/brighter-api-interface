@@ -28,7 +28,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ComboboxEnum from "@/components/combobox/ComboboxEnum";
 import { useEffect } from "react";
 
-type RoomsFormData = {
+type RoomsFormFetchedData = {
   regions: Data<
     paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
   >;
@@ -68,7 +68,7 @@ type RoomFormFields = {
 };
 
 const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
-  const { isLoading, isSuccess, error, data } = useQuery<RoomsFormData>({
+  const { isLoading, isSuccess, error, data } = useQuery<RoomsFormFetchedData>({
     queryKey: [
       "all-regions",
       "all-crafting-skills",
@@ -77,7 +77,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       "all-resources",
       "all-quest-steps",
     ],
-    queryFn: async (): Promise<RoomsFormData> => {
+    queryFn: async (): Promise<RoomsFormFetchedData> => {
       try {
         const regionsResponse = await axiosClient.get<
           Data<
