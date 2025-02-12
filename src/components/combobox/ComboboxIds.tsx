@@ -52,7 +52,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
   form: UseFormReturn<T>;
 }) {
   const initialValuesRef = useRef<number[]>([]);
-  const removeFieldValues: number[] = useWatch({
+  const removeFieldWatch: number[] = useWatch({
     control: form.control,
     name: removeFieldName,
   });
@@ -64,33 +64,33 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
         // Remove the current value
         const newValues = currentValues.filter((currentId) => currentId !== id);
         form.setValue(fieldName, newValues as PathValue<T, K>);
-        if (removeFieldValues.includes(id)) {
+        if (removeFieldWatch.includes(id)) {
           // Remove the value from removeField value
-          const newRemoveValues = removeFieldValues.filter(
+          const newRemoveValues = removeFieldWatch.filter(
             (currentId) => currentId !== id
           );
           form.setValue(removeFieldName, newRemoveValues as PathValue<T, K>);
-        } else {
+        } else if (initialValuesRef.current.includes(id)) {
           // Add the value to removeField value
-          form.setValue(removeFieldName, [
-            id,
-            ...removeFieldValues,
-          ] as PathValue<T, K>);
+          form.setValue(removeFieldName, [id, ...removeFieldWatch] as PathValue<
+            T,
+            K
+          >);
         }
       } else {
         // Add the current value
         const newValues = [id, ...currentValues];
         form.setValue(fieldName, newValues as PathValue<T, K>);
-        if (removeFieldValues.includes(id)) {
+        if (removeFieldWatch.includes(id)) {
           // Remove value from removeField values
-          const newRemoveValues = removeFieldValues.filter(
+          const newRemoveValues = removeFieldWatch.filter(
             (currentId) => currentId !== id
           );
           form.setValue(removeFieldName, newRemoveValues as PathValue<T, K>);
         }
       }
     },
-    [fieldName, form, removeFieldName, removeFieldValues]
+    [fieldName, form, removeFieldName, removeFieldWatch]
   );
 
   // Sets the initial values ref once
@@ -111,7 +111,8 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
         }
         const fieldValue = field.value as number[];
         return (
-          <>
+          <div className="space-y-2">
+            <FormLabel>{label}</FormLabel>
             <Controller
               control={form.control}
               name={removeFieldName}
@@ -119,6 +120,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                 const removeFieldValue = removeField.value as number[];
                 return (
                   <FormItem>
+                    <FormLabel>Current Ids: </FormLabel>
                     {initialValuesRef.current.map((value) => {
                       return (
                         <Badge
@@ -129,7 +131,9 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                               : "default"
                           }
                         >
-                          {value}
+                          {removeFieldValue.includes(value)
+                            ? `${value.toString()} - Will be removed`
+                            : value}
                         </Badge>
                       );
                     })}
@@ -137,9 +141,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                 );
               }}
             />
-
             <FormItem className="flex flex-col">
-              <FormLabel>{label}</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -213,7 +215,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
               <FormDescription>{description}</FormDescription>
               <FormMessage />
             </FormItem>
-          </>
+          </div>
         );
       }}
     />
