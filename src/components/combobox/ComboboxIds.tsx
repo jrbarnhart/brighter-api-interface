@@ -15,6 +15,7 @@ import {
   Path,
   PathValue,
   UseFormReturn,
+  useWatch,
 } from "react-hook-form";
 import { Check, ChevronsUpDown } from "lucide-react";
 import {
@@ -50,26 +51,52 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
   description: string;
   form: UseFormReturn<T>;
 }) {
-  const initialValues = useRef<number[]>([]);
+  const initialValuesRef = useRef<number[]>([]);
+  const removeFieldValues: number[] = useWatch({
+    control: form.control,
+    name: removeFieldName,
+  });
 
   // Set this component's state based on passed id
   const handleSelect = useCallback(
     ({ id, currentValues }: { id: number; currentValues: number[] }) => {
       if (currentValues.includes(id)) {
+        // Remove the current value
         const newValues = currentValues.filter((currentId) => currentId !== id);
         form.setValue(fieldName, newValues as PathValue<T, K>);
+        if (removeFieldValues.includes(id)) {
+          // Remove the value from removeField value
+          const newRemoveValues = removeFieldValues.filter(
+            (currentId) => currentId !== id
+          );
+          form.setValue(removeFieldName, newRemoveValues as PathValue<T, K>);
+        } else {
+          // Add the value to removeField value
+          form.setValue(removeFieldName, [
+            id,
+            ...removeFieldValues,
+          ] as PathValue<T, K>);
+        }
       } else {
+        // Add the current value
         const newValues = [id, ...currentValues];
         form.setValue(fieldName, newValues as PathValue<T, K>);
+        if (removeFieldValues.includes(id)) {
+          // Remove value from removeField values
+          const newRemoveValues = removeFieldValues.filter(
+            (currentId) => currentId !== id
+          );
+          form.setValue(removeFieldName, newRemoveValues as PathValue<T, K>);
+        }
       }
     },
-    [fieldName, form]
+    [fieldName, form, removeFieldName, removeFieldValues]
   );
 
   // Sets the initial values ref once
   useEffect(() => {
-    if (initialValues.current.length === 0) {
-      initialValues.current = form.getValues(fieldName);
+    if (initialValuesRef.current.length === 0) {
+      initialValuesRef.current = form.getValues(fieldName);
     }
   }, [fieldName, form]);
 
@@ -92,7 +119,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                 const removeFieldValue = removeField.value as number[];
                 return (
                   <FormItem>
-                    {initialValues.current.map((value) => {
+                    {initialValuesRef.current.map((value) => {
                       return (
                         <Badge
                           key={value}
