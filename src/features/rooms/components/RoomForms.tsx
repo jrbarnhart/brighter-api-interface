@@ -60,6 +60,11 @@ type RoomFormFields = {
   npcIds: number[];
   resourceIds: number[];
   questStepIds: number[];
+  removeCraftingSkillIds: number[];
+  removeMonsterIds: number[];
+  removeNpcIds: number[];
+  removeResourceIds: number[];
+  removeQuestStepIds: number[];
 };
 
 const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
@@ -278,6 +283,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         data={craftingSkills.data}
         description="Select ids for crafting skills with crafting spots in this room."
         fieldName="craftingSkillIds"
+        removeFieldName="removeCraftingSkillIds"
         label="Crafting Skill"
       />
       {/* Monsters */}
@@ -286,6 +292,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         data={monsters.data}
         description="Select ids for monsters in this room."
         fieldName="monsterIds"
+        removeFieldName="removeMonsterIds"
         label="Monsters"
       />
       {/* NPC's */}
@@ -294,6 +301,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         data={npcs.data}
         description="Select ids for NPC's in this room."
         fieldName="npcIds"
+        removeFieldName="removeNpcIds"
         label="NPC's"
       />
       {/* Resources */}
@@ -302,6 +310,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         data={resources.data}
         description="Select ids for resources in this room."
         fieldName="resourceIds"
+        removeFieldName="removeResourceIds"
         label="Resources"
       />
       {/* Quest Steps */}
@@ -310,6 +319,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         data={questSteps.data}
         description="Select ids for quest steps in this room."
         fieldName="questStepIds"
+        removeFieldName="removeQuestStepIds"
         label="Quest Steps"
       />
     </>
@@ -324,6 +334,7 @@ export function CreateRoomForm() {
       regionId: 0,
       portal: false,
       obelisk: false,
+      banks: [],
       craftingSkillIds: [],
       monsterIds: [],
       npcIds: [],
@@ -357,11 +368,17 @@ export function UpdateRoomForm({
       regionId: record.regionId,
       portal: record.portal,
       obelisk: record.obelisk,
+      banks: record.banks,
       craftingSkillIds: record.craftingSkills.map((skill) => skill.id),
       monsterIds: record.monsters.map((monster) => monster.id),
       npcIds: record.npcs.map((npc) => npc.id),
       resourceIds: record.resources.map((resource) => resource.id),
       questStepIds: record.questSteps.map((questStep) => questStep.id),
+      removeCraftingSkillIds: [],
+      removeMonsterIds: [],
+      removeNpcIds: [],
+      removeResourceIds: [],
+      removeQuestStepIds: [],
     },
   });
 
