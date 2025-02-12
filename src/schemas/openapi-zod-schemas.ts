@@ -231,6 +231,11 @@ const UpdateRoomDto = z
     npcIds: z.array(z.number().gte(1)),
     resourceIds: z.array(z.number().gte(1)),
     questStepIds: z.array(z.number().gte(1)),
+    removeCraftingSkillIds: z.array(z.number().gte(1)),
+    removeMonsterIds: z.array(z.number().gte(1)),
+    removeNpcIds: z.array(z.number().gte(1)),
+    removeResourceIds: z.array(z.number().gte(1)),
+    removeQuestStepIds: z.array(z.number().gte(1)),
   })
   .partial()
   .passthrough();
