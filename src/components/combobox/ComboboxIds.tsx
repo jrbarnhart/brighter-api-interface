@@ -56,9 +56,13 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
     control: form.control,
     name: removeFieldName,
   });
+  const fieldWatch: number[] = useWatch({
+    control: form.control,
+    name: fieldName,
+  });
 
   // Set this component's state based on passed id
-  const handleSelect = useCallback(
+  const handleCommandSelect = useCallback(
     ({ id, currentValues }: { id: number; currentValues: number[] }) => {
       if (currentValues.includes(id)) {
         // Remove the current value
@@ -93,6 +97,34 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
     [fieldName, form, removeFieldName, removeFieldWatch]
   );
 
+  const handleBadgeClick = useCallback(
+    ({ id, currentValues }: { id: number; currentValues: number[] }) => {
+      if (currentValues.includes(id)) {
+        // Remove the value from the current removeField value
+        const newRemoveValues = currentValues.filter(
+          (currentId) => currentId !== id
+        );
+        form.setValue(removeFieldName, newRemoveValues as PathValue<T, K>);
+        if (initialValuesRef.current.includes(id) && !fieldWatch.includes(id)) {
+          // Add value back to the field value
+          form.setValue(fieldName, [id, ...fieldWatch] as PathValue<T, K>);
+        }
+      } else {
+        // Add the value to the current removeField value
+        form.setValue(removeFieldName, [id, ...currentValues] as PathValue<
+          T,
+          K
+        >);
+        if (fieldWatch.includes(id)) {
+          // Remove the value from field value
+          const newValues = fieldWatch.filter((currentId) => currentId !== id);
+          form.setValue(fieldName, newValues as PathValue<T, K>);
+        }
+      }
+    },
+    [fieldName, fieldWatch, form, removeFieldName]
+  );
+
   // Sets the initial values ref once
   useEffect(() => {
     if (initialValuesRef.current.length === 0) {
@@ -119,24 +151,41 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
               render={({ field: removeField }) => {
                 const removeFieldValue = removeField.value as number[];
                 return (
-                  <FormItem>
+                  <FormItem className="flex items-center space-x-2">
+                    {/* <p>
+                      debug: vals: {fieldValue.join(",")}, removeVals:{" "}
+                      {removeFieldValue.join(",")}
+                    </p> */}
                     <FormLabel>Current Ids: </FormLabel>
-                    {initialValuesRef.current.map((value) => {
-                      return (
-                        <Badge
-                          key={value}
-                          variant={
-                            removeFieldValue.includes(value)
-                              ? "destructive"
-                              : "default"
-                          }
-                        >
-                          {removeFieldValue.includes(value)
-                            ? `${value.toString()} - Will be removed`
-                            : value}
-                        </Badge>
-                      );
-                    })}
+
+                    <div
+                      className="flex items-center gap-2 pl-2"
+                      style={{ margin: 0 }}
+                    >
+                      {initialValuesRef.current.map((value) => {
+                        return (
+                          <Badge
+                            className="cursor-pointer px-3 py-1"
+                            key={value}
+                            onClick={() => {
+                              handleBadgeClick({
+                                id: value,
+                                currentValues: removeFieldValue,
+                              });
+                            }}
+                            variant={
+                              removeFieldValue.includes(value)
+                                ? "destructive"
+                                : "default"
+                            }
+                          >
+                            {removeFieldValue.includes(value)
+                              ? `${value.toString()} - Will be removed`
+                              : value}
+                          </Badge>
+                        );
+                      })}
+                    </div>
                   </FormItem>
                 );
               }}
@@ -182,7 +231,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                             } - ${entry.id.toString()}`}
                             key={entry.id}
                             onSelect={() => {
-                              handleSelect({
+                              handleCommandSelect({
                                 id: entry.id,
                                 currentValues: fieldValue,
                               });
