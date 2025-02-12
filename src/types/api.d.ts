@@ -1508,6 +1508,11 @@ export interface components {
             npcIds?: number[];
             resourceIds?: number[];
             questStepIds?: number[];
+            removeCraftingSkillIds?: number[];
+            removeMonsterIds?: number[];
+            removeNpcIds?: number[];
+            removeResourceIds?: number[];
+            removeQuestStepIds?: number[];
         };
         CreateGatheringSkillRequirementDto: {
             skillId: number;
@@ -2147,7 +2152,7 @@ export interface components {
             weaponVariantIds?: number[];
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
-            miscItemsIds?: number[];
+            miscItemIds?: number[];
         };
         VendorEntity: {
             id: number;
@@ -2165,7 +2170,7 @@ export interface components {
             weaponVariantIds?: number[];
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
-            miscItemsIds?: number[];
+            miscItemIds?: number[];
         };
         CreateNpcDto: {
             name: string;
