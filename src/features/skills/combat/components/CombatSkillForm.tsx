@@ -44,7 +44,7 @@ const CombatSkillFormContent = ({
 }) => {
   const { isLoading, isSuccess, error, data } =
     useQuery<CombatSkillFormFetchedData>({
-      queryKey: [queryKeys.combatSkills],
+      queryKey: [queryKeys.regions],
       queryFn: async (): Promise<CombatSkillFormFetchedData> => {
         try {
           const regionsResponse = await axiosClient.get<
