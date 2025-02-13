@@ -12,7 +12,7 @@ import RegionDetails from "@/features/regions/pages/RegionDetails";
 import RoomDetails from "@/features/rooms/pages/RoomDetails";
 import SkillsLayout from "@/features/skills/layouts/SkillsLayout";
 import CombatSkillLayout from "@/features/skills/combat/layouts/CombatSkillLayout";
-import { CombatSkillForm } from "@/features/skills/combat/components/CombatSkillForm";
+import { CreateCombatSkillForm } from "@/features/skills/combat/components/CombatSkillForm";
 import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex";
 import SkillsIndex from "@/features/skills/pages/SkillsIndex";
 import CombatSkillRequirementsLayout from "@/features/skills/combat/requirements/layouts/CombatSkillRequirementsLayout";
@@ -142,7 +142,7 @@ export default function MainRouter() {
           <Route path="skills/combat" element={<CombatSkillLayout />}>
             <Route index element={<CombatSkillsIndex />} />
             <Route path=":id" element={<CombatSkillDetails />} />
-            <Route path="create" element={<CombatSkillForm />} />
+            <Route path="create" element={<CreateCombatSkillForm />} />
           </Route>
           <Route
             path="skills/gathering/requirements"
