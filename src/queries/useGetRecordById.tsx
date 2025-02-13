@@ -10,7 +10,7 @@ export default function useGetRecordById<T>({
   queryKey: string;
 }) {
   return useQuery({
-    queryKey: [`${queryKey}-by-id`],
+    queryKey: [queryKey],
     queryFn: (): Promise<T> =>
       fetch(`${url}/${id.toString()}`, {
         headers: { "Content-type": "application/json" },

@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import CraftingSkillRequirementDetailsContent from "../components/CraftingSkillRequirementDetailsContent";
 import UpdateCraftingSkillRequirementForm from "../components/UpdateCraftingSkillRequirementForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function CraftingSkillRequirementDetails() {
   return (
@@ -8,8 +9,9 @@ export default function CraftingSkillRequirementDetails() {
       redirectPath="/skills/crafting/requirements"
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/requirements`}
       RenderContent={CraftingSkillRequirementDetailsContent}
-      UpdateForm={<UpdateCraftingSkillRequirementForm />}
-      queryKeyName="crafting-skill-requirements"
+      UpdateForm={UpdateCraftingSkillRequirementForm}
+      getByIdQueryKey={queryKeys.craftingSkillRequirements}
+      deleteQueryKey={queryKeys.craftingSkillRequirementById}
       recordLabel="Crafting Skill Requirement"
       deleteNotes=""
     />

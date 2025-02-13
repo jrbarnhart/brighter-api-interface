@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ConsumableVariantDetailsContent from "../components/ConsumableVariantDetailsContent";
 import UpdateConsumableVariantForm from "../components/UpdateConsumableVariantForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function ConsumableVariantDetails() {
   return (
@@ -8,8 +9,9 @@ export default function ConsumableVariantDetails() {
       redirectPath="/items/consumables/variants"
       url={`${import.meta.env.VITE_API_URL}/items/consumables/variants`}
       RenderContent={ConsumableVariantDetailsContent}
-      UpdateForm={<UpdateConsumableVariantForm />}
-      queryKeyName="consumable-variants"
+      UpdateForm={UpdateConsumableVariantForm}
+      getByIdQueryKey={queryKeys.consumableVariants}
+      deleteQueryKey={queryKeys.consumableVariantById}
       recordLabel="Consumable Variant"
       deleteNotes=""
     />

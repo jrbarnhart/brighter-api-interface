@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import WeaponVariantsIndexContent from "../components/WeaponVariantsIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function WeaponVariantsIndex() {
   const weaponVariantsUseQueryResult = useGetRecords<{
     data: paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "weapon-variants",
+    queryKey: queryKeys.weaponVariants,
     url: `${import.meta.env.VITE_API_URL}/items/weapons/variants`,
   });
 

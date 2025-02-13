@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ResourceVariantDetailsContent from "../components/ResourceVariantDetailsContent";
 import UpdateResourceVariantForm from "../components/UpdateResourceVariantForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function ResourceVariantDetails() {
   return (
@@ -8,8 +9,9 @@ export default function ResourceVariantDetails() {
       redirectPath="/items/resources/variants"
       url={`${import.meta.env.VITE_API_URL}/items/resources/variants`}
       RenderContent={ResourceVariantDetailsContent}
-      UpdateForm={<UpdateResourceVariantForm />}
-      queryKeyName="resource-variants"
+      UpdateForm={UpdateResourceVariantForm}
+      getByIdQueryKey={queryKeys.resourceVariants}
+      deleteQueryKey={queryKeys.resourceVariantById}
       recordLabel="Resource Variant"
       deleteNotes=""
     />

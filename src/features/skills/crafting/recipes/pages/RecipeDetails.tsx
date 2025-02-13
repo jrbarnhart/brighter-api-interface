@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RecipeDetailsContent from "../components/RecipeDetailsContent";
 import UpdateRecipeForm from "../components/UpdateRecipeForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function RecipeDetails() {
   return (
@@ -8,8 +9,9 @@ export default function RecipeDetails() {
       redirectPath="/skills/crafting/recipes"
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/recipes`}
       RenderContent={RecipeDetailsContent}
-      UpdateForm={<UpdateRecipeForm />}
-      queryKeyName="recipes"
+      UpdateForm={UpdateRecipeForm}
+      getByIdQueryKey={queryKeys.craftingRecipes}
+      deleteQueryKey={queryKeys.craftingRecipeById}
       recordLabel="Recipe"
       deleteNotes=""
     />

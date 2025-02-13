@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import QuestStepsIndexContent from "../components/QuestStepsIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function QuestStepsIndex() {
   const questStepsUseQueryResult = useGetRecords<{
     data: paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "quest-steps",
+    queryKey: queryKeys.questSteps,
     url: `${import.meta.env.VITE_API_URL}/quests/steps`,
   });
 

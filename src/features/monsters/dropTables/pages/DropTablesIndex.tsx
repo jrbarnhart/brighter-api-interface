@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import DropTablesIndexContent from "../components/DropTablesIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function DropTablesIndex() {
   const dropTableUseQueryResult = useGetRecords<{
     data: paths["/monsters/drop-tables"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "drop-tables",
+    queryKey: queryKeys.dropTables,
     url: `${import.meta.env.VITE_API_URL}/monsters/drop-tables`,
   });
 

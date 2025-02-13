@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import ResourcesIndexContent from "../components/ResourcesIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function ResourcesIndex() {
   const resourcesUseQueryResult = useGetRecords<{
     data: paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "resources",
+    queryKey: queryKeys.resources,
     url: `${import.meta.env.VITE_API_URL}/items/resources`,
   });
 

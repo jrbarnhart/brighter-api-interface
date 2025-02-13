@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import GatheringSkillDetailsContent from "../components/GatheringSkillDetailsContent";
 import UpdateGatheringSkillForm from "../components/UpdateGatheringSkillForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function GatheringSkillDetails() {
   return (
@@ -8,8 +9,9 @@ export default function GatheringSkillDetails() {
       redirectPath="/skills/gathering"
       url={`${import.meta.env.VITE_API_URL}/skills/gathering`}
       RenderContent={GatheringSkillDetailsContent}
-      UpdateForm={<UpdateGatheringSkillForm />}
-      queryKeyName="gathering-skills"
+      UpdateForm={UpdateGatheringSkillForm}
+      getByIdQueryKey={queryKeys.gatheringSkills}
+      deleteQueryKey={queryKeys.gatheringSkillById}
       recordLabel="Gathering Skill"
       deleteNotes="Gathering skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."
     />

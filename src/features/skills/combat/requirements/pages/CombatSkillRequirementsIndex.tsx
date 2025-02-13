@@ -4,12 +4,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import { paths } from "@/types/api";
 import { ComponentState } from "react";
 import CombatSkillRequirementsIndexContent from "../components/CombatSkillRequirementsIndexContent";
-
+import queryKeys from "@/lib/queryKeys";
 export default function CombatSkillRequirementsIndex() {
   const combatSkillsUseQueryResult = useGetRecords<{
     data: paths["/skills/combat/requirements"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "combat-skill-requirements",
+    queryKey: queryKeys.combatSkillRequirements,
     url: `${import.meta.env.VITE_API_URL}/skills/combat/requirements`,
   });
 

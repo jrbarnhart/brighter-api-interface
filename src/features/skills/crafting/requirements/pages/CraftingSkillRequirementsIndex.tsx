@@ -4,12 +4,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import { paths } from "@/types/api";
 import { ComponentState } from "react";
 import CraftingSkillRequirementsIndexContent from "../components/CraftingSkillRequirementsIndexContent";
-
+import queryKeys from "@/lib/queryKeys";
 export default function CraftingSkillRequirementsIndex() {
   const craftingSkillsUseQueryResult = useGetRecords<{
     data: paths["/skills/crafting/requirements"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "crafting-skill-requirements",
+    queryKey: queryKeys.craftingSkillRequirements,
     url: `${import.meta.env.VITE_API_URL}/skills/crafting/requirements`,
   });
 

@@ -2,12 +2,13 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import ArmorVariantsIndexContent from "../components/ArmorVariantsIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
+import queryKeys from "@/lib/queryKeys";
 
 export default function ArmorVariantsIndex() {
   const armorVariantsUseQueryResult = useGetRecords<{
     data: paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "armor-variants",
+    queryKey: queryKeys.armorVariants,
     url: `${import.meta.env.VITE_API_URL}/items/armors/variants`,
   });
 

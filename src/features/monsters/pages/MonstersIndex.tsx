@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import MonstersIndexContent from "../components/MonstersIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function MonstersIndex() {
   const monstersUseQueryResult = useGetRecords<{
     data: paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "monsters",
+    queryKey: queryKeys.monsters,
     url: `${import.meta.env.VITE_API_URL}/monsters`,
   });
 

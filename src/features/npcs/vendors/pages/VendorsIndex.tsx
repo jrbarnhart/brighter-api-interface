@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import VendorsIndexContent from "../components/VendorsIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function VendorsIndex() {
   const vendorsUseQueryResult = useGetRecords<{
     data: paths["/npcs/vendors"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "vendors",
+    queryKey: queryKeys.vendors,
     url: `${import.meta.env.VITE_API_URL}/npcs/vendors`,
   });
 

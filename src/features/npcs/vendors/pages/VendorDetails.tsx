@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import VendorDetailsContent from "../components/VendorDetailsContent";
 import UpdateVendorForm from "../components/UpdateVendorForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function VendorDetails() {
   return (
@@ -8,8 +9,9 @@ export default function VendorDetails() {
       redirectPath="/npcs/vendors"
       url={`${import.meta.env.VITE_API_URL}/npcs/vendors`}
       RenderContent={VendorDetailsContent}
-      UpdateForm={<UpdateVendorForm />}
-      queryKeyName="vendors"
+      UpdateForm={UpdateVendorForm}
+      getByIdQueryKey={queryKeys.vendors}
+      deleteQueryKey={queryKeys.vendorById}
       recordLabel="Vendor"
       deleteNotes=""
     />

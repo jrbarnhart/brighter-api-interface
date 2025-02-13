@@ -2,12 +2,12 @@ import useGetRecords from "@/queries/useGetAllRecords";
 import RecipesIndexContent from "../components/RecipesIndexContent";
 import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
-
+import queryKeys from "@/lib/queryKeys";
 export default function RecipesIndex() {
   const recipesUseQueryResult = useGetRecords<{
     data: paths["/skills/crafting/recipes"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "recipes",
+    queryKey: queryKeys.craftingRecipes,
     url: `${import.meta.env.VITE_API_URL}/skills/crafting/recipes`,
   });
 
