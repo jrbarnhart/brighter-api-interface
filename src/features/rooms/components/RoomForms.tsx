@@ -349,7 +349,7 @@ export function CreateRoomForm() {
       form={form}
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/rooms`}
-      queryKey="all-rooms"
+      queryKey={queryKeys.rooms}
       recordLabel="Room"
     >
       <RoomFormContent form={form} />
@@ -388,7 +388,7 @@ export function UpdateRoomForm({
       form={form}
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/rooms`}
-      queryKey="all-rooms"
+      queryKey={queryKeys.rooms}
       recordLabel="Room"
     >
       <RoomFormContent form={form} />

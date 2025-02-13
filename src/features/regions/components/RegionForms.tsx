@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import { schemas } from "../../../schemas/openapi-zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import queryKeys from "@/lib/queryKeys";
 
 type RegionFormFields = {
   name: string;
@@ -52,7 +53,7 @@ export function CreateRegionForm() {
       form={form}
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      queryKey="all-regions"
+      queryKey={queryKeys.regions}
       recordLabel="Region"
     >
       <RegionFormContent form={form} />
@@ -73,7 +74,7 @@ export function UpdateRegionForm() {
       form={form}
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      queryKey="all-regions"
+      queryKey={queryKeys.regions}
       recordLabel="Region"
     >
       <RegionFormContent form={form} />

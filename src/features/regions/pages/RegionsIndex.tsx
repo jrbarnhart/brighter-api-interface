@@ -7,7 +7,7 @@ export default function RegionsIndex() {
   const regionsUseQueryResult = useGetRecords<{
     data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "regions",
+    queryKey: "regions",
     url: `${import.meta.env.VITE_API_URL}/regions`,
   });
   return (

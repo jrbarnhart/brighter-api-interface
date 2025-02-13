@@ -2,6 +2,7 @@ import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RoomDetailsContent from "../components/RoomDetailsContent";
 import { UpdateRoomForm } from "../components/RoomForms";
 import { components } from "../../../types/api";
+import queryKeys from "@/lib/queryKeys";
 
 export default function RoomDetails() {
   return (
@@ -10,7 +11,8 @@ export default function RoomDetails() {
       url={`${import.meta.env.VITE_API_URL}/rooms`}
       RenderContent={RoomDetailsContent}
       UpdateForm={UpdateRoomForm}
-      queryKeyName="rooms"
+      getByIdQueryKey={queryKeys.rooms}
+      deleteQueryKey={queryKeys.roomById}
       recordLabel="Room"
       deleteNotes="Rooms with contents cannot be deleted. Delete the content records first."
     />
