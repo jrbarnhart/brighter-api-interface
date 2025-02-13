@@ -165,7 +165,7 @@ export function CreateCombatSkillForm() {
       form={form}
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/skills/combat`}
-      queryKey="all-combat-skills"
+      queryKey={queryKeys.combatSkills}
       recordLabel="Combat Skill"
     >
       <CombatSkillFormContent form={form} />
@@ -191,7 +191,7 @@ export function UpdateCombatSkillForm({
       form={form}
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/skills/combat`}
-      queryKey="all-combat-skills"
+      queryKey={queryKeys.combatSkills}
       recordLabel="Combat Skill"
     >
       <CombatSkillFormContent form={form} />

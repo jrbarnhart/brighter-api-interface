@@ -1,6 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import CombatSkillDetailsContent from "../components/CombatSkillDetailsContent";
 import { UpdateCombatSkillForm } from "../components/CombatSkillForm";
+import queryKeys from "@/lib/queryKeys";
 
 export default function CombatSkillDetails() {
   return (
@@ -9,7 +10,8 @@ export default function CombatSkillDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/combat`}
       RenderContent={CombatSkillDetailsContent}
       UpdateForm={UpdateCombatSkillForm}
-      queryKeyName="combat-skills"
+      getByIdQueryKey={queryKeys.combatSkills}
+      deleteQueryKey={queryKeys.combatSkillById}
       recordLabel="Combat Skill"
       deleteNotes="Combat skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."
     />
