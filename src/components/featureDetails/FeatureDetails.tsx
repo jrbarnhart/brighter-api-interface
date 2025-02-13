@@ -27,7 +27,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   redirectPath: string;
   url: string;
   getByIdQueryKey: string;
-  deleteQueryKey: string;
+  deleteQueryKey: (id: string) => string;
   recordLabel: string;
   deleteNotes?: string;
 }) {
@@ -47,7 +47,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   const deleteMutation = useDeleteRecord({
     redirectPath,
     url,
-    queryKey: deleteQueryKey,
+    queryKey: deleteQueryKey(id),
   });
 
   // Return skeletons and error elements
