@@ -10,7 +10,7 @@ export default function WeaponDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/weapons`}
       RenderContent={WeaponDetailsContent}
       UpdateForm={UpdateWeaponForm}
-      getByIdQueryKey={queryKeys.weapons}
+      getByIdQueryKey={queryKeys.weaponById}
       deleteQueryKey={queryKeys.weaponById}
       recordLabel="Weapon"
       deleteNotes=""

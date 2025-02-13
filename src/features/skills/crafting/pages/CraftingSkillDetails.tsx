@@ -10,7 +10,7 @@ export default function CraftingSkillDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/crafting`}
       RenderContent={CraftingSkillDetailsContent}
       UpdateForm={UpdateCraftingSkillForm}
-      getByIdQueryKey={queryKeys.craftingSkills}
+      getByIdQueryKey={queryKeys.craftingSkillById}
       deleteQueryKey={queryKeys.craftingSkillById}
       recordLabel="Crafting Skill"
       deleteNotes="Crafting skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."

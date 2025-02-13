@@ -10,7 +10,7 @@ export default function GatheringSkillDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/gathering`}
       RenderContent={GatheringSkillDetailsContent}
       UpdateForm={UpdateGatheringSkillForm}
-      getByIdQueryKey={queryKeys.gatheringSkills}
+      getByIdQueryKey={queryKeys.gatheringSkillById}
       deleteQueryKey={queryKeys.gatheringSkillById}
       recordLabel="Gathering Skill"
       deleteNotes="Gathering skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."

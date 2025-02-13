@@ -10,7 +10,7 @@ export default function CombatSkillDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/combat`}
       RenderContent={CombatSkillDetailsContent}
       UpdateForm={UpdateCombatSkillForm}
-      getByIdQueryKey={queryKeys.combatSkills}
+      getByIdQueryKey={queryKeys.combatSkillById}
       deleteQueryKey={queryKeys.combatSkillById}
       recordLabel="Combat Skill"
       deleteNotes="Combat skills with monsters or requirements cannot be deleted. Delete monsters and requirements first."

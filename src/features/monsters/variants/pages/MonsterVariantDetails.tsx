@@ -10,7 +10,7 @@ export default function MonsterVariantDetails() {
       url={`${import.meta.env.VITE_API_URL}/monsters/variants`}
       RenderContent={MonsterVariantDetailsContent}
       UpdateForm={UpdateMonsterVariantForm}
-      getByIdQueryKey={queryKeys.monsterVariants}
+      getByIdQueryKey={queryKeys.monsterVariantById}
       deleteQueryKey={queryKeys.monsterVariantById}
       recordLabel="Monster Variant"
       deleteNotes=""

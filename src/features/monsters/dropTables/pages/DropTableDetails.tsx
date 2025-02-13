@@ -10,7 +10,7 @@ export default function DropTableDetails() {
       url={`${import.meta.env.VITE_API_URL}/monsters/drop-tables`}
       RenderContent={DropTableDetailsContent}
       UpdateForm={UpdateDropTableForm}
-      getByIdQueryKey={queryKeys.dropTables}
+      getByIdQueryKey={queryKeys.dropTableById}
       deleteQueryKey={queryKeys.dropTableById}
       recordLabel="Drop Table"
       deleteNotes=""

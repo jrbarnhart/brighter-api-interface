@@ -10,7 +10,7 @@ export default function QuestDetails() {
       url={`${import.meta.env.VITE_API_URL}/quests`}
       RenderContent={QuestDetailsContent}
       UpdateForm={UpdateQuestForm}
-      getByIdQueryKey={queryKeys.quests}
+      getByIdQueryKey={queryKeys.questById}
       deleteQueryKey={queryKeys.questById}
       recordLabel="Quest"
       deleteNotes=""

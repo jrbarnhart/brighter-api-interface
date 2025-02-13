@@ -10,7 +10,7 @@ export default function CombatSkillRequirementDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/combat/requirements`}
       RenderContent={CombatSkillRequirementDetailsContent}
       UpdateForm={UpdateCombatSkillRequirementForm}
-      getByIdQueryKey={queryKeys.combatSkills}
+      getByIdQueryKey={queryKeys.combatSkillById}
       deleteQueryKey={queryKeys.combatSkillById}
       recordLabel="Combat Skill Requirement"
       deleteNotes=""

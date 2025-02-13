@@ -10,7 +10,7 @@ export default function WeaponVariantDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/weapons/variants`}
       RenderContent={WeaponVariantDetailsContent}
       UpdateForm={UpdateWeaponVariantForm}
-      getByIdQueryKey={queryKeys.weaponVariants}
+      getByIdQueryKey={queryKeys.weaponVariantById}
       deleteQueryKey={queryKeys.weaponVariantById}
       recordLabel="Weapon Variant"
       deleteNotes=""

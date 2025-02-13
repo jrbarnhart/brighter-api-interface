@@ -10,7 +10,7 @@ export default function ResourceVariantDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/resources/variants`}
       RenderContent={ResourceVariantDetailsContent}
       UpdateForm={UpdateResourceVariantForm}
-      getByIdQueryKey={queryKeys.resourceVariants}
+      getByIdQueryKey={queryKeys.resourceVariantById}
       deleteQueryKey={queryKeys.resourceVariantById}
       recordLabel="Resource Variant"
       deleteNotes=""

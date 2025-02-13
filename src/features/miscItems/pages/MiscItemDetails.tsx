@@ -10,7 +10,7 @@ export default function MiscItemDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/misc`}
       RenderContent={MiscItemDetailsContent}
       UpdateForm={UpdateMiscItemForm}
-      getByIdQueryKey={queryKeys.miscItems}
+      getByIdQueryKey={queryKeys.miscItemById}
       deleteQueryKey={queryKeys.miscItemById}
       recordLabel="Misc Item"
       deleteNotes=""

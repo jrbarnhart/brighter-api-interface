@@ -10,7 +10,7 @@ export default function ConsumableDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/consumables`}
       RenderContent={ConsumableDetailsContent}
       UpdateForm={UpdateConsumableForm}
-      getByIdQueryKey={queryKeys.consumables}
+      getByIdQueryKey={queryKeys.consumableById}
       deleteQueryKey={queryKeys.consumableById}
       recordLabel="Consumable"
       deleteNotes=""

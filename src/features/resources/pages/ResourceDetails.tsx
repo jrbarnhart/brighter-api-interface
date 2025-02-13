@@ -10,7 +10,7 @@ export default function ResourceDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/resources`}
       RenderContent={ResourceDetailsContent}
       UpdateForm={UpdateResourceForm}
-      getByIdQueryKey={queryKeys.resources}
+      getByIdQueryKey={queryKeys.resourceById}
       deleteQueryKey={queryKeys.resourceById}
       recordLabel="Resource"
       deleteNotes=""

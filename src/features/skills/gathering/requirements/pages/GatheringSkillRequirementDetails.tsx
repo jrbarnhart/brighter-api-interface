@@ -10,7 +10,7 @@ export default function GatheringSkillRequirementDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/gathering/requirements`}
       RenderContent={GatheringSkillRequirementDetailsContent}
       UpdateForm={UpdateGatheringSkillRequirementForm}
-      getByIdQueryKey={queryKeys.gatheringSkillRequirements}
+      getByIdQueryKey={queryKeys.gatheringSkillRequirementById}
       deleteQueryKey={queryKeys.gatheringSkillRequirementById}
       recordLabel="Gathering Skill Requirement"
       deleteNotes=""

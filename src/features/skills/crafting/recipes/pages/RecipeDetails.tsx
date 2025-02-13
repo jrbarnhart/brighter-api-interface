@@ -10,7 +10,7 @@ export default function RecipeDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/recipes`}
       RenderContent={RecipeDetailsContent}
       UpdateForm={UpdateRecipeForm}
-      getByIdQueryKey={queryKeys.craftingRecipes}
+      getByIdQueryKey={queryKeys.craftingRecipeById}
       deleteQueryKey={queryKeys.craftingRecipeById}
       recordLabel="Recipe"
       deleteNotes=""

@@ -10,7 +10,7 @@ export default function VendorDetails() {
       url={`${import.meta.env.VITE_API_URL}/npcs/vendors`}
       RenderContent={VendorDetailsContent}
       UpdateForm={UpdateVendorForm}
-      getByIdQueryKey={queryKeys.vendors}
+      getByIdQueryKey={queryKeys.vendorById}
       deleteQueryKey={queryKeys.vendorById}
       recordLabel="Vendor"
       deleteNotes=""

@@ -10,7 +10,7 @@ export default function NpcDetails() {
       url={`${import.meta.env.VITE_API_URL}/npcs`}
       RenderContent={NpcDetailsContent}
       UpdateForm={UpdateNpcForm}
-      getByIdQueryKey={queryKeys.npcs}
+      getByIdQueryKey={queryKeys.npcById}
       deleteQueryKey={queryKeys.npcById}
       recordLabel="Npc"
       deleteNotes=""

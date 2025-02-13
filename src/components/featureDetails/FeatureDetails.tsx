@@ -26,7 +26,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   UpdateForm: React.ComponentType<{ record: T }>;
   redirectPath: string;
   url: string;
-  getByIdQueryKey: string;
+  getByIdQueryKey: (id: string) => string;
   deleteQueryKey: (id: string) => string;
   recordLabel: string;
   deleteNotes?: string;
@@ -41,7 +41,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   // Must wrap with {data: } to match json. Probably a better way but eh this works.
   const { isLoading, isSuccess, error, data } = useGetRecordById<{
     data: T;
-  }>({ id, url, queryKey: getByIdQueryKey });
+  }>({ id, url, queryKey: getByIdQueryKey(id) });
 
   // Mutation for deleting this record
   const deleteMutation = useDeleteRecord({

@@ -10,7 +10,7 @@ export default function ArmorVariantDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/armors/variants`}
       RenderContent={ArmorVariantDetailsContent}
       UpdateForm={UpdateArmorVariantForm}
-      getByIdQueryKey={queryKeys.armorVariants}
+      getByIdQueryKey={queryKeys.armorVariantById}
       deleteQueryKey={queryKeys.armorVariantById}
       recordLabel="Armor Variant"
       deleteNotes=""

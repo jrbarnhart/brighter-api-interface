@@ -10,7 +10,7 @@ export default function MonsterDetails() {
       url={`${import.meta.env.VITE_API_URL}/monsters`}
       RenderContent={MonsterDetailsContent}
       UpdateForm={UpdateMonsterForm}
-      getByIdQueryKey={queryKeys.monsters}
+      getByIdQueryKey={queryKeys.monsterById}
       deleteQueryKey={queryKeys.monsterById}
       recordLabel="Monster"
       deleteNotes=""

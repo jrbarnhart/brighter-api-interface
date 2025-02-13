@@ -10,7 +10,7 @@ export default function ConsumableVariantDetails() {
       url={`${import.meta.env.VITE_API_URL}/items/consumables/variants`}
       RenderContent={ConsumableVariantDetailsContent}
       UpdateForm={UpdateConsumableVariantForm}
-      getByIdQueryKey={queryKeys.consumableVariants}
+      getByIdQueryKey={queryKeys.consumableVariantById}
       deleteQueryKey={queryKeys.consumableVariantById}
       recordLabel="Consumable Variant"
       deleteNotes=""

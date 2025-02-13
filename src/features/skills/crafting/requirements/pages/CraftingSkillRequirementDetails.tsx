@@ -10,7 +10,7 @@ export default function CraftingSkillRequirementDetails() {
       url={`${import.meta.env.VITE_API_URL}/skills/crafting/requirements`}
       RenderContent={CraftingSkillRequirementDetailsContent}
       UpdateForm={UpdateCraftingSkillRequirementForm}
-      getByIdQueryKey={queryKeys.craftingSkillRequirements}
+      getByIdQueryKey={queryKeys.craftingSkillRequirementById}
       deleteQueryKey={queryKeys.craftingSkillRequirementById}
       recordLabel="Crafting Skill Requirement"
       deleteNotes=""
