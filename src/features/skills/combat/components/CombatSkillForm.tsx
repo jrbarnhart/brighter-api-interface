@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
 import { schemas } from "@/schemas/openapi-zod-schemas";
 import { components, paths } from "@/types/api";
@@ -43,7 +44,7 @@ const CombatSkillFormContent = ({
 }) => {
   const { isLoading, isSuccess, error, data } =
     useQuery<CombatSkillFormFetchedData>({
-      queryKey: ["all-combat-skills"],
+      queryKey: [queryKeys.combatSkills],
       queryFn: async (): Promise<CombatSkillFormFetchedData> => {
         try {
           const regionsResponse = await axiosClient.get<
