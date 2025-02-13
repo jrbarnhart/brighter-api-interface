@@ -44,7 +44,7 @@ const CombatSkillFormContent = ({
 }) => {
   const { isLoading, isSuccess, error, data } =
     useQuery<CombatSkillFormFetchedData>({
-      queryKey: [queryKeys.regions],
+      queryKey: [queryKeys.combatSkillForm],
       queryFn: async (): Promise<CombatSkillFormFetchedData> => {
         try {
           const regionsResponse = await axiosClient.get<
@@ -52,11 +52,7 @@ const CombatSkillFormContent = ({
               paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
             >
           >("/regions");
-          const regions = regionsResponse.data;
-
-          return {
-            regions,
-          };
+          return { regions: regionsResponse.data };
         } catch (error) {
           if (axios.isAxiosError(error)) {
             throw new Error(error.message);
@@ -92,6 +88,7 @@ const CombatSkillFormContent = ({
 
   // Render the form
   const { regions } = data;
+  console.log(regions, data);
 
   return (
     <>
