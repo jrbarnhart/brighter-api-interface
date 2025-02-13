@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select";
 import { axiosClient } from "@/queries/axiosClient";
 import { schemas } from "@/schemas/openapi-zod-schemas";
-import { paths } from "@/types/api";
+import { components, paths } from "@/types/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -150,7 +150,7 @@ const CombatSkillFormContent = ({
   );
 };
 
-export function CombatSkillForm() {
+export function CreateCombatSkillForm() {
   const form = useForm<CombatSkillFormFields>({
     resolver: zodResolver(schemas.CreateCombatSkillDtoSchema),
     defaultValues: {
@@ -163,6 +163,32 @@ export function CombatSkillForm() {
     <FeatureForm<CombatSkillFormFields>
       form={form}
       method="POST"
+      url={`${import.meta.env.VITE_API_URL}/skills/combat`}
+      queryKey="all-combat-skills"
+      recordLabel="Combat Skill"
+    >
+      <CombatSkillFormContent form={form} />
+    </FeatureForm>
+  );
+}
+
+export function UpdateCombatSkillForm({
+  record,
+}: {
+  record: components["schemas"]["CombatSkillEntity"];
+}) {
+  const form = useForm<CombatSkillFormFields>({
+    resolver: zodResolver(schemas.UpdateCombatSkillDtoSchema),
+    defaultValues: {
+      name: record.name,
+      regionId: record.regionId,
+    },
+  });
+
+  return (
+    <FeatureForm<CombatSkillFormFields>
+      form={form}
+      method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/skills/combat`}
       queryKey="all-combat-skills"
       recordLabel="Combat Skill"
