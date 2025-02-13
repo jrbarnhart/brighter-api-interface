@@ -27,6 +27,7 @@ import { Switch } from "@/components/ui/switch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ComboboxEnum from "@/components/combobox/ComboboxEnum";
 import { useEffect } from "react";
+import queryKeys from "@/lib/queryKeys";
 
 type RoomFormFetchedData = {
   regions: Data<
@@ -70,12 +71,12 @@ type RoomFormFields = {
 const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
   const { isLoading, isSuccess, error, data } = useQuery<RoomFormFetchedData>({
     queryKey: [
-      "all-regions",
-      "all-crafting-skills",
-      "all-monsters",
-      "all-npcs",
-      "all-resources",
-      "all-quest-steps",
+      queryKeys.regions,
+      queryKeys.craftingSkills,
+      queryKeys.monsters,
+      queryKeys.npcs,
+      queryKeys.resources,
+      queryKeys.questSteps,
     ],
     queryFn: async (): Promise<RoomFormFetchedData> => {
       try {
