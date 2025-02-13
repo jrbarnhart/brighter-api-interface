@@ -7,7 +7,7 @@ export default function CombatSkillsIndex() {
   const combatSkillsUseQueryResult = useGetRecords<{
     data: paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"];
   }>({
-    queryKeyName: "combat-skills",
+    queryKeyName: "all-combat-skills",
     url: `${import.meta.env.VITE_API_URL}/skills/combat`,
   });
 
