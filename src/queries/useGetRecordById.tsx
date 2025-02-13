@@ -3,14 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 export default function useGetRecordById<T>({
   id,
   url,
-  queryKeyName,
+  queryKey,
 }: {
   id: number | string;
   url: string;
-  queryKeyName: string;
+  queryKey: string;
 }) {
   return useQuery({
-    queryKey: [`${queryKeyName}-by-id`],
+    queryKey: [`${queryKey}-by-id`],
     queryFn: (): Promise<T> =>
       fetch(`${url}/${id.toString()}`, {
         headers: { "Content-type": "application/json" },
