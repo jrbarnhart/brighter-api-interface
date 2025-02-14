@@ -13,7 +13,6 @@ import { schemas } from "@/schemas/openapi-zod-schemas";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -184,29 +183,27 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         render={({ field }) => (
           <FormItem>
             <FormLabel>Region Id</FormLabel>
-            <FormControl>
-              <Select
-                onValueChange={(value) => {
-                  form.setValue("regionId", Number(value), {
-                    shouldValidate: true,
-                  });
-                }}
-                defaultValue={field.value.toString()}
-              >
+            <Select
+              onValueChange={(value) => {
+                form.setValue("regionId", Number(value), {
+                  shouldValidate: true,
+                });
+              }}
+              defaultValue={field.value.toString()}
+            >
+              <FormControl>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a region" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {regions.data.map((region) => (
-                      <SelectItem value={region.id.toString()} key={region.id}>
-                        {region.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </FormControl>
+              </FormControl>
+              <SelectContent>
+                {regions.data.map((region) => (
+                  <SelectItem value={region.id.toString()} key={region.id}>
+                    {region.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <FormDescription>
               The id of the Region this room is in.
             </FormDescription>
