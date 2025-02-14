@@ -1,7 +1,8 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import CombatSkillRequirementDetailsContent from "../components/CombatSkillRequirementDetailsContent";
-import UpdateCombatSkillRequirementForm from "../components/UpdateCombatSkillRequirementForm";
+
 import queryKeys from "@/lib/queryKeys";
+import { UpdateCombatSkillRequirementForm } from "../components/CombatSkillRequirementForm";
 
 export default function CombatSkillRequirementDetails() {
   return (
