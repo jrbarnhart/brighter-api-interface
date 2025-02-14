@@ -244,7 +244,7 @@ const CreateGatheringSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400).optional(),
-    resourceVariantId: z.number().gte(1).optional(),
+    resourceVariantId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const GatheringSkillRequirementBaseEntity = z
@@ -252,6 +252,7 @@ const GatheringSkillRequirementBaseEntity = z
     id: z.number().gte(1),
     description: z.string().max(400).optional(),
     skillId: z.number().gte(1),
+    resourceVariantId: z.number().gte(1).nullable(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
@@ -271,7 +272,6 @@ const ResourceVariantBaseWithResourceEntity = z
     name: z.string().min(1).max(256),
     resourceId: z.number().gte(1),
     resource: ResourceBaseEntity,
-    requirementId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const GatheringSkillRequirementEntity = z
@@ -281,6 +281,7 @@ const GatheringSkillRequirementEntity = z
     skill: GatheringSkillEntity,
     skillId: z.number().gte(1),
     resourceVariant: ResourceVariantBaseWithResourceEntity.optional(),
+    resourceVariantId: z.number().gte(1).nullable(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
@@ -289,7 +290,7 @@ const UpdateGatheringSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400),
-    resourceVariantId: z.number().gte(1),
+    resourceVariantId: z.number().gte(1).nullable(),
   })
   .partial()
   .passthrough();
@@ -305,7 +306,7 @@ const CreateCraftingSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400).optional(),
-    recipeId: z.number().gte(1).optional(),
+    recipeId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const CraftingSkillRequirementBaseEntity = z
@@ -313,15 +314,12 @@ const CraftingSkillRequirementBaseEntity = z
     id: z.number().gte(1),
     description: z.string().max(400).optional(),
     skillId: z.number().gte(1),
+    recipeId: z.number().gte(1).nullable(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
 const CraftingRecipeBaseEntity = z
-  .object({
-    id: z.number().gte(1),
-    name: z.string().min(1).max(256),
-    requirementId: z.number().gte(1).nullable(),
-  })
+  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
   .passthrough();
 const CraftingSkillRequirementEntity = z
   .object({
@@ -330,6 +328,7 @@ const CraftingSkillRequirementEntity = z
     skill: CraftingSkillBaseEntity,
     skillId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
+    recipeId: z.number().gte(1).nullable(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
@@ -358,6 +357,7 @@ const CraftingSkillRequirementBaseWithSkillEntity = z
     description: z.string().max(400).optional(),
     skillId: z.number().gte(1),
     skill: CraftingSkillBaseEntity,
+    recipeId: z.number().gte(1).nullable(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
@@ -438,7 +438,6 @@ const CraftingRecipeEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     requirement: CraftingSkillRequirementBaseWithSkillEntity.optional(),
-    requirementId: z.number().gte(1).nullable(),
     inputResourceVariants: z.array(ResourceVariantBaseWithResourceEntity),
     inputItems: z.array(MiscItemBaseEntity),
     outputConsumableVariant:
@@ -546,7 +545,6 @@ const ResourceVariantBaseEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     resourceId: z.number().gte(1),
-    requirementId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const ResourceBaseWithSkillEntity = z
@@ -575,7 +573,6 @@ const ResourceVariantEntity = z
     resource: ResourceBaseWithSkillEntity,
     resourceId: z.number().gte(1),
     requirement: GatheringSkillRequirementBaseEntity.optional(),
-    requirementId: z.number().gte(1).nullable(),
     inRecipes: z.array(CraftingRecipeBaseEntity),
     vendors: z.array(VendorBaseEntity),
     dropTables: z.array(DropTableBaseEntity),

@@ -1518,12 +1518,13 @@ export interface components {
             skillId: number;
             unlockLevel: number;
             description?: string;
-            resourceVariantId?: number;
+            resourceVariantId?: number | null;
         };
         GatheringSkillRequirementBaseEntity: {
             id: number;
             description?: string;
             skillId: number;
+            resourceVariantId: number | null;
             unlockLevel: number;
         };
         GatheringSkillEntity: {
@@ -1539,7 +1540,6 @@ export interface components {
             name: string;
             resourceId: number;
             resource: components["schemas"]["ResourceBaseEntity"];
-            requirementId: number | null;
         };
         GatheringSkillRequirementEntity: {
             id: number;
@@ -1547,13 +1547,14 @@ export interface components {
             skill: components["schemas"]["GatheringSkillEntity"];
             skillId: number;
             resourceVariant?: components["schemas"]["ResourceVariantBaseWithResourceEntity"];
+            resourceVariantId: number | null;
             unlockLevel: number;
         };
         UpdateGatheringSkillRequirementDto: {
             skillId?: number;
             unlockLevel?: number;
             description?: string;
-            resourceVariantId?: number;
+            resourceVariantId?: number | null;
         };
         CreateGatheringSkillDto: {
             name: string;
@@ -1567,18 +1568,18 @@ export interface components {
             skillId: number;
             unlockLevel: number;
             description?: string;
-            recipeId?: number;
+            recipeId?: number | null;
         };
         CraftingSkillRequirementBaseEntity: {
             id: number;
             description?: string;
             skillId: number;
+            recipeId: number | null;
             unlockLevel: number;
         };
         CraftingRecipeBaseEntity: {
             id: number;
             name: string;
-            requirementId: number | null;
         };
         CraftingSkillRequirementEntity: {
             id: number;
@@ -1586,6 +1587,7 @@ export interface components {
             skill: components["schemas"]["CraftingSkillBaseEntity"];
             skillId: number;
             recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
+            recipeId: number | null;
             unlockLevel: number;
         };
         UpdateCraftingSkillRequirementDto: {
@@ -1607,6 +1609,7 @@ export interface components {
             description?: string;
             skillId: number;
             skill: components["schemas"]["CraftingSkillBaseEntity"];
+            recipeId: number | null;
             unlockLevel: number;
         };
         MiscItemBaseEntity: {
@@ -1673,7 +1676,6 @@ export interface components {
             id: number;
             name: string;
             requirement?: components["schemas"]["CraftingSkillRequirementBaseWithSkillEntity"];
-            requirementId: number | null;
             inputResourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
             inputItems: components["schemas"]["MiscItemBaseEntity"][];
             outputConsumableVariant?: components["schemas"]["ConsumableVariantBaseWithConsumableEntity"];
@@ -1763,7 +1765,6 @@ export interface components {
             id: number;
             name: string;
             resourceId: number;
-            requirementId: number | null;
         };
         ResourceBaseWithSkillEntity: {
             id: number;
@@ -1787,7 +1788,6 @@ export interface components {
             resource: components["schemas"]["ResourceBaseWithSkillEntity"];
             resourceId: number;
             requirement?: components["schemas"]["GatheringSkillRequirementBaseEntity"];
-            requirementId: number | null;
             inRecipes: components["schemas"]["CraftingRecipeBaseEntity"][];
             vendors: components["schemas"]["VendorBaseEntity"][];
             dropTables: components["schemas"]["DropTableBaseEntity"][];
