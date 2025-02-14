@@ -1,3 +1,3 @@
-export default function CreateCombatSkillRequirementForm() {
+export function CreateCombatSkillRequirementForm() {
   return <p>Create Combat Skill Req Form</p>;
 }
