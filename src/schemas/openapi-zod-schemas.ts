@@ -481,7 +481,7 @@ const CreateCombatSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400).optional(),
-    monsterVariantId: z.number().gte(1).optional(),
+    monsterVariantId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const CombatSkillRequirementBaseEntity = z
@@ -508,7 +508,7 @@ const CombatSkillRequirementEntity = z
     skill: CombatSkillBaseEntity,
     skillId: z.number().gte(1),
     monsterVariant: MonsterVariantBaseWithMonsterEntity.optional(),
-    monsterVariantId: z.number().gte(1).optional(),
+    monsterVariantId: z.number().gte(1).nullish(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();
@@ -517,7 +517,7 @@ const UpdateCombatSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400),
-    monsterVariantId: z.number().gte(1),
+    monsterVariantId: z.number().gte(1).nullable(),
   })
   .partial()
   .passthrough();
