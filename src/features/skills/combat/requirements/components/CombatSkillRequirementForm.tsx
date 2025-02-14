@@ -44,8 +44,10 @@ type CombatSkillRequirementFormFields = {
 
 const CombatSkillRequirementFormContent = ({
   form,
+  record,
 }: {
   form: UseFormReturn<CombatSkillRequirementFormFields>;
+  record?: components["schemas"]["CombatSkillRequirementEntity"];
 }) => {
   const { isLoading, isSuccess, error, data } =
     useQuery<CombatSkillRequirementFormFetchedData>({
@@ -104,9 +106,9 @@ const CombatSkillRequirementFormContent = ({
   // Render the form
   const { combatSkills, monsterVariants } = data;
   const unsetMonsterVariants = monsterVariants.data.filter(
-    (variant) => !variant.requirement?.id
+    (variant) =>
+      !variant.requirement?.id || variant.requirement.id === record?.id
   );
-  console.log(unsetMonsterVariants);
 
   return (
     <>
@@ -200,6 +202,7 @@ const CombatSkillRequirementFormContent = ({
         description="Id of variant unlocked. Optional. Variant requirementId must be null."
         fieldName="monsterVariantId"
         label="Monster Variant Id"
+        nullable
       />
     </>
   );
@@ -252,7 +255,7 @@ export function UpdateCombatSkillRequirementForm({
       queryKey={queryKeys.combatSkillRequirements}
       recordLabel="Combat Skill Requirement"
     >
-      <CombatSkillRequirementFormContent form={form} />
+      <CombatSkillRequirementFormContent form={form} record={record} />
     </FeatureForm>
   );
 }
