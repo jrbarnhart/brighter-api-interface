@@ -193,7 +193,11 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
             >
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a region" />
+                  <SelectValue>
+                    {field.value === 0
+                      ? "Select a region"
+                      : regions.data.find((r) => r.id === field.value)?.name}
+                  </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>

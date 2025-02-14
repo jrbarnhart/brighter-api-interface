@@ -121,7 +121,12 @@ const CombatSkillRequirementFormContent = ({
             >
               <FormControl>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a combat skill" />
+                  <SelectValue>
+                    {field.value === 0
+                      ? "Select a combat skill"
+                      : combatSkills.data.find((s) => s.id === field.value)
+                          ?.name}
+                  </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
@@ -149,10 +154,14 @@ const CombatSkillRequirementFormContent = ({
             <FormControl>
               <Input
                 type="number"
-                placeholder="99"
+                placeholder="Unlock level"
+                min={0}
                 {...field}
+                value={field.value === 0 ? "" : field.value} // Show placeholder instead of 0
                 onChange={(e) => {
-                  field.onChange(Number(e.target.value));
+                  const value =
+                    e.target.value === "" ? 0 : Number(e.target.value);
+                  field.onChange(value);
                 }}
               />
             </FormControl>
