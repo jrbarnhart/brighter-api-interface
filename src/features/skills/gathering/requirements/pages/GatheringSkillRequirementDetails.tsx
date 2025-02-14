@@ -1,7 +1,8 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import GatheringSkillRequirementDetailsContent from "../components/GatheringSkillRequirementDetailsContent";
-import UpdateGatheringSkillRequirementForm from "../components/UpdateGatheringSkillRequirementForm";
+
 import queryKeys from "@/lib/queryKeys";
+import { UpdateGatheringSkillRequirementForm } from "../components/GatheringSkillRequirementForm";
 
 export default function GatheringSkillRequirementDetails() {
   return (
