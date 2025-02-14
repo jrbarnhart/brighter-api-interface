@@ -53,6 +53,7 @@ const queryKeys = {
   questStepById: (id: string) => `quest-step-${id}`,
   roomForm: "room-form-data",
   combatSkillForm: "comat-skill-form-data",
+  combatSkillRequirementForm: "combat-skill-requirement-form-data",
 };
 
 export default queryKeys;
