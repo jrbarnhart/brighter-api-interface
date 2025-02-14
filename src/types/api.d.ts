@@ -1715,6 +1715,7 @@ export interface components {
             id: number;
             description?: string;
             skillId: number;
+            monsterVariantId?: number | null;
             unlockLevel: number;
         };
         MonsterVariantBaseWithMonsterEntity: {
