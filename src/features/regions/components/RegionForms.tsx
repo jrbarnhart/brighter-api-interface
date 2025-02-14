@@ -53,7 +53,7 @@ export function CreateRegionForm() {
       form={form}
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      queryKeys={queryKeys.regions}
+      queryKey={queryKeys.regions}
       recordLabel="Region"
     >
       <RegionFormContent form={form} />
@@ -74,7 +74,7 @@ export function UpdateRegionForm() {
       form={form}
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/regions`}
-      queryKeys={queryKeys.regions}
+      queryKey={queryKeys.regions}
       recordLabel="Region"
     >
       <RegionFormContent form={form} />
