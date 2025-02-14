@@ -17,7 +17,7 @@ import CombatSkillsIndex from "@/features/skills/combat/pages/CombatSkillsIndex"
 import SkillsIndex from "@/features/skills/pages/SkillsIndex";
 import CombatSkillRequirementsLayout from "@/features/skills/combat/requirements/layouts/CombatSkillRequirementsLayout";
 import CombatSkillRequirementsIndex from "@/features/skills/combat/requirements/pages/CombatSkillRequirementsIndex";
-import CreateCombatSkillRequirementForm from "@/features/skills/combat/requirements/components/CreateCombatSkillRequirementForm";
+import CreateCombatSkillRequirementForm from "@/features/skills/combat/requirements/components/CombatSkillRequirementForm";
 import CombatSkillDetails from "@/features/skills/combat/pages/CombatSkillDetails";
 import CombatSkillRequirementDetails from "@/features/skills/combat/requirements/pages/CombatSkillRequirementDetails";
 import CraftingSkillRequirementsLayout from "@/features/skills/crafting/requirements/layouts/CombatSkillRequirementsLayout";
