@@ -103,6 +103,9 @@ const CombatSkillRequirementFormContent = ({
 
   // Render the form
   const { combatSkills, monsterVariants } = data;
+  const unsetMonsterVariants = monsterVariants.data.filter(
+    (variant) => !variant.requirementId
+  );
 
   return (
     <>
@@ -192,8 +195,8 @@ const CombatSkillRequirementFormContent = ({
       {/* Monster Variant Id */}
       <ComboboxSingleIdId
         form={form}
-        data={monsterVariants.data}
-        description="Id of monster variant unlocked by this requirement. Can be null."
+        data={unsetMonsterVariants}
+        description="Id of variant unlocked. Optional. Variant requirementId must be null."
         fieldName="monsterVariantId"
         label="Monster Variant Id"
       />
@@ -218,7 +221,7 @@ export function CreateCombatSkillRequirementForm() {
       method="POST"
       url={`${import.meta.env.VITE_API_URL}/skills/combat/requirements`}
       queryKey={queryKeys.combatSkillRequirements}
-      recordLabel="Combat Skill"
+      recordLabel="Combat Skill Requirement"
     >
       <CombatSkillRequirementFormContent form={form} />
     </FeatureForm>
@@ -246,7 +249,7 @@ export function UpdateCombatSkillRequirementForm({
       method="PATCH"
       url={`${import.meta.env.VITE_API_URL}/skills/combat/requirements`}
       queryKey={queryKeys.combatSkillRequirements}
-      recordLabel="Combat Skill"
+      recordLabel="Combat Skill Requirement"
     >
       <CombatSkillRequirementFormContent form={form} />
     </FeatureForm>
