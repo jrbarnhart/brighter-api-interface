@@ -56,6 +56,8 @@ const queryKeys = {
   combatSkillRequirementForm: "combat-skill-requirement-form-data",
   gatheringSkillForm: "gathering-skill-form-data",
   gatheringSkillRequirementForm: "gathering-skill-requirement-form-data",
+  craftingSkillForm: "crafting-skill-form-data",
+  craftingSkillRequirementForm: "crafting-skill-requirement-form-data",
 };
 
 export default queryKeys;
