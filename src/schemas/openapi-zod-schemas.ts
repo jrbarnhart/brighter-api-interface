@@ -499,7 +499,6 @@ const MonsterVariantBaseWithMonsterEntity = z
     name: z.string().min(1).max(256),
     monsterId: z.number().gte(1),
     monster: MonsterBaseEntity,
-    requirementId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const CombatSkillRequirementEntity = z
@@ -885,7 +884,6 @@ const MonsterVariantBaseEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     monsterId: z.number().gte(1),
-    requirementId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const MonsterBaseWithSkillEntity = z
@@ -931,7 +929,6 @@ const MonsterVariantEntity = z
     monster: MonsterBaseWithSkillEntity,
     monsterId: z.number().gte(1),
     requirement: CombatSkillRequirementBaseEntity.optional(),
-    requirementId: z.number().gte(1).nullable(),
     dropTable: DropTableBaseEntity.optional(),
   })
   .passthrough();

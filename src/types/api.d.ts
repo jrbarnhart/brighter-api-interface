@@ -1723,7 +1723,6 @@ export interface components {
             name: string;
             monsterId: number;
             monster: components["schemas"]["MonsterBaseEntity"];
-            requirementId: number | null;
         };
         CombatSkillRequirementEntity: {
             id: number;
@@ -2047,7 +2046,6 @@ export interface components {
             id: number;
             name: string;
             monsterId: number;
-            requirementId: number | null;
         };
         MonsterBaseWithSkillEntity: {
             /**
@@ -2077,7 +2075,6 @@ export interface components {
             monster: components["schemas"]["MonsterBaseWithSkillEntity"];
             monsterId: number;
             requirement?: components["schemas"]["CombatSkillRequirementBaseEntity"];
-            requirementId: number | null;
             dropTable?: components["schemas"]["DropTableBaseEntity"];
         };
         UpdateMonsterVariantDto: {
