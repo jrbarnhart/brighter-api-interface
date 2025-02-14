@@ -35,7 +35,7 @@ import CreateRecipeForm from "@/features/skills/crafting/recipes/components/Crea
 import GatheringSkillRequirementsLayout from "@/features/skills/gathering/requirements/layouts/GatheringSkillRequirementsLayout";
 import GatheringSkillRequirementsIndex from "@/features/skills/gathering/requirements/pages/GatheringSkillRequirementsIndex";
 import GatheringSkillRequirementDetails from "@/features/skills/gathering/requirements/pages/GatheringSkillRequirementDetails";
-import CreateGatheringSkillRequirementForm from "@/features/skills/gathering/requirements/components/CreateGatheringSkillRequirementForm";
+import { CreateGatheringSkillRequirementForm } from "@/features/skills/gathering/requirements/components/GatheringSkillRequirementForm";
 import GatheringSkillLayout from "@/features/skills/gathering/layouts/GatheringSkillLayout";
 import GatheringSkillsIndex from "@/features/skills/gathering/pages/GatheringSkillsIndex";
 import GatheringSkillDetails from "@/features/skills/gathering/pages/GatheringSkillDetails";
