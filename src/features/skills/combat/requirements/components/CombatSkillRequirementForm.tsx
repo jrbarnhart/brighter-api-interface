@@ -104,8 +104,9 @@ const CombatSkillRequirementFormContent = ({
   // Render the form
   const { combatSkills, monsterVariants } = data;
   const unsetMonsterVariants = monsterVariants.data.filter(
-    (variant) => !variant.requirementId
+    (variant) => !variant.requirement?.id
   );
+  console.log(unsetMonsterVariants);
 
   return (
     <>
