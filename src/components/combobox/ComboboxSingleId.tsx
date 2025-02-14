@@ -34,12 +34,14 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
   label,
   description,
   form,
+  nullable = false,
 }: {
   data: ComboboxData;
   fieldName: Path<T>;
   label: string;
   description: string;
   form: UseFormReturn<T>;
+  nullable?: boolean;
 }) {
   // Set this component's state based on passed id
   const handleCommandSelect = useCallback(
@@ -98,8 +100,18 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
                       className="h-9"
                     />
                     <CommandList>
-                      <CommandEmpty>Not found.</CommandEmpty>
+                      <CommandEmpty>No options found.</CommandEmpty>
                       <CommandGroup>
+                        {nullable && field.value !== null && (
+                          <CommandItem
+                            onSelect={() => {
+                              field.onChange(null);
+                            }}
+                            className="text-destructive"
+                          >
+                            Remove selection
+                          </CommandItem>
+                        )}
                         {data.map((entry) => (
                           <CommandItem
                             value={`${
