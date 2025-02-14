@@ -508,6 +508,7 @@ const CombatSkillRequirementEntity = z
     skill: CombatSkillBaseEntity,
     skillId: z.number().gte(1),
     monsterVariant: MonsterVariantBaseWithMonsterEntity.optional(),
+    monsterVariantId: z.number().gte(1).optional(),
     unlockLevel: z.number().gte(1),
   })
   .passthrough();

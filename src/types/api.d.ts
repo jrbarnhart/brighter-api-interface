@@ -1730,6 +1730,7 @@ export interface components {
             skill: components["schemas"]["CombatSkillBaseEntity"];
             skillId: number;
             monsterVariant?: components["schemas"]["MonsterVariantBaseWithMonsterEntity"];
+            monsterVariantId?: number;
             unlockLevel: number;
         };
         UpdateCombatSkillRequirementDto: {
