@@ -54,6 +54,8 @@ const queryKeys = {
   roomForm: "room-form-data",
   combatSkillForm: "comat-skill-form-data",
   combatSkillRequirementForm: "combat-skill-requirement-form-data",
+  gatheringSkillForm: "gathering-skill-form-data",
+  gatheringSkillRequirementForm: "gathering-skill-requirement-form-data",
 };
 
 export default queryKeys;
