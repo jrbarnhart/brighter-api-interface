@@ -22,7 +22,7 @@ export default function CombatSkillRequirementDetailsContent({
         <div className="flex gap-3 items-center">
           <p className="text-xl">Monster Variant: </p>
           <RecordLink
-            recordBasePath="/monsterse/variants"
+            recordBasePath="/monsters/variants"
             recordId={record.monsterVariant.id}
             recordName={`${record.monsterVariant.name} ${record.monsterVariant.monster.name}`}
           />
