@@ -88,7 +88,6 @@ const CombatSkillFormContent = ({
 
   // Render the form
   const { regions } = data;
-  console.log(regions, data);
 
   return (
     <>

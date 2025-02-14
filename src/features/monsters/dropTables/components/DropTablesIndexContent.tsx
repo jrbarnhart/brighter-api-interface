@@ -15,7 +15,6 @@ export default function DropTablesIndexContent({
   gridColsRule: string;
 }) {
   const groupedData = groupDataByMonsterVariantMonster(data);
-  console.log(groupedData);
   return groupedData.map((group, index) => {
     return (
       <Collapsible key={index} defaultOpen={true}>
