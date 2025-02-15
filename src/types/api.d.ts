@@ -1580,6 +1580,9 @@ export interface components {
         CraftingRecipeBaseEntity: {
             id: number;
             name: string;
+            outputConsumableVariantId: number | null;
+            outputWeaponVariantId: number | null;
+            outputArmorVariantId: number | null;
         };
         CraftingSkillRequirementEntity: {
             id: number;
@@ -1600,9 +1603,9 @@ export interface components {
             name: string;
             inputResourceVariantIds?: number[];
             inputItemIds?: number[];
-            outputConsumableVariantId?: number;
-            outputWeaponVariantId?: number;
-            outputArmorVariantId?: number;
+            outputConsumableVariantId?: number | null;
+            outputWeaponVariantId?: number | null;
+            outputArmorVariantId?: number | null;
         };
         CraftingSkillRequirementBaseWithSkillEntity: {
             id: number;
@@ -1626,7 +1629,6 @@ export interface components {
             name: string;
             consumableId: number;
             consumable: components["schemas"]["ConsumableBaseEntity"];
-            recipeId: number | null;
         };
         WeaponBaseEntity: {
             /**
@@ -1649,7 +1651,6 @@ export interface components {
             name: string;
             weaponId: number;
             weapon: components["schemas"]["WeaponBaseEntity"];
-            recipeId: number | null;
         };
         ArmorBaseEntity: {
             /**
@@ -1670,7 +1671,6 @@ export interface components {
             name: string;
             armorId: number;
             armor: components["schemas"]["ArmorBaseEntity"];
-            recipeId: number | null;
         };
         CraftingRecipeEntity: {
             id: number;
@@ -1679,16 +1679,21 @@ export interface components {
             inputResourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
             inputItems: components["schemas"]["MiscItemBaseEntity"][];
             outputConsumableVariant?: components["schemas"]["ConsumableVariantBaseWithConsumableEntity"];
+            outputConsumableVariantId: number | null;
             outputWeaponVariant?: components["schemas"]["WeaponVariantBaseWithWeaponEntity"];
+            outputWeaponVariantId: number | null;
             outputArmorVariant?: components["schemas"]["ArmorVariantBaseWithArmorEntity"];
+            outputArmorVariantId: number | null;
         };
         UpdateCraftingRecipeDto: {
             name?: string;
             inputResourceVariantIds?: number[];
+            removeInputResourceVariantIds?: number[];
             inputItemIds?: number[];
-            outputConsumableVariantId?: number;
-            outputWeaponVariantId?: number;
-            outputArmorVariantId?: number;
+            removeInputItemIds?: number[];
+            outputConsumableVariantId?: number | null;
+            outputWeaponVariantId?: number | null;
+            outputArmorVariantId?: number | null;
         };
         CreateCraftingSkillDto: {
             name: string;
@@ -1823,7 +1828,6 @@ export interface components {
             id: number;
             name: string;
             consumableId: number;
-            recipeId: number | null;
         };
         ConsumableBaseWithSkillEntity: {
             id: number;
@@ -1837,7 +1841,6 @@ export interface components {
             consumable: components["schemas"]["ConsumableBaseWithSkillEntity"];
             consumableId: number;
             recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
-            recipeId: number | null;
             vendors: components["schemas"]["VendorBaseEntity"][];
             dropTables: components["schemas"]["DropTableBaseEntity"][];
         };
@@ -1868,7 +1871,6 @@ export interface components {
             id: number;
             name: string;
             weaponId: number;
-            recipeId: number | null;
         };
         WeaponVariantEntity: {
             id: number;
@@ -1876,7 +1878,6 @@ export interface components {
             weapon: components["schemas"]["WeaponBaseEntity"];
             weaponId: number;
             recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
-            recipeId: number | null;
             vendors: components["schemas"]["VendorBaseEntity"][];
             dropTables: components["schemas"]["DropTableBaseEntity"][];
         };
@@ -1939,7 +1940,6 @@ export interface components {
             id: number;
             name: string;
             armorId: number;
-            recipeId: number | null;
         };
         ArmorVariantEntity: {
             id: number;
@@ -1947,7 +1947,6 @@ export interface components {
             armor: components["schemas"]["ArmorBaseEntity"];
             armorId: number;
             recipe?: components["schemas"]["CraftingRecipeBaseEntity"];
-            recipeId: number | null;
             vendors: components["schemas"]["VendorBaseEntity"][];
             dropTables: components["schemas"]["DropTableBaseEntity"][];
         };

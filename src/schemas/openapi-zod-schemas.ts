@@ -319,7 +319,13 @@ const CraftingSkillRequirementBaseEntity = z
   })
   .passthrough();
 const CraftingRecipeBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
+  .object({
+    id: z.number().gte(1),
+    name: z.string().min(1).max(256),
+    outputConsumableVariantId: z.number().gte(1).nullable(),
+    outputWeaponVariantId: z.number().gte(1).nullable(),
+    outputArmorVariantId: z.number().gte(1).nullable(),
+  })
   .passthrough();
 const CraftingSkillRequirementEntity = z
   .object({
@@ -346,9 +352,9 @@ const CreateCraftingRecipeDto = z
     name: z.string().min(1).max(256),
     inputResourceVariantIds: z.array(z.number().gte(1)).optional(),
     inputItemIds: z.array(z.number().gte(1)).optional(),
-    outputConsumableVariantId: z.number().gte(1).optional(),
-    outputWeaponVariantId: z.number().gte(1).optional(),
-    outputArmorVariantId: z.number().gte(1).optional(),
+    outputConsumableVariantId: z.number().gte(1).nullish(),
+    outputWeaponVariantId: z.number().gte(1).nullish(),
+    outputArmorVariantId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const CraftingSkillRequirementBaseWithSkillEntity = z
@@ -377,7 +383,6 @@ const ConsumableVariantBaseWithConsumableEntity = z
     name: z.string().min(1).max(256),
     consumableId: z.number().gte(1),
     consumable: ConsumableBaseEntity,
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const WeaponBaseEntity = z
@@ -404,7 +409,6 @@ const WeaponVariantBaseWithWeaponEntity = z
     name: z.string().min(1).max(256),
     weaponId: z.number().gte(1),
     weapon: WeaponBaseEntity,
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const ArmorBaseEntity = z
@@ -430,7 +434,6 @@ const ArmorVariantBaseWithArmorEntity = z
     name: z.string().min(1).max(256),
     armorId: z.number().gte(1),
     armor: ArmorBaseEntity,
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const CraftingRecipeEntity = z
@@ -442,18 +445,23 @@ const CraftingRecipeEntity = z
     inputItems: z.array(MiscItemBaseEntity),
     outputConsumableVariant:
       ConsumableVariantBaseWithConsumableEntity.optional(),
+    outputConsumableVariantId: z.number().gte(1).nullable(),
     outputWeaponVariant: WeaponVariantBaseWithWeaponEntity.optional(),
+    outputWeaponVariantId: z.number().gte(1).nullable(),
     outputArmorVariant: ArmorVariantBaseWithArmorEntity.optional(),
+    outputArmorVariantId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const UpdateCraftingRecipeDto = z
   .object({
     name: z.string().min(1).max(256),
     inputResourceVariantIds: z.array(z.number().gte(1)),
+    removeInputResourceVariantIds: z.array(z.number().gte(1)),
     inputItemIds: z.array(z.number().gte(1)),
-    outputConsumableVariantId: z.number().gte(1),
-    outputWeaponVariantId: z.number().gte(1),
-    outputArmorVariantId: z.number().gte(1),
+    removeInputItemIds: z.array(z.number().gte(1)),
+    outputConsumableVariantId: z.number().gte(1).nullable(),
+    outputWeaponVariantId: z.number().gte(1).nullable(),
+    outputArmorVariantId: z.number().gte(1).nullable(),
   })
   .partial()
   .passthrough();
@@ -616,7 +624,6 @@ const ConsumableVariantBaseEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     consumableId: z.number().gte(1),
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const ConsumableBaseWithSkillEntity = z
@@ -634,7 +641,6 @@ const ConsumableVariantEntity = z
     consumable: ConsumableBaseWithSkillEntity,
     consumableId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
-    recipeId: z.number().gte(1).nullable(),
     vendors: z.array(VendorBaseEntity),
     dropTables: z.array(DropTableBaseEntity),
   })
@@ -670,7 +676,6 @@ const WeaponVariantBaseEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     weaponId: z.number().gte(1),
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const WeaponVariantEntity = z
@@ -680,7 +685,6 @@ const WeaponVariantEntity = z
     weapon: WeaponBaseEntity,
     weaponId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
-    recipeId: z.number().gte(1).nullable(),
     vendors: z.array(VendorBaseEntity),
     dropTables: z.array(DropTableBaseEntity),
   })
@@ -751,7 +755,6 @@ const ArmorVariantBaseEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     armorId: z.number().gte(1),
-    recipeId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const ArmorVariantEntity = z
@@ -761,7 +764,6 @@ const ArmorVariantEntity = z
     armor: ArmorBaseEntity,
     armorId: z.number().gte(1),
     recipe: CraftingRecipeBaseEntity.optional(),
-    recipeId: z.number().gte(1).nullable(),
     vendors: z.array(VendorBaseEntity),
     dropTables: z.array(DropTableBaseEntity),
   })
