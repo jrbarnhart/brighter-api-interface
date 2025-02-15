@@ -58,6 +58,7 @@ const queryKeys = {
   gatheringSkillRequirementForm: "gathering-skill-requirement-form-data",
   craftingSkillForm: "crafting-skill-form-data",
   craftingSkillRequirementForm: "crafting-skill-requirement-form-data",
+  craftingRecipeForm: "crafting-recipe-form-data",
 };
 
 export default queryKeys;
