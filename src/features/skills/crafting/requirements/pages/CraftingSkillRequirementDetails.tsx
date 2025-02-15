@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import CraftingSkillRequirementDetailsContent from "../components/CraftingSkillRequirementDetailsContent";
-import UpdateCraftingSkillRequirementForm from "../components/UpdateCraftingSkillRequirementForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateCraftingSkillRequirementForm } from "../components/CraftingSkillRequirementForm";
 
 export default function CraftingSkillRequirementDetails() {
   return (
