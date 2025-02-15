@@ -27,7 +27,7 @@ import CreateCraftingSkillRequirementForm from "@/features/skills/crafting/requi
 import CraftingSkillLayout from "@/features/skills/crafting/layouts/CraftingSkillLayout";
 import CraftingSkillsIndex from "@/features/skills/crafting/pages/CraftingSkillsIndex";
 import CraftingSkillDetails from "@/features/skills/crafting/pages/CraftingSkillDetails";
-import CreateCraftingSkillForm from "@/features/skills/crafting/components/CreateCraftingSkillForm";
+import { CreateCraftingSkillForm } from "@/features/skills/crafting/components/CraftingSkillForm";
 import RecipesLayout from "@/features/skills/crafting/recipes/layouts/RecipesLayout";
 import RecipesIndex from "@/features/skills/crafting/recipes/pages/RecipesIndex";
 import RecipeDetails from "@/features/skills/crafting/recipes/pages/RecipeDetails";
