@@ -23,7 +23,7 @@ import CombatSkillRequirementDetails from "@/features/skills/combat/requirements
 import CraftingSkillRequirementsLayout from "@/features/skills/crafting/requirements/layouts/CombatSkillRequirementsLayout";
 import CraftingSkillRequirementsIndex from "@/features/skills/crafting/requirements/pages/CraftingSkillRequirementsIndex";
 import CraftingSkillRequirementDetails from "@/features/skills/crafting/requirements/pages/CraftingSkillRequirementDetails";
-import CreateCraftingSkillRequirementForm from "@/features/skills/crafting/requirements/components/CreateCraftingSkillRequirementForm";
+import { CreateCraftingSkillRequirementForm } from "@/features/skills/crafting/requirements/components/CraftingSkillRequirementForm";
 import CraftingSkillLayout from "@/features/skills/crafting/layouts/CraftingSkillLayout";
 import CraftingSkillsIndex from "@/features/skills/crafting/pages/CraftingSkillsIndex";
 import CraftingSkillDetails from "@/features/skills/crafting/pages/CraftingSkillDetails";
