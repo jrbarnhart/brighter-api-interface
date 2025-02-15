@@ -1594,7 +1594,7 @@ export interface components {
             skillId?: number;
             unlockLevel?: number;
             description?: string;
-            recipeId?: number;
+            recipeId?: number | null;
         };
         CreateCraftingRecipeDto: {
             name: string;

@@ -337,7 +337,7 @@ const UpdateCraftingSkillRequirementDto = z
     skillId: z.number().gte(1),
     unlockLevel: z.number().gte(1),
     description: z.string().max(400),
-    recipeId: z.number().gte(1),
+    recipeId: z.number().gte(1).nullable(),
   })
   .partial()
   .passthrough();
