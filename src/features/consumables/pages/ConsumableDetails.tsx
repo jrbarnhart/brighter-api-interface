@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ConsumableDetailsContent from "../components/ConsumableDetailsContent";
-import UpdateConsumableForm from "../components/UpdateConsumableForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateConsumableForm } from "../components/ConsumableForm";
 
 export default function ConsumableDetails() {
   return (
