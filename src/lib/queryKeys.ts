@@ -61,6 +61,8 @@ const queryKeys = {
   craftingRecipeForm: "crafting-recipe-form-data",
   resourceForm: "resource-form-data",
   resourceVariantForm: "resource-variant-form-data",
+  consumableForm: "consumable-form-data",
+  consumableVariantForm: "consumable-variant-form-data",
 };
 
 export default queryKeys;
