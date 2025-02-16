@@ -55,6 +55,15 @@ export default function RecipeDetailsContent({
         !record.outputWeaponVariant && (
           <p className="text-xl">No output has been assigned.</p>
         )}
+      {[
+        record.outputArmorVariant,
+        record.outputWeaponVariant,
+        record.outputConsumableVariant,
+      ].filter(Boolean).length > 1 && (
+        <p className="text-2xl text-destructive">
+          More than one output assigned. This is likely a mistake!
+        </p>
+      )}
     </>
   );
 }
