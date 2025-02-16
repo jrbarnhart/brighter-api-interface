@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ResourceDetailsContent from "../components/ResourceDetailsContent";
-import UpdateResourceForm from "../components/UpdateResourceForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateResourceForm } from "../components/ResourceForm";
 
 export default function ResourceDetails() {
   return (

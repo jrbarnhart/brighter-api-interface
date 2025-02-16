@@ -47,7 +47,7 @@ import CreateResourceVariantForm from "@/features/resources/variants/components/
 import ResourcesLayout from "@/features/resources/layouts/ResourcesLayout";
 import ResourcesIndex from "@/features/resources/pages/ResourcesIndex";
 import ResourceDetails from "@/features/resources/pages/ResourceDetails";
-import CreateResourceForm from "@/features/resources/components/CreateResourceForm";
+import { CreateResourceForm } from "@/features/resources/components/ResourceForm";
 import ItemsLayout from "@/features/items/layouts/ItemsLayout";
 import ItemsIndex from "@/features/items/pages/ItemsIndex";
 import ConsumableVariantsLayout from "@/features/consumables/variants/layouts/ConsumableVariantsLayout";
