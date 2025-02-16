@@ -180,6 +180,7 @@ export function CreateResourceForm() {
     defaultValues: {
       name: "",
       skillId: 0,
+      passive: false,
     },
   });
 
