@@ -53,7 +53,7 @@ import ItemsIndex from "@/features/items/pages/ItemsIndex";
 import ConsumableVariantsLayout from "@/features/consumables/variants/layouts/ConsumableVariantsLayout";
 import ConsumableVariantsIndex from "@/features/consumables/variants/pages/ConsumableVariantsIndex";
 import ConsumableVariantDetails from "@/features/consumables/variants/pages/ConsumableVariantDetails";
-import CreateConsumableVariantForm from "@/features/consumables/variants/components/CreateConsumableVariantForm";
+import { CreateConsumableVariantForm } from "@/features/consumables/variants/components/ConsumableVariantForm";
 import ConsumablesLayout from "@/features/consumables/layouts/ConsumablesLayout";
 import ConsumablesIndex from "@/features/consumables/pages/ConsumablesIndex";
 import ConsumableDetails from "@/features/consumables/pages/ConsumableDetails";
