@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ResourceVariantDetailsContent from "../components/ResourceVariantDetailsContent";
-import UpdateResourceVariantForm from "../components/UpdateResourceVariantForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateResourceVariantForm } from "../components/ResourceVariantForm";
 
 export default function ResourceVariantDetails() {
   return (
