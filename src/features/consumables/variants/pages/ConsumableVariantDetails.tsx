@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ConsumableVariantDetailsContent from "../components/ConsumableVariantDetailsContent";
-import UpdateConsumableVariantForm from "../components/UpdateConsumableVariantForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateConsumableVariantForm } from "../components/ConsumableVariantForm";
 
 export default function ConsumableVariantDetails() {
   return (
