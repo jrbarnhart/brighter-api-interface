@@ -1622,7 +1622,7 @@ export interface components {
         ConsumableBaseEntity: {
             id: number;
             name: string;
-            skillId?: number;
+            skillId: number | null;
         };
         ConsumableVariantBaseWithConsumableEntity: {
             id: number;
@@ -1832,7 +1832,7 @@ export interface components {
         ConsumableBaseWithSkillEntity: {
             id: number;
             name: string;
-            skillId?: number;
+            skillId: number | null;
             skill?: components["schemas"]["CraftingSkillBaseEntity"];
         };
         ConsumableVariantEntity: {
@@ -1850,18 +1850,18 @@ export interface components {
         };
         CreateConsumableDto: {
             name: string;
-            skillId?: number;
+            skillId?: number | null;
         };
         ConsumableEntity: {
             id: number;
             name: string;
             skill?: components["schemas"]["CraftingSkillBaseEntity"];
-            skillId?: number;
+            skillId: number | null;
             variants: components["schemas"]["ConsumableVariantBaseEntity"][];
         };
         UpdateConsumableDto: {
             name?: string;
-            skillId?: number;
+            skillId?: number | null;
         };
         CreateWeaponVariantDto: {
             name: string;

@@ -374,7 +374,7 @@ const ConsumableBaseEntity = z
   .object({
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
-    skillId: z.number().gte(1).optional(),
+    skillId: z.number().gte(1).nullable(),
   })
   .passthrough();
 const ConsumableVariantBaseWithConsumableEntity = z
@@ -630,7 +630,7 @@ const ConsumableBaseWithSkillEntity = z
   .object({
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
-    skillId: z.number().gte(1).optional(),
+    skillId: z.number().gte(1).nullable(),
     skill: CraftingSkillBaseEntity.optional(),
   })
   .passthrough();
@@ -652,7 +652,7 @@ const UpdateConsumableVariantDto = z
 const CreateConsumableDto = z
   .object({
     name: z.string().min(1).max(256),
-    skillId: z.number().gte(1).optional(),
+    skillId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const ConsumableEntity = z
@@ -660,12 +660,15 @@ const ConsumableEntity = z
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
     skill: CraftingSkillBaseEntity.optional(),
-    skillId: z.number().gte(1).optional(),
+    skillId: z.number().gte(1).nullable(),
     variants: z.array(ConsumableVariantBaseEntity),
   })
   .passthrough();
 const UpdateConsumableDto = z
-  .object({ name: z.string().min(1).max(256), skillId: z.number().gte(1) })
+  .object({
+    name: z.string().min(1).max(256),
+    skillId: z.number().gte(1).nullable(),
+  })
   .partial()
   .passthrough();
 const CreateWeaponVariantDto = z
