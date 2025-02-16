@@ -43,7 +43,7 @@ import { CreateGatheringSkillForm } from "@/features/skills/gathering/components
 import ResourceVariantsLayout from "@/features/resources/variants/layouts/ResourceVariantsLayout";
 import ResourceVariantsIndex from "@/features/resources/variants/pages/ResourceVariantsIndex";
 import ResourceVariantDetails from "@/features/resources/variants/pages/ResourceVariantDetails";
-import CreateResourceVariantForm from "@/features/resources/variants/components/CreateResourceVariantForm";
+import { CreateResourceVariantForm } from "@/features/resources/variants/components/ResourceVariantForm";
 import ResourcesLayout from "@/features/resources/layouts/ResourcesLayout";
 import ResourcesIndex from "@/features/resources/pages/ResourcesIndex";
 import ResourceDetails from "@/features/resources/pages/ResourceDetails";
