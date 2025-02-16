@@ -59,6 +59,8 @@ const queryKeys = {
   craftingSkillForm: "crafting-skill-form-data",
   craftingSkillRequirementForm: "crafting-skill-requirement-form-data",
   craftingRecipeForm: "crafting-recipe-form-data",
+  resourceForm: "resource-form-data",
+  resourceVariantForm: "resource-variant-form-data",
 };
 
 export default queryKeys;
