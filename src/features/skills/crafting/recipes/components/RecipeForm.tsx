@@ -140,7 +140,7 @@ const CraftingRecipeFormContent = ({
 
   return (
     <>
-      {/* Room Name */}
+      {/* Recipe Name */}
       <FormField
         control={form.control}
         name="name"

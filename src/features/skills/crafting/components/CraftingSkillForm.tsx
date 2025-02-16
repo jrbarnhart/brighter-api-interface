@@ -90,7 +90,7 @@ const CraftingSkillFormContent = ({
 
   return (
     <>
-      {/* Room Name */}
+      {/* Skill Name */}
       <FormField
         control={form.control}
         name="name"
