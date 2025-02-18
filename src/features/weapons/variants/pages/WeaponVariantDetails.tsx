@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import WeaponVariantDetailsContent from "../components/WeaponVariantDetailsContent";
-import UpdateWeaponVariantForm from "../components/UpdateWeaponVariantForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateWeaponVariantForm } from "../components/WeaponVariantForm";
 
 export default function WeaponVariantDetails() {
   return (
