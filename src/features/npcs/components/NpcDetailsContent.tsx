@@ -20,7 +20,7 @@ export default function NpcDetailsContent({
           />
         </div>
       ) : (
-        <p>Vendor: Not Assigned</p>
+        <p className="text-xl">Vendor: Not Assigned</p>
       )}
       <ScrollList
         basePath="quests/steps"
