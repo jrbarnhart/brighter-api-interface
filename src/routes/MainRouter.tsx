@@ -61,7 +61,7 @@ import { CreateConsumableForm } from "@/features/consumables/components/Consumab
 import WeaponVariantsLayout from "@/features/weapons/variants/layouts/WeaponVariantsLayout";
 import WeaponVariantsIndex from "@/features/weapons/variants/pages/WeaponVariantsIndex";
 import WeaponVariantDetails from "@/features/weapons/variants/pages/WeaponVariantDetails";
-import CreateWeaponVariantForm from "@/features/weapons/variants/components/CreateWeaponVariantForm";
+import { CreateWeaponVariantForm } from "@/features/weapons/variants/components/WeaponVariantForm";
 import WeaponsLayout from "@/features/weapons/layouts/WeaponsLayout";
 import WeaponsIndex from "@/features/weapons/pages/WeaponsIndex";
 import WeaponDetails from "@/features/weapons/pages/WeaponDetails";
