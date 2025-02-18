@@ -101,7 +101,7 @@ import { CreateNpcForm } from "@/features/npcs/components/NpcForm";
 import QuestsLayout from "@/features/quests/layouts/QuestsLayout";
 import QuestsIndex from "@/features/quests/pages/QuestsIndex";
 import QuestDetails from "@/features/quests/pages/QuestDetails";
-import CreateQuestForm from "@/features/quests/components/CreateQuestForm";
+import { CreateQuestForm } from "@/features/quests/components/QuestForm";
 import QuestStepsLayout from "@/features/quests/questSteps/layouts/QuestStepsLayout";
 import QuestStepsIndex from "@/features/quests/questSteps/pages/QuestStepsIndex";
 import QuestStepDetails from "@/features/quests/questSteps/pages/QuestStepDetails";
