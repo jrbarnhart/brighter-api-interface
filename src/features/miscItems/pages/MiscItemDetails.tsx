@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import MiscItemDetailsContent from "../components/MiscItemDetailsContent";
-import UpdateMiscItemForm from "../components/UpdateMiscItemForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateMiscItemForm } from "../components/MiscItemForm";
 
 export default function MiscItemDetails() {
   return (
