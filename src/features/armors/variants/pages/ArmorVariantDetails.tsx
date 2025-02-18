@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ArmorVariantDetailsContent from "../components/ArmorVariantDetailsContent";
-import UpdateArmorVariantForm from "../components/UpdateArmorVariantForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateArmorVariantForm } from "../components/ArmorVariantForm";
 
 export default function ArmorVariantDetails() {
   return (
