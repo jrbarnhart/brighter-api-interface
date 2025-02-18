@@ -65,6 +65,8 @@ const queryKeys = {
   consumableVariantForm: "consumable-variant-form-data",
   weaponVariantForm: "weapon-variant-form-data",
   armorVariantForm: "armor-variant-form-data",
+  monsterForm: "monster-form-data",
+  monsterVariantForm: "monster-variant-form-data",
 };
 
 export default queryKeys;
