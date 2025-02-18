@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import ArmorDetailsContent from "../components/ArmorDetailsContent";
-import UpdateArmorForm from "../components/UpdateArmorForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateArmorForm } from "../components/ArmorForm";
 
 export default function ArmorDetails() {
   return (
