@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import VendorDetailsContent from "../components/VendorDetailsContent";
-import UpdateVendorForm from "../components/UpdateVendorForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateVendorForm } from "../components/VendorForm";
 
 export default function VendorDetails() {
   return (
