@@ -67,6 +67,8 @@ const queryKeys = {
   armorVariantForm: "armor-variant-form-data",
   monsterForm: "monster-form-data",
   monsterVariantForm: "monster-variant-form-data",
+  vendorForm: "vendor-form-data",
+  questStepForm: "quest-step-form-data",
 };
 
 export default queryKeys;
