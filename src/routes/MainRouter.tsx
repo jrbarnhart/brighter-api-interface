@@ -77,7 +77,7 @@ import { CreateArmorForm } from "@/features/armors/components/ArmorForm";
 import MonsterVariantsLayout from "@/features/monsters/variants/layouts/MonsterVariantsLayout";
 import MonsterVariantsIndex from "@/features/monsters/variants/pages/MonsterVariantsIndex";
 import MonsterVariantDetails from "@/features/monsters/variants/pages/MonsterVariantDetails";
-import CreateMonsterVariantForm from "@/features/monsters/variants/components/CreateMonsterVariantForm";
+import { CreateMonsterVariantForm } from "@/features/monsters/variants/components/MonsterVariantForm";
 import MonstersLayout from "@/features/monsters/layouts/MonstersLayout";
 import MonstersIndex from "@/features/monsters/pages/MonstersIndex";
 import MonsterDetails from "@/features/monsters/pages/MonsterDetails";
