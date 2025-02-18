@@ -17,7 +17,7 @@ export default function RecipeDetailsContent({
       />
       <ScrollList
         basePath="items/misc"
-        items={record.inputResourceVariants}
+        items={record.inputItems}
         title="Input Misc Items"
       />
       {record.outputConsumableVariant && (
