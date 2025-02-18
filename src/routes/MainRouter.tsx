@@ -105,7 +105,7 @@ import { CreateQuestForm } from "@/features/quests/components/QuestForm";
 import QuestStepsLayout from "@/features/quests/questSteps/layouts/QuestStepsLayout";
 import QuestStepsIndex from "@/features/quests/questSteps/pages/QuestStepsIndex";
 import QuestStepDetails from "@/features/quests/questSteps/pages/QuestStepDetails";
-import CreateQuestStepForm from "@/features/quests/questSteps/components/CreateQuestStepForm";
+import { CreateQuestStepForm } from "@/features/quests/questSteps/components/QuestStepForm";
 
 export default function MainRouter() {
   return (
