@@ -1104,8 +1104,8 @@ const CreateQuestStepDto = z
     index: z.number().gte(1),
     description: z.string().max(400),
     questId: z.number().gte(1),
-    roomId: z.number().gte(1).optional(),
-    npcId: z.number().gte(1).optional(),
+    roomId: z.number().gte(1).nullish(),
+    npcId: z.number().gte(1).nullish(),
   })
   .passthrough();
 const QuestBaseEntity = z
@@ -1129,8 +1129,8 @@ const UpdateQuestStepDto = z
     index: z.number().gte(1),
     description: z.string().max(400),
     questId: z.number().gte(1),
-    roomId: z.number().gte(1),
-    npcId: z.number().gte(1),
+    roomId: z.number().gte(1).nullable(),
+    npcId: z.number().gte(1).nullable(),
   })
   .partial()
   .passthrough();

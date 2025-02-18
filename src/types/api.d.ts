@@ -2192,8 +2192,8 @@ export interface components {
             index: number;
             description: string;
             questId: number;
-            roomId?: number;
-            npcId?: number;
+            roomId?: number | null;
+            npcId?: number | null;
         };
         QuestBaseEntity: {
             id: number;
@@ -2214,8 +2214,8 @@ export interface components {
             index?: number;
             description?: string;
             questId?: number;
-            roomId?: number;
-            npcId?: number;
+            roomId?: number | null;
+            npcId?: number | null;
         };
         CreateQuestDto: {
             name: string;
