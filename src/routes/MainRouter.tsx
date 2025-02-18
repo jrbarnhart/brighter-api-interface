@@ -81,7 +81,7 @@ import CreateMonsterVariantForm from "@/features/monsters/variants/components/Cr
 import MonstersLayout from "@/features/monsters/layouts/MonstersLayout";
 import MonstersIndex from "@/features/monsters/pages/MonstersIndex";
 import MonsterDetails from "@/features/monsters/pages/MonsterDetails";
-import CreateMonsterForm from "@/features/monsters/components/CreateMonsterForm";
+import { CreateMonsterForm } from "@/features/monsters/components/MonsterForm";
 import DropTablesLayout from "@/features/monsters/dropTables/layouts/DropTablesLayout";
 import DropTablesIndex from "@/features/monsters/dropTables/pages/DropTablesIndex";
 import DropTableDetails from "@/features/monsters/dropTables/pages/DropTableDetails";
