@@ -37,7 +37,7 @@ const WeaponVariantFormContent = ({
 }) => {
   const { isLoading, isSuccess, error, data } =
     useQuery<WeaponVariantFormFetchedData>({
-      queryKey: [queryKeys.resourceForm],
+      queryKey: [queryKeys.weaponVariantForm],
       queryFn: async (): Promise<WeaponVariantFormFetchedData> => {
         try {
           const weaponsResponse = await axiosClient.get<
