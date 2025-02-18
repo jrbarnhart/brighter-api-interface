@@ -92,7 +92,7 @@ import MiscItemDetails from "@/features/miscItems/pages/MiscItemDetails";
 import { CreateMiscItemForm } from "@/features/miscItems/components/MiscItemForm";
 import VendorsIndex from "@/features/npcs/vendors/pages/VendorsIndex";
 import VendorDetails from "@/features/npcs/vendors/pages/VendorDetails";
-import CreateVendorForm from "@/features/npcs/vendors/components/CreateVendorForm";
+import { CreateVendorForm } from "@/features/npcs/vendors/components/VendorForm";
 import VendorsLayout from "@/features/npcs/vendors/layouts/VendorsLayout";
 import NpcsLayout from "@/features/npcs/layouts/NpcsLayout";
 import NpcsIndex from "@/features/npcs/pages/NpcsIndex";
