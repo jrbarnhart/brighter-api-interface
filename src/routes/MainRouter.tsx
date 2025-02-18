@@ -73,7 +73,7 @@ import CreateArmorVariantForm from "@/features/armors/variants/components/Create
 import ArmorsLayout from "@/features/armors/layouts/ArmorsLayout";
 import ArmorsIndex from "@/features/armors/pages/ArmorsIndex";
 import ArmorDetails from "@/features/armors/pages/ArmorDetails";
-import CreateArmorForm from "@/features/armors/components/CreateArmorForm";
+import { CreateArmorForm } from "@/features/armors/components/ArmorForm";
 import MonsterVariantsLayout from "@/features/monsters/variants/layouts/MonsterVariantsLayout";
 import MonsterVariantsIndex from "@/features/monsters/variants/pages/MonsterVariantsIndex";
 import MonsterVariantDetails from "@/features/monsters/variants/pages/MonsterVariantDetails";
