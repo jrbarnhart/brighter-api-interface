@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import NpcDetailsContent from "../components/NpcDetailsContent";
-import UpdateNpcForm from "../components/UpdateNpcForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateNpcForm } from "../components/NpcForm";
 
 export default function NpcDetails() {
   return (
