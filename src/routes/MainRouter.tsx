@@ -97,7 +97,7 @@ import VendorsLayout from "@/features/npcs/vendors/layouts/VendorsLayout";
 import NpcsLayout from "@/features/npcs/layouts/NpcsLayout";
 import NpcsIndex from "@/features/npcs/pages/NpcsIndex";
 import NpcDetails from "@/features/npcs/pages/NpcDetails";
-import CreateNpcForm from "@/features/npcs/components/CreateNpcForm";
+import { CreateNpcForm } from "@/features/npcs/components/NpcForm";
 import QuestsLayout from "@/features/quests/layouts/QuestsLayout";
 import QuestsIndex from "@/features/quests/pages/QuestsIndex";
 import QuestDetails from "@/features/quests/pages/QuestDetails";
