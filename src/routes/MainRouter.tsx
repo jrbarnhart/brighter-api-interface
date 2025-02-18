@@ -65,7 +65,7 @@ import CreateWeaponVariantForm from "@/features/weapons/variants/components/Crea
 import WeaponsLayout from "@/features/weapons/layouts/WeaponsLayout";
 import WeaponsIndex from "@/features/weapons/pages/WeaponsIndex";
 import WeaponDetails from "@/features/weapons/pages/WeaponDetails";
-import CreateWeaponForm from "@/features/weapons/components/CreateWeaponForm";
+import { CreateWeaponForm } from "@/features/weapons/components/WeaponForm";
 import ArmorVariantsLayout from "@/features/armors/variants/layouts/ArmorVariantsLayout";
 import ArmorVariantsIndex from "@/features/armors/variants/pages/ArmorVariantsIndex";
 import ArmorVariantDetails from "@/features/armors/variants/pages/ArmorVariantDetails";
