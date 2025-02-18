@@ -1075,6 +1075,11 @@ const UpdateVendorDto = z
     armorVariantIds: z.array(z.number().gte(1)),
     consumableVariantIds: z.array(z.number().gte(1)),
     miscItemIds: z.array(z.number().gte(1)),
+    removeResourceVariantIds: z.array(z.number().gte(1)),
+    removeWeaponVariantIds: z.array(z.number().gte(1)),
+    removeArmorVariantIds: z.array(z.number().gte(1)),
+    removeConsumableVariantIds: z.array(z.number().gte(1)),
+    removeMiscItemIds: z.array(z.number().gte(1)),
   })
   .partial()
   .passthrough();

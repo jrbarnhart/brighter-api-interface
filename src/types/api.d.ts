@@ -2169,6 +2169,11 @@ export interface components {
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
             miscItemIds?: number[];
+            removeResourceVariantIds?: number[];
+            removeWeaponVariantIds?: number[];
+            removeArmorVariantIds?: number[];
+            removeConsumableVariantIds?: number[];
+            removeMiscItemIds?: number[];
         };
         CreateNpcDto: {
             name: string;
