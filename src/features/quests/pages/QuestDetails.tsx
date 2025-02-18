@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import QuestDetailsContent from "../components/QuestDetailsContent";
-import UpdateQuestForm from "../components/UpdateQuestForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateQuestForm } from "../components/QuestForm";
 
 export default function QuestDetails() {
   return (
