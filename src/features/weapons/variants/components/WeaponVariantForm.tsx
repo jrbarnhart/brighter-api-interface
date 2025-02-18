@@ -84,7 +84,7 @@ const WeaponVariantFormContent = ({
 
   return (
     <>
-      {/* WeaponVariant Name */}
+      {/* Weapon Variant Name */}
       <FormField
         control={form.control}
         name="name"
