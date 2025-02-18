@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import MonsterDetailsContent from "../components/MonsterDetailsContent";
-import UpdateMonsterForm from "../components/UpdateMonsterForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateMonsterForm } from "../components/MonsterForm";
 
 export default function MonsterDetails() {
   return (
