@@ -27,6 +27,7 @@ export default function NpcDetailsContent({
         items={record.questSteps}
         title="Quest Steps"
       />
+      <ScrollList basePath="rooms" items={record.rooms} title="In Rooms" />
     </>
   );
 }

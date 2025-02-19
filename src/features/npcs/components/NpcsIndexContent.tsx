@@ -19,12 +19,14 @@ export default function NpcsIndexContent({
         recordName={npc.name}
       />
       <p>{npc.id}</p>
-      {npc.vendor && (
+      {npc.vendor ? (
         <RecordLink
           recordBasePath="/npcs/vendors"
           recordId={npc.vendor.id}
           recordName={`Id: ${npc.vendor.id.toString()}`}
         />
+      ) : (
+        <p>Not Set</p>
       )}
       <p>{npc.questSteps.length}</p>
       <p>{npc.rooms.length}</p>

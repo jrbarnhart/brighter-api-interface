@@ -26,6 +26,7 @@ export default function VendorsIndexContent({
       <p>{vendor.resourceVariants.length}</p>
       <p>{vendor.consumableVariants.length}</p>
       <p>{vendor.weaponVariants.length}</p>
+      <p>{vendor.armorVariants.length}</p>
       <p>{vendor.miscItems.length}</p>
     </div>
   ));
