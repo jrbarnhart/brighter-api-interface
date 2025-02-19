@@ -3,6 +3,7 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { Form } from "../ui/form";
 import { Button } from "../ui/button";
+import { useEffect } from "react";
 
 export default function FeatureForm<T extends FieldValues>({
   children,
@@ -28,6 +29,14 @@ export default function FeatureForm<T extends FieldValues>({
   const token = localStorage.getItem("access_token");
 
   const authHeaderValue = `Bearer ${token ?? ""}`;
+
+  const { formState, reset } = form;
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState.isSubmitSuccessful, reset]);
 
   const mutation = useMutation({
     mutationFn: async (bodyData: T) => {
