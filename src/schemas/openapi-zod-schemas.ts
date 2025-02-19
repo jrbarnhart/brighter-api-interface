@@ -850,7 +850,7 @@ const CreateDropTableDto = z
     armorVariantIds: z.array(z.number().gte(1)).optional(),
     consumableVariantIds: z.array(z.number().gte(1)).optional(),
     miscItemIds: z.array(z.number().gte(1)).optional(),
-    currency: z.number().gte(1).optional(),
+    currency: z.number().gte(1).nullish(),
   })
   .passthrough();
 const DropTableEntity = z
@@ -874,7 +874,12 @@ const UpdateDropTableDto = z
     armorVariantIds: z.array(z.number().gte(1)),
     consumableVariantIds: z.array(z.number().gte(1)),
     miscItemIds: z.array(z.number().gte(1)),
-    currency: z.number().gte(1),
+    currency: z.number().gte(1).nullable(),
+    removeResourceVariantIds: z.array(z.number().gte(1)),
+    removeWeaponVariantIds: z.array(z.number().gte(1)),
+    removeArmorVariantIds: z.array(z.number().gte(1)),
+    removeConsumableVariantIds: z.array(z.number().gte(1)),
+    removeMiscItemIds: z.array(z.number().gte(1)),
   })
   .partial()
   .passthrough();
@@ -1127,7 +1132,7 @@ const QuestStepEntity = z
 const UpdateQuestStepDto = z
   .object({
     index: z.number().gte(1),
-    description: z.string().max(400),
+    description: z.string().min(1).max(400),
     questId: z.number().gte(1),
     roomId: z.number().gte(1).nullable(),
     npcId: z.number().gte(1).nullable(),
@@ -1193,7 +1198,7 @@ const StatsEntity = z
         npcs: z.number(),
         vendors: z.number(),
         quests: z.number(),
-        questStep: z.number(),
+        questSteps: z.number(),
       })
       .passthrough(),
   })

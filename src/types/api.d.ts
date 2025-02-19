@@ -2035,7 +2035,7 @@ export interface components {
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
             miscItemIds?: number[];
-            currency?: number;
+            currency?: number | null;
         };
         DropTableEntity: {
             id: number;
@@ -2055,7 +2055,12 @@ export interface components {
             armorVariantIds?: number[];
             consumableVariantIds?: number[];
             miscItemIds?: number[];
-            currency?: number;
+            currency?: number | null;
+            removeResourceVariantIds?: number[];
+            removeWeaponVariantIds?: number[];
+            removeArmorVariantIds?: number[];
+            removeConsumableVariantIds?: number[];
+            removeMiscItemIds?: number[];
         };
         CreateMonsterVariantDto: {
             name: string;
@@ -2289,7 +2294,7 @@ export interface components {
                 npcs: number;
                 vendors: number;
                 quests: number;
-                questStep: number;
+                questSteps: number;
             };
         };
         AttackElementsEnum: {
