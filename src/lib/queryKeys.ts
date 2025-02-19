@@ -67,6 +67,7 @@ const queryKeys = {
   armorVariantForm: "armor-variant-form-data",
   monsterForm: "monster-form-data",
   monsterVariantForm: "monster-variant-form-data",
+  dropTableForm: "drop-table-form-data",
   vendorForm: "vendor-form-data",
   questStepForm: "quest-step-form-data",
 };
