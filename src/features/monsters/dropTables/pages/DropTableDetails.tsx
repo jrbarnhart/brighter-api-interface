@@ -1,7 +1,7 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import DropTableDetailsContent from "../components/DropTableDetailsContent";
-import UpdateDropTableForm from "../components/UpdateDropTableForm";
 import queryKeys from "@/lib/queryKeys";
+import { UpdateDropTableForm } from "../components/DropTableForm";
 
 export default function DropTableDetails() {
   return (
