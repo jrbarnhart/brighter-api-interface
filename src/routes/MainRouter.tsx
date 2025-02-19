@@ -106,13 +106,16 @@ import QuestStepsLayout from "@/features/quests/questSteps/layouts/QuestStepsLay
 import QuestStepsIndex from "@/features/quests/questSteps/pages/QuestStepsIndex";
 import QuestStepDetails from "@/features/quests/questSteps/pages/QuestStepDetails";
 import { CreateQuestStepForm } from "@/features/quests/questSteps/components/QuestStepForm";
+import HomeLayout from "@/pages/home/HomeLayout";
 
 export default function MainRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Nav />}>
-          <Route index element={<Home />} />
+          <Route path="/" element={<HomeLayout />}>
+            <Route index element={<Home />} />
+          </Route>
           {/* Auth */}
           <Route path="login" element={<Login />} />
           {/* Regions */}
