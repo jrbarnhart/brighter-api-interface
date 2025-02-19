@@ -1,6 +1,6 @@
 import FeatureDetails from "@/components/featureDetails/FeatureDetails";
 import RoomDetailsContent from "../components/RoomDetailsContent";
-import { UpdateRoomForm } from "../components/RoomForms";
+import { UpdateRoomForm } from "../components/RoomForm";
 import { components } from "../../../types/api";
 import queryKeys from "@/lib/queryKeys";
 
