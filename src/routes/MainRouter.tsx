@@ -85,7 +85,7 @@ import { CreateMonsterForm } from "@/features/monsters/components/MonsterForm";
 import DropTablesLayout from "@/features/monsters/dropTables/layouts/DropTablesLayout";
 import DropTablesIndex from "@/features/monsters/dropTables/pages/DropTablesIndex";
 import DropTableDetails from "@/features/monsters/dropTables/pages/DropTableDetails";
-import CreateDropTableForm from "@/features/monsters/dropTables/components/CreateDropTableForm";
+import { CreateDropTableForm } from "@/features/monsters/dropTables/components/DropTableForm";
 import MiscItemsLayout from "@/features/miscItems/layouts/MiscItemsLayout";
 import MiscItemsIndex from "@/features/miscItems/pages/MiscItemsIndex";
 import MiscItemDetails from "@/features/miscItems/pages/MiscItemDetails";
