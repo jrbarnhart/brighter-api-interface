@@ -1102,7 +1102,7 @@ const UpdateNpcDto = z
 const CreateQuestStepDto = z
   .object({
     index: z.number().gte(1),
-    description: z.string().max(400),
+    description: z.string().min(1).max(400),
     questId: z.number().gte(1),
     roomId: z.number().gte(1).nullish(),
     npcId: z.number().gte(1).nullish(),
@@ -1147,6 +1147,56 @@ const QuestEntity = z
 const UpdateQuestDto = z
   .object({ name: z.string().min(1).max(256) })
   .partial()
+  .passthrough();
+const StatsEntity = z
+  .object({
+    counts: z
+      .object({
+        regions: z.number(),
+        rooms: z.number(),
+        combatSkills: z.number(),
+        combatSkillRequirements: z.number(),
+        gatheringSkills: z.number(),
+        gatheringSkillRequirements: z.number(),
+        craftingSkills: z.number(),
+        craftingSkillRequirements: z.number(),
+        craftingRecipes: z.number(),
+        resources: z.number(),
+        resourceVariants: z.number(),
+        consumables: z.number(),
+        consumableVariants: z.number(),
+        weapons: z.number(),
+        weaponVariants: z.number(),
+        armors: z.number(),
+        armorVariants: z.number(),
+        miscItems: z.number(),
+        monsters: z.number(),
+        monsterVariants: z.number(),
+        npcs: z.number(),
+        vendors: z.number(),
+        quests: z.number(),
+        questSteps: z.number(),
+      })
+      .passthrough(),
+    unset: z
+      .object({
+        combatSkillRequirements: z.number(),
+        gatheringSkillRequirements: z.number(),
+        craftingSkillRequirements: z.number(),
+        craftingRecipes: z.number(),
+        resourceVariants: z.number(),
+        consumableVariants: z.number(),
+        weaponVariants: z.number(),
+        armorVariants: z.number(),
+        monsterVariants: z.number(),
+        dropTables: z.number(),
+        npcs: z.number(),
+        vendors: z.number(),
+        quests: z.number(),
+        questStep: z.number(),
+      })
+      .passthrough(),
+  })
   .passthrough();
 
 export const schemas = {
@@ -1266,4 +1316,5 @@ export const schemas = {
   CreateQuestDtoSchema: CreateQuestDto,
   QuestEntitySchema: QuestEntity,
   UpdateQuestDtoSchema: UpdateQuestDto,
+  StatsEntitySchema: StatsEntity,
 };

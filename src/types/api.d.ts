@@ -11,7 +11,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get: operations["AppController_getHello"];
+        get: operations["AppController_getMetaData"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1376,6 +1376,26 @@ export interface paths {
         patch: operations["QuestsController_update"];
         trace?: never;
     };
+    "/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get API stats
+         * @description This gets counts and other info about all database records
+         */
+        get: operations["StatsController_find"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2228,6 +2248,50 @@ export interface components {
         UpdateQuestDto: {
             name?: string;
         };
+        StatsEntity: {
+            counts: {
+                regions: number;
+                rooms: number;
+                combatSkills: number;
+                combatSkillRequirements: number;
+                gatheringSkills: number;
+                gatheringSkillRequirements: number;
+                craftingSkills: number;
+                craftingSkillRequirements: number;
+                craftingRecipes: number;
+                resources: number;
+                resourceVariants: number;
+                consumables: number;
+                consumableVariants: number;
+                weapons: number;
+                weaponVariants: number;
+                armors: number;
+                armorVariants: number;
+                miscItems: number;
+                monsters: number;
+                monsterVariants: number;
+                npcs: number;
+                vendors: number;
+                quests: number;
+                questSteps: number;
+            };
+            unset: {
+                combatSkillRequirements: number;
+                gatheringSkillRequirements: number;
+                craftingSkillRequirements: number;
+                craftingRecipes: number;
+                resourceVariants: number;
+                consumableVariants: number;
+                weaponVariants: number;
+                armorVariants: number;
+                monsterVariants: number;
+                dropTables: number;
+                npcs: number;
+                vendors: number;
+                quests: number;
+                questStep: number;
+            };
+        };
         AttackElementsEnum: {
             /** @enum {string} */
             value: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
@@ -2253,7 +2317,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    AppController_getHello: {
+    AppController_getMetaData: {
         parameters: {
             query?: never;
             header?: never;
@@ -2266,9 +2330,7 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content: {
-                    "application/json": string;
-                };
+                content?: never;
             };
         };
     };
@@ -6586,6 +6648,26 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    StatsController_find: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Found stats */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatsEntity"];
+                };
             };
         };
     };
