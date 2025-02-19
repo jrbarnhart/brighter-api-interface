@@ -70,6 +70,7 @@ const queryKeys = {
   dropTableForm: "drop-table-form-data",
   vendorForm: "vendor-form-data",
   questStepForm: "quest-step-form-data",
+  stats: "stats",
 };
 
 export default queryKeys;
