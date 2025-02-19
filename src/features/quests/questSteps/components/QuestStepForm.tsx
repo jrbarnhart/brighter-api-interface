@@ -110,6 +110,14 @@ const QuestStepFormContent = ({
 
   return (
     <>
+      {/* Quest Id */}
+      <ComboboxSingleIdId
+        form={form}
+        data={quests.data}
+        fieldName="questId"
+        label="Quest"
+        description="Id of the quest this is a step of."
+      />
       {/* Index */}
       <FormField
         control={form.control}
@@ -152,14 +160,6 @@ const QuestStepFormContent = ({
             <FormMessage />
           </FormItem>
         )}
-      />
-      {/* Quest Id */}
-      <ComboboxSingleIdId
-        form={form}
-        data={quests.data}
-        fieldName="questId"
-        label="Quest"
-        description="Id of the quest this is a step of."
       />
       {/* Room Id */}
       <ComboboxSingleIdId
