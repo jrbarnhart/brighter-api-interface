@@ -25,6 +25,10 @@ type MonsterFormFetchedData = {
   combatSkills: Data<
     paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
   >;
+
+  regions: Data<
+    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
 };
 
 type MonsterFormFields = {
@@ -33,6 +37,7 @@ type MonsterFormFields = {
   immuneElement: components["schemas"]["AttackElementsEnum"]["value"];
   vulnerableElement: components["schemas"]["AttackElementsEnum"]["value"];
   skillId: number;
+  regionId: number;
   passive: boolean;
 };
 
@@ -51,7 +56,17 @@ const MonsterFormContent = ({
               paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
             >
           >("/skills/combat");
-          return { combatSkills: combatSkillsResponse.data };
+
+          const regionsResponse = await axiosClient.get<
+            Data<
+              paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+            >
+          >("/regions");
+
+          return {
+            combatSkills: combatSkillsResponse.data,
+            regions: regionsResponse.data,
+          };
         } catch (error) {
           if (axios.isAxiosError(error)) {
             throw new Error(error.message);
@@ -86,7 +101,7 @@ const MonsterFormContent = ({
   }
 
   // Render the form
-  const { combatSkills } = data;
+  const { combatSkills, regions } = data;
 
   return (
     <>
@@ -112,6 +127,14 @@ const MonsterFormContent = ({
         fieldName="skillId"
         label="Skill"
         description="The combat skill this monster is fought with."
+      />
+      {/* Region Id */}
+      <ComboboxSingleIdId
+        form={form}
+        data={regions.data}
+        fieldName="regionId"
+        label="Region"
+        description="The region this monster is in."
       />
       {/* Attack Element */}
       <SelectField
@@ -170,6 +193,7 @@ export function CreateMonsterForm() {
     defaultValues: {
       name: "",
       skillId: 0,
+      regionId: 0,
       attackElement: "NONE",
       immuneElement: "NONE",
       vulnerableElement: "NONE",
@@ -200,6 +224,7 @@ export function UpdateMonsterForm({
     defaultValues: {
       name: record.name,
       skillId: record.skillId,
+      regionId: record.regionId,
       attackElement: record.attackElement,
       immuneElement: record.immuneElement,
       vulnerableElement: record.vulnerableElement,
