@@ -19,7 +19,7 @@ import {
   CommandItem,
   CommandList,
 } from "../ui/command";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 type ComboboxData = {
   name?: string;
@@ -48,20 +48,29 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
     ({
       id,
       currentValue: currentValues,
+      name,
     }: {
       id: number;
       currentValue: number;
+      name?: string;
     }) => {
       if (currentValues === id) {
         // Remove the current value
         form.setValue(fieldName, null as PathValue<T, Path<T>>);
+        setButtonContent(null);
       } else {
         // Add the current value
         form.setValue(fieldName, id as PathValue<T, Path<T>>);
+        const newButtonContent = name
+          ? `${id.toString()} - ${name}`
+          : `Id - ${id.toString()}`;
+        setButtonContent(newButtonContent);
       }
     },
     [fieldName, form]
   );
+
+  const [buttonContent, setButtonContent] = useState<string | null>(null);
 
   return (
     <FormField
@@ -85,10 +94,10 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
                       role="combobox"
                       className={cn(
                         "w-60 truncate justify-between",
-                        fieldValue && "text-muted-foreground"
+                        !fieldValue && "text-muted-foreground"
                       )}
                     >
-                      {fieldValue ? fieldValue : `Select ${label}`}
+                      {buttonContent ? buttonContent : `Select ${label}`}
                       <ChevronsUpDown className="opacity-50" />
                     </Button>
                   </FormControl>
@@ -128,6 +137,7 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
                               handleCommandSelect({
                                 id: entry.id,
                                 currentValue: fieldValue,
+                                name: entry.name,
                               });
                             }}
                           >
