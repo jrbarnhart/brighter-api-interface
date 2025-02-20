@@ -1438,30 +1438,6 @@ export interface components {
             name: string;
             regionId: number;
         };
-        RegionEntity: {
-            id: number;
-            name: string;
-            rooms: components["schemas"]["RoomBaseEntity"][];
-            combatSkills: components["schemas"]["CombatSkillBaseEntity"][];
-            gatheringSkills: components["schemas"]["GatheringSkillBaseEntity"][];
-            craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
-        };
-        UpdateRegionDto: {
-            name?: string;
-        };
-        CreateRoomDto: {
-            /** @description The array of types of bank in this room */
-            banks?: ("BONES" | "BUILDING" | "CAPES" | "EXPLOSIVES" | "BAIT" | "HIDES" | "INGREDIENTS" | "LEATHERS" | "LUMBER" | "MONUMENT" | "ORE" | "REAGENTS" | "POTIONS" | "QUARTERMASTER" | "STONE" | "TIMBER")[];
-            name: string;
-            regionId: number;
-            portal: boolean;
-            obelisk: boolean;
-            craftingSkillIds?: number[];
-            monsterIds?: number[];
-            npcIds?: number[];
-            resourceIds?: number[];
-            questStepIds?: number[];
-        };
         MonsterBaseEntity: {
             /**
              * @description The damage element this weapon has
@@ -1481,7 +1457,33 @@ export interface components {
             id: number;
             name: string;
             skillId: number;
+            regionId: number;
             passive: boolean;
+        };
+        RegionEntity: {
+            id: number;
+            name: string;
+            rooms: components["schemas"]["RoomBaseEntity"][];
+            combatSkills: components["schemas"]["CombatSkillBaseEntity"][];
+            gatheringSkills: components["schemas"]["GatheringSkillBaseEntity"][];
+            craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
+            monsters: components["schemas"]["MonsterBaseEntity"][];
+        };
+        UpdateRegionDto: {
+            name?: string;
+        };
+        CreateRoomDto: {
+            /** @description The array of types of bank in this room */
+            banks?: ("BONES" | "BUILDING" | "CAPES" | "EXPLOSIVES" | "BAIT" | "HIDES" | "INGREDIENTS" | "LEATHERS" | "LUMBER" | "MONUMENT" | "ORE" | "REAGENTS" | "POTIONS" | "QUARTERMASTER" | "STONE" | "TIMBER")[];
+            name: string;
+            regionId: number;
+            portal: boolean;
+            obelisk: boolean;
+            craftingSkillIds?: number[];
+            monsterIds?: number[];
+            npcIds?: number[];
+            resourceIds?: number[];
+            questStepIds?: number[];
         };
         NpcBaseEntity: {
             id: number;
@@ -2091,6 +2093,7 @@ export interface components {
             name: string;
             skillId: number;
             skill: components["schemas"]["CombatSkillBaseEntity"];
+            regionId: number;
             passive: boolean;
         };
         MonsterVariantEntity: {
@@ -2123,6 +2126,7 @@ export interface components {
             vulnerableElement: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
             name: string;
             skillId: number;
+            regionId: number;
             passive: boolean;
         };
         MonsterEntity: {
@@ -2145,6 +2149,8 @@ export interface components {
             name: string;
             skill: components["schemas"]["CombatSkillBaseEntity"];
             skillId: number;
+            region: components["schemas"]["RegionBaseEntity"];
+            regionId: number;
             rooms: components["schemas"]["RoomBaseEntity"][];
             passive: boolean;
             variants: components["schemas"]["MonsterVariantBaseEntity"][];
@@ -2167,6 +2173,7 @@ export interface components {
             vulnerableElement?: "ARBORAE" | "CRYONAE" | "INFERNAE" | "NECROMAE" | "TEMPESTAE" | "IMPACT" | "NONE";
             name?: string;
             skillId?: number;
+            regionId?: number;
             passive?: boolean;
         };
         CreateVendorDto: {

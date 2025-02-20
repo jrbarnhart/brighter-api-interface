@@ -60,6 +60,42 @@ const CraftingSkillBaseEntity = z
     regionId: z.number().gte(1),
   })
   .passthrough();
+const MonsterBaseEntity = z
+  .object({
+    attackElement: z.enum([
+      "ARBORAE",
+      "CRYONAE",
+      "INFERNAE",
+      "NECROMAE",
+      "TEMPESTAE",
+      "IMPACT",
+      "NONE",
+    ]),
+    immuneElement: z.enum([
+      "ARBORAE",
+      "CRYONAE",
+      "INFERNAE",
+      "NECROMAE",
+      "TEMPESTAE",
+      "IMPACT",
+      "NONE",
+    ]),
+    vulnerableElement: z.enum([
+      "ARBORAE",
+      "CRYONAE",
+      "INFERNAE",
+      "NECROMAE",
+      "TEMPESTAE",
+      "IMPACT",
+      "NONE",
+    ]),
+    id: z.number().gte(1),
+    name: z.string().min(1).max(256),
+    skillId: z.number().gte(1),
+    regionId: z.number().gte(1),
+    passive: z.boolean(),
+  })
+  .passthrough();
 const RegionEntity = z
   .object({
     id: z.number().gte(1),
@@ -68,6 +104,7 @@ const RegionEntity = z
     combatSkills: z.array(CombatSkillBaseEntity),
     gatheringSkills: z.array(GatheringSkillBaseEntity),
     craftingSkills: z.array(CraftingSkillBaseEntity),
+    monsters: z.array(MonsterBaseEntity),
   })
   .passthrough();
 const UpdateRegionDto = z
@@ -107,41 +144,6 @@ const CreateRoomDto = z
     npcIds: z.array(z.number().gte(1)).optional(),
     resourceIds: z.array(z.number().gte(1)).optional(),
     questStepIds: z.array(z.number().gte(1)).optional(),
-  })
-  .passthrough();
-const MonsterBaseEntity = z
-  .object({
-    attackElement: z.enum([
-      "ARBORAE",
-      "CRYONAE",
-      "INFERNAE",
-      "NECROMAE",
-      "TEMPESTAE",
-      "IMPACT",
-      "NONE",
-    ]),
-    immuneElement: z.enum([
-      "ARBORAE",
-      "CRYONAE",
-      "INFERNAE",
-      "NECROMAE",
-      "TEMPESTAE",
-      "IMPACT",
-      "NONE",
-    ]),
-    vulnerableElement: z.enum([
-      "ARBORAE",
-      "CRYONAE",
-      "INFERNAE",
-      "NECROMAE",
-      "TEMPESTAE",
-      "IMPACT",
-      "NONE",
-    ]),
-    id: z.number().gte(1),
-    name: z.string().min(1).max(256),
-    skillId: z.number().gte(1),
-    passive: z.boolean(),
   })
   .passthrough();
 const NpcBaseEntity = z
@@ -926,6 +928,7 @@ const MonsterBaseWithSkillEntity = z
     name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
     skill: CombatSkillBaseEntity,
+    regionId: z.number().gte(1),
     passive: z.boolean(),
   })
   .passthrough();
@@ -974,6 +977,7 @@ const CreateMonsterDto = z
     ]),
     name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
+    regionId: z.number().gte(1),
     passive: z.boolean(),
   })
   .passthrough();
@@ -1010,6 +1014,8 @@ const MonsterEntity = z
     name: z.string().min(1).max(256),
     skill: CombatSkillBaseEntity,
     skillId: z.number().gte(1),
+    region: RegionBaseEntity,
+    regionId: z.number().gte(1),
     rooms: z.array(RoomBaseEntity),
     passive: z.boolean(),
     variants: z.array(MonsterVariantBaseEntity),
@@ -1046,6 +1052,7 @@ const UpdateMonsterDto = z
     ]),
     name: z.string().min(1).max(256),
     skillId: z.number().gte(1),
+    regionId: z.number().gte(1),
     passive: z.boolean(),
   })
   .partial()
@@ -1213,10 +1220,10 @@ export const schemas = {
   CombatSkillBaseEntitySchema: CombatSkillBaseEntity,
   GatheringSkillBaseEntitySchema: GatheringSkillBaseEntity,
   CraftingSkillBaseEntitySchema: CraftingSkillBaseEntity,
+  MonsterBaseEntitySchema: MonsterBaseEntity,
   RegionEntitySchema: RegionEntity,
   UpdateRegionDtoSchema: UpdateRegionDto,
   CreateRoomDtoSchema: CreateRoomDto,
-  MonsterBaseEntitySchema: MonsterBaseEntity,
   NpcBaseEntitySchema: NpcBaseEntity,
   ResourceBaseEntitySchema: ResourceBaseEntity,
   QuestStepBaseEntitySchema: QuestStepBaseEntity,
