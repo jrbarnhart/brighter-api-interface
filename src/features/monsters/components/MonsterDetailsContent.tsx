@@ -10,13 +10,20 @@ export default function MonsterDetailsContent({
   return (
     <>
       <p className="text-xl">Id: {record.id}</p>
-
       <div className="flex gap-3 items-center">
         <p className="text-xl">Skill: </p>
         <RecordLink
           recordBasePath="/skills/combat"
           recordId={record.skillId}
           recordName={record.skill.name}
+        />
+      </div>
+      <div className="flex gap-3 items-center">
+        <p className="text-xl">Region: </p>
+        <RecordLink
+          recordBasePath="/regions"
+          recordId={record.regionId}
+          recordName={record.region.name}
         />
       </div>
       <p className="text-xl">Passive: {record.passive ? "✅" : "❌"}</p>
