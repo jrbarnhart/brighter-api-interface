@@ -1,6 +1,6 @@
 import { components } from "@/types/api";
 
-export function groupDataBySkillId<T extends { skillId?: number }>(
+export function groupDataBySkillId<T extends { skillId?: number | null }>(
   data: T[]
 ): T[][] {
   return Object.values(
