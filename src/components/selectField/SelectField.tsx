@@ -21,12 +21,14 @@ export default function SelectField<T extends FieldValues>({
   fieldName,
   label,
   description,
+  valueType = "string",
 }: {
   data: string[] | { name: string; id: number }[];
   form: UseFormReturn<T>;
   fieldName: Path<T>;
   label: string;
   description: string;
+  valueType?: "string" | "number";
 }) {
   const normalizedData = data.map((d) =>
     typeof d === "string" ? { name: d, id: d } : d
@@ -41,15 +43,18 @@ export default function SelectField<T extends FieldValues>({
           <FormLabel>{label}</FormLabel>
           <Select
             onValueChange={(value) => {
-              form.setValue(fieldName, value as PathValue<T, Path<T>>, {
-                shouldValidate: true,
-              });
+              const newValue = valueType === "number" ? Number(value) : value;
+              form.setValue(fieldName, newValue as PathValue<T, Path<T>>);
             }}
             value={field.value}
           >
             <FormControl>
               <SelectTrigger>
-                <SelectValue placeholder={`Select a ${label}`} />
+                <SelectValue>
+                  {field.value === 0
+                    ? "Select a skill"
+                    : normalizedData.find((r) => r.id === field.value)?.name}
+                </SelectValue>
               </SelectTrigger>
             </FormControl>
             <SelectContent>
