@@ -19,7 +19,7 @@ import {
   CommandItem,
   CommandList,
 } from "../ui/command";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type ComboboxData = {
   name?: string;
@@ -70,7 +70,17 @@ export default function ComboboxSingleIdId<T extends FieldValues>({
     [fieldName, form]
   );
 
+  // Handles the content of the trigger button so that entry names can be used
   const [buttonContent, setButtonContent] = useState<string | null>(null);
+  const {
+    formState: { isSubmitSuccessful },
+  } = form;
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      setButtonContent(null);
+    }
+  }, [isSubmitSuccessful]);
 
   return (
     <FormField
