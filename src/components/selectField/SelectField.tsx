@@ -45,7 +45,7 @@ export default function SelectField<T extends FieldValues>({
                 shouldValidate: true,
               });
             }}
-            defaultValue={field.value}
+            value={field.value}
           >
             <FormControl>
               <SelectTrigger>
