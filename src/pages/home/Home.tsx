@@ -25,10 +25,15 @@ export default function Home() {
     const title = camelToTitleCase(recordName);
 
     return (
-      <div>
-        <h3>{title}</h3>
-        <p>Total: {count}</p>
-        <p>Unset: {unset}</p>
+      <div className="bg-secondary rounded-xl p-3 w-80 h-40 grid grid-rows-[1fr_2fr]">
+        <h3 className="text-xl">{title}</h3>
+        <div className="bg-background/70 flex flex-col justify-around p-2 rounded-xl">
+          <p className="text-lg">Total: {count}</p>
+          <p className="text-lg">
+            Unset:{" "}
+            <span className={unset > 0 ? "text-destructive" : ""}>{unset}</span>
+          </p>
+        </div>
       </div>
     );
   };
@@ -74,7 +79,7 @@ export default function Home() {
   const { counts, unset } = stats.data;
 
   return (
-    <div>
+    <div className="flex gap-4 flex-wrap">
       {Object.entries(counts).map(([countKey, count], index) => {
         const unsetVal =
           (unset[countKey as keyof typeof unset] || undefined) ?? 0;
