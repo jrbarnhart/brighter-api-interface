@@ -1,4 +1,5 @@
 import FeatureForm from "@/components/featureForm/FeatureForm";
+import SelectField from "@/components/selectField/SelectField";
 import {
   FormControl,
   FormDescription,
@@ -8,13 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
@@ -107,45 +101,14 @@ const ResourceFormContent = ({
           </FormItem>
         )}
       />
-      {/* Region Id */}
-      <FormField
-        control={form.control}
-        name="skillId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Skill Id</FormLabel>
-            <Select
-              onValueChange={(value) => {
-                form.setValue("skillId", Number(value), {
-                  shouldValidate: true,
-                });
-              }}
-              defaultValue={field.value.toString()}
-            >
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue>
-                    {field.value === 0
-                      ? "Select a skill"
-                      : gatheringSkills.data.find((r) => r.id === field.value)
-                          ?.name}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {gatheringSkills.data.map((region) => (
-                  <SelectItem value={region.id.toString()} key={region.id}>
-                    {region.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormDescription>
-              The id of the skill this resources is gathered by.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
+      {/* Skill Id */}
+      <SelectField
+        form={form}
+        data={gatheringSkills.data}
+        fieldName="skillId"
+        label="Skill"
+        description="The skill this resource is gathered by."
+        valueType="number"
       />
       {/* Is Passive */}
       <FormField
