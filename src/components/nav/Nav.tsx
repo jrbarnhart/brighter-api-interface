@@ -28,13 +28,13 @@ export default function Nav() {
 
         <Collapsible className="w-full">
           <div className="flex justify-between items-center w-full">
-            <Button variant={"link"} className="text-xl pl-0">
-              <Link to={"/skills"}>Skills</Link>
-            </Button>
             <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="sm" className="px-2">
-                <ChevronsUpDown className="h-4 w-4" />
-                <span className="sr-only">Toggle</span>
+              <Button variant="ghost" size="sm" className="px-0 pr-2 w-full">
+                <div className="flex items-center w-full justify-between">
+                  <p className="text-xl">Skills</p>
+                  <ChevronsUpDown className="h-4 w-4" />
+                  <span className="sr-only">Toggle</span>
+                </div>
               </Button>
             </CollapsibleTrigger>
           </div>
