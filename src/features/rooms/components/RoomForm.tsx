@@ -10,13 +10,6 @@ import {
 import { Input } from "@/components/ui/input";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import { schemas } from "@/schemas/openapi-zod-schemas";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import ComboboxIds from "@/components/combobox/ComboboxIds";
 import { useQuery } from "@tanstack/react-query";
 import { components, paths } from "@/types/api";
@@ -27,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ComboboxEnum from "@/components/combobox/ComboboxEnum";
 import { useEffect } from "react";
 import queryKeys from "@/lib/queryKeys";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 
 type RoomFormFetchedData = {
   regions: Data<
@@ -51,7 +45,7 @@ type RoomFormFetchedData = {
 
 type RoomFormFields = {
   name: string;
-  regionId: number;
+  regionId: number | undefined;
   portal: boolean;
   obelisk: boolean;
   banks: string[];
@@ -177,43 +171,12 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
         )}
       />
       {/* Region Id */}
-      <FormField
-        control={form.control}
-        name="regionId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Region Id</FormLabel>
-            <Select
-              onValueChange={(value) => {
-                form.setValue("regionId", Number(value), {
-                  shouldValidate: true,
-                });
-              }}
-              defaultValue={field.value.toString()}
-            >
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue>
-                    {field.value === 0
-                      ? "Select a region"
-                      : regions.data.find((r) => r.id === field.value)?.name}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {regions.data.map((region) => (
-                  <SelectItem value={region.id.toString()} key={region.id}>
-                    {region.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormDescription>
-              The id of the Region this room is in.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
+      <ComboboxSingleId
+        form={form}
+        data={regions.data}
+        fieldName="regionId"
+        label="Region"
+        description="The region this room is found in."
       />
       {/* Is Portal */}
       <FormField
@@ -326,7 +289,7 @@ export function CreateRoomForm() {
     resolver: zodResolver(schemas.CreateRoomDtoSchema),
     defaultValues: {
       name: "",
-      regionId: 0,
+      regionId: undefined,
       portal: false,
       obelisk: false,
       banks: [],
