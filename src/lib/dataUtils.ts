@@ -1,10 +1,14 @@
 import { components } from "@/types/api";
 
-function sortItemsInGroupsByAlpha<T extends { name: string }>(
+function sortItemsInGroupsByAlpha<T extends { name?: string }>(
   groups: T[][]
 ): T[][] {
   return groups.map((group) =>
-    group.sort((a, b) => a.name.localeCompare(b.name))
+    group.sort((a, b) => {
+      const nameA = a.name || "";
+      const nameB = b.name || "";
+      return nameA.localeCompare(nameB);
+    })
   );
 }
 
@@ -34,10 +38,10 @@ export function groupDataBySkillId<T extends { skillId?: number | null }>(
   );
 }
 
-export function groupDataByRegionId<T extends { regionId?: number | null }>(
-  data: T[]
-): T[][] {
-  return Object.values(
+export function groupDataByRegionId<
+  T extends { regionId?: number | null; name?: string }
+>(data: T[]): T[][] {
+  const groups = Object.values(
     data.reduce((acc: { [key: number]: T[] }, item) => {
       const regionId = item.regionId ?? -1;
       const array = acc[regionId] ?? (acc[regionId] = []);
@@ -45,6 +49,8 @@ export function groupDataByRegionId<T extends { regionId?: number | null }>(
       return acc;
     }, {})
   );
+
+  return sortItemsInGroupsByAlpha(groups);
 }
 
 export function groupDataByQuestName<T extends { quest: { name: string } }>(
