@@ -28,7 +28,7 @@ type ComboboxData = {
   id: number;
 }[];
 
-export default function ComboboxSingleIdId<T extends FieldValues>({
+export default function ComboboxSingleId<T extends FieldValues>({
   data,
   fieldName,
   label,

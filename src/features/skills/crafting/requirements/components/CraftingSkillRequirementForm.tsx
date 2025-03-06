@@ -1,4 +1,4 @@
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -196,7 +196,7 @@ const CraftingSkillRequirementFormContent = ({
         )}
       />
       {/* Recipe Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={unsetRecipes}
         description="Id of recipe unlocked. Optional. Recipe requirementId must be null."

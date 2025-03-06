@@ -1,4 +1,4 @@
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -100,7 +100,7 @@ const ConsumableVariantFormContent = ({
         )}
       />
       {/* Skill Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={consumables.data}
         description="Id of the consumable this is a variant of."

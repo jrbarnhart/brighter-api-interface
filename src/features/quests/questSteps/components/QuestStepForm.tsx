@@ -1,4 +1,4 @@
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -111,7 +111,7 @@ const QuestStepFormContent = ({
   return (
     <>
       {/* Quest Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={quests.data}
         fieldName="questId"
@@ -162,7 +162,7 @@ const QuestStepFormContent = ({
         )}
       />
       {/* Room Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={rooms.data}
         fieldName="roomId"
@@ -171,7 +171,7 @@ const QuestStepFormContent = ({
         nullable
       />
       {/* Npc Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={npcs.data}
         fieldName="npcId"

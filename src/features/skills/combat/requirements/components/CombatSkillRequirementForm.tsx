@@ -1,4 +1,4 @@
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -196,7 +196,7 @@ const CombatSkillRequirementFormContent = ({
         )}
       />
       {/* Monster Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={unsetMonsterVariants}
         description="Id of variant unlocked. Optional. Variant requirementId must be null."

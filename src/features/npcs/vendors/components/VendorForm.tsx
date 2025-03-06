@@ -1,5 +1,5 @@
 import ComboboxIds from "@/components/combobox/ComboboxIds";
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
@@ -149,7 +149,7 @@ const VendorFormContent = ({
   return (
     <>
       {/* Npc Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={npcs.data.filter((d) => !d.vendor || d.vendor.id === record?.id)}
         fieldName="npcId"

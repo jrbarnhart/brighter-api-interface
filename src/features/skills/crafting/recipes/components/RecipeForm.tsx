@@ -1,5 +1,5 @@
 import ComboboxIds from "@/components/combobox/ComboboxIds";
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -174,7 +174,7 @@ const CraftingRecipeFormContent = ({
         label="Input Misc Items"
       />
       {/* Output Consumable Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={consumableVariants.data}
         description="Id of consumable variant created by this recipe."
@@ -183,7 +183,7 @@ const CraftingRecipeFormContent = ({
         nullable
       />
       {/* Output Weapon Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={weaponVariants.data}
         description="Id of weapon variant created by this recipe."
@@ -192,7 +192,7 @@ const CraftingRecipeFormContent = ({
         nullable
       />
       {/* Output Armor Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={armorVariants.data}
         description="Id of armor variant created by this recipe."

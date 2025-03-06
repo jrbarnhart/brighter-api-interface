@@ -18,7 +18,7 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import queryKeys from "@/lib/queryKeys";
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 
 type DropTableFormFetchedData = {
   monsterVariants: Data<
@@ -163,7 +163,7 @@ const DropTableFormContent = ({
   return (
     <>
       {/* Monster Variant Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={monsterVariants.data.filter(
           (monsterVariant) =>

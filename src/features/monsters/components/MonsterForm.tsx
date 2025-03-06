@@ -1,4 +1,4 @@
-import ComboboxSingleIdId from "@/components/combobox/ComboboxSingleId";
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import SelectField from "@/components/selectField/SelectField";
 import {
@@ -121,7 +121,7 @@ const MonsterFormContent = ({
         )}
       />
       {/* Skill Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={combatSkills.data}
         fieldName="skillId"
@@ -129,7 +129,7 @@ const MonsterFormContent = ({
         description="The combat skill this monster is fought with."
       />
       {/* Region Id */}
-      <ComboboxSingleIdId
+      <ComboboxSingleId
         form={form}
         data={regions.data}
         fieldName="regionId"
