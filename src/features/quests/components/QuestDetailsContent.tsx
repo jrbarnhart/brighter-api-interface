@@ -10,6 +10,8 @@ export default function QuestDetailsContent({
     <>
       <p className="text-xl">Id: {record.id}</p>
 
+      <p className="text-xl">Region: {record.region.name}</p>
+
       <ScrollList basePath="quests/steps" items={record.steps} title="Steps" />
     </>
   );
