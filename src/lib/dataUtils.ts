@@ -1,5 +1,16 @@
 import { components } from "@/types/api";
 
+export function groupDataByAlpha<T extends { name: string }>(data: T[]): T[][] {
+  return Object.values(
+    data.reduce((acc: { [key: string]: T[] }, item) => {
+      const firstLetter = item.name[0]?.toUpperCase() || "*";
+      const array = acc[firstLetter] ?? (acc[firstLetter] = []);
+      array.push(item);
+      return acc;
+    }, {})
+  );
+}
+
 export function groupDataBySkillId<T extends { skillId?: number | null }>(
   data: T[]
 ): T[][] {
