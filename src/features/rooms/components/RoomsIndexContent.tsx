@@ -17,7 +17,7 @@ export default function RoomsIndexContent({
   const groupedData = groupDataByRegionId(data);
 
   return groupedData.map((group, index) => (
-    <Collapsible key={index} defaultOpen={true}>
+    <Collapsible key={index} defaultOpen={false}>
       <CollapsibleTrigger asChild>
         <p className="select-none p-2 text-lg bg-border">
           {group[0]?.region.name ?? "Region Name"}
