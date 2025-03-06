@@ -96,6 +96,13 @@ const MonsterBaseEntity = z
     passive: z.boolean(),
   })
   .passthrough();
+const QuestBaseEntity = z
+  .object({
+    id: z.number().gte(1),
+    name: z.string().min(1).max(256),
+    regionId: z.number().gte(1),
+  })
+  .passthrough();
 const RegionEntity = z
   .object({
     id: z.number().gte(1),
@@ -105,6 +112,7 @@ const RegionEntity = z
     gatheringSkills: z.array(GatheringSkillBaseEntity),
     craftingSkills: z.array(CraftingSkillBaseEntity),
     monsters: z.array(MonsterBaseEntity),
+    quests: z.array(QuestBaseEntity),
   })
   .passthrough();
 const UpdateRegionDto = z
@@ -1120,9 +1128,6 @@ const CreateQuestStepDto = z
     npcId: z.number().gte(1).nullish(),
   })
   .passthrough();
-const QuestBaseEntity = z
-  .object({ id: z.number().gte(1), name: z.string().min(1).max(256) })
-  .passthrough();
 const QuestStepEntity = z
   .object({
     id: z.number().gte(1),
@@ -1147,17 +1152,19 @@ const UpdateQuestStepDto = z
   .partial()
   .passthrough();
 const CreateQuestDto = z
-  .object({ name: z.string().min(1).max(256) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .passthrough();
 const QuestEntity = z
   .object({
     id: z.number().gte(1),
     name: z.string().min(1).max(256),
+    region: RegionBaseEntity,
+    regionId: z.number().gte(1),
     steps: z.array(QuestStepBaseEntity),
   })
   .passthrough();
 const UpdateQuestDto = z
-  .object({ name: z.string().min(1).max(256) })
+  .object({ name: z.string().min(1).max(256), regionId: z.number().gte(1) })
   .partial()
   .passthrough();
 const StatsEntity = z
@@ -1221,6 +1228,7 @@ export const schemas = {
   GatheringSkillBaseEntitySchema: GatheringSkillBaseEntity,
   CraftingSkillBaseEntitySchema: CraftingSkillBaseEntity,
   MonsterBaseEntitySchema: MonsterBaseEntity,
+  QuestBaseEntitySchema: QuestBaseEntity,
   RegionEntitySchema: RegionEntity,
   UpdateRegionDtoSchema: UpdateRegionDto,
   CreateRoomDtoSchema: CreateRoomDto,
@@ -1322,7 +1330,6 @@ export const schemas = {
   NpcEntitySchema: NpcEntity,
   UpdateNpcDtoSchema: UpdateNpcDto,
   CreateQuestStepDtoSchema: CreateQuestStepDto,
-  QuestBaseEntitySchema: QuestBaseEntity,
   QuestStepEntitySchema: QuestStepEntity,
   UpdateQuestStepDtoSchema: UpdateQuestStepDto,
   CreateQuestDtoSchema: CreateQuestDto,
