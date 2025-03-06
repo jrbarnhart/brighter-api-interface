@@ -1,7 +1,15 @@
 import { components } from "@/types/api";
 
+function sortItemsInGroupsByAlpha<T extends { name: string }>(
+  groups: T[][]
+): T[][] {
+  return groups.map((group) =>
+    group.sort((a, b) => a.name.localeCompare(b.name))
+  );
+}
+
 export function groupDataByAlpha<T extends { name: string }>(data: T[]): T[][] {
-  return Object.values(
+  const groups = Object.values(
     data.reduce((acc: { [key: string]: T[] }, item) => {
       const firstLetter = item.name[0]?.toUpperCase() || "*";
       const array = acc[firstLetter] ?? (acc[firstLetter] = []);
@@ -9,6 +17,8 @@ export function groupDataByAlpha<T extends { name: string }>(data: T[]): T[][] {
       return acc;
     }, {})
   );
+
+  return sortItemsInGroupsByAlpha(groups);
 }
 
 export function groupDataBySkillId<T extends { skillId?: number | null }>(
