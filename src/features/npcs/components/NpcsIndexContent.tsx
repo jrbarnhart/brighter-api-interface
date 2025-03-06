@@ -17,7 +17,7 @@ export default function NpcsIndexContent({
   const groupedData = groupDataByAlpha(data);
 
   return groupedData.map((group, index) => (
-    <Collapsible key={index} defaultOpen={true}>
+    <Collapsible key={index} defaultOpen={false}>
       <CollapsibleTrigger asChild>
         <p className="select-none p-2 text-lg bg-border">
           {group[0]?.name[0]?.toUpperCase() ?? "*"}
