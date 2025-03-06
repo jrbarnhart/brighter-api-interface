@@ -1,3 +1,4 @@
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -9,13 +10,24 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import queryKeys from "@/lib/queryKeys";
+import { axiosClient } from "@/queries/axiosClient";
 import { schemas } from "@/schemas/openapi-zod-schemas";
-import { components } from "@/types/api";
+import { components, paths } from "@/types/api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
+
+type QuestFormFetchedData = {
+  regions: Data<
+    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+  >;
+};
 
 type QuestFormFields = {
   name: string;
+  regionId: number;
 };
 
 const QuestFormContent = ({
@@ -23,6 +35,52 @@ const QuestFormContent = ({
 }: {
   form: UseFormReturn<QuestFormFields>;
 }) => {
+  const { isLoading, isSuccess, error, data } = useQuery<QuestFormFetchedData>({
+    queryKey: [queryKeys.questForm],
+    queryFn: async (): Promise<QuestFormFetchedData> => {
+      try {
+        const regionsResponse = await axiosClient.get<
+          Data<
+            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+          >
+        >("/regions");
+        return { regions: regionsResponse.data };
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(error.message);
+        } else {
+          console.error(error);
+          throw new Error(
+            "An unexpected error occurred while fetching data for form."
+          );
+        }
+      }
+    },
+  });
+
+  // Reset the form after data is fetched so defaults show up
+  useEffect(() => {
+    if (isSuccess) {
+      form.reset();
+    }
+  }, [form, isSuccess]);
+
+  // Render skeleton/error here
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
+  if (!isSuccess) {
+    return (
+      <div>
+        <p>There was a problem fetching the data.</p>
+      </div>
+    );
+  }
+
+  // Render the form
+  const { regions } = data;
+
   return (
     <>
       {/* Quest Name */}
@@ -39,6 +97,14 @@ const QuestFormContent = ({
             <FormMessage />
           </FormItem>
         )}
+      />
+      {/* Region Id */}
+      <ComboboxSingleId
+        form={form}
+        data={regions.data}
+        fieldName="regionId"
+        label="Region"
+        description="Region this quest belongs to."
       />
     </>
   );
