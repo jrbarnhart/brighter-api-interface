@@ -1,3 +1,4 @@
+import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
 import {
   FormControl,
@@ -8,13 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
 import { schemas } from "@/schemas/openapi-zod-schemas";
@@ -105,44 +99,13 @@ const ResourceVariantFormContent = ({
           </FormItem>
         )}
       />
-      {/* Region Id */}
-      <FormField
-        control={form.control}
-        name="resourceId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Resource Id</FormLabel>
-            <Select
-              onValueChange={(value) => {
-                form.setValue("resourceId", Number(value), {
-                  shouldValidate: true,
-                });
-              }}
-              defaultValue={field.value.toString()}
-            >
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue>
-                    {field.value === 0
-                      ? "Select a resource"
-                      : resources.data.find((r) => r.id === field.value)?.name}
-                  </SelectValue>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {resources.data.map((region) => (
-                  <SelectItem value={region.id.toString()} key={region.id}>
-                    {region.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormDescription>
-              The id of resource this is a variant of.
-            </FormDescription>
-            <FormMessage />
-          </FormItem>
-        )}
+      {/* Resource Id */}
+      <ComboboxSingleId
+        form={form}
+        data={resources.data}
+        fieldName="resourceId"
+        description="Resource this is a variant of."
+        label="Resource Id"
       />
     </>
   );
