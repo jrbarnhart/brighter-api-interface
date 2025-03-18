@@ -19,13 +19,13 @@ export default function ResourceVariantsIndexContent({
   return (
     <>
       {Object.keys(groupedData).map((skillName) => (
-        <Collapsible key={skillName} defaultOpen={true}>
+        <Collapsible key={skillName} defaultOpen={false}>
           <CollapsibleTrigger asChild>
             <p className="select-none p-2 text-lg bg-border">{skillName}</p>
           </CollapsibleTrigger>
           <CollapsibleContent>
             {Object.keys(groupedData[skillName] || {}).map((resourceName) => (
-              <Collapsible key={resourceName} defaultOpen={true}>
+              <Collapsible key={resourceName} defaultOpen={false}>
                 <CollapsibleTrigger asChild>
                   <p className="select-none p-2 text-base bg-border/50">
                     {resourceName}
