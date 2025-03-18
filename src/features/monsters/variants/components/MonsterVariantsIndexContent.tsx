@@ -4,7 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { groupMonsterVariantsBySkillAndBase } from "@/lib/dataUtils";
+import { groupMonsterVariantsByRegionIdAndBase } from "@/lib/dataUtils";
 import { components } from "@/types/api";
 
 export default function MonsterVariantsIndexContent({
@@ -14,25 +14,27 @@ export default function MonsterVariantsIndexContent({
   data: components["schemas"]["MonsterVariantEntity"][];
   gridColsRule: string;
 }) {
-  const groupedData = groupMonsterVariantsBySkillAndBase(data);
+  const groupedData = groupMonsterVariantsByRegionIdAndBase(data);
 
   return (
     <>
-      {Object.keys(groupedData).map((skillName) => (
-        <Collapsible key={skillName} defaultOpen={true}>
+      {Object.keys(groupedData).map((regionId) => (
+        <Collapsible key={regionId} defaultOpen={false}>
           <CollapsibleTrigger asChild>
-            <p className="select-none p-2 text-lg bg-border">{skillName}</p>
+            <p className="select-none p-2 text-lg bg-border">
+              Region Id: {regionId}
+            </p>
           </CollapsibleTrigger>
           <CollapsibleContent>
-            {Object.keys(groupedData[skillName] || {}).map((monsterName) => (
-              <Collapsible key={monsterName} defaultOpen={true}>
+            {Object.keys(groupedData[regionId] || {}).map((monsterName) => (
+              <Collapsible key={monsterName} defaultOpen={false}>
                 <CollapsibleTrigger asChild>
                   <p className="select-none p-2 text-base bg-border/50">
                     {monsterName}
                   </p>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  {(groupedData[skillName]?.[monsterName] || []).map(
+                  {(groupedData[regionId]?.[monsterName] || []).map(
                     (variant) => (
                       <div
                         className={`grid ${gridColsRule} items-center p-2 even:bg-secondary/60`}

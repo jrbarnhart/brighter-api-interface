@@ -181,6 +181,30 @@ export function groupMonsterVariantsBySkillAndBase<
   );
 }
 
+export function groupMonsterVariantsByRegionIdAndBase<
+  T extends { monster: { name: string; regionId: number } }
+>(data: T[]) {
+  return data.reduce(
+    (acc: { [key: string]: { [key: string]: T[] } }, variant) => {
+      const regionId = variant.monster.regionId;
+      const monsterName = variant.monster.name;
+
+      if (!acc[regionId]) {
+        acc[regionId] = {};
+      }
+
+      if (!acc[regionId][monsterName]) {
+        acc[regionId][monsterName] = [];
+      }
+
+      acc[regionId][monsterName].push(variant);
+
+      return acc;
+    },
+    {}
+  );
+}
+
 export function groupConsumableVariantsBySkillAndBase<
   T extends { consumable: { name: string; skill?: { name: string } } }
 >(data: T[]) {
