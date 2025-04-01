@@ -20,7 +20,7 @@ export default function LogsControls({ ...props }: LogsControlsProps) {
           checked={hideStartup}
           onCheckedChange={setHideStartup}
         />
-        {hideStartup ? "Show" : "Hide"} Startup Logs
+        Hide Startup Logs
       </Label>
     </div>
   );
