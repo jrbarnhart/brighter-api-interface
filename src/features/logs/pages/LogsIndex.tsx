@@ -64,10 +64,17 @@ export default function LogsIndex() {
   }
 
   const { combinedLogs, combinedErrors } = data;
-  let filteredData = [...combinedLogs, ...combinedErrors];
+  // Combine data and sort by timestamp
+  let allData = [...combinedLogs, ...combinedErrors].sort((a, b) => {
+    const dateA = new Date(a.timestamp);
+    const dateB = new Date(b.timestamp);
+    if (dateA < dateB) return 1;
+    if (dateA > dateB) return -1;
+    return 0;
+  });
 
   if (hideStartup)
-    filteredData = filteredData.filter((log) => {
+    allData = allData.filter((log) => {
       const filterContexts = [
         "NestFactory",
         "NestApplication",
@@ -88,7 +95,7 @@ export default function LogsIndex() {
   return (
     <>
       <LogsControls hideStartup={hideStartup} setHideStartup={setHideStartup} />
-      <LogsTable data={filteredData} />
+      <LogsTable data={allData} />
     </>
   );
 }
