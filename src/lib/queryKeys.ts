@@ -72,6 +72,7 @@ const queryKeys = {
   questForm: "quest-form-data",
   questStepForm: "quest-step-form-data",
   stats: "stats",
+  logs: "logs",
 };
 
 export default queryKeys;
