@@ -37,7 +37,21 @@ export default function LogsTable({ ...props }: LogsTableProps) {
       },
       {
         accessorKey: "context",
-        header: "Context",
+        header: () => (
+          <div className="flex gap-4 p-1 items-center">
+            <button
+              type="button"
+              className="h-8 w-8 bg-background flex justify-center items-center rounded-full border-2 border-white"
+              aria-label="Collapse all"
+              onClick={() => {
+                setExpandedRows([]);
+              }}
+            >
+              <ChevronsUp />
+            </button>
+            <span>Context</span>
+          </div>
+        ),
         cell: ({ row }) => {
           const expanded = expandedRows.includes(row.index);
           return typeof row.original.context !== "string" ? (
