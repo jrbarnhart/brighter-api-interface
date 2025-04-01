@@ -43,6 +43,11 @@ export default function LogsIndex() {
         }
       }
     },
+    retry: (failureCount, error) => {
+      const unauthorized = error.message.includes("401");
+      if (unauthorized) return false;
+      return failureCount < 3;
+    },
   });
 
   if (isLoading) return "Loading...";
