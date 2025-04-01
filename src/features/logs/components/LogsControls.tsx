@@ -11,16 +11,17 @@ export default function LogsControls({ ...props }: LogsControlsProps) {
   const { hideStartup, setHideStartup } = props;
   return (
     <div>
-      <div className="flex items-center h-12 gap-3">
+      <Label
+        htmlFor="toggle-startup-logs"
+        className="text-lg flex items-center h-12 w-56 gap-3 justify-between cursor-pointer"
+      >
         <Switch
           id="toggle-startup-logs"
           checked={hideStartup}
           onCheckedChange={setHideStartup}
         />
-        <Label htmlFor="toggle-startup-logs" className="text-lg">
-          Toggle Startup Logs
-        </Label>
-      </div>
+        {hideStartup ? "Show" : "Hide"} Startup Logs
+      </Label>
     </div>
   );
 }
