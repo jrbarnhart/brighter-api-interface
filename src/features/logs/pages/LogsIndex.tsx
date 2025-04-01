@@ -56,10 +56,6 @@ export default function LogsIndex() {
   const { combinedLogs: logs, combinedErrors: errors } = data;
 
   // Group logs by day
-  type LogsByDay = {
-    [day: string]: (Log | ErrorLog)[];
-  };
-
   const groupLogsByDay = (logs: Log[] | ErrorLog[]): LogsByDay => {
     return logs.reduce((groups: LogsByDay, log: Log | ErrorLog) => {
       // Create a Date object from the timestamp

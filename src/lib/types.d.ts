@@ -16,3 +16,7 @@ type LogsResponse = {
     combinedErrors: ErrorLog[];
   };
 };
+
+type LogsByDay = {
+  [day: string]: (Log | ErrorLog)[];
+};
