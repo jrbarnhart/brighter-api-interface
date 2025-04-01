@@ -61,7 +61,5 @@ export default function LogsIndex() {
 
   const { combinedLogs, combinedErrors } = data;
 
-  return (
-    <LogsTable combinedErrors={combinedErrors} combinedLogs={combinedLogs} />
-  );
+  return <LogsTable data={[...combinedLogs, ...combinedErrors]} />;
 }

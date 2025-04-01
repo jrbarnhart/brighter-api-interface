@@ -9,12 +9,11 @@ import JsonView from "@uiw/react-json-view";
 import { vscodeTheme } from "@uiw/react-json-view/vscode";
 
 type LogsTableProps = {
-  combinedLogs: Log[];
-  combinedErrors: ErrorLog[];
+  data: (Log | ErrorLog)[];
 };
 
 export default function LogsTable({ ...props }: LogsTableProps) {
-  const { combinedLogs, combinedErrors } = props;
+  const { data } = props;
 
   const columns = React.useMemo<ColumnDef<Log | ErrorLog>[]>(
     () => [
@@ -54,7 +53,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
   );
 
   const table = useReactTable({
-    data: [...combinedLogs, ...combinedErrors],
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
