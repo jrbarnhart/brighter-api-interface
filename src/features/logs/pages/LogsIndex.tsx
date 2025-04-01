@@ -3,7 +3,6 @@ import { axiosClient } from "@/queries/axiosClient";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LogsTable from "../components/LogsTable";
-import { groupLogsByDay } from "@/lib/dataUtils";
 
 export default function LogsIndex() {
   // Logs are protected and need auth
@@ -61,8 +60,8 @@ export default function LogsIndex() {
   }
 
   const { combinedLogs, combinedErrors } = data;
-  const groupedLogs = groupLogsByDay(combinedLogs);
-  const groupedErrors = groupLogsByDay(combinedErrors);
 
-  return <LogsTable groupedErrors={groupedErrors} groupedLogs={groupedLogs} />;
+  return (
+    <LogsTable combinedErrors={combinedErrors} combinedLogs={combinedLogs} />
+  );
 }
