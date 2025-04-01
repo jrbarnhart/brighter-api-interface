@@ -160,7 +160,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
         </tbody>
       </table>
       <div className="h-2" />
-      <div className="flex items-center gap-2">
+      <div className="flex justify-center items-center gap-2">
         <button
           className="border rounded p-1"
           onClick={() => {
@@ -215,7 +215,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
               const page = e.target.value ? Number(e.target.value) - 1 : 0;
               table.setPageIndex(page);
             }}
-            className="border p-1 rounded w-16"
+            className="border p-1 rounded w-16 bg-background"
           />
         </span>
         <select
@@ -223,6 +223,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
           onChange={(e) => {
             table.setPageSize(Number(e.target.value));
           }}
+          className="bg-background"
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
@@ -231,7 +232,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
           ))}
         </select>
       </div>
-      <div>
+      <div className="flex justify-center items-center">
         Showing {table.getRowModel().rows.length.toLocaleString()} of{" "}
         {table.getRowCount().toLocaleString()} Rows
       </div>
