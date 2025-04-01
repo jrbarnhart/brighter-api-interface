@@ -64,11 +64,31 @@ export default function LogsIndex() {
   }
 
   const { combinedLogs, combinedErrors } = data;
+  let filteredData = [...combinedLogs, ...combinedErrors];
+
+  if (hideStartup)
+    filteredData = filteredData.filter((log) => {
+      const filterContexts = [
+        "NestFactory",
+        "NestApplication",
+        "InstanceLoader",
+        "RouterExplorer",
+        "RoutesResolver",
+      ];
+
+      if (
+        typeof log.context !== "object" &&
+        filterContexts.includes(log.context.toString())
+      ) {
+        return false;
+      }
+      return true;
+    });
 
   return (
     <>
       <LogsControls hideStartup={hideStartup} setHideStartup={setHideStartup} />
-      <LogsTable data={[...combinedLogs, ...combinedErrors]} />
+      <LogsTable data={filteredData} />
     </>
   );
 }
