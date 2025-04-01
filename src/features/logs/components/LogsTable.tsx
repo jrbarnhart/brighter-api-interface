@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ColumnDef,
   useReactTable,
@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-table";
 import JsonView from "@uiw/react-json-view";
 import { vscodeTheme } from "@uiw/react-json-view/vscode";
+import { SquareChevronDown, SquareChevronUp } from "lucide-react";
 
 type LogsTableProps = {
   data: (Log | ErrorLog)[];
@@ -14,6 +15,8 @@ type LogsTableProps = {
 
 export default function LogsTable({ ...props }: LogsTableProps) {
   const { data } = props;
+
+  const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
   const columns = React.useMemo<ColumnDef<Log | ErrorLog>[]>(
     () => [
@@ -37,11 +40,33 @@ export default function LogsTable({ ...props }: LogsTableProps) {
         header: "Context",
         cell: ({ row }) =>
           typeof row.original.context !== "string" ? (
-            <div className="bg-white min-w-64">
+            <div
+              className={
+                expandedRows.includes(row.index) ? "" : "" + "flex gap-4"
+              }
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setExpandedRows((prev) => {
+                    if (prev.includes(row.index)) {
+                      return prev.filter((entry) => entry !== row.index);
+                    } else return [...prev, row.index];
+                  });
+                }}
+              >
+                {expandedRows.includes(row.index) ? (
+                  <SquareChevronUp />
+                ) : (
+                  <SquareChevronDown />
+                )}
+              </button>
               <JsonView
                 value={row.original.context}
-                collapsed={true}
+                collapsed={!expandedRows.includes(row.index)}
                 style={vscodeTheme}
+                enableClipboard={false}
+                className="grow"
               />
             </div>
           ) : (
@@ -49,7 +74,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
           ),
       },
     ],
-    []
+    [expandedRows]
   );
 
   const table = useReactTable({
