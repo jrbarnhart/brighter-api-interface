@@ -105,6 +105,8 @@ import QuestStepsIndex from "@/features/quests/questSteps/pages/QuestStepsIndex"
 import QuestStepDetails from "@/features/quests/questSteps/pages/QuestStepDetails";
 import { CreateQuestStepForm } from "@/features/quests/questSteps/components/QuestStepForm";
 import HomeLayout from "@/pages/home/HomeLayout";
+import LogsIndex from "@/features/logs/pages/LogsIndex";
+import LogsLayout from "@/features/logs/layouts/LogsLayout";
 
 export default function MainRouter() {
   return (
@@ -116,6 +118,10 @@ export default function MainRouter() {
           </Route>
           {/* Auth */}
           <Route path="login" element={<Login />} />
+          {/* Logs */}
+          <Route path="logs" element={<LogsLayout />}>
+            <Route index element={<LogsIndex />} />
+          </Route>
           {/* Regions */}
           <Route path="regions" element={<RegionsLayout />}>
             <Route index element={<RegionsIndex />} />
