@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import {
   ColumnDef,
   useReactTable,
@@ -17,12 +17,12 @@ import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 type LogsTableProps = {
   data: (Log | ErrorLog)[];
+  expandedRows: number[];
+  setExpandedRows: React.Dispatch<SetStateAction<number[]>>;
 };
 
 export default function LogsTable({ ...props }: LogsTableProps) {
-  const { data } = props;
-
-  const [expandedRows, setExpandedRows] = useState<number[]>([]);
+  const { data, expandedRows, setExpandedRows } = props;
 
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -93,7 +93,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
         },
       },
     ],
-    [expandedRows]
+    [expandedRows, setExpandedRows]
   );
 
   const table = useReactTable({

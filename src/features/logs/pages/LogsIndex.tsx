@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function LogsIndex() {
   const [hideStartup, setHideStartup] = useState(true);
+  const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
   // Logs are protected and need auth
   const token = localStorage.getItem("access_token");
@@ -94,8 +95,16 @@ export default function LogsIndex() {
 
   return (
     <>
-      <LogsControls hideStartup={hideStartup} setHideStartup={setHideStartup} />
-      <LogsTable data={allData} />
+      <LogsControls
+        hideStartup={hideStartup}
+        setHideStartup={setHideStartup}
+        setExpandedRows={setExpandedRows}
+      />
+      <LogsTable
+        data={allData}
+        expandedRows={expandedRows}
+        setExpandedRows={setExpandedRows}
+      />
     </>
   );
 }
