@@ -6,10 +6,11 @@ import LogsTable from "../components/LogsTable";
 import { groupLogsByDay } from "@/lib/dataUtils";
 
 export default function LogsIndex() {
-  // Fetch log data
+  // Logs are protected and need auth
   const token = localStorage.getItem("access_token");
   const authHeaderValue = `Bearer ${token ?? ""}`;
 
+  // Fetch log data
   const { isLoading, isSuccess, error, data } = useQuery<{
     combinedLogs: Log[];
     combinedErrors: ErrorLog[];
@@ -27,7 +28,6 @@ export default function LogsIndex() {
           }
         );
 
-        // Return just the data we need, removing the unnecessary nesting
         return {
           combinedLogs: response.data.data.combinedLogs,
           combinedErrors: response.data.data.combinedErrors,
@@ -55,11 +55,9 @@ export default function LogsIndex() {
     );
   }
 
-  const { combinedLogs: logs, combinedErrors: errors } = data;
-
-  // Group logs by day
-  const groupedLogs = groupLogsByDay(logs);
-  const groupedErrors = groupLogsByDay(errors);
+  const { combinedLogs, combinedErrors } = data;
+  const groupedLogs = groupLogsByDay(combinedLogs);
+  const groupedErrors = groupLogsByDay(combinedErrors);
 
   return <LogsTable groupedErrors={groupedErrors} groupedLogs={groupedLogs} />;
 }
