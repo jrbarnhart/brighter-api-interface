@@ -1,5 +1,5 @@
 type Log = {
-  context: Record<string, unknown>;
+  context: Record<string, unknown> | string;
   level: string;
   message: string;
   timestamp: string;
