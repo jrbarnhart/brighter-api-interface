@@ -62,7 +62,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
             <div className="flex gap-4 p-1">
               <button
                 type="button"
-                className="h-8 w-8 bg-background flex justify-center items-center rounded-full border-2 border-white"
+                className="h-8 w-8 bg-background flex justify-center items-center rounded-full border border-white/40"
                 aria-label={expanded ? "collapse" : "expand"}
                 onClick={() => {
                   setExpandedRows((prev) => {
