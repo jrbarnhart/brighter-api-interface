@@ -1,21 +1,74 @@
+// types.d.ts
+
+type Log = {
+  context: Record<string, unknown>;
+  level: string;
+  message: string;
+  timestamp: string;
+};
+
+type ErrorLog = Log & {
+  error: Record<string, unknown>;
+  stack: string[];
+};
+
+// API response structure - what actually comes from axios
+type APIResponse = {
+  data: {
+    combinedLogs: Log[];
+    combinedErrors: ErrorLog[];
+  };
+};
+
+// LogsIndex.tsx
+
 import queryKeys from "@/lib/queryKeys";
-import useGetRecords from "@/queries/useGetAllRecords";
+import { axiosClient } from "@/queries/axiosClient";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function LogsIndex() {
   // Fetch log data
-  const logsQueryResult = useGetRecords<{
-    data: ReturnedLogData;
+  const token = localStorage.getItem("access_token");
+  const authHeaderValue = `Bearer ${token ?? ""}`;
+
+  const { isLoading, isSuccess, error, data } = useQuery<{
+    combinedLogs: Log[];
+    combinedErrors: ErrorLog[];
   }>({
-    queryKey: queryKeys.logs,
-    url: `${import.meta.env.VITE_API_URL}/logs`,
+    queryKey: [queryKeys.logs],
+    queryFn: async () => {
+      try {
+        const response = await axiosClient.get<APIResponse>(
+          `${import.meta.env.VITE_API_URL}/logs`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: authHeaderValue,
+            },
+          }
+        );
+
+        // Return just the data we need, removing the unnecessary nesting
+        return {
+          combinedLogs: response.data.data.combinedLogs,
+          combinedErrors: response.data.data.combinedErrors,
+        };
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          throw new Error(error.message);
+        } else {
+          console.error(error);
+          throw new Error(
+            "An unexpected error occurred while fetching data for form."
+          );
+        }
+      }
+    },
   });
 
-  const { isLoading, isSuccess, error, data } = logsQueryResult;
-
   if (isLoading) return "Loading...";
-
   if (error) return "An error has occurred: " + error.message;
-
   if (!isSuccess) {
     return (
       <div>
@@ -24,18 +77,27 @@ export default function LogsIndex() {
     );
   }
 
-  const { data: returnedLogData } = data;
-  const { combinedLogs: logs, combinedErrors: errors } = returnedLogData;
+  const { combinedLogs: logs, combinedErrors: errors } = data;
 
   // Group logs by day
   type LogsByDay = {
     [day: string]: (Log | ErrorLog)[];
   };
+
   const groupLogsByDay = (logs: Log[] | ErrorLog[]): LogsByDay => {
     return logs.reduce((groups: LogsByDay, log: Log | ErrorLog) => {
-      const day = log.timestamp.split("T")[0] || "Day Not Found";
+      // Create a Date object from the timestamp
+      const date = new Date(log.timestamp);
 
-      // Create a group for the found day if it doesn't exist yet
+      // Format the date as you prefer, for example: "Monday, January 1, 2023"
+      const day = date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      // Create a group for the formatted day if it doesn't exist yet
       if (!groups[day]) {
         groups[day] = [];
       }
@@ -52,14 +114,28 @@ export default function LogsIndex() {
 
   return (
     <div>
-      {Object.keys(groupedLogs).map((groupName) => (
-        <div key={groupName}>
-          <p>Logs:</p>
-          {groupedLogs[groupName]?.map((log) => (
-            <p key={log.timestamp}>{JSON.stringify(log)}</p>
-          ))}
-        </div>
-      ))}
+      <div>
+        <p>Logs:</p>
+        {Object.keys(groupedLogs).map((groupName) => (
+          <div key={groupName}>
+            <p>{groupName}</p>
+            {groupedLogs[groupName]?.map((log) => (
+              <p key={log.timestamp}>{JSON.stringify(log)}</p>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div>
+        <p>Errors:</p>
+        {Object.keys(groupedErrors).map((groupName) => (
+          <div key={groupName}>
+            <p>{groupName}</p>
+            {groupedErrors[groupName]?.map((log) => (
+              <p key={log.timestamp}>{JSON.stringify(log)}</p>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
