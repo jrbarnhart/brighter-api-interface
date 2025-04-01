@@ -1,27 +1,3 @@
-// types.d.ts
-
-type Log = {
-  context: Record<string, unknown>;
-  level: string;
-  message: string;
-  timestamp: string;
-};
-
-type ErrorLog = Log & {
-  error: Record<string, unknown>;
-  stack: string[];
-};
-
-// API response structure - what actually comes from axios
-type APIResponse = {
-  data: {
-    combinedLogs: Log[];
-    combinedErrors: ErrorLog[];
-  };
-};
-
-// LogsIndex.tsx
-
 import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +15,7 @@ export default function LogsIndex() {
     queryKey: [queryKeys.logs],
     queryFn: async () => {
       try {
-        const response = await axiosClient.get<APIResponse>(
+        const response = await axiosClient.get<LogsResponse>(
           `${import.meta.env.VITE_API_URL}/logs`,
           {
             headers: {
@@ -119,8 +95,10 @@ export default function LogsIndex() {
         {Object.keys(groupedLogs).map((groupName) => (
           <div key={groupName}>
             <p>{groupName}</p>
-            {groupedLogs[groupName]?.map((log) => (
-              <p key={log.timestamp}>{JSON.stringify(log)}</p>
+            {groupedLogs[groupName]?.map((log, index) => (
+              <p key={log.timestamp + index.toString()}>
+                {JSON.stringify(log)}
+              </p>
             ))}
           </div>
         ))}
@@ -130,8 +108,10 @@ export default function LogsIndex() {
         {Object.keys(groupedErrors).map((groupName) => (
           <div key={groupName}>
             <p>{groupName}</p>
-            {groupedErrors[groupName]?.map((log) => (
-              <p key={log.timestamp}>{JSON.stringify(log)}</p>
+            {groupedErrors[groupName]?.map((errorLog, index) => (
+              <p key={errorLog.timestamp + index.toString()}>
+                {JSON.stringify(errorLog)}
+              </p>
             ))}
           </div>
         ))}
