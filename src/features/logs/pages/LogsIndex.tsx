@@ -3,8 +3,12 @@ import { axiosClient } from "@/queries/axiosClient";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import LogsTable from "../components/LogsTable";
+import LogsControls from "../components/LogsControls";
+import { useState } from "react";
 
 export default function LogsIndex() {
+  const [hideStartup, setHideStartup] = useState(true);
+
   // Logs are protected and need auth
   const token = localStorage.getItem("access_token");
   const authHeaderValue = `Bearer ${token ?? ""}`;
@@ -61,5 +65,10 @@ export default function LogsIndex() {
 
   const { combinedLogs, combinedErrors } = data;
 
-  return <LogsTable data={[...combinedLogs, ...combinedErrors]} />;
+  return (
+    <>
+      <LogsControls hideStartup={hideStartup} setHideStartup={setHideStartup} />
+      <LogsTable data={[...combinedLogs, ...combinedErrors]} />
+    </>
+  );
 }
