@@ -1,12 +1,12 @@
 type Log = {
-  context: Record<unknown, unknown>;
+  context: Record<string, unknown>;
   level: string;
   message: string;
   timestamp: string;
 };
 
 type ErrorLog = Log & {
-  error: Record<unknown, unknown>;
+  error: Record<string, unknown>;
   stack: string[];
 };
 
