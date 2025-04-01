@@ -20,6 +20,9 @@ export default function LogsTable({ ...props }: LogsTableProps) {
       {
         accessorKey: "timestamp",
         header: "Time",
+        accessorFn: (log) => {
+          return new Date(log.timestamp).toLocaleDateString();
+        },
       },
       {
         accessorKey: "level",
@@ -51,12 +54,12 @@ export default function LogsTable({ ...props }: LogsTableProps) {
 
   return (
     <div>
-      <table>
+      <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th key={header.id} className="text-left">
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
