@@ -284,3 +284,28 @@ export function groupArmorVariantsByFactionSlotAndBase<
     {}
   );
 }
+
+export function groupLogsByDay(logs: Log[] | ErrorLog[]): LogsByDay {
+  return logs.reduce((groups: LogsByDay, log: Log | ErrorLog) => {
+    // Create a Date object from the timestamp
+    const date = new Date(log.timestamp);
+
+    // Format the date as you prefer, for example: "Monday, January 1, 2023"
+    const day = date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    // Create a group for the formatted day if it doesn't exist yet
+    if (!groups[day]) {
+      groups[day] = [];
+    }
+
+    // Add current log to the proper day array
+    groups[day].push(log);
+
+    return groups;
+  }, {});
+}
