@@ -2,6 +2,7 @@ import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import LogsTable from "../components/LogsTable";
 
 export default function LogsIndex() {
   // Fetch log data
@@ -84,34 +85,5 @@ export default function LogsIndex() {
   const groupedLogs = groupLogsByDay(logs);
   const groupedErrors = groupLogsByDay(errors);
 
-  return (
-    <div>
-      <div>
-        <p>Logs:</p>
-        {Object.keys(groupedLogs).map((groupName) => (
-          <div key={groupName}>
-            <p>{groupName}</p>
-            {groupedLogs[groupName]?.map((log, index) => (
-              <p key={log.timestamp + index.toString()}>
-                {JSON.stringify(log)}
-              </p>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div>
-        <p>Errors:</p>
-        {Object.keys(groupedErrors).map((groupName) => (
-          <div key={groupName}>
-            <p>{groupName}</p>
-            {groupedErrors[groupName]?.map((errorLog, index) => (
-              <p key={errorLog.timestamp + index.toString()}>
-                {JSON.stringify(errorLog)}
-              </p>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <LogsTable groupedErrors={groupedErrors} groupedLogs={groupedLogs} />;
 }
