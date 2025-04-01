@@ -35,7 +35,14 @@ export default function LogsTable({ ...props }: LogsTableProps) {
         accessorKey: "timestamp",
         header: "Time",
         accessorFn: (log) => {
-          return new Date(log.timestamp).toLocaleDateString();
+          const date = new Date(log.timestamp);
+          const formatter = new Intl.DateTimeFormat("en-us", {
+            hour12: false,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+          return `${date.toLocaleDateString()} ${formatter.format(date)}`;
         },
       },
       {
