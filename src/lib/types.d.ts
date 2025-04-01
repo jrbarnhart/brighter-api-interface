@@ -10,7 +10,9 @@ type ErrorLog = Log & {
   stack: string[];
 };
 
-type ReturnedLogData = {
-  combinedLogs: Log[];
-  combinedErrors: ErrorLog[];
+type LogsResponse = {
+  data: {
+    combinedLogs: Log[];
+    combinedErrors: ErrorLog[];
+  };
 };
