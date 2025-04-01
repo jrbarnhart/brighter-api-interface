@@ -48,21 +48,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
       },
       {
         accessorKey: "context",
-        header: () => (
-          <div className="flex gap-4 p-1 items-center">
-            <button
-              type="button"
-              className="h-8 w-8 bg-background flex justify-center items-center rounded-full border-2 border-white"
-              aria-label="Collapse all"
-              onClick={() => {
-                setExpandedRows([]);
-              }}
-            >
-              <ChevronsUp />
-            </button>
-            <span>Context</span>
-          </div>
-        ),
+        header: "Context",
         cell: ({ row }) => {
           const expanded = expandedRows.includes(row.index);
           return typeof row.original.context !== "string" ? (
@@ -121,9 +107,14 @@ export default function LogsTable({ ...props }: LogsTableProps) {
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="h-20 text-2xl bg-secondary">
+            <tr key={headerGroup.id} className="h-20 text-xl bg-secondary">
               {headerGroup.headers.map((header) => (
                 <th key={header.id} className="text-left pl-2 border-2">
+                  {header.column.getCanFilter() ? (
+                    <div>
+                      <Filter column={header.column} table={table} />
+                    </div>
+                  ) : null}
                   <div
                     {...{
                       className: header.column.getCanSort()
@@ -140,11 +131,6 @@ export default function LogsTable({ ...props }: LogsTableProps) {
                       asc: " 🔼",
                       desc: " 🔽",
                     }[header.column.getIsSorted() as string] ?? null}
-                    {header.column.getCanFilter() ? (
-                      <div>
-                        <Filter column={header.column} table={table} />
-                      </div>
-                    ) : null}
                   </div>
                 </th>
               ))}
@@ -302,7 +288,7 @@ function Filter({
     </div>
   ) : (
     <input
-      className="w-36 border shadow rounded"
+      className="w-full border shadow rounded bg-background"
       onChange={(e) => {
         column.setFilterValue(e.target.value);
       }}
