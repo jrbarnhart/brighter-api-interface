@@ -38,13 +38,10 @@ export default function LogsTable({ ...props }: LogsTableProps) {
       {
         accessorKey: "context",
         header: "Context",
-        cell: ({ row }) =>
-          typeof row.original.context !== "string" ? (
-            <div
-              className={
-                expandedRows.includes(row.index) ? "" : "" + "flex gap-4"
-              }
-            >
+        cell: ({ row }) => {
+          const expanded = expandedRows.includes(row.index);
+          return typeof row.original.context !== "string" ? (
+            <div className={expanded ? "" : "" + "flex gap-4"}>
               <button
                 type="button"
                 onClick={() => {
@@ -55,15 +52,11 @@ export default function LogsTable({ ...props }: LogsTableProps) {
                   });
                 }}
               >
-                {expandedRows.includes(row.index) ? (
-                  <SquareChevronUp />
-                ) : (
-                  <SquareChevronDown />
-                )}
+                {expanded ? <SquareChevronUp /> : <SquareChevronDown />}
               </button>
               <JsonView
                 value={row.original.context}
-                collapsed={!expandedRows.includes(row.index)}
+                collapsed={!expanded}
                 style={vscodeTheme}
                 enableClipboard={false}
                 className="grow"
@@ -71,7 +64,8 @@ export default function LogsTable({ ...props }: LogsTableProps) {
             </div>
           ) : (
             <p>{row.original.context}</p>
-          ),
+          );
+        },
       },
     ],
     [expandedRows]
