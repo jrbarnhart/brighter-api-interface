@@ -19,6 +19,10 @@ export default function Nav() {
         </Button>
 
         <Button variant={"link"} className="text-xl pl-0">
+          <Link to={"/logs"}>Logs</Link>
+        </Button>
+
+        <Button variant={"link"} className="text-xl pl-0">
           <Link to={"/regions"}>Regions</Link>
         </Button>
 
