@@ -59,7 +59,7 @@ export default function LogsTable({ ...props }: LogsTableProps) {
   });
 
   return (
-    <div className="px-4">
+    <div>
       <table className="w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
