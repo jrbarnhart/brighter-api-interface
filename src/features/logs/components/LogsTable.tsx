@@ -7,7 +7,7 @@ import {
 } from "@tanstack/react-table";
 import JsonView from "@uiw/react-json-view";
 import { vscodeTheme } from "@uiw/react-json-view/vscode";
-import { SquareChevronDown, SquareChevronUp } from "lucide-react";
+import { ChevronsDown, ChevronsUp } from "lucide-react";
 
 type LogsTableProps = {
   data: (Log | ErrorLog)[];
@@ -41,9 +41,11 @@ export default function LogsTable({ ...props }: LogsTableProps) {
         cell: ({ row }) => {
           const expanded = expandedRows.includes(row.index);
           return typeof row.original.context !== "string" ? (
-            <div className={expanded ? "" : "" + "flex gap-4"}>
+            <div className="flex gap-4 p-1">
               <button
                 type="button"
+                className="h-8 w-8 bg-background flex justify-center items-center rounded-full border-2 border-white"
+                aria-label={expanded ? "collapse" : "expand"}
                 onClick={() => {
                   setExpandedRows((prev) => {
                     if (prev.includes(row.index)) {
@@ -52,14 +54,19 @@ export default function LogsTable({ ...props }: LogsTableProps) {
                   });
                 }}
               >
-                {expanded ? <SquareChevronUp /> : <SquareChevronDown />}
+                {expanded ? <ChevronsUp /> : <ChevronsDown />}
               </button>
               <JsonView
                 value={row.original.context}
                 collapsed={!expanded}
                 style={vscodeTheme}
                 enableClipboard={false}
-                className="grow"
+                className="grow border border-gray-500"
+                onExpand={() => {
+                  setExpandedRows((prev) => {
+                    return [...prev, row.index];
+                  });
+                }}
               />
             </div>
           ) : (
