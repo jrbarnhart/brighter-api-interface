@@ -19,9 +19,11 @@ export default function LogsIndex() {
     combinedLogs: Log[];
     combinedErrors: ErrorLog[];
   }>({
+    staleTime: 600000, // 10 min
     queryKey: [queryKeys.logs],
     queryFn: async () => {
       try {
+        console.log("Request!");
         const response = await axiosClient.get<LogsResponse>(
           `${import.meta.env.VITE_API_URL}/logs`,
           {
