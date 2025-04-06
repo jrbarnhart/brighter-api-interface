@@ -4,9 +4,9 @@ import useGetRecords from "../../../queries/useGetAllRecords";
 import RegionsIndexContent from "../components/RegionsIndexContent";
 import queryKeys from "@/lib/queryKeys";
 export default function RegionsIndex() {
-  const regionsUseQueryResult = useGetRecords<{
-    data: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const regionsUseQueryResult = useGetRecords<
+    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.regions,
     url: `${import.meta.env.VITE_API_URL}/regions`,
   });
