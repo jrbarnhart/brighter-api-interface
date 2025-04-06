@@ -22,13 +22,9 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type MonsterFormFetchedData = {
-  combatSkills: Data<
-    paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  combatSkills: paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  regions: Data<
-    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  regions: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type MonsterFormFields = {
@@ -52,15 +48,11 @@ const MonsterFormContent = ({
       queryFn: async (): Promise<MonsterFormFetchedData> => {
         try {
           const combatSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/combat");
 
           const regionsResponse = await axiosClient.get<
-            Data<
-              paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/regions");
 
           return {
@@ -123,7 +115,7 @@ const MonsterFormContent = ({
       {/* Skill Id */}
       <ComboboxSingleId
         form={form}
-        data={combatSkills.data}
+        data={combatSkills}
         fieldName="skillId"
         label="Skill"
         description="The combat skill this monster is fought with."
@@ -131,7 +123,7 @@ const MonsterFormContent = ({
       {/* Region Id */}
       <ComboboxSingleId
         form={form}
-        data={regions.data}
+        data={regions}
         fieldName="regionId"
         label="Region"
         description="The region this monster is in."

@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function MonsterVariantsIndex() {
-  const monsterVariantsUseQueryResult = useGetRecords<{
-    data: paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const monsterVariantsUseQueryResult = useGetRecords<
+    paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.monsterVariants,
     url: `${import.meta.env.VITE_API_URL}/monsters/variants`,
   });

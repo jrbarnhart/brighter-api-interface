@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type MonsterVariantFormFetchedData = {
-  monsters: Data<
-    paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  monsters: paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type MonsterVariantFormFields = {
@@ -41,9 +39,7 @@ const MonsterVariantFormContent = ({
       queryFn: async (): Promise<MonsterVariantFormFetchedData> => {
         try {
           const monstersResponse = await axiosClient.get<
-            Data<
-              paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/monsters");
           return { monsters: monstersResponse.data };
         } catch (error) {
@@ -102,7 +98,7 @@ const MonsterVariantFormContent = ({
       {/* Monster Id */}
       <ComboboxSingleId
         form={form}
-        data={monsters.data}
+        data={monsters}
         fieldName="monsterId"
         label="Monster"
         description="Id of the monster this is a variant of."
