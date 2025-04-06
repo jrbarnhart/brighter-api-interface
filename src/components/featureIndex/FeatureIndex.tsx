@@ -8,7 +8,7 @@ export default function FeatureIndex<T>({
   renderContentFn,
 }: {
   featureLabel: string;
-  featureUseQueryResult: UseQueryResult<{ data: T[] }>;
+  featureUseQueryResult: UseQueryResult<T[]>;
   featureHeaders: string[];
   gridColsRule: string;
   renderContentFn: ({
@@ -33,8 +33,6 @@ export default function FeatureIndex<T>({
     );
   }
 
-  const { data: unwrappedData } = data;
-
   return (
     <div className="border border-border">
       <div className={`grid ${gridColsRule} gap-2 p-2 bg-secondary`}>
@@ -44,9 +42,7 @@ export default function FeatureIndex<T>({
           </p>
         ))}
       </div>
-      <div className="">
-        {renderContentFn({ data: unwrappedData, gridColsRule })}
-      </div>
+      <div className="">{renderContentFn({ data, gridColsRule })}</div>
     </div>
   );
 }
