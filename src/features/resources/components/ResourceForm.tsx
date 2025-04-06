@@ -21,9 +21,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type ResourceFormFetchedData = {
-  gatheringSkills: Data<
-    paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  gatheringSkills: paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type ResourceFormFields = {
@@ -43,9 +41,7 @@ const ResourceFormContent = ({
       queryFn: async (): Promise<ResourceFormFetchedData> => {
         try {
           const gatheringSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/gathering");
           return { gatheringSkills: gatheringSkillsResponse.data };
         } catch (error) {
@@ -104,7 +100,7 @@ const ResourceFormContent = ({
       {/* Skill Id */}
       <SelectField
         form={form}
-        data={gatheringSkills.data}
+        data={gatheringSkills}
         fieldName="skillId"
         label="Skill"
         description="The skill this resource is gathered by."

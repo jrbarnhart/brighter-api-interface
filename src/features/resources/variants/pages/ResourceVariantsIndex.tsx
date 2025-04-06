@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function ResourceVariantsIndex() {
-  const resourceVariantsUseQueryResult = useGetRecords<{
-    data: paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const resourceVariantsUseQueryResult = useGetRecords<
+    paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.resourceVariants,
     url: `${import.meta.env.VITE_API_URL}/items/resources/variants`,
   });

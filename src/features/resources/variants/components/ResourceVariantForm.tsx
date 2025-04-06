@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type ResourceVariantFormFetchedData = {
-  resources: Data<
-    paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  resources: paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type ResourceVariantFormFields = {
@@ -41,9 +39,7 @@ const ResourceVariantFormContent = ({
       queryFn: async (): Promise<ResourceVariantFormFetchedData> => {
         try {
           const resourcesResponse = await axiosClient.get<
-            Data<
-              paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/resources");
           return { resources: resourcesResponse.data };
         } catch (error) {
@@ -102,7 +98,7 @@ const ResourceVariantFormContent = ({
       {/* Resource Id */}
       <ComboboxSingleId
         form={form}
-        data={resources.data}
+        data={resources}
         fieldName="resourceId"
         description="Resource this is a variant of."
         label="Resource Id"
