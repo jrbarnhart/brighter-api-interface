@@ -12,24 +12,17 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type VendorFormFetchedData = {
-  npcs: Data<
-    paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  resourceVariants: Data<
-    paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  weaponVariants: Data<
-    paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  armorVariants: Data<
-    paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  consumableVariants: Data<
-    paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  miscItems: Data<
-    paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  npcs: paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  resourceVariants: paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  weaponVariants: paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  armorVariants: paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  consumableVariants: paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  miscItems: paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type VendorFormFields = {
@@ -59,39 +52,27 @@ const VendorFormContent = ({
       queryFn: async (): Promise<VendorFormFetchedData> => {
         try {
           const npcsResponse = await axiosClient.get<
-            Data<
-              paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/npcs");
 
           const resourceVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/resources/variants");
 
           const weaponVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/weapons/variants");
 
           const armorVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/armors/variants");
 
           const consumableVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/consumables/variants");
 
           const miscItemsResponse = await axiosClient.get<
-            Data<
-              paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/misc");
 
           return {
@@ -151,7 +132,7 @@ const VendorFormContent = ({
       {/* Npc Id */}
       <ComboboxSingleId
         form={form}
-        data={npcs.data.filter((d) => !d.vendor || d.vendor.id === record?.id)}
+        data={npcs.filter((d) => !d.vendor || d.vendor.id === record?.id)}
         fieldName="npcId"
         label="Npc"
         description="Id of the npc that is this vendor."
@@ -159,7 +140,7 @@ const VendorFormContent = ({
       {/* Resource Variants */}
       <ComboboxIds
         form={form}
-        data={resourceVariants.data}
+        data={resourceVariants}
         fieldName="resourceVariantIds"
         removeFieldName="removeResourceVariantIds"
         label="Resource Variants"
@@ -168,7 +149,7 @@ const VendorFormContent = ({
       {/* Weapon Variants */}
       <ComboboxIds
         form={form}
-        data={weaponVariants.data}
+        data={weaponVariants}
         fieldName="weaponVariantIds"
         removeFieldName="removeWeaponVariantIds"
         label="Weapon Variants"
@@ -177,7 +158,7 @@ const VendorFormContent = ({
       {/* Armor Variants */}
       <ComboboxIds
         form={form}
-        data={armorVariants.data}
+        data={armorVariants}
         fieldName="armorVariantIds"
         removeFieldName="removeArmorVariantIds"
         label="Armor Variants"
@@ -186,7 +167,7 @@ const VendorFormContent = ({
       {/* Consumable Variants */}
       <ComboboxIds
         form={form}
-        data={consumableVariants.data}
+        data={consumableVariants}
         fieldName="consumableVariantIds"
         removeFieldName="removeConsumableVariantIds"
         label="Consumable Variants"
@@ -195,7 +176,7 @@ const VendorFormContent = ({
       {/* Misc Items */}
       <ComboboxIds
         form={form}
-        data={miscItems.data}
+        data={miscItems}
         fieldName="miscItemIds"
         removeFieldName="removeMiscItemIds"
         label="Misc Items"
