@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function QuestsIndex() {
-  const questsUseQueryResult = useGetRecords<{
-    data: paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const questsUseQueryResult = useGetRecords<
+    paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.quests,
     url: `${import.meta.env.VITE_API_URL}/quests`,
   });

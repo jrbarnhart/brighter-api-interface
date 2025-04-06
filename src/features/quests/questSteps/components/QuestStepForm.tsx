@@ -20,15 +20,11 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type QuestStepFormFetchedData = {
-  quests: Data<
-    paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  rooms: Data<
-    paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  npcs: Data<
-    paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  quests: paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  rooms: paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  npcs: paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type QuestStepFormFields = {
@@ -50,21 +46,15 @@ const QuestStepFormContent = ({
       queryFn: async (): Promise<QuestStepFormFetchedData> => {
         try {
           const questsResponse = await axiosClient.get<
-            Data<
-              paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/quests"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/quests");
 
           const roomsResponse = await axiosClient.get<
-            Data<
-              paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/rooms");
 
           const npcsResponse = await axiosClient.get<
-            Data<
-              paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/npcs");
 
           return {
@@ -113,7 +103,7 @@ const QuestStepFormContent = ({
       {/* Quest Id */}
       <ComboboxSingleId
         form={form}
-        data={quests.data}
+        data={quests}
         fieldName="questId"
         label="Quest"
         description="Id of the quest this is a step of."
@@ -164,7 +154,7 @@ const QuestStepFormContent = ({
       {/* Room Id */}
       <ComboboxSingleId
         form={form}
-        data={rooms.data}
+        data={rooms}
         fieldName="roomId"
         label="Room"
         description="Id of the room this step takes place in. Optional."
@@ -173,7 +163,7 @@ const QuestStepFormContent = ({
       {/* Npc Id */}
       <ComboboxSingleId
         form={form}
-        data={npcs.data}
+        data={npcs}
         fieldName="npcId"
         label="Npc"
         description="Id of the npc this step is triggered by or involves. Optional."

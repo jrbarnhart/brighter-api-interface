@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type QuestFormFetchedData = {
-  regions: Data<
-    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  regions: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type QuestFormFields = {
@@ -40,9 +38,7 @@ const QuestFormContent = ({
     queryFn: async (): Promise<QuestFormFetchedData> => {
       try {
         const regionsResponse = await axiosClient.get<
-          Data<
-            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/regions");
         return { regions: regionsResponse.data };
       } catch (error) {
@@ -101,7 +97,7 @@ const QuestFormContent = ({
       {/* Region Id */}
       <ComboboxSingleId
         form={form}
-        data={regions.data}
+        data={regions}
         fieldName="regionId"
         label="Region"
         description="Region this quest belongs to."
