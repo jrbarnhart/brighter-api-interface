@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function WeaponVariantsIndex() {
-  const weaponVariantsUseQueryResult = useGetRecords<{
-    data: paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const weaponVariantsUseQueryResult = useGetRecords<
+    paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.weaponVariants,
     url: `${import.meta.env.VITE_API_URL}/items/weapons/variants`,
   });

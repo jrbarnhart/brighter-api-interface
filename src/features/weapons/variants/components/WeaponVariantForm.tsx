@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type WeaponVariantFormFetchedData = {
-  weapons: Data<
-    paths["/items/weapons"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  weapons: paths["/items/weapons"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type WeaponVariantFormFields = {
@@ -41,9 +39,7 @@ const WeaponVariantFormContent = ({
       queryFn: async (): Promise<WeaponVariantFormFetchedData> => {
         try {
           const weaponsResponse = await axiosClient.get<
-            Data<
-              paths["/items/weapons"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/weapons"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/weapons");
           return { weapons: weaponsResponse.data };
         } catch (error) {
@@ -102,7 +98,7 @@ const WeaponVariantFormContent = ({
       {/* Weapon Id */}
       <ComboboxSingleId
         form={form}
-        data={weapons.data}
+        data={weapons}
         fieldName="weaponId"
         label="Weapon"
         description="Id of the weapon this is a variant of."
