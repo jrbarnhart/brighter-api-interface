@@ -23,7 +23,6 @@ export default function LogsIndex() {
     queryKey: [queryKeys.logs],
     queryFn: async () => {
       try {
-        console.log("Request!");
         const response = await axiosClient.get<LogsResponse>(
           `${import.meta.env.VITE_API_URL}/logs`,
           {
@@ -35,8 +34,8 @@ export default function LogsIndex() {
         );
 
         return {
-          combinedLogs: response.data.data.combinedLogs,
-          combinedErrors: response.data.data.combinedErrors,
+          combinedLogs: response.data.combinedLogs,
+          combinedErrors: response.data.combinedErrors,
         };
       } catch (error) {
         if (axios.isAxiosError(error)) {

@@ -60,7 +60,7 @@ export default function Login() {
         throw new Error("Error validating response");
       }
 
-      return validatedResponse.data;
+      return validatedResponse;
     },
     onSuccess: async (data) => {
       setToken(data.data.access_token);
