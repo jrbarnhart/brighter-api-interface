@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetRecords<T>({
-  queryKey: queryKey,
+  queryKey,
   url,
 }: {
   queryKey: string;
