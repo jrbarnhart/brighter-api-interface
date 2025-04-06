@@ -11,10 +11,8 @@ type ErrorLog = Log & {
 };
 
 type LogsResponse = {
-  data: {
-    combinedLogs: Log[];
-    combinedErrors: ErrorLog[];
-  };
+  combinedLogs: Log[];
+  combinedErrors: ErrorLog[];
 };
 
 type LogsByDay = {
