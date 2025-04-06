@@ -84,30 +84,3 @@ export default function ArmorVariantsIndexContent({
     </>
   );
 }
-
-// {(groupedData[faction]?.[armorName] || []).map(
-//   (variant) => (
-//     <div
-//       className={`grid ${gridColsRule} items-center p-2 even:bg-secondary/60`}
-//       key={variant.id}
-//     >
-//       <RecordLink
-//         recordBasePath="/items/armors/variants"
-//         recordId={variant.id}
-//         recordName={`${variant.name} ${variant.armor.name}`}
-//       />
-//       {variant.recipe ? (
-//         <RecordLink
-//           recordBasePath="/skills/crafting/recipes"
-//           recordId={variant.recipe.id}
-//           recordName={variant.recipe.name}
-//         />
-//       ) : (
-//         <p>Not assigned</p>
-//       )}
-//       <p>{variant.id}</p>
-//       <p>{variant.vendors.length}</p>
-//       <p>{variant.dropTables.length}</p>
-//     </div>
-//   )
-// )}
