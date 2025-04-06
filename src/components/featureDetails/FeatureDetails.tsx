@@ -39,9 +39,11 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
   // Could return early here instead of letting the error propagate
   if (!id) id = "";
   // Must wrap with {data: } to match json. Probably a better way but eh this works.
-  const { isLoading, isSuccess, error, data } = useGetRecordById<{
-    data: T;
-  }>({ id, url, queryKey: getByIdQueryKey(id) });
+  const { isLoading, isSuccess, error, data } = useGetRecordById<T>({
+    id,
+    url,
+    queryKey: getByIdQueryKey(id),
+  });
 
   // Mutation for deleting this record
   const deleteMutation = useDeleteRecord({
@@ -63,16 +65,14 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
     );
   }
 
-  const { data: foundRecord } = data;
-
   return (
     <ScrollArea className="h-full">
       <div className="space-y-4">
         <div className="flex h-8 items-start gap-3">
           <h2 className="text-2xl truncate">
-            {foundRecord.unlockLevel
-              ? `Lvl: ${foundRecord.unlockLevel.toString()}`
-              : foundRecord.name}
+            {data.unlockLevel
+              ? `Lvl: ${data.unlockLevel.toString()}`
+              : data.name}
           </h2>
           <div className="w-1 h-full bg-secondary rounded-xl border-border" />
           <Button
@@ -97,7 +97,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
           </Button>
         </div>
         {isUpdating ? (
-          <UpdateForm record={foundRecord} />
+          <UpdateForm record={data} />
         ) : isDeleting ? (
           <DeleteConfirmation
             deleteMutation={deleteMutation}
@@ -106,7 +106,7 @@ export default function FeatureDetails<T extends RequiredRecordProperties>({
             notes={deleteNotes ?? ""}
           />
         ) : (
-          <RenderContent record={foundRecord} />
+          <RenderContent record={data} />
         )}
       </div>
     </ScrollArea>
