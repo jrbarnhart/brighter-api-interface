@@ -5,9 +5,9 @@ import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 
 export default function ArmorsIndex() {
-  const armorsUseQueryResult = useGetRecords<{
-    data: paths["/items/armors"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const armorsUseQueryResult = useGetRecords<
+    paths["/items/armors"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.armors,
     url: `${import.meta.env.VITE_API_URL}/items/armors`,
   });
