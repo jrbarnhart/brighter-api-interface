@@ -5,9 +5,9 @@ import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 
 export default function ConsumablesIndex() {
-  const consumablesUseQueryResult = useGetRecords<{
-    data: paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const consumablesUseQueryResult = useGetRecords<
+    paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.consumables,
     url: `${import.meta.env.VITE_API_URL}/items/consumables`,
   });

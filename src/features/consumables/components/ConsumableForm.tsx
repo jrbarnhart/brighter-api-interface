@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type ConsumableFormFetchedData = {
-  craftingSkills: Data<
-    paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  craftingSkills: paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type ConsumableFormFields = {
@@ -41,9 +39,7 @@ const ConsumableFormContent = ({
       queryFn: async (): Promise<ConsumableFormFetchedData> => {
         try {
           const craftingSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/crafting");
           return { craftingSkills: craftingSkillsResponse.data };
         } catch (error) {
@@ -102,7 +98,7 @@ const ConsumableFormContent = ({
       {/* Skill Id */}
       <ComboboxSingleId
         form={form}
-        data={craftingSkills.data}
+        data={craftingSkills}
         description="Id of the crafting skill that makes this. Optional."
         fieldName="skillId"
         label="Crafting Skill"

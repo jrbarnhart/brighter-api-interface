@@ -20,9 +20,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type ConsumableVariantFormFetchedData = {
-  consumables: Data<
-    paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  consumables: paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type ConsumableVariantFormFields = {
@@ -41,9 +39,7 @@ const ConsumableVariantFormContent = ({
       queryFn: async (): Promise<ConsumableVariantFormFetchedData> => {
         try {
           const consumablesResponse = await axiosClient.get<
-            Data<
-              paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/consumables"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/consumables");
           return { consumables: consumablesResponse.data };
         } catch (error) {
@@ -102,7 +98,7 @@ const ConsumableVariantFormContent = ({
       {/* Skill Id */}
       <ComboboxSingleId
         form={form}
-        data={consumables.data}
+        data={consumables}
         description="Id of the consumable this is a variant of."
         fieldName="consumableId"
         label="Consumable"

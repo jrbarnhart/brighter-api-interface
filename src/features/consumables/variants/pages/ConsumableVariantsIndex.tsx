@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function ConsumableVariantsIndex() {
-  const consumableVariantsUseQueryResult = useGetRecords<{
-    data: paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const consumableVariantsUseQueryResult = useGetRecords<
+    paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.consumableVariants,
     url: `${import.meta.env.VITE_API_URL}/items/consumables/variants`,
   });
