@@ -5,9 +5,9 @@ import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 
 export default function ArmorVariantsIndex() {
-  const armorVariantsUseQueryResult = useGetRecords<{
-    data: paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const armorVariantsUseQueryResult = useGetRecords<
+    paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.armorVariants,
     url: `${import.meta.env.VITE_API_URL}/items/armors/variants`,
   });
