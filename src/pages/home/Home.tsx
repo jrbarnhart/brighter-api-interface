@@ -6,9 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 type StatsFetchedData = {
-  stats: Data<
-    paths["/stats"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  stats: paths["/stats"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 export default function Home() {
@@ -43,9 +41,7 @@ export default function Home() {
     queryFn: async (): Promise<StatsFetchedData> => {
       try {
         const statsResult = await axiosClient.get<
-          Data<
-            paths["/stats"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/stats"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/stats");
         return { stats: statsResult.data };
       } catch (error) {
@@ -76,7 +72,7 @@ export default function Home() {
 
   // Render the form
   const { stats } = data;
-  const { counts, unset } = stats.data;
+  const { counts, unset } = stats;
 
   return (
     <div className="flex gap-4 flex-wrap">
