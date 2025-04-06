@@ -23,24 +23,17 @@ import queryKeys from "@/lib/queryKeys";
 import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 
 type RoomFormFetchedData = {
-  regions: Data<
-    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  craftingSkills: Data<
-    paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  monsters: Data<
-    paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  npcs: Data<
-    paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  resources: Data<
-    paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  questSteps: Data<
-    paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  regions: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  craftingSkills: paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  monsters: paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  npcs: paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  resources: paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  questSteps: paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type RoomFormFields = {
@@ -67,44 +60,32 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
     queryFn: async (): Promise<RoomFormFetchedData> => {
       try {
         const regionsResponse = await axiosClient.get<
-          Data<
-            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/regions");
         const regions = regionsResponse.data;
 
         const craftingSkillsResponse = await axiosClient.get<
-          Data<
-            paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/skills/crafting");
         const craftingSkills = craftingSkillsResponse.data;
 
         const monstersResponse = await axiosClient.get<
-          Data<
-            paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/monsters"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/monsters");
         const monsters = monstersResponse.data;
 
         const npcsResponse = await axiosClient.get<
-          Data<
-            paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/npcs"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/npcs");
         const npcs = npcsResponse.data;
 
         const resourcesResponse = await axiosClient.get<
-          Data<
-            paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/items/resources"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/items/resources");
         const resources = resourcesResponse.data;
 
         const questStepsResponse = await axiosClient.get<
-          Data<
-            paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"]
-          >
+          paths["/quests/steps"]["get"]["responses"]["200"]["content"]["application/json"]
         >("/quests/steps");
         const questSteps = questStepsResponse.data;
 
@@ -173,7 +154,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* Region Id */}
       <ComboboxSingleId
         form={form}
-        data={regions.data}
+        data={regions}
         fieldName="regionId"
         label="Region"
         description="The region this room is found in."
@@ -238,7 +219,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* Crafting Skills (Spots) */}
       <ComboboxIds
         form={form}
-        data={craftingSkills.data}
+        data={craftingSkills}
         description="Select ids for crafting skills with crafting spots in this room."
         fieldName="craftingSkillIds"
         removeFieldName="removeCraftingSkillIds"
@@ -247,7 +228,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* Monsters */}
       <ComboboxIds
         form={form}
-        data={monsters.data}
+        data={monsters}
         description="Select ids for monsters in this room."
         fieldName="monsterIds"
         removeFieldName="removeMonsterIds"
@@ -256,7 +237,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* NPC's */}
       <ComboboxIds
         form={form}
-        data={npcs.data}
+        data={npcs}
         description="Select ids for NPC's in this room."
         fieldName="npcIds"
         removeFieldName="removeNpcIds"
@@ -265,7 +246,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* Resources */}
       <ComboboxIds
         form={form}
-        data={resources.data}
+        data={resources}
         description="Select ids for resources in this room."
         fieldName="resourceIds"
         removeFieldName="removeResourceIds"
@@ -274,7 +255,7 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
       {/* Quest Steps */}
       <ComboboxIds
         form={form}
-        data={questSteps.data}
+        data={questSteps}
         description="Select ids for quest steps in this room."
         fieldName="questStepIds"
         removeFieldName="removeQuestStepIds"

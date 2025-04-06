@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import RoomsIndexContent from "../components/RoomsIndexContent";
 import queryKeys from "@/lib/queryKeys";
 export default function RoomsIndex() {
-  const roomsUseQueryResult = useGetRecords<{
-    data: paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const roomsUseQueryResult = useGetRecords<
+    paths["/rooms"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.rooms,
     url: `${import.meta.env.VITE_API_URL}/rooms`,
   });
