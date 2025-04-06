@@ -21,29 +21,17 @@ import queryKeys from "@/lib/queryKeys";
 import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 
 type DropTableFormFetchedData = {
-  monsterVariants: Data<
-    paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  monsterVariants: paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  resourceVariants: Data<
-    paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  resourceVariants: paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  weaponVariants: Data<
-    paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  weaponVariants: paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  armorVariants: Data<
-    paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  armorVariants: paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  consumableVariants: Data<
-    paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  consumableVariants: paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 
-  miscItems: Data<
-    paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  miscItems: paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type DropTableFormFields = {
@@ -74,39 +62,27 @@ const DropTableFormContent = ({
       queryFn: async (): Promise<DropTableFormFetchedData> => {
         try {
           const monsterVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/monsters/variants");
 
           const resourceVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/resources/variants");
 
           const weaponVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/weapons/variants");
 
           const armorVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/armors/variants");
 
           const consumableVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/consumables/variants");
 
           const miscItemsResponse = await axiosClient.get<
-            Data<
-              paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/misc");
 
           return {
@@ -165,7 +141,7 @@ const DropTableFormContent = ({
       {/* Monster Variant Id */}
       <ComboboxSingleId
         form={form}
-        data={monsterVariants.data.filter(
+        data={monsterVariants.filter(
           (monsterVariant) =>
             !monsterVariant.dropTable ||
             monsterVariant.id === record?.monsterVariantId
@@ -177,7 +153,7 @@ const DropTableFormContent = ({
       {/* Resource Variant Ids */}
       <ComboboxIds
         form={form}
-        data={resourceVariants.data}
+        data={resourceVariants}
         fieldName="resourceVariantIds"
         removeFieldName="removeResourceVariantIds"
         label="Resource Variants"
@@ -186,7 +162,7 @@ const DropTableFormContent = ({
       {/* Weapon Variant Ids */}
       <ComboboxIds
         form={form}
-        data={weaponVariants.data}
+        data={weaponVariants}
         fieldName="weaponVariantIds"
         removeFieldName="removeWeaponVariantIds"
         label="Weapon Variants"
@@ -195,7 +171,7 @@ const DropTableFormContent = ({
       {/* Armor Variant Ids */}
       <ComboboxIds
         form={form}
-        data={armorVariants.data}
+        data={armorVariants}
         fieldName="armorVariantIds"
         removeFieldName="removeArmorVariantIds"
         label="Armor Variants"
@@ -204,7 +180,7 @@ const DropTableFormContent = ({
       {/* Consumable Variant Ids */}
       <ComboboxIds
         form={form}
-        data={consumableVariants.data}
+        data={consumableVariants}
         fieldName="consumableVariantIds"
         removeFieldName="removeConsumableVariantIds"
         label="Consumable Variants"
@@ -213,7 +189,7 @@ const DropTableFormContent = ({
       {/* Misc Items */}
       <ComboboxIds
         form={form}
-        data={miscItems.data}
+        data={miscItems}
         fieldName="miscItemIds"
         removeFieldName="removeMiscItemIds"
         label="Misc Items"
