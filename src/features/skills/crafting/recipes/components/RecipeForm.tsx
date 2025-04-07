@@ -21,21 +21,15 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type CraftingRecipeFormFetchedData = {
-  resourceVariants: Data<
-    paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  miscItems: Data<
-    paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  consumableVariants: Data<
-    paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  weaponVariants: Data<
-    paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  armorVariants: Data<
-    paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  resourceVariants: paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  miscItems: paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  consumableVariants: paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  weaponVariants: paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  armorVariants: paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type CraftingRecipeFormFields = {
@@ -60,33 +54,23 @@ const CraftingRecipeFormContent = ({
       queryFn: async (): Promise<CraftingRecipeFormFetchedData> => {
         try {
           const resourceVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/resources/variants");
 
           const miscItemsResponse = await axiosClient.get<
-            Data<
-              paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/misc"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/misc");
 
           const consumableVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/consumables/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/consumables/variants");
 
           const weaponVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/weapons/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/weapons/variants");
 
           const armorVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/armors/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/armors/variants");
 
           return {
@@ -158,7 +142,7 @@ const CraftingRecipeFormContent = ({
       {/* Input Resource Variant Ids */}
       <ComboboxIds
         form={form}
-        data={resourceVariants.data}
+        data={resourceVariants}
         description="Id's of resource variants used in this recipe."
         fieldName="inputResourceVariantIds"
         removeFieldName="removeInputResourceVariantIds"
@@ -167,7 +151,7 @@ const CraftingRecipeFormContent = ({
       {/* Input Misc Item Ids */}
       <ComboboxIds
         form={form}
-        data={miscItems.data}
+        data={miscItems}
         description="Id's of misc items used in this recipe."
         fieldName="inputItemIds"
         removeFieldName="removeInputItemIds"
@@ -176,7 +160,7 @@ const CraftingRecipeFormContent = ({
       {/* Output Consumable Variant Id */}
       <ComboboxSingleId
         form={form}
-        data={consumableVariants.data}
+        data={consumableVariants}
         description="Id of consumable variant created by this recipe."
         fieldName="outputConsumableVariantId"
         label="Consumable Variant"
@@ -185,7 +169,7 @@ const CraftingRecipeFormContent = ({
       {/* Output Weapon Variant Id */}
       <ComboboxSingleId
         form={form}
-        data={weaponVariants.data}
+        data={weaponVariants}
         description="Id of weapon variant created by this recipe."
         fieldName="outputWeaponVariantId"
         label="Weapon Variant"
@@ -194,7 +178,7 @@ const CraftingRecipeFormContent = ({
       {/* Output Armor Variant Id */}
       <ComboboxSingleId
         form={form}
-        data={armorVariants.data}
+        data={armorVariants}
         description="Id of armor variant created by this recipe."
         fieldName="outputArmorVariantId"
         label="Armor Variant"
