@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function CraftingSkillsIndex() {
-  const craftingSkillsUseQueryResult = useGetRecords<{
-    data: paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const craftingSkillsUseQueryResult = useGetRecords<
+    paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.craftingSkills,
     url: `${import.meta.env.VITE_API_URL}/skills/crafting`,
   });

@@ -27,12 +27,9 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type CraftingSkillRequirementFormFetchedData = {
-  craftingSkills: Data<
-    paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  recipes: Data<
-    paths["/skills/crafting/recipes"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  craftingSkills: paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  recipes: paths["/skills/crafting/recipes"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type CraftingSkillRequirementFormFields = {
@@ -55,15 +52,11 @@ const CraftingSkillRequirementFormContent = ({
       queryFn: async (): Promise<CraftingSkillRequirementFormFetchedData> => {
         try {
           const craftingSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/crafting"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/crafting");
 
           const recipesResponse = await axiosClient.get<
-            Data<
-              paths["/skills/crafting/recipes"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/crafting/recipes"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/crafting/recipes");
 
           return {
@@ -105,7 +98,7 @@ const CraftingSkillRequirementFormContent = ({
 
   // Render the form
   const { craftingSkills, recipes } = data;
-  const unsetRecipes = recipes.data.filter(
+  const unsetRecipes = recipes.filter(
     (variant) =>
       !variant.requirement?.id || variant.requirement.id === record?.id
   );
@@ -130,13 +123,12 @@ const CraftingSkillRequirementFormContent = ({
                   <SelectValue>
                     {field.value === 0
                       ? "Select a crafting skill"
-                      : craftingSkills.data.find((s) => s.id === field.value)
-                          ?.name}
+                      : craftingSkills.find((s) => s.id === field.value)?.name}
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {craftingSkills.data.map((skill) => (
+                {craftingSkills.map((skill) => (
                   <SelectItem key={skill.id} value={skill.id.toString()}>
                     {skill.name}
                   </SelectItem>
