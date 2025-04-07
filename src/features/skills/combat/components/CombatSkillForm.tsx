@@ -26,9 +26,7 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type CombatSkillFormFetchedData = {
-  regions: Data<
-    paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  regions: paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type CombatSkillFormFields = {
@@ -47,9 +45,7 @@ const CombatSkillFormContent = ({
       queryFn: async (): Promise<CombatSkillFormFetchedData> => {
         try {
           const regionsResponse = await axiosClient.get<
-            Data<
-              paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/regions"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/regions");
           return { regions: regionsResponse.data };
         } catch (error) {
@@ -125,12 +121,12 @@ const CombatSkillFormContent = ({
                   <SelectValue>
                     {field.value === 0
                       ? "Select a region"
-                      : regions.data.find((r) => r.id === field.value)?.name}
+                      : regions.find((r) => r.id === field.value)?.name}
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {regions.data.map((region) => (
+                {regions.map((region) => (
                   <SelectItem value={region.id.toString()} key={region.id}>
                     {region.name}
                   </SelectItem>

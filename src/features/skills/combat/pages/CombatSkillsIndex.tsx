@@ -4,9 +4,9 @@ import { paths, components } from "@/types/api";
 import FeatureIndex from "@/components/featureIndex/FeatureIndex";
 import queryKeys from "@/lib/queryKeys";
 export default function CombatSkillsIndex() {
-  const combatSkillsUseQueryResult = useGetRecords<{
-    data: paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const combatSkillsUseQueryResult = useGetRecords<
+    paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.combatSkills,
     url: `${import.meta.env.VITE_API_URL}/skills/combat`,
   });

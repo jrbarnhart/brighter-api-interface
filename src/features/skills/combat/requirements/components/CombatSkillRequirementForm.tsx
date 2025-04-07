@@ -27,12 +27,9 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type CombatSkillRequirementFormFetchedData = {
-  combatSkills: Data<
-    paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  monsterVariants: Data<
-    paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  combatSkills: paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  monsterVariants: paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type CombatSkillRequirementFormFields = {
@@ -55,15 +52,11 @@ const CombatSkillRequirementFormContent = ({
       queryFn: async (): Promise<CombatSkillRequirementFormFetchedData> => {
         try {
           const combatSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/combat"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/combat");
 
           const monsterVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/monsters/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/monsters/variants");
 
           return {
@@ -105,7 +98,7 @@ const CombatSkillRequirementFormContent = ({
 
   // Render the form
   const { combatSkills, monsterVariants } = data;
-  const unsetMonsterVariants = monsterVariants.data.filter(
+  const unsetMonsterVariants = monsterVariants.filter(
     (variant) =>
       !variant.requirement?.id || variant.requirement.id === record?.id
   );
@@ -130,13 +123,12 @@ const CombatSkillRequirementFormContent = ({
                   <SelectValue>
                     {field.value === 0
                       ? "Select a combat skill"
-                      : combatSkills.data.find((s) => s.id === field.value)
-                          ?.name}
+                      : combatSkills.find((s) => s.id === field.value)?.name}
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {combatSkills.data.map((skill) => (
+                {combatSkills.map((skill) => (
                   <SelectItem key={skill.id} value={skill.id.toString()}>
                     {skill.name}
                   </SelectItem>
