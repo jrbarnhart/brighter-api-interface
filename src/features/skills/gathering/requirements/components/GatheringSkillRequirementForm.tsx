@@ -27,12 +27,9 @@ import { useEffect } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 
 type GatheringSkillRequirementFormFetchedData = {
-  gatheringSkills: Data<
-    paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
-  resourceVariants: Data<
-    paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-  >;
+  gatheringSkills: paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"];
+
+  resourceVariants: paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"];
 };
 
 type GatheringSkillRequirementFormFields = {
@@ -55,15 +52,11 @@ const GatheringSkillRequirementFormContent = ({
       queryFn: async (): Promise<GatheringSkillRequirementFormFetchedData> => {
         try {
           const gatheringSkillsResponse = await axiosClient.get<
-            Data<
-              paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/skills/gathering"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/skills/gathering");
 
           const resourceVariantsResponse = await axiosClient.get<
-            Data<
-              paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
-            >
+            paths["/items/resources/variants"]["get"]["responses"]["200"]["content"]["application/json"]
           >("/items/resources/variants");
 
           return {
@@ -105,7 +98,7 @@ const GatheringSkillRequirementFormContent = ({
 
   // Render the form
   const { gatheringSkills, resourceVariants } = data;
-  const unsetResourceVariants = resourceVariants.data.filter(
+  const unsetResourceVariants = resourceVariants.filter(
     (variant) =>
       !variant.requirement?.id || variant.requirement.id === record?.id
   );
@@ -130,13 +123,12 @@ const GatheringSkillRequirementFormContent = ({
                   <SelectValue>
                     {field.value === 0
                       ? "Select a gathering skill"
-                      : gatheringSkills.data.find((s) => s.id === field.value)
-                          ?.name}
+                      : gatheringSkills.find((s) => s.id === field.value)?.name}
                   </SelectValue>
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {gatheringSkills.data.map((skill) => (
+                {gatheringSkills.map((skill) => (
                   <SelectItem key={skill.id} value={skill.id.toString()}>
                     {skill.name}
                   </SelectItem>

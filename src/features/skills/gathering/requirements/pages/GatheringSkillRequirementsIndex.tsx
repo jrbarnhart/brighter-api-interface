@@ -5,9 +5,9 @@ import { ComponentState } from "react";
 import GatheringSkillRequirementsIndexContent from "../components/GatheringSkillRequirementsIndexContent";
 import queryKeys from "@/lib/queryKeys";
 export default function GatheringSkillRequirementsIndex() {
-  const gatheringSkillsUseQueryResult = useGetRecords<{
-    data: paths["/skills/gathering/requirements"]["get"]["responses"]["200"]["content"]["application/json"];
-  }>({
+  const gatheringSkillsUseQueryResult = useGetRecords<
+    paths["/skills/gathering/requirements"]["get"]["responses"]["200"]["content"]["application/json"]
+  >({
     queryKey: queryKeys.gatheringSkillRequirements,
     url: `${import.meta.env.VITE_API_URL}/skills/gathering/requirements`,
   });
