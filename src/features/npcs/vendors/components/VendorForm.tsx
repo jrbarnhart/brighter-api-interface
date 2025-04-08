@@ -1,6 +1,15 @@
 import ComboboxIds from "@/components/combobox/ComboboxIds";
 import ComboboxSingleId from "@/components/combobox/ComboboxSingleId";
 import FeatureForm from "@/components/featureForm/FeatureForm";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import queryKeys from "@/lib/queryKeys";
 import { axiosClient } from "@/queries/axiosClient";
 import { schemas } from "@/schemas/openapi-zod-schemas";
@@ -27,6 +36,7 @@ type VendorFormFetchedData = {
 
 type VendorFormFields = {
   npcId: number;
+  name: string;
   resourceVariantIds: number[];
   weaponVariantIds: number[];
   armorVariantIds: number[];
@@ -137,6 +147,21 @@ const VendorFormContent = ({
         label="Npc"
         description="Id of the npc that is this vendor."
       />
+      {/* Vendor/Shop Name */}
+      <FormField
+        control={form.control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Name</FormLabel>
+            <FormControl>
+              <Input placeholder="Vendor/Shop Name" {...field} />
+            </FormControl>
+            <FormDescription>The name of the npc.</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       {/* Resource Variants */}
       <ComboboxIds
         form={form}
@@ -191,6 +216,7 @@ export function CreateVendorForm() {
     resolver: zodResolver(schemas.CreateVendorDtoSchema),
     defaultValues: {
       npcId: 0,
+      name: "",
       resourceVariantIds: [],
       weaponVariantIds: [],
       armorVariantIds: [],
@@ -226,6 +252,7 @@ export function UpdateVendorForm({
     resolver: zodResolver(schemas.UpdateVendorDtoSchema),
     defaultValues: {
       npcId: record.npcId,
+      name: record.name,
       resourceVariantIds: record.resourceVariants.map((v) => v.id),
       weaponVariantIds: record.weaponVariants.map((v) => v.id),
       armorVariantIds: record.armorVariants.map((v) => v.id),

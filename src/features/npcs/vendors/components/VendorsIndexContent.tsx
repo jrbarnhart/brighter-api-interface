@@ -18,8 +18,9 @@ export default function VendorsIndexContent({
         recordId={vendor.id}
         recordName={`Id: ${vendor.id.toString()}`}
       />
+      <p>{vendor.name || "Not set"}</p>
       <RecordLink
-        recordBasePath="npcs/"
+        recordBasePath="/npcs"
         recordId={vendor.npc.id}
         recordName={vendor.npc.name}
       />

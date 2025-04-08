@@ -11,6 +11,8 @@ export default function VendorDetailsContent({
     <>
       <p className="text-xl">Id: {record.id}</p>
 
+      <p className="text-xl">Name: {record.name || "Not set"}</p>
+
       <div className="flex gap-3 items-center">
         <p className="text-xl">NPC: </p>
         <RecordLink

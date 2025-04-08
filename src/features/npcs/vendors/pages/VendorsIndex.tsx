@@ -15,6 +15,7 @@ export default function VendorsIndex() {
     <FeatureIndex<components["schemas"]["VendorEntity"]>
       featureLabel="Vendors"
       featureHeaders={[
+        "Id",
         "Name",
         "Npc",
         "Resources",
@@ -23,7 +24,7 @@ export default function VendorsIndex() {
         "Armors",
         "Misc Items",
       ]}
-      gridColsRule="grid-cols-[2fr_2fr_1fr_1fr_1fr_1fr_1fr]"
+      gridColsRule="grid-cols-[2fr_2fr_2fr_1fr_1fr_1fr_1fr_1fr]"
       featureUseQueryResult={vendorsUseQueryResult}
       renderContentFn={VendorsIndexContent}
     />
