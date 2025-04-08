@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "get-api-types": "openapi-typescript https://brshapi.com/api-json --output src/types/api.d.ts",
+    "get-api-schemas": "pnpx openapi-zod-client 'https://brshapi.com/api-json' -o './src/schemas/openapi-zod-schemas.ts'",
     "get-api-types:local": "openapi-typescript http://localhost:3000/api-json --output src/types/api.d.ts",
     "get-api-schemas:local": "pnpx openapi-zod-client 'http://localhost:3000/api-json' -o './src/schemas/openapi-zod-schemas.ts'"
   },
