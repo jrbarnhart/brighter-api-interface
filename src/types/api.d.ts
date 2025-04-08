@@ -1396,6 +1396,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/logs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["LogsController_getCombinedLogs"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1808,6 +1824,7 @@ export interface components {
         };
         VendorBaseEntity: {
             id: number;
+            name?: string | null;
             npcId: number;
         };
         DropTableBaseEntity: {
@@ -2183,6 +2200,7 @@ export interface components {
             passive?: boolean;
         };
         CreateVendorDto: {
+            name?: string;
             npcId: number;
             resourceVariantIds?: number[];
             weaponVariantIds?: number[];
@@ -2192,6 +2210,7 @@ export interface components {
         };
         VendorEntity: {
             id: number;
+            name?: string;
             npc: components["schemas"]["NpcBaseEntity"];
             npcId: number;
             resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
@@ -2201,6 +2220,7 @@ export interface components {
             miscItems: components["schemas"]["MiscItemBaseEntity"][];
         };
         UpdateVendorDto: {
+            name?: string;
             npcId?: number;
             resourceVariantIds?: number[];
             weaponVariantIds?: number[];
@@ -6777,6 +6797,23 @@ export interface operations {
                         };
                     };
                 };
+            };
+        };
+    };
+    LogsController_getCombinedLogs: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

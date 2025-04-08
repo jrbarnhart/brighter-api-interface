@@ -575,7 +575,11 @@ const ResourceBaseWithSkillEntity = z
   })
   .passthrough();
 const VendorBaseEntity = z
-  .object({ id: z.number().gte(1), npcId: z.number().gte(1) })
+  .object({
+    id: z.number().gte(1),
+    name: z.string().min(1).max(256).nullish(),
+    npcId: z.number().gte(1),
+  })
   .passthrough();
 const DropTableBaseEntity = z
   .object({
@@ -1067,6 +1071,7 @@ const UpdateMonsterDto = z
   .passthrough();
 const CreateVendorDto = z
   .object({
+    name: z.string().min(1).max(256).optional(),
     npcId: z.number().gte(1),
     resourceVariantIds: z.array(z.number().gte(1)).optional(),
     weaponVariantIds: z.array(z.number().gte(1)).optional(),
@@ -1078,6 +1083,7 @@ const CreateVendorDto = z
 const VendorEntity = z
   .object({
     id: z.number().gte(1),
+    name: z.string().min(1).max(256).optional(),
     npc: NpcBaseEntity,
     npcId: z.number().gte(1),
     resourceVariants: z.array(ResourceVariantBaseEntity),
@@ -1089,6 +1095,7 @@ const VendorEntity = z
   .passthrough();
 const UpdateVendorDto = z
   .object({
+    name: z.string().min(1).max(256),
     npcId: z.number().gte(1),
     resourceVariantIds: z.array(z.number().gte(1)),
     weaponVariantIds: z.array(z.number().gte(1)),
