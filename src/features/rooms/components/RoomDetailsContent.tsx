@@ -24,6 +24,7 @@ export default function RoomDetailsContent({
       ) : (
         <p>Is not Obelisk room ❌</p>
       )}
+      {record.rift ? <p>Has Stroage Rift ✅</p> : <p>No Storage Rift ❌</p>}
       <div>
         <p>Banks:</p>
         <ul className="list-disc list-inside">

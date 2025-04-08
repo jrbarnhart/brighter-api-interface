@@ -36,13 +36,9 @@ export default function RoomsIndexContent({
               recordName={room.name}
             />
             <p>{room.id}</p>
-            <RecordLink
-              recordBasePath="/regions"
-              recordId={room.region.id}
-              recordName={room.region.name}
-            />
             <p>{room.portal && "✅"}</p>
             <p>{room.obelisk && "✅"}</p>
+            <p>{room.rift && "✅"}</p>
             <p>{room.banks.length}</p>
             <p className="truncate">{room.craftingSkills.length}</p>
             <p className="truncate">{room.monsters.length}</p>

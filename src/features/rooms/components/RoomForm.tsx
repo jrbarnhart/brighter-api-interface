@@ -41,6 +41,7 @@ type RoomFormFields = {
   regionId: number | undefined;
   portal: boolean;
   obelisk: boolean;
+  rift: boolean;
   banks: string[];
   craftingSkillIds: number[];
   monsterIds: number[];
@@ -200,6 +201,29 @@ const RoomFormContent = ({ form }: { form: UseFormReturn<RoomFormFields> }) => {
             </FormControl>
             <FormDescription>
               Does this room have an obelisk in it?
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      {/* Is Rift */}
+      <FormField
+        control={form.control}
+        name="rift"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Storage Rift Room:</FormLabel>
+            <FormControl>
+              <div className="w-full">
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  defaultChecked={field.value}
+                />
+              </div>
+            </FormControl>
+            <FormDescription>
+              Does this room have a storage rift in it?
             </FormDescription>
             <FormMessage />
           </FormItem>
