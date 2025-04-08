@@ -19,7 +19,7 @@ import {
   CommandItem,
   CommandList,
 } from "../ui/command";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
 type ComboboxData = {
   name?: string;
@@ -48,7 +48,6 @@ export default function ComboboxSingleId<T extends FieldValues>({
     ({
       id,
       currentValue: currentValues,
-      name,
     }: {
       id: number;
       currentValue: number;
@@ -57,30 +56,13 @@ export default function ComboboxSingleId<T extends FieldValues>({
       if (currentValues === id) {
         // Remove the current value
         form.setValue(fieldName, null as PathValue<T, Path<T>>);
-        setButtonContent(null);
       } else {
         // Add the current value
         form.setValue(fieldName, id as PathValue<T, Path<T>>);
-        const newButtonContent = name
-          ? `${id.toString()} - ${name}`
-          : `Id - ${id.toString()}`;
-        setButtonContent(newButtonContent);
       }
     },
     [fieldName, form]
   );
-
-  // Handles the content of the trigger button so that entry names can be used
-  const [buttonContent, setButtonContent] = useState<string | null>(null);
-  const {
-    formState: { isSubmitSuccessful },
-  } = form;
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      setButtonContent(null);
-    }
-  }, [isSubmitSuccessful]);
 
   return (
     <FormField
@@ -107,7 +89,7 @@ export default function ComboboxSingleId<T extends FieldValues>({
                         !fieldValue && "text-muted-foreground"
                       )}
                     >
-                      {buttonContent ? buttonContent : `Select ${label}`}
+                      {field.value ? fieldValue : `Select ${label}`}
                       <ChevronsUpDown className="opacity-50" />
                     </Button>
                   </FormControl>
