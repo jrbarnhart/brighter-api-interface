@@ -37,6 +37,7 @@ const RoomBaseEntity = z
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
+    rift: z.boolean(),
   })
   .passthrough();
 const CombatSkillBaseEntity = z
@@ -147,6 +148,7 @@ const CreateRoomDto = z
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
+    rift: z.boolean(),
     craftingSkillIds: z.array(z.number().gte(1)).optional(),
     monsterIds: z.array(z.number().gte(1)).optional(),
     npcIds: z.array(z.number().gte(1)).optional(),
@@ -203,6 +205,7 @@ const RoomEntity = z
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
+    rift: z.boolean(),
     craftingSkills: z.array(CraftingSkillBaseEntity),
     monsters: z.array(MonsterBaseEntity),
     npcs: z.array(NpcBaseEntity),
@@ -236,6 +239,7 @@ const UpdateRoomDto = z
     regionId: z.number().gte(1),
     portal: z.boolean(),
     obelisk: z.boolean(),
+    rift: z.boolean(),
     craftingSkillIds: z.array(z.number().gte(1)),
     monsterIds: z.array(z.number().gte(1)),
     npcIds: z.array(z.number().gte(1)),
@@ -1071,7 +1075,7 @@ const UpdateMonsterDto = z
   .passthrough();
 const CreateVendorDto = z
   .object({
-    name: z.string().min(1).max(256).optional(),
+    name: z.string().min(1).max(256).nullish(),
     npcId: z.number().gte(1),
     resourceVariantIds: z.array(z.number().gte(1)).optional(),
     weaponVariantIds: z.array(z.number().gte(1)).optional(),
@@ -1083,7 +1087,7 @@ const CreateVendorDto = z
 const VendorEntity = z
   .object({
     id: z.number().gte(1),
-    name: z.string().min(1).max(256).optional(),
+    name: z.string().min(1).max(256).nullish(),
     npc: NpcBaseEntity,
     npcId: z.number().gte(1),
     resourceVariants: z.array(ResourceVariantBaseEntity),
@@ -1095,7 +1099,7 @@ const VendorEntity = z
   .passthrough();
 const UpdateVendorDto = z
   .object({
-    name: z.string().min(1).max(256),
+    name: z.string().min(1).max(256).nullable(),
     npcId: z.number().gte(1),
     resourceVariantIds: z.array(z.number().gte(1)),
     weaponVariantIds: z.array(z.number().gte(1)),
