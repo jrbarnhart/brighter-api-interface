@@ -89,7 +89,12 @@ export default function ComboboxSingleId<T extends FieldValues>({
                         !fieldValue && "text-muted-foreground"
                       )}
                     >
-                      {field.value ? fieldValue : `Select ${label}`}
+                      {field.value
+                        ? `${fieldValue.toString()} - ${
+                            data.find((d) => d.id === fieldValue)?.name ||
+                            "Name Not Found"
+                          }`
+                        : `Select ${label}`}
                       <ChevronsUpDown className="opacity-50" />
                     </Button>
                   </FormControl>
