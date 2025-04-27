@@ -29,12 +29,23 @@ import {
 import { useCallback, useEffect, useRef } from "react";
 import { Badge } from "../ui/badge";
 
-type ComboboxData = {
-  name?: string;
-  index?: number;
-  quest?: { name: string };
+type BaseItem = {
+  name: string;
+};
+
+type ComboboxItem = {
   id: number;
-}[];
+  name?: string;
+  description?: string;
+  index?: number;
+  resource?: BaseItem;
+  armor?: BaseItem;
+  weapon?: BaseItem;
+  monster?: BaseItem;
+  quest?: BaseItem;
+};
+
+type ComboboxData = ComboboxItem[];
 
 export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
   data,
@@ -60,6 +71,37 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
     control: form.control,
     name: fieldName,
   });
+
+  // Helpers for getting text from entries
+  function getBaseName(item: ComboboxItem): string | undefined {
+    return (
+      item.resource?.name ||
+      item.armor?.name ||
+      item.weapon?.name ||
+      item.quest?.name ||
+      item.monster?.name ||
+      undefined
+    );
+  }
+
+  const getDisplayText = (entry: ComboboxItem): string => {
+    // Quest Steps
+    if (entry.index && entry.description && entry.quest?.name) {
+      const tenChars = entry.description.slice(0, 9);
+      return `${entry.quest.name} #${entry.index.toString()} - ${tenChars}...`;
+    }
+    // Variants with base names
+    const baseName = getBaseName(entry);
+    if (entry.name && baseName) {
+      return `${entry.name} ${baseName}`;
+    }
+    // No base name
+    if (entry.name) {
+      return entry.name;
+    }
+    // No name at all
+    return `Id: ${entry.id.toString()}`;
+  };
 
   // Set this component's state based on passed id
   const handleCommandSelect = useCallback(
@@ -220,15 +262,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                       <CommandGroup>
                         {data.map((entry) => (
                           <CommandItem
-                            value={`${
-                              entry.name
-                                ? entry.name
-                                : entry.index
-                                ? `${
-                                    entry.quest?.name || "No Name"
-                                  } # ${entry.index.toString()}`
-                                : "Id: "
-                            } - ${entry.id.toString()}`}
+                            value={entry.id.toString()}
                             key={entry.id}
                             onSelect={() => {
                               handleCommandSelect({
@@ -237,15 +271,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                               });
                             }}
                           >
-                            {`${
-                              entry.name
-                                ? entry.name
-                                : entry.index
-                                ? `${
-                                    entry.quest?.name || "No Name"
-                                  } # ${entry.index.toString()}`
-                                : "Id: "
-                            } - ${entry.id.toString()}`}
+                            {getDisplayText(entry)}
                             <Check
                               className={cn(
                                 "ml-auto",
