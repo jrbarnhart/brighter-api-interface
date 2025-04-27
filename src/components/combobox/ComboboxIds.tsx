@@ -262,7 +262,7 @@ export default function ComboboxIds<T extends FieldValues, K extends Path<T>>({
                       <CommandGroup>
                         {data.map((entry) => (
                           <CommandItem
-                            value={entry.id.toString()}
+                            value={getDisplayText(entry)}
                             key={entry.id}
                             onSelect={() => {
                               handleCommandSelect({
