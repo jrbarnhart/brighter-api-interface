@@ -53,9 +53,9 @@ export function groupDataByRegionId<
   return sortItemsInGroupsByAlpha(groups);
 }
 
-export function groupDataByQuestName<T extends { quest: { name: string } }>(
-  data: T[]
-): T[][] {
+export function groupDataByQuestName<
+  T extends { index: number; quest: { name: string } }
+>(data: T[]): T[][] {
   return Object.values(
     data.reduce((acc: { [key: string]: T[] }, item) => {
       const questName = item.quest.name;
@@ -63,7 +63,7 @@ export function groupDataByQuestName<T extends { quest: { name: string } }>(
       array.push(item);
       return acc;
     }, {})
-  );
+  ).map((group) => group.sort((a, b) => a.index - b.index));
 }
 
 export function groupDataByElement<
