@@ -136,6 +136,7 @@ export function UpdateQuestForm({
     resolver: zodResolver(schemas.UpdateQuestDtoSchema),
     defaultValues: {
       name: record.name,
+      regionId: record.regionId,
     },
   });
 
