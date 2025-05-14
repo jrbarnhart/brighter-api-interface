@@ -4,7 +4,7 @@ import { ScrollArea } from "../ui/scroll-area";
 
 type RequiredItemProperties = {
   id: string | number;
-  name?: string;
+  name?: string | null;
   description?: string;
 };
 
