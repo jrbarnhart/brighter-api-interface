@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "brighter-api-interface",
+  base: "/brighter-api-interface",
   plugins: [react()],
   resolve: {
     alias: {
