@@ -8,7 +8,7 @@ import DeleteConfirmation from "../deleteConfirmation/DeleteConfirmation";
 
 type RequiredRecordProperties = {
   id: number;
-  name?: string;
+  name?: string | null;
   unlockLevel?: number | string;
 };
 
