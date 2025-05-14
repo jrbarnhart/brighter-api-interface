@@ -110,7 +110,7 @@ import LogsLayout from "@/features/logs/layouts/LogsLayout";
 
 export default function MainRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="brighter-api-interface">
       <Routes>
         <Route element={<Nav />}>
           <Route path="/" element={<HomeLayout />}>
