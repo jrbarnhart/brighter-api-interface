@@ -252,7 +252,7 @@ export function UpdateVendorForm({
     resolver: zodResolver(schemas.UpdateVendorDtoSchema),
     defaultValues: {
       npcId: record.npcId,
-      name: record.name,
+      name: record.name || "null",
       resourceVariantIds: record.resourceVariants.map((v) => v.id),
       weaponVariantIds: record.weaponVariants.map((v) => v.id),
       armorVariantIds: record.armorVariants.map((v) => v.id),
