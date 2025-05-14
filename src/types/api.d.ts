@@ -1509,9 +1509,15 @@ export interface components {
             resourceIds?: number[];
             questStepIds?: number[];
         };
-        NpcBaseEntity: {
+        VendorBaseEntity: {
+            id: number;
+            name?: string | null;
+            npcId: number;
+        };
+        NpcBaseEntityWithVendor: {
             id: number;
             name: string;
+            vendor?: components["schemas"]["VendorBaseEntity"];
         };
         ResourceBaseEntity: {
             id: number;
@@ -1519,11 +1525,12 @@ export interface components {
             skillId: number;
             passive: boolean;
         };
-        QuestStepBaseEntity: {
+        QuestStepBaseEntityWithQuest: {
             id: number;
             index: number;
             description: string;
             questId: number;
+            quest: components["schemas"]["QuestBaseEntity"];
             roomId: number | null;
             npcId: number | null;
         };
@@ -1539,9 +1546,9 @@ export interface components {
             rift: boolean;
             craftingSkills: components["schemas"]["CraftingSkillBaseEntity"][];
             monsters: components["schemas"]["MonsterBaseEntity"][];
-            npcs: components["schemas"]["NpcBaseEntity"][];
+            npcs: components["schemas"]["NpcBaseEntityWithVendor"][];
             resources: components["schemas"]["ResourceBaseEntity"][];
-            questSteps: components["schemas"]["QuestStepBaseEntity"][];
+            questSteps: components["schemas"]["QuestStepBaseEntityWithQuest"][];
         };
         UpdateRoomDto: {
             /** @description The array of types of bank in this room */
@@ -1825,11 +1832,6 @@ export interface components {
             skillId: number;
             skill: components["schemas"]["GatheringSkillBaseEntity"];
             passive: boolean;
-        };
-        VendorBaseEntity: {
-            id: number;
-            name?: string | null;
-            npcId: number;
         };
         DropTableBaseEntity: {
             id: number;
@@ -2212,15 +2214,19 @@ export interface components {
             consumableVariantIds?: number[];
             miscItemIds?: number[];
         };
+        NpcBaseEntity: {
+            id: number;
+            name: string;
+        };
         VendorEntity: {
             id: number;
             name?: string | null;
             npc: components["schemas"]["NpcBaseEntity"];
             npcId: number;
-            resourceVariants: components["schemas"]["ResourceVariantBaseEntity"][];
-            consumableVariants: components["schemas"]["ConsumableVariantBaseEntity"][];
-            weaponVariants: components["schemas"]["WeaponVariantBaseEntity"][];
-            armorVariants: components["schemas"]["ArmorVariantBaseEntity"][];
+            resourceVariants: components["schemas"]["ResourceVariantBaseWithResourceEntity"][];
+            consumableVariants: components["schemas"]["ConsumableVariantBaseWithConsumableEntity"][];
+            weaponVariants: components["schemas"]["WeaponVariantBaseWithWeaponEntity"][];
+            armorVariants: components["schemas"]["ArmorVariantBaseWithArmorEntity"][];
             miscItems: components["schemas"]["MiscItemBaseEntity"][];
         };
         UpdateVendorDto: {
@@ -2244,7 +2250,7 @@ export interface components {
             id: number;
             name: string;
             vendor?: components["schemas"]["VendorBaseEntity"];
-            questSteps: components["schemas"]["QuestStepBaseEntity"][];
+            questSteps: components["schemas"]["QuestStepBaseEntityWithQuest"][];
             rooms: components["schemas"]["RoomBaseEntity"][];
         };
         UpdateNpcDto: {
@@ -2256,6 +2262,14 @@ export interface components {
             questId: number;
             roomId?: number | null;
             npcId?: number | null;
+        };
+        QuestStepBaseEntity: {
+            id: number;
+            index: number;
+            description: string;
+            questId: number;
+            roomId: number | null;
+            npcId: number | null;
         };
         QuestStepEntity: {
             id: number;
